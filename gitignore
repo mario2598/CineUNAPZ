@@ -1,0 +1,10 @@
+build/built-jar.properties
+build/**
+build/*
+build/
+dist/**
+dist/*
+dist/
+list/**
+lib/*
+lib/
