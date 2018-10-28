@@ -6,6 +6,7 @@
 package cineuna.util;
 
 import cineuna.CineUNA;
+import cineuna.controller.ContainerController;
 import cineuna.controller.Controller;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -89,12 +90,27 @@ public class FlowController {
         return loader;
     }
 
+//    public void goMain() {
+//        try {
+//            this.mainStage.setScene(new Scene(FXMLLoader.load(CineUNA.class.getResource("view/Container.fxml"), this.idioma)));
+//            this.mainStage.show();
+//            AppContext.setMainStage(mainStage);
+//        } catch (IOException ex) {
+//            java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
+//        }
+//    }
+    
     public void goMain() {
         try {
-            this.mainStage.setScene(new Scene(FXMLLoader.load(CineUNA.class.getResource("view/Container.fxml"), this.idioma)));
-            this.mainStage.show();
-            AppContext.setMainStage(mainStage);
-        } catch (IOException ex) {
+            FXMLLoader loader = getLoader("Container");
+            mainStage.setScene(new Scene(loader.getRoot()));
+            mainStage.show();
+            if((boolean) AppContext.getInstance().get("administrador")){
+                goView("AdminMenu");
+            } else {
+                //View para usuarios
+            }
+        } catch (Exception ex) {
             java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
         }
     }
@@ -119,24 +135,25 @@ public class FlowController {
         }
         switch (location) {
             case "Center":
-                ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getCenter()).getChildren().clear();
-                ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getCenter()).getChildren().add(loader.getRoot());
+                StackPane holderSP = ((ContainerController) getLoader("Container").getController()).getHolderPane();
+                holderSP.getChildren().clear();
+                holderSP.getChildren().add(0,loader.getRoot());
                 break;
             case "Top":
-                ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getTop()).getChildren().clear();
-                ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getTop()).getChildren().add(loader.getRoot());
+                ((StackPane) ((BorderPane) stage.getScene().getRoot()).getTop()).getChildren().clear();
+                ((StackPane) ((BorderPane) stage.getScene().getRoot()).getTop()).getChildren().add(loader.getRoot());
                 break;
             case "Bottom":
-                ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getBottom()).getChildren().clear();
-                ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getBottom()).getChildren().add(loader.getRoot());
+                ((StackPane) ((BorderPane) stage.getScene().getRoot()).getBottom()).getChildren().clear();
+                ((StackPane) ((BorderPane) stage.getScene().getRoot()).getBottom()).getChildren().add(loader.getRoot());
                 break;
             case "Right":
-                ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getRight()).getChildren().clear();
-                ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getRight()).getChildren().add(loader.getRoot());
+                ((StackPane) ((BorderPane) stage.getScene().getRoot()).getRight()).getChildren().clear();
+                ((StackPane) ((BorderPane) stage.getScene().getRoot()).getRight()).getChildren().add(loader.getRoot());
                 break;
             case "Left":
-                ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getLeft()).getChildren().clear();
-                ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getLeft()).getChildren().add(loader.getRoot());
+                ((StackPane) ((BorderPane) stage.getScene().getRoot()).getLeft()).getChildren().clear();
+                ((StackPane) ((BorderPane) stage.getScene().getRoot()).getLeft()).getChildren().add(loader.getRoot());
                 break;
             default:
                 break;
