@@ -1,0 +1,105 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27/10/2018, 08:52:59 PM
+    Author     : robri
+*/
+
+*{
+    /*root*/
+    -fx-base-color-root: black;
+
+    /*buttons*/
+    -fx-base-color-but:#FF0A0A;
+    -fx-base-color-but-border: transparent;
+    -fx-base-color-but2:transparent;
+    -fx-base-color-but2-border: white;
+    -fx-base-color-but-tf:white;
+    -fx-base-color-but-hover:#FF0A0A;
+    -fx-base-color-but2-hover:transparent;
+    -fx-base-color-but-tf-hover:white;
+    
+    /*separator*/
+    -fx-base-color-sep:transparent;
+    
+    /*hyperlink*/
+    -fx-base-color-hyper-tf:white;
+    -fx-base-color-hyper-tf-focus:#FF0A0A;
+    
+    /*scroll pane*/
+    -fx-base-color-scroll-pane:transparent;
+    -fx-base-color-scroll-bar:transparent;
+    -fx-base-color-scroll-bar-thumb:transparent;
+    -fx-base-color-scroll-bar-track:transparent;
+}
+
+#root{
+    -fx-background-color: -fx-base-color-root;
+}
+
+.jfx-button{
+    -jfx-button-type:FLAT;
+    -fx-background-color: -fx-base-color-but;
+    -fx-text-fill: -fx-base-color-but-tf;
+    -fx-border-radius: 30,30,30,30;
+}
+
+.jfx-button:hover{
+    -fx-background-color: -fx-base-color-but-hover;
+    -fx-text-fill: -fx-base-color-but-tf-hover;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+/*todo*/
+ .separator{
+    /*-fx-orientation: vertical; */
+    -fx-border-style: none;
+    -fx-background-color: transparent;
+}
+
+.separator .line {
+    -fx-border-style: solid;
+    -fx-border-width: 1; 
+    -fx-border-: 0; 
+    -fx-border-color: -fx-base-color-sep;
+}
+
+.hyperlink{
+    -fx-alignment: center;
+    -fx-text-fill: -fx-base-color-hyper-tf;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.hyperlink:hover{
+    -fx-text-fill: -fx-base-color-hyper-tf-focus;
+}
+
+.scroll-pane{
+     -fx-background-color: -fx-base-color-scroll-pane;
+}
+
+.scroll-bar:horizontal,.scroll-bar:vertical{
+    -fx-background-color: -fx-base-color-scroll-bar;
+}
+
+.scroll-bar:horizontal .track,.scroll-bar:vertical .track{
+    -fx-background-color: -fx-base-color-scroll-bar-track;
+}
+
+.scroll-bar:horizontal .thumb,.scroll-bar:vertical .thumb {
+    -fx-background-color: -fx-base-color-scroll-bar-thumb;
+    -fx-background-radius: 5em;
+}
+
+.jfx-scroll-pane{
+    -fx-background-color:-fx-base-color-scroll-pane;
+}
+
+.jfx-scroll-bar:horizontal,jfx-scroll-bar:vertical{
+    -fx-background-color:-fx-base-color-scroll-bar;    
+}

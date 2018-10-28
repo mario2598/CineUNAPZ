@@ -14,11 +14,11 @@ and open the template in the editor.
     
     /*tab pane*/
     -fx-base-color-tp: transparent;
-    -fx-base-color-tp-header: #059CE5;
+    -fx-base-color-tp-header: transparent;
     -fx-base-color-tp-tab:transparent;
-    -fx-base-color-tp-tab-sel:#28C7DB;
-    -fx-base-color-tp-tab-lbltf:white;
-    -fx-base-color-tp-tab-lbltf-sel:white;
+    -fx-base-color-tp-tab-sel:#FF0A0A;
+    -fx-base-color-tp-tab-lbltf:red;
+    -fx-base-color-tp-tab-lbltf-sel:red;
     
     /*tile pane*/
     
@@ -29,6 +29,10 @@ and open the template in the editor.
     /*vbox*/
     
     /*scroll pane*/
+    -fx-base-color-scroll-pane:transparent;
+    -fx-base-color-scroll-bar:transparent;
+    -fx-base-color-scroll-bar-thumb:#FF0A0A;
+    -fx-base-color-scroll-bar-track:transparent;
     
     /*label*/
     
@@ -91,7 +95,7 @@ and open the template in the editor.
     -fx-base-color-unchecked:white;
     
     /*separator*/
-    -fx-base-color-sep:#FF0A0A;
+    -fx-base-color-sep:#272727;
     
     /*hyperlink*/
     -fx-base-color-hyper-tf:white;
@@ -126,78 +130,30 @@ and open the template in the editor.
     -fx-background-image : url("../resources/Eliminar-48.png");
 }
 
-.tab-pane
-{
-    -fx-side: top;
-    -fx-background-color: -fx-base-color-tp;
-    /*-fx-tab-min-width:90px;*/
-}
-
-.tab-pane .tab-header-area .tab-header-background {
-    -fx-side: top;
-    -fx-opacity:1;
-    -fx-background-radius: 5%;
-    -fx-background-color: -fx-base-color-tp-header;
-}
-
-.tab-pane .tab
-{
-    -fx-background-radius: 30 30 30 30;
-    -fx-border-radius: 30 30 30 30;
-    -fx-background-color: -fx-base-color-tp-tab;
-}
-
-.tab-pane .tab:hover{
-    -fx-translate-y: -3;
-}
-
-.tab-pane .tab:selected
-{
-    -fx-background-color: -fx-base-color-tp-tab-sel;
-    -fx-traslate-x: 1.2;
-    -fx-traslate-y: 1.2;
-}
-
-.tab .tab-label { 
-    -fx-alignment: CENTER;
-    -fx-text-fill: -fx-base-color-tp-tab-lbltf;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-}
-
-.tab:selected .tab-label {
-    -fx-alignment: CENTER;
-    -fx-text-fill: -fx-base-color-tp-tab-lbltf-sel;
-    /*-fx-scale-x: 1.2;*/
-    /*-fx-scale-y: 1.2;*/
-}
-/*todo*/
-/*
 .scroll-pane{
-     -fx-background-color: ;
+     -fx-background-color: -fx-base-color-scroll-pane;
 }
 
 .scroll-bar:horizontal,.scroll-bar:vertical{
-    -fx-background-color: ;
+    -fx-background-color: -fx-base-color-scroll-bar;
 }
 
 .scroll-bar:horizontal .track,.scroll-bar:vertical .track{
-    -fx-background-color: ;
+    -fx-background-color: -fx-base-color-scroll-bar-track;
 }
 
 .scroll-bar:horizontal .thumb,.scroll-bar:vertical .thumb {
-    -fx-background-color: ;
+    -fx-background-color: -fx-base-color-scroll-bar-thumb;
     -fx-background-radius: 5em;
 }
 
 .jfx-scroll-pane{
-    -fx-background-color:;
+    -fx-background-color:-fx-base-color-scroll-pane;
 }
 
-.jfx-scroll-bar:horizontal{
-    -fx-background-color:;    
+.jfx-scroll-bar:horizontal,jfx-scroll-bar:vertical{
+    -fx-background-color:-fx-base-color-scroll-bar;    
 }
-*/
 
 /*todo*/
 /*
@@ -643,4 +599,51 @@ and open the template in the editor.
     -glyph-size: 70px;
     -fx-text-alignment: center;
     -fx-line-spacing: 10;
+}
+
+
+.jfx-tab-pane
+{
+    -fx-side: top;
+    -fx-background-color: -fx-base-color-tp;
+    /*-fx-tab-min-width:90px;*/
+}
+
+.jfx-tab-pane .jfx-tab-header-area .jfx-tab-header-background {
+    -fx-side: top;
+    -fx-opacity:1;
+    -fx-background-radius: 5%;
+    -fx-background-color: -fx-base-color-tp-header;
+}
+
+.jfx-tab-pane .jfx-tab
+{
+    -fx-background-radius: 30 30 30 30;
+    -fx-border-radius: 30 30 30 30;
+    -fx-background-color: -fx-base-color-tp-tab;
+}
+
+.jfx-tab-pane .jfx-tab:hover{
+    -fx-translate-y: -3;
+}
+
+.jfx-tab-pane .jfx-tab:selected
+{
+    -fx-background-color: -fx-base-color-tp-tab-sel;
+    -fx-traslate-x: 1.2;
+    -fx-traslate-y: 1.2;
+}
+
+.jfx-tab .jfx-tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: -fx-base-color-tp-tab-lbltf;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.jfx-tab:selected .jfx-tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: -fx-base-color-tp-tab-lbltf-sel;
+    /*-fx-scale-x: 1.2;*/
+    /*-fx-scale-y: 1.2;*/
 }

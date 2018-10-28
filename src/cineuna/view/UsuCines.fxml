@@ -1,16 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
-   <center>
-      <ScrollPane prefHeight="720.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
-         <content>
-            <TilePane prefHeight="720.0" prefWidth="1600.0" />
-         </content>
-      </ScrollPane>
-   </center>
-</BorderPane>
+<HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1600.0" spacing="100.0" style="-fx-background-color: black;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="280.0" spacing="10.0">
+         <children>
+            <Label fx:id="lblNombreCine" alignment="CENTER" prefHeight="17.0" prefWidth="349.0" text="CINE UNA " textFill="#f2e9e9">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0">
+               <children>
+                  <FontAwesomeIconView glyphName="" size="20.0" text="" wrappingWidth="52.0" />
+                  <Hyperlink prefHeight="23.0" prefWidth="157.0" text="2772-6391" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0">
+               <children>
+                  <FontAwesomeIconView size="20.0" text="" wrappingWidth="39.0" />
+                  <Hyperlink prefHeight="23.0" prefWidth="157.0" text="infocine@cineuna.com" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0" spacing="50.0">
+               <children>
+                  <JFXButton prefHeight="19.0" prefWidth="98.0" style="-fx-background-color: green;" text="8:00">
+                     <graphic>
+                        <FontAwesomeIconView text="" translateX="-10.0" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <JFXButton prefHeight="22.0" prefWidth="98.0" text="20:00">
+               <graphic>
+                  <FontAwesomeIconView text="" translateX="-10.0" />
+               </graphic>
+            </JFXButton>
+         </children>
+         <HBox.margin>
+            <Insets left="100.0" />
+         </HBox.margin>
+      </VBox>
+      <JFXTabPane prefHeight="620.0" prefWidth="639.0" styleClass="jfx-tab-pane" stylesheets="@Style.css">
+         <tabs>
+            <Tab text="Cartelera">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="515.0" style="-fx-background-color: transparent;">
+                     <children>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <TilePane fx:id="tpCartelera" prefHeight="591.0" prefWidth="528.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Próximamente">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                     <children>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <TilePane fx:id="tpProximas" prefHeight="589.0" prefWidth="526.0" style="-fx-background-color: transparent;" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+         <HBox.margin>
+            <Insets bottom="50.0" top="20.0" />
+         </HBox.margin>
+      </JFXTabPane>
+   </children>
+</HBox>
