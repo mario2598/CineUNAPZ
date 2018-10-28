@@ -129,7 +129,7 @@ public class LogInController extends Controller implements Initializable {
                             this.vbNewPass.setVisible(true);  
                         }else{
                                 if(usuDto.getUsuEstado().equals("A")){
-                                     if(usuDto.usuAdmin.equals("S")){
+                                     if(usuDto.getUsuAdmin().equals("S") || this.cbAdmin.isSelected()){
                                          AppContext.getInstance().set("administrador", (Boolean)true);
                                     } 
                                     else{

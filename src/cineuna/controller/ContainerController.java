@@ -18,6 +18,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -44,6 +45,8 @@ public class ContainerController extends Controller implements Initializable {
     @FXML
     private AnchorPane apTop;
     private VBox vbOpcionesUsu;
+    @FXML
+    private StackPane centerHP;
 
     /**
      * Initializes the controller class.
@@ -57,7 +60,6 @@ public class ContainerController extends Controller implements Initializable {
             menuUsu.setVisible(false);
         }
         llenarInfoUsuario();
-        
     }    
 
     @Override
@@ -142,5 +144,9 @@ public class ContainerController extends Controller implements Initializable {
     public void initContainers(){
         this.vbOpcionesUsu=new VBox();
         this.popUp= new JFXPopup();
+    }
+    
+    public StackPane getHolderPane(){
+        return this.centerHP;
     }
 }
