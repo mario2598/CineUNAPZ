@@ -8,66 +8,86 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1600.0" spacing="100.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="280.0" spacing="10.0">
-         <children>
-            <Label fx:id="lblNombreCine" alignment="CENTER" prefHeight="17.0" prefWidth="349.0" text="CINE UNA " textFill="#f2e9e9">
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="40.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0">
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="1600.0" spacing="100.0" stylesheets="@Style.css" BorderPane.alignment="CENTER">
                <children>
-                  <FontAwesomeIconView glyphName="" size="20.0" text="" wrappingWidth="52.0" />
-                  <Hyperlink prefHeight="23.0" prefWidth="157.0" text="2772-6391" />
+                  <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="280.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="lblNombreCine" alignment="CENTER" prefHeight="17.0" prefWidth="349.0" text="CINE UNA " textFill="#f2e9e9">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0">
+                           <children>
+                              <FontAwesomeIconView glyphName="" size="20.0" text="" wrappingWidth="52.0" />
+                              <Hyperlink fx:id="lblNumTel" prefHeight="23.0" prefWidth="157.0" text="2772-6391" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0">
+                           <children>
+                              <FontAwesomeIconView size="20.0" text="" wrappingWidth="39.0" />
+                              <Hyperlink fx:id="lblCorreo" prefHeight="23.0" prefWidth="157.0" text="infocine@cineuna.com" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0" spacing="50.0">
+                           <children>
+                              <JFXButton fx:id="btnAbre" alignment="CENTER" prefHeight="19.0" prefWidth="98.0" style="-fx-background-color: green;" text="8:00">
+                                 <graphic>
+                                    <FontAwesomeIconView text="" translateX="-10.0" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <JFXButton fx:id="btnCierra" alignment="CENTER" prefHeight="22.0" prefWidth="98.0" text="20:00">
+                           <graphic>
+                              <FontAwesomeIconView text="" translateX="-10.0" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <TabPane prefHeight="720.0" prefWidth="588.0" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab text="Cartelera">
+                           <content>
+                              <JFXListView fx:id="tpCartelera" style="-fx-background-color: transparent;" />
+                           </content>
+                        </Tab>
+                        <Tab text="Próximamente">
+                           <content>
+                              <JFXListView fx:id="tpProximas" style="-fx-background-color: transparent;" />
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0">
+         </center>
+         <top>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="38.0" prefWidth="1600.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
                <children>
-                  <FontAwesomeIconView size="20.0" text="" wrappingWidth="39.0" />
-                  <Hyperlink prefHeight="23.0" prefWidth="157.0" text="infocine@cineuna.com" />
+                  <FontAwesomeIconView fx:id="btnOpcionesUsu" layoutX="917.0" layoutY="26.0" text="" />
+                  <Hyperlink fx:id="hlNombreUsuario" layoutX="923.0" layoutY="8.0" prefHeight="23.0" prefWidth="117.0" styleClass="hyperlink-dark" text="USUARIO" />
                </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0" spacing="50.0">
-               <children>
-                  <JFXButton prefHeight="19.0" prefWidth="98.0" style="-fx-background-color: green;" text="8:00">
-                     <graphic>
-                        <FontAwesomeIconView text="" translateX="-10.0" />
-                     </graphic>
-                  </JFXButton>
-               </children>
-            </HBox>
-            <JFXButton prefHeight="22.0" prefWidth="98.0" text="20:00">
-               <graphic>
-                  <FontAwesomeIconView text="" translateX="-10.0" />
-               </graphic>
-            </JFXButton>
-         </children>
-         <HBox.margin>
-            <Insets left="100.0" />
-         </HBox.margin>
-      </VBox>
-      <TabPane prefHeight="720.0" prefWidth="678.0" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Cartelera">
-               <content>
-                  <JFXListView fx:id="tpCartelera" style="-fx-background-color: transparent;" />
-               </content>
-            </Tab>
-          <Tab text="Próximamente">
-               <content>
-                  <JFXListView fx:id="tpProximas" style="-fx-background-color: transparent;" />
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+      <StackPane fx:id="spDialogos" prefHeight="150.0" prefWidth="200.0" visible="false" />
    </children>
-</HBox>
+</StackPane>

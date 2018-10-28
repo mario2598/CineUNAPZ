@@ -69,6 +69,7 @@ and open the template in the editor.
 }
 
 .hyperlink{
+    -fx-font-size: 15; 
     -fx-alignment: center;
     -fx-text-fill: -fx-base-color-hyper-tf;
     -fx-background-color: transparent;

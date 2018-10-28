@@ -5,6 +5,8 @@
  */
 package cineuna.cards;
 
+import cineuna.util.AppContext;
+import cineuna.util.FlowController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.geometry.Orientation;
@@ -14,6 +16,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -29,6 +32,11 @@ public class MovieCard extends Card {
     private ImageView posterImg;
     private JFXButton reservarBtn;
     private Separator sep;
+    private Boolean disponible;
+
+    public MovieCard(Boolean disponible) {
+        this.disponible = disponible;
+    }
     
     @Override
     public void initCard() {
@@ -88,6 +96,7 @@ public class MovieCard extends Card {
         posterImg.setPreserveRatio(false);
         posterImg.setFitWidth(110);
         posterImg.setFitHeight(125);
+        posterImg.setTranslateX(-20);
         posterImg.setImage(new Image("cineuna/resources/images/Ejemplo.JPG"));
     }
     
@@ -95,7 +104,18 @@ public class MovieCard extends Card {
      * inicializa el botón y su acción
      */
     private void initBtn(){
-        reservarBtn = new JFXButton("Reservar");
+        if (disponible) {
+           reservarBtn = new JFXButton("Reservar");
+           reservarBtn.setOnAction(e->{
+               FlowController.getInstance().goViewOnDialog("UsuInfoPelicula", (StackPane) AppContext.getInstance().get("spDialogos"));
+           });
+        }
+        else{
+           reservarBtn = new JFXButton("Información");
+           reservarBtn.setOnAction(e->{
+               FlowController.getInstance().goViewOnDialog("UsuInfoPelicula", (StackPane) AppContext.getInstance().get("spDialogos"));
+           });
+        }
     }
     
     /**
@@ -123,7 +143,10 @@ public class MovieCard extends Card {
     private JFXTextArea cargarDescripcion(){
         JFXTextArea descripcion = new JFXTextArea();
         descripcion.setText("Deadpool debe proteger a Russell, un adolescente mutante, de Cable un soldado del futuro genéticamente modificado. Deadpool se alía con otros superhéroes para poder derrotar al poderoso Cable.");
-        descripcion.setPrefSize(400, 70);
+        descripcion.setPrefSize(500, 70);
+        descripcion.setEditable(false);
+        descripcion.autosize();
+        
         return descripcion;
     }
     

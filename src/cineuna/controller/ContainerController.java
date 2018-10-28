@@ -59,7 +59,9 @@ public class ContainerController extends Controller implements Initializable {
             menuAdmin.setVisible(true);
             menuUsu.setVisible(false);
         }
+        else{
         llenarInfoUsuario();
+        }
     }    
 
     @Override
@@ -148,5 +150,9 @@ public class ContainerController extends Controller implements Initializable {
     
     public StackPane getHolderPane(){
         return this.centerHP;
+    }
+    
+    public void seleccionarUsuario(){
+        FlowController.getInstance().goView("UsuCines");
     }
 }
