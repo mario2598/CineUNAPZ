@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.TilePane?>
+
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
+   <center>
+      <ScrollPane prefHeight="720.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
+         <content>
+            <TilePane prefHeight="720.0" prefWidth="1600.0" />
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
