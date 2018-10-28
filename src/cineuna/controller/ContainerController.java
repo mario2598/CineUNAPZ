@@ -109,7 +109,7 @@ public class ContainerController extends Controller implements Initializable {
      * llena el hyperlink del nombre de usuario y asigna el popup
      */
     public void llenarInfoUsuario(){
-        this.hlNombreUsuario.setText((String) AppContext.getInstance().get("nombre"));
+        this.hlNombreUsuario.setText("usuario");
         this.hlNombreUsuario.setOnAction(e->{
             //FlowController.getInstance().goView("InfoUsuario");
         });
