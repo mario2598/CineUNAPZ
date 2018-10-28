@@ -16,9 +16,9 @@ and open the template in the editor.
     -fx-base-color-tp: transparent;
     -fx-base-color-tp-header: transparent;
     -fx-base-color-tp-tab:transparent;
-    -fx-base-color-tp-tab-sel:#FF0A0A;
-    -fx-base-color-tp-tab-lbltf:red;
-    -fx-base-color-tp-tab-lbltf-sel:red;
+    -fx-base-color-tp-tab-sel: #FF0A0A;
+    -fx-base-color-tp-tab-lbltf:white;
+    -fx-base-color-tp-tab-lbltf-sel:white;
     
     /*tile pane*/
     
@@ -36,6 +36,9 @@ and open the template in the editor.
     
     /*label*/
     
+    /*text area*/
+    -fx-base-color-text-area: transparent;
+    -fx-base-color-text-area-tf: white;   
     /*popup*/
     -fx-base-color-popup:black;
     
@@ -51,6 +54,14 @@ and open the template in the editor.
     -fx-base-color-cb-list:white;
     -fx-base-color-cb-list-tf: #202020;
     -fx-base-color-cb-base-tf:white;
+    
+    /*list view*/
+    -fx-base-color-list-view-background: transparent;
+    -fx-base-color-list-view-border: transparent;
+    -fx-base-color-list-view-tf: transparent;
+    -fx-base-color-list-cell-tf: transparent;
+    -fx-base-color-list-cell-odd: transparent;
+    -fx-base-color-list-cell-hover: transparent;
     
     
     /*table view*/
@@ -144,6 +155,11 @@ and open the template in the editor.
 
 .scroll-bar:horizontal .thumb,.scroll-bar:vertical .thumb {
     -fx-background-color: -fx-base-color-scroll-bar-thumb;
+    -fx-background-radius: 5em;
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: transparent;
     -fx-background-radius: 5em;
 }
 
@@ -415,35 +431,34 @@ and open the template in the editor.
     -fx-border-color: -fx-base-color-tv-header-sep;
 }
 
-/*todo*/
-/*
+
 .jfx-list-view{
-   -fx-background-color:;
+   -fx-background-color: -fx-base-color-list-view-background;
     -fx-opacity: 0.8;
-    -fx-text-fill: white;
-    -fx-border-color: white;
+    -fx-text-fill: -fx-base-color-list-view-tf;
+    -fx-border-color: -fx-base-color-list-view-border;
 }
 .list-cell{
-    -fx-text-fill: white;
-    -fx-background-color:derive(,30%),black;
+    -fx-text-fill: -fx-base-color-list-cell-tf;
+    -fx-background-color:derive(-fx-base-color-list-view-background,30%),black;
     -fx-opacity: 0.8;
 }
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
-    -fx-text-fill: white;
-    -fx-background-color: linear-gradient(derive(,10%) 100%, derive(,30%) 75%);
+    -fx-text-fill: -fx-base-color-list-cell-tf-sel;
+    -fx-background-color: linear-gradient(derive(-fx-base-color-list-view-background,10%) 100%, derive(-fx-base-color-list-view-background,30%) 75%);
     -fx-text-fill: white;
 }
 
 .list-cell:odd {
-    -fx-cell-hover-color: red;
-    -fx-background-color: derive(,50%);
+    -fx-cell-hover-color: -fx-base-color-list-cell-odd;
+    -fx-background-color: derive(-fx-base-color-list-view-background,50%);
 }
 
 .list-cell:filled:hover {
-    -fx-cell-hover-color: ;
+    -fx-cell-hover-color: -fx-base-color-list-cell-hover;
     -fx-text-fill: white;
 }
-*/
+
 
 .jfx-button{
     -jfx-button-type:FLAT;
@@ -549,6 +564,17 @@ and open the template in the editor.
 }
 */
 
+.jfx-text-area {
+    /*-fx-font-family: Consolas;*/
+    -fx-font-size: 15;
+    -fx-text-fill: -fx-base-color-text-area-tf;
+    -fx-display-caret:true;
+}
+
+.jfx-text-area .content {
+    -fx-background-color: -fx-base-color-text-area;
+}
+
 .hyperlink{
     -fx-alignment: center;
     -fx-text-fill: -fx-base-color-hyper-tf;
@@ -602,46 +628,46 @@ and open the template in the editor.
 }
 
 
-.jfx-tab-pane
+.tab-pane
 {
     -fx-side: top;
     -fx-background-color: -fx-base-color-tp;
     /*-fx-tab-min-width:90px;*/
 }
 
-.jfx-tab-pane .jfx-tab-header-area .jfx-tab-header-background {
+.tab-pane .tab-header-area .tab-header-background {
     -fx-side: top;
     -fx-opacity:1;
     -fx-background-radius: 5%;
     -fx-background-color: -fx-base-color-tp-header;
 }
 
-.jfx-tab-pane .jfx-tab
+.tab-pane .tab
 {
     -fx-background-radius: 30 30 30 30;
     -fx-border-radius: 30 30 30 30;
     -fx-background-color: -fx-base-color-tp-tab;
 }
 
-.jfx-tab-pane .jfx-tab:hover{
+.tab-pane .tab:hover{
     -fx-translate-y: -3;
 }
 
-.jfx-tab-pane .jfx-tab:selected
+.tab-pane .tab:selected
 {
     -fx-background-color: -fx-base-color-tp-tab-sel;
     -fx-traslate-x: 1.2;
     -fx-traslate-y: 1.2;
 }
 
-.jfx-tab .jfx-tab-label { 
+.tab .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: -fx-base-color-tp-tab-lbltf;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
 
-.jfx-tab:selected .jfx-tab-label {
+.tab:selected .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: -fx-base-color-tp-tab-lbltf-sel;
     /*-fx-scale-x: 1.2;*/

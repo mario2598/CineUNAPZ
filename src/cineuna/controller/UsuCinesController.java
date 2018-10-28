@@ -5,14 +5,13 @@
  */
 package cineuna.controller;
 
-import cineuna.cards.CineCard;
 import cineuna.cards.MovieCard;
+import com.jfoenix.controls.JFXListView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 
@@ -28,9 +27,9 @@ public class UsuCinesController extends Controller implements Initializable {
     @FXML
     private Label lblNombreCine;
     @FXML
-    private TilePane tpCartelera;
+    private JFXListView<MovieCard> tpCartelera;
     @FXML
-    private TilePane tpProximas;
+    private JFXListView<MovieCard> tpProximas;
     
 
     /**
@@ -38,17 +37,28 @@ public class UsuCinesController extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        for (int i = 0; i < 10; i++) {
-            MovieCard card = new MovieCard();
-            card.initCard();
-            tpCartelera.getChildren().add(card);
-            
-        }
+        
     }    
 
     @Override
     public void initialize() {
-        
+        llenarCartelera();
+        llenarProximas();
     }
     
+    private void llenarCartelera(){
+        for (int i = 0; i < 10; i++) {
+            MovieCard card = new MovieCard();
+            card.initCard();
+            tpCartelera.getItems().add(card);
+        }
+    }
+    
+    private void llenarProximas(){
+        for (int i = 0; i < 10; i++) {
+            MovieCard card = new MovieCard();
+            card.initCard();
+            tpProximas.getItems().add(card);
+        }
+    }
 }

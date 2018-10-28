@@ -44,6 +44,7 @@ public class MovieCard extends Card {
            //asigna la hoja de estilos para el card
            this.getStylesheets().clear();
            this.getStylesheets().add("cineuna/cards/StyleCards.css");
+           this.setId("root");
         }
     }
     

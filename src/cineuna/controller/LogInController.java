@@ -166,8 +166,14 @@ public class LogInController extends Controller implements Initializable {
 
     @FXML
     private void irInicioSesion(ActionEvent event) {
+        /*
         this.vbLogIn.setVisible(false);
-        this.vbInicioSesion.setVisible(true);
+        this.vbInicioSesion.setVisible(true);*/
+        AppContext.getInstance().set("administrador",false);
+        AppContext.getInstance().setUsuario(new UsuarioDto());
+        FlowController.getInstance().goMain();
+        FlowController.getInstance().goView("UsuCines");
+        ((Stage) root.getScene().getWindow()).close();
     }
 
     @FXML

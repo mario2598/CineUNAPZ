@@ -10,7 +10,7 @@ and open the template in the editor.
 
 *{
     /*root*/
-    -fx-base-color-root: black;
+    -fx-base-color-root: transparent;
 
     /*buttons*/
     -fx-base-color-but:#FF0A0A;

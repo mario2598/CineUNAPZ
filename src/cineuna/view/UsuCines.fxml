@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1600.0" spacing="100.0" style="-fx-background-color: black;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
+<HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1600.0" spacing="100.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="280.0" spacing="10.0">
          <children>
@@ -57,38 +55,19 @@
             <Insets left="100.0" />
          </HBox.margin>
       </VBox>
-      <JFXTabPane prefHeight="620.0" prefWidth="639.0" styleClass="jfx-tab-pane" stylesheets="@Style.css">
-         <tabs>
-            <Tab text="Cartelera">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="515.0" style="-fx-background-color: transparent;">
-                     <children>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <content>
-                              <TilePane fx:id="tpCartelera" prefHeight="591.0" prefWidth="528.0" />
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-              </content>
+      <TabPane prefHeight="720.0" prefWidth="678.0" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Cartelera">
+               <content>
+                  <JFXListView fx:id="tpCartelera" style="-fx-background-color: transparent;" />
+               </content>
             </Tab>
-            <Tab text="Próximamente">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
-                     <children>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <content>
-                              <TilePane fx:id="tpProximas" prefHeight="589.0" prefWidth="526.0" style="-fx-background-color: transparent;" />
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-              </content>
+          <Tab text="Próximamente">
+               <content>
+                  <JFXListView fx:id="tpProximas" style="-fx-background-color: transparent;" />
+               </content>
             </Tab>
-         </tabs>
-         <HBox.margin>
-            <Insets bottom="50.0" top="20.0" />
-         </HBox.margin>
-      </JFXTabPane>
+        </tabs>
+      </TabPane>
    </children>
 </HBox>
