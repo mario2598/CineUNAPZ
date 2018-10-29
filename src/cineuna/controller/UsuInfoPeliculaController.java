@@ -6,10 +6,15 @@
 package cineuna.controller;
 
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -17,6 +22,19 @@ import javafx.fxml.Initializable;
  * @author robri
  */
 public class UsuInfoPeliculaController extends Controller implements Initializable {
+
+    @FXML
+    private JFXDialogLayout root;
+    @FXML
+    private ImageView imgPoster;
+    @FXML
+    private AnchorPane apVideo;
+    @FXML
+    private Label lblNombre;
+    @FXML
+    private Label lblFecha;
+    @FXML
+    private JFXTextArea lblResenna;
 
 
     /**
@@ -29,6 +47,10 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
 
     @Override
     public void initialize() {
+    }
+
+    @FXML
+    private void verTrailer(MouseEvent event) {
     }
     
 }

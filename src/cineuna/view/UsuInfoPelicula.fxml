@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXDialogLayout?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
-<JFXDialogLayout maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="637.0" prefWidth="883.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoPeliculaController" />
+<JFXDialogLayout fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="631.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoPeliculaController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+         <children>
+            <StackPane prefHeight="297.0" prefWidth="675.0">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="imgPoster" fitHeight="315.0" fitWidth="540.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../resources/images/Ejemplo.JPG" />
+                           </image>
+                        </ImageView>
+                        <FontAwesomeIconView onMouseClicked="#verTrailer" size="100.0" styleClass="glyph-icon-login" text="" wrappingWidth="68.0" />
+                     </children>
+                  </StackPane>
+                  <AnchorPane fx:id="apVideo" prefHeight="200.0" prefWidth="200.0" visible="false" />
+               </children>
+            </StackPane>
+            <Label fx:id="lblNombre" prefHeight="38.0" prefWidth="678.0" text="DeadPool 2" textFill="#f5f0f0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="31.0" prefWidth="597.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="143.0" text="Fecha de estreno: " textFill="#f8f6f6">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lblFecha" alignment="CENTER" prefHeight="28.0" prefWidth="87.0" text="28/10/18" textFill="#f8f4f4" />
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <HBox prefHeight="94.0" prefWidth="675.0">
+               <children>
+                  <JFXTextArea fx:id="lblResenna" editable="false" prefHeight="55.0" prefWidth="677.0" text="Deadpool debe proteger a Russell, un adolescente mutante, de Cable un soldado del futuro genéticamente modificado. Deadpool se alía con otros superhéroes para poder derrotar al poderoso Cable.&#10;&#10;" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</JFXDialogLayout>
