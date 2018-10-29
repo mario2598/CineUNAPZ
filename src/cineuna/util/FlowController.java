@@ -10,7 +10,6 @@ import cineuna.controller.ContainerController;
 import cineuna.controller.Controller;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,7 +18,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -102,6 +100,7 @@ public class FlowController {
     
     public void goMain() {
         try {
+            loaders.clear();
             FXMLLoader loader = getLoader("Container");
             mainStage.setScene(new Scene(loader.getRoot()));
             mainStage.show();

@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.TilePane;
 
 /**
  * FXML Controller class
@@ -18,6 +19,9 @@ import javafx.fxml.Initializable;
  * @author Chris
  */
 public class AdminMenuController extends Controller implements Initializable {
+
+    @FXML
+    private TilePane tilepAdminMenu;
 
     /**
      * Initializes the controller class.
