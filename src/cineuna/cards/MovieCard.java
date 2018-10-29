@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXTextArea;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -85,7 +86,7 @@ public class MovieCard extends Card {
         infoVb.setAlignment(Pos.CENTER);
         infoVb.setPrefSize(290, 150);
         infoVb.setSpacing(15);
-        infoVb.getChildren().addAll(cargarNombre(),cargarDescripcion(),reservarBtn);
+        infoVb.getChildren().addAll(cargarNombre(),cargarIdioma(),cargarFecha(),reservarBtn);
     }
     
     /**
@@ -136,15 +137,33 @@ public class MovieCard extends Card {
         return nombre;
     }
     
+    private Label cargarIdioma(){
+        Label idioma = new Label("Idioma: ");
+        idioma.setAlignment(Pos.CENTER);
+        idioma.setText(idioma.getText()+"Español");
+        return idioma;
+    }
+    
+    private Label cargarFecha(){
+       Label fecha = new Label();
+       fecha.setAlignment(Pos.CENTER);
+       if(disponible){
+           fecha.setText("En cartelera hasta: "+ 28/10/18);
+       }
+       else{
+           fecha.setText("Disponible hasta: "+ 28/10/18);
+       }
+       return fecha; 
+    }
+    
     /**
      * inicializa el text area con la descripción de la película a partir del movieDto
      * @return 
      */
-    private JFXTextArea cargarDescripcion(){
-        JFXTextArea descripcion = new JFXTextArea();
-        descripcion.setText("Deadpool debe proteger a Russell, un adolescente mutante, de Cable un soldado del futuro genéticamente modificado. Deadpool se alía con otros superhéroes para poder derrotar al poderoso Cable.");
+    private Label cargarDescripcion(){
+        Label descripcion = new Label("Fecha de estreno: ");
+        descripcion.setText(descripcion.getText()+"28/10/18");
         descripcion.setPrefSize(500, 70);
-        descripcion.setEditable(false);
         descripcion.autosize();
         
         return descripcion;

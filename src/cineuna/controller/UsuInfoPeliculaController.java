@@ -49,8 +49,19 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     public void initialize() {
     }
 
+    /**
+     * usar el apVideo que está invisible para poner el reproductor de youtube
+     * @param event 
+     */
     @FXML
     private void verTrailer(MouseEvent event) {
+    }
+    
+    private void cargarInfoPelicula(){
+        //imgPoster.setImage(value);
+        lblFecha.setText("28/10/18");
+        lblNombre.setText("DeadPool 2");
+        lblResenna.setText("Deadpool debe proteger a Russell, un adolescente mutante, de Cable un soldado del futuro genéticamente modificado. Deadpool se alía con otros superhéroes para poder derrotar al poderoso Cable.");
     }
     
 }
