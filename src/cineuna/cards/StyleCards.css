@@ -11,6 +11,8 @@ and open the template in the editor.
 *{
     /*root*/
     -fx-base-color-root: transparent;
+    -fx-base-color-card: transparent;
+    -fx-base-color-card-hover: derive(black,0.2);
 
     /*buttons*/
     -fx-base-color-but:#FF0A0A;
@@ -103,4 +105,23 @@ and open the template in the editor.
 
 .jfx-scroll-bar:horizontal,jfx-scroll-bar:vertical{
     -fx-background-color:-fx-base-color-scroll-bar;    
+}
+
+.lbl{
+    
+}
+
+.lbl-cine{
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+}
+
+.card{
+    
+}
+
+.card:hover{
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+    -fx-background-color:-fx-base-color-card-hover;
 }

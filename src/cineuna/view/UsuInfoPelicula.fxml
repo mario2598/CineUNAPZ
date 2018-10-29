@@ -15,16 +15,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<JFXDialogLayout fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="631.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoPeliculaController">
+<JFXDialogLayout fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="400.0" prefHeight="599.0" prefWidth="446.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoPeliculaController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+      <VBox prefHeight="559.0" prefWidth="398.0" spacing="20.0">
          <children>
-            <StackPane prefHeight="297.0" prefWidth="675.0">
+            <StackPane prefHeight="226.0" prefWidth="386.0">
                <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <StackPane prefHeight="226.0" prefWidth="386.0">
                      <children>
-                        <ImageView fx:id="imgPoster" fitHeight="315.0" fitWidth="540.0" pickOnBounds="true">
+                        <ImageView fx:id="imgPoster" fitHeight="226.0" fitWidth="379.0" pickOnBounds="true">
                            <image>
                               <Image url="@../resources/images/Ejemplo.JPG" />
                            </image>
@@ -59,9 +58,9 @@
                </children>
             </HBox>
             <Separator prefWidth="200.0" />
-            <HBox prefHeight="100.0" prefWidth="583.0">
+            <HBox prefHeight="123.0" prefWidth="398.0">
                <children>
-                  <JFXTextArea fx:id="lblResenna" editable="false" prefHeight="92.0" prefWidth="583.0" text="Deadpool debe proteger a Russell, un adolescente mutante, de Cable un soldado del futuro genéticamente modificado. Deadpool se alía con otros superhéroes para poder derrotar al poderoso Cable.&#10;&#10;" />
+                  <JFXTextArea fx:id="lblResenna" editable="false" prefHeight="94.0" prefWidth="398.0" text="Deadpool debe proteger a Russell, un adolescente mutante, de Cable un soldado del futuro genéticamente modificado. Deadpool se alía con otros superhéroes para poder derrotar al poderoso Cable.&#10;&#10;" />
                </children>
             </HBox>
             <JFXListView fx:id="listaTandas" orientation="HORIZONTAL" prefHeight="45.0" prefWidth="583.0" />

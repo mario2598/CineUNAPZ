@@ -6,6 +6,7 @@
 package cineuna.cards;
 
 import cineuna.util.FlowController;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +29,7 @@ public class CineCard extends Card{
         this.setId("root");
         initPoster();
         initLabel();
+        this.root.getStyleClass().add("card");
     }
     
     private void initRoot(){
@@ -39,7 +41,7 @@ public class CineCard extends Card{
     }
     
     private void initPoster(){
-        imgCine= new ImageView(new Image("cineuna/resources/images/Ejemplo.JPG"));
+        imgCine= new ImageView(new Image("cineuna/resources/images/logoEjemplo.png"));
         imgCine.setFitWidth(110);
         imgCine.setFitHeight(125);
         root.getChildren().add(imgCine);
@@ -47,6 +49,9 @@ public class CineCard extends Card{
     
     private void initLabel(){
         lbl=new Label("nombre");
+        lbl.setAlignment(Pos.CENTER);
+        lbl.getStyleClass().add("lbl-cine");
+        lbl.setPrefWidth(110);
         root.getChildren().add(lbl);
         
     }

@@ -75,6 +75,7 @@ public class MovieCard extends Card {
         //añade el root y el separador
         rootVb.getChildren().addAll(root, sep);
         rootVb.setSpacing(10);
+        
     }
 
     /**
