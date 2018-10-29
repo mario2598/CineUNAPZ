@@ -29,7 +29,7 @@ and open the template in the editor.
     /*vbox*/
     
     /*scroll pane*/
-    -fx-base-color-scroll-pane:transparent;
+    -fx-base-color-scroll-pane:black;
     -fx-base-color-scroll-bar:transparent;
     -fx-base-color-scroll-bar-thumb:#FF0A0A;
     -fx-base-color-scroll-bar-track:transparent;

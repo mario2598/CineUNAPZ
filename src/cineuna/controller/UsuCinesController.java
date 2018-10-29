@@ -48,9 +48,7 @@ public class UsuCinesController extends Controller implements Initializable {
     private JFXButton btnCierra;
     @FXML
     private StackPane spDialogos;
-    @FXML
     private FontAwesomeIconView btnOpcionesUsu;
-    @FXML
     private Hyperlink hlNombreUsuario;
     private VBox vbOpcionesUsu;
     private JFXPopup popUp;
@@ -63,7 +61,7 @@ public class UsuCinesController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         AppContext.getInstance().set("spDialogos",spDialogos);
         initContainers();
-        llenarInfoUsuario();
+        //llenarInfoUsuario();
     }    
 
     @Override
@@ -72,7 +70,7 @@ public class UsuCinesController extends Controller implements Initializable {
         llenarCartelera();
         llenarProximas();
         llenarInfoCines();
-        llenarInfoUsuario();
+        //llenarInfoUsuario();
     }
     
     private void initContainers(){

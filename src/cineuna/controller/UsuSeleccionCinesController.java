@@ -5,33 +5,24 @@
  */
 package cineuna.controller;
 
+import cineuna.cards.CineCard;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-
+import javafx.scene.layout.TilePane;
 /**
  * FXML Controller class
  *
  * @author robri
  */
-public class UsuSeleccionTandaController extends Controller implements Initializable {
+public class UsuSeleccionCinesController extends Controller implements Initializable {
 
     @FXML
     private JFXDialogLayout root;
     @FXML
-    private Label lblCine;
-    @FXML
-    private Label lblSala;
-    @FXML
-    private Label lblAsientos;
-    @FXML
-    private Label lblCosto;
-    @FXML
-    private AnchorPane apReserva;
+    private TilePane tpCines;
 
     /**
      * Initializes the controller class.
@@ -43,6 +34,15 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
 
     @Override
     public void initialize() {
+        initCines();
+    }
+    
+    private void initCines(){
+        for (int i = 0; i < 4; i++) {
+            CineCard card=new CineCard();
+            card.initCard();
+            tpCines.getChildren().add(card);
+        }
     }
     
 }

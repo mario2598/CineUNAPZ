@@ -8,18 +8,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="1079.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <BorderPane prefHeight="610.0" prefWidth="1574.0">
          <center>
-            <HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="1600.0" spacing="100.0" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+            <HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1080.0" spacing="100.0" stylesheets="@Style.css" BorderPane.alignment="CENTER">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="280.0" spacing="10.0">
                      <children>
@@ -62,7 +61,7 @@
                         <Insets left="100.0" />
                      </HBox.margin>
                   </VBox>
-                  <TabPane prefHeight="720.0" prefWidth="588.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane prefHeight="572.0" prefWidth="646.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Cartelera">
                            <content>
@@ -79,15 +78,7 @@
                </children>
             </HBox>
          </center>
-         <top>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="38.0" prefWidth="1600.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
-               <children>
-                  <FontAwesomeIconView fx:id="btnOpcionesUsu" layoutX="917.0" layoutY="26.0" text="" />
-                  <Hyperlink fx:id="hlNombreUsuario" layoutX="923.0" layoutY="8.0" prefHeight="23.0" prefWidth="117.0" styleClass="hyperlink-dark" text="USUARIO" />
-               </children>
-            </AnchorPane>
-         </top>
       </BorderPane>
-      <StackPane fx:id="spDialogos" prefHeight="150.0" prefWidth="200.0" visible="false" />
+      <StackPane fx:id="spDialogos" prefHeight="610.0" prefWidth="1561.0" visible="false" />
    </children>
 </StackPane>

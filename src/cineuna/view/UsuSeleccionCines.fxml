@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.TilePane?>
+
+
+<JFXDialogLayout fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="971.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuSeleccionCinesController">
+   <children>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+         <content>
+            <TilePane fx:id="tpCines" alignment="CENTER" hgap="20.0" prefColumns="4" prefHeight="503.0" prefRows="4" prefWidth="603.0" style="-fx-background-color: transparent;" vgap="20.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</JFXDialogLayout>

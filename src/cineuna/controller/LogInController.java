@@ -173,7 +173,7 @@ public class LogInController extends Controller implements Initializable {
         AppContext.getInstance().setUsuario(new UsuarioDto());
         FlowController.getInstance().goMain();
         ((Stage) root.getScene().getWindow()).close();
-        FlowController.getInstance().goView("UsuCines");
+        FlowController.getInstance().goView("UsuSeleccionCines");
     }
 
     @FXML
