@@ -8,7 +8,6 @@ package cineuna.cards;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
@@ -170,7 +169,6 @@ public class MovieCard extends Card {
         
         return descripcion;
     }
-    
     
     
 }
