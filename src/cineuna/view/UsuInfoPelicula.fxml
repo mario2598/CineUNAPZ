@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXDialogLayout?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<JFXDialogLayout fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="631.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoPeliculaController">
+<JFXDialogLayout fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="631.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoPeliculaController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
          <children>
@@ -47,20 +48,23 @@
             </Label>
             <HBox prefHeight="31.0" prefWidth="597.0">
                <children>
-                  <Label prefHeight="28.0" prefWidth="143.0" text="Fecha de estreno: " textFill="#f8f6f6">
+                  <Label prefHeight="28.0" prefWidth="101.0" text="En cartelera: " textFill="#f8f6f6">
                      <padding>
                         <Insets left="30.0" />
                      </padding>
                   </Label>
                   <Label fx:id="lblFecha" alignment="CENTER" prefHeight="28.0" prefWidth="87.0" text="28/10/18" textFill="#f8f4f4" />
+                  <Label alignment="CENTER" prefHeight="28.0" prefWidth="38.0" text="hasta: " textFill="#f8f4f4" />
+                  <Label fx:id="lblFechaFin" alignment="CENTER" prefHeight="28.0" prefWidth="86.0" text="28/10/18" textFill="#f8f4f4" />
                </children>
             </HBox>
             <Separator prefWidth="200.0" />
-            <HBox prefHeight="94.0" prefWidth="675.0">
+            <HBox prefHeight="100.0" prefWidth="583.0">
                <children>
-                  <JFXTextArea fx:id="lblResenna" editable="false" prefHeight="55.0" prefWidth="677.0" text="Deadpool debe proteger a Russell, un adolescente mutante, de Cable un soldado del futuro genéticamente modificado. Deadpool se alía con otros superhéroes para poder derrotar al poderoso Cable.&#10;&#10;" />
+                  <JFXTextArea fx:id="lblResenna" editable="false" prefHeight="92.0" prefWidth="583.0" text="Deadpool debe proteger a Russell, un adolescente mutante, de Cable un soldado del futuro genéticamente modificado. Deadpool se alía con otros superhéroes para poder derrotar al poderoso Cable.&#10;&#10;" />
                </children>
             </HBox>
+            <JFXListView fx:id="listaTandas" orientation="HORIZONTAL" prefHeight="45.0" prefWidth="583.0" />
          </children>
       </VBox>
    </children>

@@ -108,12 +108,14 @@ public class MovieCard extends Card {
         if (disponible) {
            reservarBtn = new JFXButton("Reservar");
            reservarBtn.setOnAction(e->{
+               AppContext.getInstance().set("peliDisponible",disponible);
                FlowController.getInstance().goViewOnDialog("UsuInfoPelicula", (StackPane) AppContext.getInstance().get("spDialogos"));
            });
         }
         else{
            reservarBtn = new JFXButton("Información");
            reservarBtn.setOnAction(e->{
+               AppContext.getInstance().set("peliDisponible",disponible);
                FlowController.getInstance().goViewOnDialog("UsuInfoPelicula", (StackPane) AppContext.getInstance().get("spDialogos"));
            });
         }
