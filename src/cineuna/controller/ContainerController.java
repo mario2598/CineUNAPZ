@@ -49,7 +49,7 @@ public class ContainerController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initContainers();
-        
+        llenarInfoUsuario();
     }    
 
     @Override
@@ -65,7 +65,8 @@ public class ContainerController extends Controller implements Initializable {
     public void llenarInfoUsuario(){
         this.hlNombreUsuario.setText("usuario");
         this.hlNombreUsuario.setOnAction(e->{
-            //FlowController.getInstance().goView("InfoUsuario");
+            System.out.println("asdasdasd");
+            FlowController.getInstance().goView("UsuInfoUsuario");
         });
         
         this.btnOpcionesUsu.setOnMouseClicked(event ->{

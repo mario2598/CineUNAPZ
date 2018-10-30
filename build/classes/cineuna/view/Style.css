@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : robri
 */
 *{
-    -fx-base-color-root: black;
+    -fx-base-color-root: #0C0C0D;
     -fx-base-color-root2: white;
     -fx-base-color-lateral:  black;
     
