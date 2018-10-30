@@ -322,7 +322,7 @@ public class LogInController extends Controller implements Initializable {
             message.setRecipients(Message.RecipientType.TO,
             InternetAddress.parse(usuario.getUsuEmail()));
             message.setSubject("Activacion Cuenta CINEUNAPZ") ;
-            message.setText("Ingrese al link para activar la cuenta " + "http://DESKTOP-RCLJD2G:80/WsCineUNA/wsCine/UsuarioController/activar/"+usuario.getUsuUser());
+            message.setText("Ingrese al link para activar la cuenta " + "http://localhost:80/WsCineUNA/wsCine/UsuarioController/activar/"+usuario.getUsuCodAct());
 
             Transport.send(message);
 
