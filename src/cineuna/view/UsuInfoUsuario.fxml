@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="780.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoUsuarioController">
    <children>
-      <FontAwesomeIconView layoutX="31.0" layoutY="74.0" onMouseClicked="#volver" text="" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="382.0" prefWidth="196.0" spacing="30.0">
+               <children>
+                  <ImageView fitHeight="82.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/images/Ejemplo.JPG" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="txtUsuario" disable="true" promptText="Usuario">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtNombre" disable="true" promptText="Nombre" />
+                  <JFXTextField fx:id="txtPApellido" disable="true" promptText="P Apellido" />
+                  <JFXTextField fx:id="txtSApellido" disable="true" promptText="S Apellido" />
+                  <JFXPasswordField fx:id="txtContrasenna1" disable="true" promptText="Contraseña" />
+                  <JFXPasswordField fx:id="txtContrasenna2" disable="true" promptText="Contraseña" visible="false" />
+                  <JFXButton maxHeight="1.7976931348623157E308" text="Editar" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <FontAwesomeIconView onMouseClicked="#volver" text="" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0" />
    </children>
 </AnchorPane>

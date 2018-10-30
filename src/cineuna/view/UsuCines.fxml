@@ -21,6 +21,15 @@
          <center>
             <HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="780.0" spacing="20.0" stylesheets="@Style.css" BorderPane.alignment="CENTER">
                <children>
+                  <VBox prefHeight="550.0" prefWidth="30.0">
+                     <children>
+                        <FontAwesomeIconView onMouseClicked="#volver" text="">
+                           <VBox.margin>
+                              <Insets left="20.0" top="30.0" />
+                           </VBox.margin>
+                        </FontAwesomeIconView>
+                     </children>
+                  </VBox>
                   <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="550.0" prefWidth="432.0" spacing="10.0">
                      <children>
                         <ImageView fitHeight="95.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">

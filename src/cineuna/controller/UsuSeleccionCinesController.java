@@ -38,6 +38,7 @@ public class UsuSeleccionCinesController extends Controller implements Initializ
     }
     
     private void initCines(){
+        tpCines.getChildren().clear();
         for (int i = 0; i < 4; i++) {
             CineCard card=new CineCard();
             card.initCard();

@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.TilePane;
 
 /**
  * FXML Controller class
@@ -31,7 +32,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     @FXML
     private Label lblCosto;
     @FXML
-    private AnchorPane apReserva;
+    private TilePane apReserva;
 
     /**
      * Initializes the controller class.

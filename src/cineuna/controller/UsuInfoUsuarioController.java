@@ -7,6 +7,8 @@ package cineuna.controller;
 
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -23,6 +25,18 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
 
     @FXML
     private AnchorPane root;
+    @FXML
+    private JFXTextField txtUsuario;
+    @FXML
+    private JFXTextField txtNombre;
+    @FXML
+    private JFXTextField txtPApellido;
+    @FXML
+    private JFXTextField txtSApellido;
+    @FXML
+    private JFXPasswordField txtContrasenna1;
+    @FXML
+    private JFXPasswordField txtContrasenna2;
 
     /**
      * Initializes the controller class.

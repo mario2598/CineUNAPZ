@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -119,6 +120,7 @@ public class UsuCinesController extends Controller implements Initializable {
     }
     
     private void llenarCartelera(){
+        tpCartelera.getItems().clear();
         for (int i = 0; i < 10; i++) {
             MovieCard card = new MovieCard(true);
             card.initCard();
@@ -127,6 +129,7 @@ public class UsuCinesController extends Controller implements Initializable {
     }
     
     private void llenarProximas(){
+        tpProximas.getItems().clear();
         for (int i = 0; i < 10; i++) {
             MovieCard card = new MovieCard(false);
             card.initCard();
@@ -140,5 +143,10 @@ public class UsuCinesController extends Controller implements Initializable {
         lblCorreo.setText("correo_prueba@cineuna.com");
         lblAbre.setText("8:00");
         lblCierra.setText("21:00");
+    }
+
+    @FXML
+    private void volver(MouseEvent event) {
+        FlowController.getInstance().goView("UsuSeleccionCines");
     }
 }
