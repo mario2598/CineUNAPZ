@@ -42,9 +42,7 @@ public class UsuCinesController extends Controller implements Initializable {
     private Hyperlink lblNumTel;
     @FXML
     private Hyperlink lblCorreo;
-    @FXML
     private JFXButton btnAbre;
-    @FXML
     private JFXButton btnCierra;
     @FXML
     private StackPane spDialogos;
@@ -52,6 +50,10 @@ public class UsuCinesController extends Controller implements Initializable {
     private Hyperlink hlNombreUsuario;
     private VBox vbOpcionesUsu;
     private JFXPopup popUp;
+    @FXML
+    private Label lblAbre;
+    @FXML
+    private Label lblCierra;
     
 
     /**
@@ -136,7 +138,7 @@ public class UsuCinesController extends Controller implements Initializable {
         lblNombreCine.setText("CineUNA");
         lblNumTel.setText("2772-6391");
         lblCorreo.setText("correo_prueba@cineuna.com");
-        btnAbre.setText("8:00");
-        btnCierra.setText("21:00");
+        lblAbre.setText("8:00");
+        lblCierra.setText("21:00");
     }
 }

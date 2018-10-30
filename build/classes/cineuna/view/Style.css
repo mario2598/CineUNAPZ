@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : robri
 */
 *{
-    -fx-base-color-root: #0C0C0D;
+    -fx-base-color-root: black;
     -fx-base-color-root2: white;
     -fx-base-color-lateral:  black;
     
@@ -35,6 +35,7 @@ and open the template in the editor.
     -fx-base-color-scroll-bar-track:transparent;
     
     /*label*/
+    -fx-base-color-lbl-tf: white;
     
     /*text area*/
     -fx-base-color-text-area: transparent;
@@ -79,6 +80,8 @@ and open the template in the editor.
     /*buttons*/
     -fx-base-color-but:#FF0A0A;
     -fx-base-color-but-border: transparent;
+    -fx-base-color-but-green:green;
+    -fx-base-color-but-green-border: transparent;
     -fx-base-color-but2:transparent;
     -fx-base-color-but2-border: white;
     -fx-base-color-but-tf:white;
@@ -474,6 +477,16 @@ and open the template in the editor.
     -fx-scale-y: 1.2;
 }
 
+.jfx-button-green{
+    -fx-background-color: -fx-base-color-but-green;
+    -fx-border-color: -fx-base-color-but-green-border;
+}
+
+.jfx-button-green:hover{
+    -fx-background-color: -fx-base-color-but-green;
+    -fx-border-color: transparent;
+}
+
 .jfx-button2{
     -fx-background-color: -fx-base-color-but2;
     -fx-border-color: -fx-base-color-but2-border;
@@ -555,14 +568,17 @@ and open the template in the editor.
 }*/
 
 
-/*todo*/
-/*
 .label{
-    -fx-text-fill: ;
+    -fx-text-fill: -fx-base-color-lbl-tf;
     -fx-alignment: center;
     -fx-font-size: 15;
 }
-*/
+
+.label-titulo{
+    -fx-text-fill: -fx-base-color-lbl-tf;
+    -fx-alignment: center;
+    -fx-font-size: 25;
+}
 
 .jfx-text-area {
     /*-fx-font-family: Consolas;*/
@@ -608,7 +624,7 @@ and open the template in the editor.
 
 .glyph-icon{
     -fx-fill: -fx-base-color-glyph;
-    -glyph-size: 20px;
+    -glyph-size: 25px;
     -fx-text-alignment: center;
     -fx-line-spacing: 10;
 }

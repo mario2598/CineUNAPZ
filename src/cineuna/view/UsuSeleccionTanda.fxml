@@ -4,16 +4,15 @@
 <?import com.jfoenix.controls.JFXDialogLayout?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<JFXDialogLayout fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="677.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuSeleccionTandaController">
+<JFXDialogLayout fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="780.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuSeleccionTandaController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="547.0" prefWidth="161.0">
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="547.0" prefWidth="161.0">
                <children>
                   <Label fx:id="lblCine" alignment="CENTER" prefHeight="74.0" prefWidth="161.0" text="CinePZ">
                      <VBox.margin>
@@ -25,14 +24,19 @@
                   <Label fx:id="lblAsientos" alignment="CENTER" prefHeight="52.0" prefWidth="161.0" text="6" />
                   <Label alignment="CENTER" prefHeight="61.0" prefWidth="161.0" text="Costo:" />
                   <Label fx:id="lblCosto" alignment="CENTER" prefHeight="61.0" prefWidth="161.0" text="30000" />
-                  <JFXButton text="Reservar">
+                  <JFXButton styleClass="jfx-button-green" text="Reservar">
                      <VBox.margin>
-                        <Insets top="50.0" />
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton text="Cancelar">
+                     <VBox.margin>
+                        <Insets top="20.0" />
                      </VBox.margin>
                   </JFXButton>
                </children>
             </VBox>
-            <AnchorPane fx:id="apReserva" prefHeight="547.0" prefWidth="469.0" />
+            <TilePane fx:id="apReserva" prefHeight="510.0" prefWidth="572.0" />
          </children>
       </HBox>
    </children>

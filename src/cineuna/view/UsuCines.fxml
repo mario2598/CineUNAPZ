@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
@@ -8,64 +7,78 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="1273.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="780.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuCinesController">
    <children>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="606.0" prefWidth="1082.0" StackPane.alignment="CENTER">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="550.0" prefWidth="780.0" StackPane.alignment="CENTER">
          <center>
-            <HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="1273.0" spacing="100.0" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+            <HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="780.0" spacing="20.0" stylesheets="@Style.css" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="280.0" spacing="10.0">
+                  <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="550.0" prefWidth="432.0" spacing="10.0">
                      <children>
-                        <Label fx:id="lblNombreCine" alignment="CENTER" prefHeight="17.0" prefWidth="349.0" text="CINE UNA " textFill="#f2e9e9">
+                        <ImageView fitHeight="95.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
                            <VBox.margin>
-                              <Insets top="50.0" />
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@../resources/images/logoEjemplo.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblNombreCine" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="263.0" styleClass="label-titulo" text="CINE UNA " textFill="#f2e9e9">
+                           <VBox.margin>
+                              <Insets top="10.0" />
                            </VBox.margin>
                            <font>
                               <Font size="40.0" />
                            </font>
                         </Label>
-                        <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0">
+                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="263.0">
                            <children>
-                              <FontAwesomeIconView glyphName="" size="20.0" text="" wrappingWidth="52.0" />
-                              <Hyperlink fx:id="lblNumTel" prefHeight="23.0" prefWidth="157.0" text="2772-6391" />
+                              <FontAwesomeIconView glyphName="" size="20.0" text="" wrappingWidth="30.0" />
+                              <Hyperlink fx:id="lblNumTel" prefHeight="23.0" prefWidth="153.0" text="2772-6391" textAlignment="CENTER" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0">
+                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="51.0" prefWidth="263.0">
                            <children>
-                              <FontAwesomeIconView size="20.0" text="" wrappingWidth="39.0" />
-                              <Hyperlink fx:id="lblCorreo" prefHeight="23.0" prefWidth="157.0" text="infocine@cineuna.com" />
+                              <FontAwesomeIconView size="20.0" text="" wrappingWidth="19.0" />
+                              <Hyperlink fx:id="lblCorreo" prefHeight="23.0" prefWidth="154.0" text="infocine@cineuna.com" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="86.0" prefWidth="350.0" spacing="50.0">
+                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="51.0" prefWidth="263.0">
                            <children>
-                              <JFXButton fx:id="btnAbre" alignment="CENTER" prefHeight="19.0" prefWidth="98.0" style="-fx-background-color: green;" text="8:00">
-                                 <graphic>
-                                    <FontAwesomeIconView text="" translateX="-10.0" />
-                                 </graphic>
-                              </JFXButton>
+                              <FontAwesomeIconView size="20.0" text="" wrappingWidth="27.0" />
+                              <Label prefHeight="21.0" prefWidth="151.0" text="Horario:" />
                            </children>
                         </HBox>
-                        <JFXButton fx:id="btnCierra" alignment="CENTER" prefHeight="22.0" prefWidth="98.0" text="20:00">
-                           <graphic>
-                              <FontAwesomeIconView text="" translateX="-10.0" />
-                           </graphic>
-                        </JFXButton>
+                        <HBox alignment="CENTER" prefHeight="65.0" prefWidth="263.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="48.0" text="Abre:" />
+                              <Label fx:id="lblAbre" prefHeight="21.0" prefWidth="48.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="65.0" prefWidth="263.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="48.0" text="Abre:" />
+                              <Label fx:id="lblCierra" prefHeight="21.0" prefWidth="48.0" />
+                           </children>
+                        </HBox>
                      </children>
                      <HBox.margin>
-                        <Insets left="100.0" />
+                        <Insets />
                      </HBox.margin>
                   </VBox>
-                  <TabPane prefHeight="572.0" prefWidth="646.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="572.0" prefWidth="646.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Cartelera">
                            <content>
-                              <JFXListView fx:id="tpCartelera" style="-fx-background-color: transparent;" />
+                              <JFXListView fx:id="tpCartelera" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" />
                            </content>
                         </Tab>
                         <Tab text="Próximamente">
@@ -74,6 +87,9 @@
                            </content>
                         </Tab>
                      </tabs>
+                     <HBox.margin>
+                        <Insets bottom="20.0" right="20.0" top="20.0" />
+                     </HBox.margin>
                   </TabPane>
                </children>
             </HBox>

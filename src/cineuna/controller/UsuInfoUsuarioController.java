@@ -5,6 +5,8 @@
  */
 package cineuna.controller;
 
+import cineuna.util.AppContext;
+import cineuna.util.FlowController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -36,6 +38,8 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
 
     @FXML
     private void volver(MouseEvent event) {
+        //String pantallaPrevia = (String) AppContext.getInstance().get("pantallaPrevia");
+        FlowController.getInstance().goView("UsuCines");
     }
     
 }

@@ -3,9 +3,8 @@
 <?import com.jfoenix.controls.JFXDialogLayout?>
 <?import javafx.scene.layout.TilePane?>
 
-
-<JFXDialogLayout fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="831.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuSeleccionCinesController">
+<JFXDialogLayout fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="780.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuSeleccionCinesController">
    <children>
-      <TilePane fx:id="tpCines" alignment="CENTER" hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefColumns="4" prefHeight="503.0" prefRows="4" prefWidth="603.0" style="-fx-background-color: transparent;" vgap="20.0" />
+      <TilePane fx:id="tpCines" alignment="CENTER" hgap="100.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefColumns="4" prefHeight="468.0" prefRows="4" prefWidth="690.0" style="-fx-background-color: transparent;" vgap="100.0" />
    </children>
 </JFXDialogLayout>

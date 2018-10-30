@@ -5,7 +5,9 @@
  */
 package cineuna.controller;
 
+import cineuna.logic.BotonTanda;
 import cineuna.util.AppContext;
+import cineuna.util.FlowController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXListView;
@@ -79,8 +81,9 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
         if(disponible){
             for (int i = 0; i < 3; i++) {
                 JFXButton btnTanda = new JFXButton("16:30");
-                btnTanda.setOnMouseClicked(c->{
-                
+                btnTanda.setOnAction(c->{  
+                //AppContext.getInstance().set("tandaSeleccionada",tanda);
+                 FlowController.getInstance().goView("UsuSeleccionTanda");
                 });
                 listaTandas.getItems().add(btnTanda);
             }

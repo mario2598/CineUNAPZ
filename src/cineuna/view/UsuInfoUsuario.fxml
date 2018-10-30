@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="781.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoUsuarioController">
+<AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="780.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoUsuarioController">
    <children>
       <FontAwesomeIconView layoutX="31.0" layoutY="74.0" onMouseClicked="#volver" text="" />
    </children>
