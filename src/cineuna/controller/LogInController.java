@@ -214,7 +214,7 @@ public class LogInController extends Controller implements Initializable {
             this.vbOpcUsu.setVisible(true);
     }
     
-    @FXML
+       @FXML
     private void registrarCliente(ActionEvent event) {
         Boolean req = validaCamposRegistro();
         if(req){
@@ -224,6 +224,8 @@ public class LogInController extends Controller implements Initializable {
             usuario.setUsuUser(tfRegUsu.getText());
             usuario.setUsuPassword(tfRegContra.getText());
             usuario.setUsuEmail(tfRegCorreo.getText());
+            String cod = generarCodAct(tfRegUsu.getText());
+            usuario.setUsuCodAct(cod);
             if(!tfRegApe1.getText().isEmpty()){{
                 usuario.setUsuSapellido(tfRegApe1.getText());
             }
@@ -245,6 +247,7 @@ public class LogInController extends Controller implements Initializable {
         }
      }   
     }
+        
     }
     
     private Boolean validaCamposRegistro(){
@@ -489,5 +492,25 @@ System.out.println( abecedario[numRandon] );
             newPass += abecedario[numeroABC];
          }
          return newPass;
+    }
+     
+  private String generarCodAct(String usu) {
+         Integer numeroABC;
+         String newCod ="";
+         String [] abecedario = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
+         "K", "L", "M","N","O","P","Q","R","S","T","U","V","W", "X","Y","Z" };
+
+        int numRandon = (int) Math.round(Math.random() * 26 ) ;
+
+        System.out.println( abecedario[numRandon] );
+         
+         for(int i = 0; i <= 3 ; i++){
+  
+            numeroABC = (int) (Math.random() * 26) + 1;
+            newCod += usu.charAt(i);
+            
+            newCod += abecedario[numeroABC];
+         }
+         return newCod;
     }
 }

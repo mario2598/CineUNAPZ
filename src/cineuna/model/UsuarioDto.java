@@ -48,6 +48,8 @@ public class UsuarioDto {
     public SimpleStringProperty usuNewpassword;
     @XmlTransient
     public SimpleStringProperty usuCambio;
+    @XmlTransient
+    public SimpleStringProperty usuCodAct;
    // @XmlTransient
    // List<CineDto> cineList;
      public UsuarioDto() {
@@ -63,6 +65,8 @@ public class UsuarioDto {
         this.usuAdmin = new SimpleStringProperty("N");
         this.usuNewpassword = new SimpleStringProperty();
         this.usuCambio = new SimpleStringProperty("N");
+        this.usuCodAct = new SimpleStringProperty();
+        
     }    
 
     public Long getUsuId() {
@@ -162,6 +166,13 @@ public class UsuarioDto {
 
     public void setUsuCambio(String usuCambio) {
         this.usuCambio.set(usuCambio);
+    }
+    public String getUsuCodAct() {
+        return usuCodAct.get();
+    }
+
+    public void setUsuCodAct(String usuCodAct) {
+        this.usuCodAct.set(usuCodAct);
     }
     
      
