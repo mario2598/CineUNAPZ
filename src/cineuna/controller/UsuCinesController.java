@@ -6,6 +6,7 @@
 package cineuna.controller;
 
 import cineuna.cards.MovieCard;
+import cineuna.cards.MovieCard2;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import com.jfoenix.controls.JFXButton;
@@ -36,7 +37,7 @@ public class UsuCinesController extends Controller implements Initializable {
     @FXML
     private Label lblNombreCine;
     @FXML
-    private JFXListView<MovieCard> tpCartelera;
+    private JFXListView<MovieCard2> tpCartelera;
     @FXML
     private JFXListView<MovieCard> tpProximas;
     @FXML
@@ -122,7 +123,7 @@ public class UsuCinesController extends Controller implements Initializable {
     private void llenarCartelera(){
         tpCartelera.getItems().clear();
         for (int i = 0; i < 10; i++) {
-            MovieCard card = new MovieCard(true);
+            MovieCard2 card = new MovieCard2(true);
             card.initCard();
             tpCartelera.getItems().add(card);
         }

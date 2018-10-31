@@ -6,6 +6,7 @@
 package cineuna.controller;
 
 import cineuna.cards.CineCard;
+import cineuna.cards.MovieCard2;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
 import java.util.ResourceBundle;

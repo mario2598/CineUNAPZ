@@ -36,10 +36,19 @@ and open the template in the editor.
     -fx-base-color-scroll-bar:transparent;
     -fx-base-color-scroll-bar-thumb:transparent;
     -fx-base-color-scroll-bar-track:transparent;
+    
+    /*text area*/
+    -fx-base-color-text-area:transparent;
+    -fx-base-color-text-area-tf:white;
 }
 
 #root{
     -fx-background-color: -fx-base-color-root;
+}
+
+.info-root{
+    -fx-background-color: black;
+    -fx-opacity: 0.8;
 }
 
 .jfx-button{
@@ -124,4 +133,26 @@ and open the template in the editor.
     -fx-scale-x: 1.2;
     -fx-scale-y: 1.2;
     -fx-background-color:-fx-base-color-card-hover;
+}
+
+.jfx-text-area {
+    /*-fx-font-family: Consolas;*/
+    -fx-font-size: 15;
+    -fx-text-fill: -fx-base-color-text-area-tf;
+    -fx-display-caret:true;
+}
+
+.jfx-text-area .content {
+    -fx-background-color: -fx-base-color-text-area;
+}
+
+.jfx-text-area:disabled {
+    /*-fx-font-family: Consolas;*/
+    -fx-font-size: 15;
+    -fx-text-fill: -fx-base-color-text-area-tf;
+    -fx-display-caret:true;
+}
+
+.jfx-text-area .content:disabled {
+    -fx-background-color: -fx-base-color-text-area;
 }
