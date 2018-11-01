@@ -166,9 +166,12 @@ public class LogInController extends Controller implements Initializable {
 
     @FXML
     private void irInicioSesion(ActionEvent event) {
-        /*
+        desabilitaInicio();
         this.vbLogIn.setVisible(false);
-        this.vbInicioSesion.setVisible(true);*/
+        this.vbInicioSesion.setVisible(true);
+    }
+    
+    private void desabilitaInicio(){
         AppContext.getInstance().set("administrador",false);
         AppContext.getInstance().setUsuario(new UsuarioDto());
         FlowController.getInstance().goMain();
@@ -300,7 +303,7 @@ public class LogInController extends Controller implements Initializable {
             message.setSubject("Activacion Cuenta CINEUNAPZ") ;
             message.setText("Ingrese al link para activar la cuenta " + "http://localhost:80/WsCineUNA/wsCine/UsuarioController/activar/"+usuario.getUsuCodAct());
 
-            message.setText("Ingrese al link para activar la cuenta " + "http://localhost:80/WsCineUNA/wsCine/UsuarioController/activar/"+usuario.getUsuUser());
+            //message.setText("Ingrese al link para activar la cuenta " + "http://localhost:80/WsCineUNA/wsCine/UsuarioController/activar/"+usuario.getUsuUser());
             Transport.send(message);
 
             return true;
