@@ -51,12 +51,14 @@ public class ContainerController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         initContainers();
         llenarInfoUsuario();
+        bindUsuario();
     }    
 
     @Override
     public void initialize() {
         isAdmin =(Boolean)(AppContext.getInstance().get("administrador"));
         llenarInfoUsuario();
+        bindUsuario();
     }
 
     
@@ -64,9 +66,9 @@ public class ContainerController extends Controller implements Initializable {
      * llena el hyperlink del nombre de usuario y asigna el popup
      */
     public void llenarInfoUsuario(){
-        this.hlNombreUsuario.setText("usuario");
+        //this.hlNombreUsuario.setText("usuario");
         this.hlNombreUsuario.setOnAction(e->{
-            System.out.println("asdasdasd");
+            //System.out.println("asdasdasd");
             FlowController.getInstance().goView("UsuInfoUsuario");
         });
         
@@ -111,6 +113,19 @@ public class ContainerController extends Controller implements Initializable {
     public void initContainers(){
         this.vbOpcionesUsu=new VBox();
         this.popUp= new JFXPopup();
+    }
+    
+    private void bindUsuario(){
+        unbinds();
+        binds();
+    }
+    
+    private void binds(){
+        hlNombreUsuario.textProperty().bind(AppContext.getInstance().getUsuario().usuUser);
+    }
+    
+    private void unbinds(){
+        hlNombreUsuario.textProperty().unbind();
     }
     
     public StackPane getHolderPane(){

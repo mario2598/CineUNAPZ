@@ -233,7 +233,6 @@ public class FlowController {
         stage.initOwner(parentStage);
         stage.centerOnScreen();
         stage.showAndWait();
-
     }
 
     public Controller getController(String viewName) {

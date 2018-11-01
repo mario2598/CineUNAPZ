@@ -25,10 +25,16 @@
                         <Image url="@../resources/UNA%20Logo.png" />
                      </image>
                   </ImageView>
-                  <JFXButton onAction="#irInicioSesion" prefHeight="25.0" prefWidth="174.0" text="Iniciar Sesión" />
-                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="326.0" text="----------- ¿Nueva cuenta? -----------" textFill="#f5eded" />
-                  <JFXButton alignment="CENTER" onAction="#irRegistroCliente" prefHeight="25.0" prefWidth="92.0" styleClass="jfx-button2" text="Cliente" />
+                  <JFXButton fx:id="iniciarBtn" onAction="#irInicioSesion" prefHeight="25.0" prefWidth="174.0" text="Iniciar Sesión" />
+                  <Label fx:id="lblNuevaCuenta" alignment="CENTER" prefHeight="38.0" prefWidth="326.0" text="-----Nueva------" textFill="#f5eded" />
+                  <JFXButton fx:id="regBtn" alignment="CENTER" onAction="#irRegistroCliente" prefHeight="25.0" prefWidth="92.0" styleClass="jfx-button2" text="Cliente" />
                   <JFXButton alignment="CENTER" styleClass="jfx-button2" text="Administrador" visible="false" />
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="460.0" spacing="10.0">
+                     <children>
+                        <Hyperlink onAction="#idimaEng" text="Inglés" />
+                        <Hyperlink onAction="#idiomaEsp" text="Español" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

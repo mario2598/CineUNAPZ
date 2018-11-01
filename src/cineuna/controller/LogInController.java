@@ -9,8 +9,10 @@ import cineuna.model.UsuarioDto;
 import cineuna.service.UsuarioService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import cineuna.util.LangUtils;
 import cineuna.util.Mensaje;
 import cineuna.util.Respuesta;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -39,6 +41,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import static javafx.scene.control.Alert.AlertType.ERROR;
 import static javafx.scene.control.Alert.AlertType.INFORMATION;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -91,6 +94,12 @@ public class LogInController extends Controller implements Initializable {
     @FXML
     private VBox vbLogInvb;
     UsuarioDto usuDto;
+    @FXML
+    private JFXButton iniciarBtn;
+    @FXML
+    private JFXButton regBtn;
+    @FXML
+    private Label lblNuevaCuenta;
 
     /**
      * Initializes the controller class.
@@ -103,6 +112,14 @@ public class LogInController extends Controller implements Initializable {
     @Override
     public void initialize() {
         reinicia();
+        cargarLenguaje();
+    }
+    
+    private void cargarLenguaje(){
+        //recibe el botón al cual cargar y un tag que está en el archivo de idioma
+        LangUtils.getInstance().loadButtonLang(iniciarBtn, "reg");
+        LangUtils.getInstance().loadButtonLang(regBtn, "reg");
+        LangUtils.getInstance().loadLabelLang(lblNuevaCuenta, "nueva");
     }
 
     @FXML
@@ -496,5 +513,17 @@ System.out.println( abecedario[numRandon] );
             newCod += abecedario[numeroABC];
          }
          return newCod;
+    }
+
+    @FXML
+    private void idimaEng(ActionEvent event) {
+        LangUtils.getInstance().setLang("eng");
+        cargarLenguaje();
+    }
+
+    @FXML
+    private void idiomaEsp(ActionEvent event) {
+        LangUtils.getInstance().setLang("esp");
+        cargarLenguaje();
     }
 }
