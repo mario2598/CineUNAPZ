@@ -5,9 +5,7 @@
  */
 package cineuna.controller;
 
-import cineuna.util.AppContext;
 import cineuna.util.FlowController;
-import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
