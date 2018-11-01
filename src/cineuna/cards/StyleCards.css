@@ -40,6 +40,10 @@ and open the template in the editor.
     /*text area*/
     -fx-base-color-text-area:transparent;
     -fx-base-color-text-area-tf:white;
+    
+    /*font awesome*/
+    -fx-base-color-glyph-hover: #FF0A0A;
+    -fx-base-color-glyph: white;    
 }
 
 #root{
@@ -148,11 +152,27 @@ and open the template in the editor.
 
 .jfx-text-area:disabled {
     /*-fx-font-family: Consolas;*/
+    -fx-opacity:1;
     -fx-font-size: 15;
     -fx-text-fill: -fx-base-color-text-area-tf;
     -fx-display-caret:true;
 }
 
 .jfx-text-area .content:disabled {
+    -fx-opacity:1;
     -fx-background-color: -fx-base-color-text-area;
+}
+
+.glyph-icon{
+    -fx-fill: -fx-base-color-glyph;
+    -glyph-size: 40px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 10;
+}
+
+.glyph-icon:hover{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 0);
+    -fx-fill: -fx-base-color-glyph-hover;
 }

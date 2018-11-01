@@ -33,16 +33,11 @@ import javafx.stage.Stage;
 public class UsuCinesController extends Controller implements Initializable {
 
     @FXML
-    private HBox root;
-    @FXML
+    private StackPane root;
     private Label lblNombreCine;
-    @FXML
     private JFXListView<MovieCard2> tpCartelera;
-    @FXML
     private JFXListView<MovieCard> tpProximas;
-    @FXML
     private Hyperlink lblNumTel;
-    @FXML
     private Hyperlink lblCorreo;
     private JFXButton btnAbre;
     private JFXButton btnCierra;
@@ -52,10 +47,12 @@ public class UsuCinesController extends Controller implements Initializable {
     private Hyperlink hlNombreUsuario;
     private VBox vbOpcionesUsu;
     private JFXPopup popUp;
-    @FXML
     private Label lblAbre;
-    @FXML
     private Label lblCierra;
+    @FXML
+    private JFXListView<MovieCard2> listaCartelera;
+    @FXML
+    private JFXListView<MovieCard2> listaProximas;
     
 
     /**
@@ -65,7 +62,6 @@ public class UsuCinesController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         AppContext.getInstance().set("spDialogos",spDialogos);
         initContainers();
-        //llenarInfoUsuario();
     }    
 
     @Override
@@ -73,8 +69,6 @@ public class UsuCinesController extends Controller implements Initializable {
         initContainers();
         llenarCartelera();
         llenarProximas();
-        llenarInfoCines();
-        //llenarInfoUsuario();
     }
     
     private void initContainers(){
@@ -82,72 +76,46 @@ public class UsuCinesController extends Controller implements Initializable {
         this.vbOpcionesUsu=new VBox();
     }
     
-    /**
-     * llena el hyperlink del nombre de usuario y asigna el popup
-     */
-    public void llenarInfoUsuario(){
-        this.hlNombreUsuario.setText((String) AppContext.getInstance().get("nombre"));
-        this.hlNombreUsuario.setOnAction(e->{
-            //FlowController.getInstance().goView("InfoUsuario");
-        });
-        
-        this.btnOpcionesUsu.setOnMouseClicked(event ->{
-            this.popUp.show(btnOpcionesUsu,JFXPopup.PopupVPosition.TOP,JFXPopup.PopupHPosition.LEFT,event.getX(),event.getY());
-        });
-        llenarOpcionesUsu();
-        this.popUp.setPopupContent(this.vbOpcionesUsu);
-    }
-    
-    /**
-     * llena el vbox de las opciones del perfil de usuario
-     */
-    public void llenarOpcionesUsu(){
-        for (int i = 0; i < 10; i++) {
-            Hyperlink hl= new Hyperlink();
-            switch (i) {
-                case 1:
-                    hl.setText("Cerrar Sesión");
-                    hl.setOnAction(e->{
-                        ((Stage) root.getScene().getWindow()).close();
-                        FlowController.getInstance().goViewInWindow("LogIn");
-                    });
-                    this.vbOpcionesUsu.getChildren().add(hl);
-                    break;
-                default:
-                    break;
-            }
-            
-        }
-    }
-    
     private void llenarCartelera(){
-        tpCartelera.getItems().clear();
+        listaCartelera.getItems().clear();
         for (int i = 0; i < 10; i++) {
             MovieCard2 card = new MovieCard2(true);
             card.initCard();
-            tpCartelera.getItems().add(card);
+            listaCartelera.getItems().add(card);
         }
     }
     
     private void llenarProximas(){
-        tpProximas.getItems().clear();
+        listaProximas.getItems().clear();
         for (int i = 0; i < 10; i++) {
-            MovieCard card = new MovieCard(false);
+            MovieCard2 card = new MovieCard2(false);
             card.initCard();
-            tpProximas.getItems().add(card);
+            listaProximas.getItems().add(card);
         }
-    }
-    
-    private void llenarInfoCines(){
-        lblNombreCine.setText("CineUNA");
-        lblNumTel.setText("2772-6391");
-        lblCorreo.setText("correo_prueba@cineuna.com");
-        lblAbre.setText("8:00");
-        lblCierra.setText("21:00");
     }
 
     @FXML
     private void volver(MouseEvent event) {
         FlowController.getInstance().goView("UsuSeleccionCines");
+    }
+
+    @FXML
+    private void atrasCartelera(MouseEvent event) {
+        listaCartelera.scrollTo(0);
+    }
+
+    @FXML
+    private void adelanteCartelera(MouseEvent event) {
+        listaCartelera.scrollTo(listaCartelera.getItems().size());
+    }
+
+    @FXML
+    private void atrasProximas(MouseEvent event) {
+        listaProximas.scrollTo(0);
+    }
+
+    @FXML
+    private void adelanteProximas(MouseEvent event) {
+        listaProximas.scrollTo(listaProximas.getItems().size());
     }
 }

@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : robri
 */
 *{
-    -fx-base-color-root: #181818;
+    -fx-base-color-root: black;
     -fx-base-color-root2: white;
     -fx-base-color-lateral:  black;
     
@@ -437,14 +437,15 @@ and open the template in the editor.
 
 .jfx-list-view{
    -fx-background-color: -fx-base-color-list-view-background;
-    -fx-opacity: 0.8;
+    -fx-opacity: 1;
     -fx-text-fill: -fx-base-color-list-view-tf;
     -fx-border-color: -fx-base-color-list-view-border;
 }
 .list-cell{
     -fx-text-fill: -fx-base-color-list-cell-tf;
-    -fx-background-color:derive(-fx-base-color-list-view-background,30%),black;
-    -fx-opacity: 0.8;
+    /*-fx-background-color:derive(-fx-base-color-list-view-background,30%),black;*/
+    -fx-background-color: -fx-base-color-list-view-background;
+    -fx-opacity: 1;
 }
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-text-fill: -fx-base-color-list-cell-tf-sel;
@@ -576,8 +577,9 @@ and open the template in the editor.
 
 .label-titulo{
     -fx-text-fill: -fx-base-color-lbl-tf;
-    -fx-alignment: center;
-    -fx-font-size: 25;
+    -fx-alignment: CENTER_LEFT;
+   
+    -fx-font-size: 20;
 }
 
 .jfx-text-area {
