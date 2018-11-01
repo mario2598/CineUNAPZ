@@ -14,23 +14,10 @@ import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -40,35 +27,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import javax.xml.parsers.ParserConfigurationException;
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.xml.sax.SAXException;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Random;
 import static javafx.scene.control.Alert.AlertType.ERROR;
 import static javafx.scene.control.Alert.AlertType.INFORMATION;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperReport;
 
 /**
  * FXML Controller class
@@ -159,7 +129,7 @@ public class LogInController extends Controller implements Initializable {
                             this.vbNewPass.setVisible(true);  
                         }else{
                                 if(usuDto.getUsuEstado().equals("A")){
-                                     if(usuDto.usuAdmin.equals("S")){
+                                     if(usuDto.getUsuAdmin().equals("S") || this.cbAdmin.isSelected()){
                                          AppContext.getInstance().set("administrador", (Boolean)true);
                                     } 
                                     else{
@@ -196,8 +166,14 @@ public class LogInController extends Controller implements Initializable {
 
     @FXML
     private void irInicioSesion(ActionEvent event) {
+        /*
         this.vbLogIn.setVisible(false);
-        this.vbInicioSesion.setVisible(true);
+        this.vbInicioSesion.setVisible(true);*/
+        AppContext.getInstance().set("administrador",false);
+        AppContext.getInstance().setUsuario(new UsuarioDto());
+        FlowController.getInstance().goMain();
+        ((Stage) root.getScene().getWindow()).close();
+        FlowController.getInstance().goView("UsuSeleccionCines");
     }
 
     @FXML
@@ -324,6 +300,7 @@ public class LogInController extends Controller implements Initializable {
             message.setSubject("Activacion Cuenta CINEUNAPZ") ;
             message.setText("Ingrese al link para activar la cuenta " + "http://localhost:80/WsCineUNA/wsCine/UsuarioController/activar/"+usuario.getUsuCodAct());
 
+            message.setText("Ingrese al link para activar la cuenta " + "http://localhost:80/WsCineUNA/wsCine/UsuarioController/activar/"+usuario.getUsuUser());
             Transport.send(message);
 
             return true;

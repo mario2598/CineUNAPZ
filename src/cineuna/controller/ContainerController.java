@@ -18,6 +18,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -33,10 +34,6 @@ public class ContainerController extends Controller implements Initializable {
     private Boolean isAdmin;
     private JFXButton b;
     @FXML
-    private VBox menuAdmin;
-    @FXML
-    private VBox menuUsu;
-    @FXML
     private FontAwesomeIconView btnOpcionesUsu;
     @FXML
     private Hyperlink hlNombreUsuario;
@@ -44,6 +41,8 @@ public class ContainerController extends Controller implements Initializable {
     @FXML
     private AnchorPane apTop;
     private VBox vbOpcionesUsu;
+    @FXML
+    private StackPane centerHP;
 
     /**
      * Initializes the controller class.
@@ -51,63 +50,24 @@ public class ContainerController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initContainers();
-        isAdmin =(Boolean)(AppContext.getInstance().get("administrador"));
-        if(isAdmin){
-            menuAdmin.setVisible(true);
-            menuUsu.setVisible(false);
-        }
         llenarInfoUsuario();
-        
     }    
 
     @Override
     public void initialize() {
-        if(isAdmin){
-            menuAdmin.setVisible(true);
-            menuUsu.setVisible(false);
-        }
+        isAdmin =(Boolean)(AppContext.getInstance().get("administrador"));
         llenarInfoUsuario();
     }
 
-    @FXML
-    private void irParamG(MouseEvent event) {
-    }
-
-    @FXML
-    private void irMantUsuarios(MouseEvent event) {
-    }
-
-    @FXML
-    private void irMantPeliculas(MouseEvent event) {
-    }
-
-    @FXML
-    private void irMantSalas(MouseEvent event) {
-    }
-
-    @FXML
-    private void irInfoUsuario(MouseEvent event) {
-    }
-
-    @FXML
-    private void irInfoCine(MouseEvent event) {
-    }
-
-    @FXML
-    private void irCartelera(MouseEvent event) {
-    }
-
-    @FXML
-    private void irProximas(MouseEvent event) {
-    }
     
     /**
      * llena el hyperlink del nombre de usuario y asigna el popup
      */
     public void llenarInfoUsuario(){
-        this.hlNombreUsuario.setText((String) AppContext.getInstance().get("nombre"));
+        this.hlNombreUsuario.setText("usuario");
         this.hlNombreUsuario.setOnAction(e->{
-            //FlowController.getInstance().goView("InfoUsuario");
+            System.out.println("asdasdasd");
+            FlowController.getInstance().goView("UsuInfoUsuario");
         });
         
         this.btnOpcionesUsu.setOnMouseClicked(event ->{
@@ -122,13 +82,22 @@ public class ContainerController extends Controller implements Initializable {
      */
     public void llenarOpcionesUsu(){
         for (int i = 0; i < 10; i++) {
-            Hyperlink hl= new Hyperlink();
+            Hyperlink hl;
             switch (i) {
                 case 1:
+                    hl= new Hyperlink();
                     hl.setText("Cerrar Sesión");
                     hl.setOnAction(e->{
                         ((Stage) root.getScene().getWindow()).close();
                         FlowController.getInstance().goViewInWindow("LogIn");
+                    });
+                    this.vbOpcionesUsu.getChildren().add(hl);
+                    break;
+                case 2:
+                    hl= new Hyperlink();
+                    hl.setText("Información cine");
+                    hl.setOnAction(e->{
+                        FlowController.getInstance().goView("UsuInfoCine");
                     });
                     this.vbOpcionesUsu.getChildren().add(hl);
                     break;
@@ -142,5 +111,22 @@ public class ContainerController extends Controller implements Initializable {
     public void initContainers(){
         this.vbOpcionesUsu=new VBox();
         this.popUp= new JFXPopup();
+    }
+    
+    public StackPane getHolderPane(){
+        return this.centerHP;
+    }
+    
+    public void seleccionarUsuario(){
+        FlowController.getInstance().goView("UsuCines");
+    }
+
+    @FXML
+    private void volver(MouseEvent event) {
+    }
+
+    @FXML
+    private void irInicio(MouseEvent event) {
+        FlowController.getInstance().goView("UsuCines");
     }
 }

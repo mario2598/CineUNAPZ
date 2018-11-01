@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<JFXDialogLayout fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="400.0" prefHeight="519.0" prefWidth="409.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoPeliculaController">
+   <children>
+      <VBox fx:id="vbRoot" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="460.0" prefWidth="377.0" spacing="5.0">
+         <children>
+            <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="226.0" prefWidth="386.0">
+               <children>
+                  <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="194.0" prefWidth="381.0">
+                     <children>
+                        <ImageView fx:id="imgPoster" fitHeight="199.0" fitWidth="347.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../resources/images/Ejemplo.JPG" />
+                           </image>
+                        </ImageView>
+                        <FontAwesomeIconView onMouseClicked="#verTrailer" size="100.0" styleClass="glyph-icon-login" text="" wrappingWidth="68.0" />
+                     </children>
+                  </StackPane>
+                  <AnchorPane fx:id="apVideo" prefHeight="200.0" prefWidth="200.0" visible="false" />
+               </children>
+            </StackPane>
+            <Label fx:id="lblNombre" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="38.0" prefWidth="678.0" text="DeadPool 2" textFill="#f5f0f0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="597.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="101.0" text="En cartelera: " textFill="#f8f6f6">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lblFecha" alignment="CENTER" prefHeight="28.0" prefWidth="87.0" text="28/10/18" textFill="#f8f4f4" />
+                  <Label alignment="CENTER" prefHeight="28.0" prefWidth="38.0" text="hasta: " textFill="#f8f4f4" />
+                  <Label fx:id="lblFechaFin" alignment="CENTER" prefHeight="28.0" prefWidth="86.0" text="28/10/18" textFill="#f8f4f4" />
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER" prefHeight="125.0" prefWidth="361.0">
+               <children>
+                  <JFXTextArea fx:id="lblResenna" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="82.0" prefWidth="355.0" text="Deadpool debe proteger a Russell, un adolescente mutante, de Cable un soldado del futuro genéticamente modificado. Deadpool se alía con otros superhéroes para poder derrotar al poderoso Cable.&#10;&#10;" />
+               </children>
+            </HBox>
+            <JFXListView fx:id="listaTandas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="HORIZONTAL" prefHeight="44.0" prefWidth="361.0" />
+         </children>
+      </VBox>
+   </children>
+</JFXDialogLayout>
