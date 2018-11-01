@@ -137,7 +137,10 @@ public class LogInController extends Controller implements Initializable {
                                      } 
                                      AppContext.getInstance().setUsuario((UsuarioDto)respuesta.getResultado("Usuario"));
                                      FlowController.getInstance().goMain();
-                                     ((Stage) root.getScene().getWindow()).close();  
+                                     ((Stage) root.getScene().getWindow()).close();
+                                     //nuevo
+                                    AppContext.getInstance().setUsuario(usuDto);
+                                     
                                 }else{                    
                                      new Mensaje().show(Alert.AlertType.ERROR, "Cuenta Inactiva", "Es necesario activar la cuenta mediante el correo electronico");
                                  }
