@@ -18,7 +18,7 @@
    <children>
       <StackPane fx:id="vbLogIn" prefHeight="150.0" prefWidth="200.0">
          <children>
-            <VBox fx:id="vbLogInvb" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" visible="false">
+            <VBox fx:id="vbLogInvb" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
                <children>
                   <ImageView fitHeight="79.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -111,7 +111,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="vbNewPass" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="vbNewPass" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
             <Label fx:id="lblMsjNewPass" prefHeight="21.0" prefWidth="344.0" text="Ingrese la nueva contraseña" textFill="#fffefe">
                <VBox.margin>
@@ -133,12 +133,12 @@
             </JFXPasswordField>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton onAction="#btnNewPassVlv" prefHeight="31.0" prefWidth="114.0" text="Volver">
+                  <JFXButton fx:id="btnVolverNewPass" onAction="#btnNewPassVlv" prefHeight="31.0" prefWidth="114.0" text="Volver">
                      <HBox.margin>
                         <Insets left="90.0" top="90.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton onAction="#btnNewPassCont" prefHeight="31.0" prefWidth="119.0" text="Cambiar">
+                  <JFXButton fx:id="btnCambiar" onAction="#btnNewPassCont" prefHeight="31.0" prefWidth="119.0" text="Cambiar">
                      <HBox.margin>
                         <Insets left="50.0" top="90.0" />
                      </HBox.margin>

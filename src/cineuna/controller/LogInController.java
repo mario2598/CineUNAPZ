@@ -41,6 +41,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import static javafx.scene.control.Alert.AlertType.ERROR;
 import static javafx.scene.control.Alert.AlertType.INFORMATION;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 
 /**
@@ -100,6 +101,28 @@ public class LogInController extends Controller implements Initializable {
     private JFXButton regBtn;
     @FXML
     private Label lblNuevaCuenta;
+    @FXML
+    private JFXButton btnEntrar;
+    @FXML
+    private Hyperlink hlRecuperar;
+    @FXML
+    private Hyperlink hlAutoReg;
+    @FXML
+    private JFXButton btnRegistrar;
+    @FXML
+    private Label lblMsj1;
+    @FXML
+    private Label lblMsj2;
+    @FXML
+    private JFXButton btnVolver;
+    @FXML
+    private JFXButton btnEnviarCorreo;
+    @FXML
+    private Label lblMsjNewPass;
+    @FXML
+    private JFXButton btnVolverNewPass;
+    @FXML
+    private JFXButton btnCambiar;
 
     /**
      * Initializes the controller class.
@@ -120,6 +143,26 @@ public class LogInController extends Controller implements Initializable {
         LangUtils.getInstance().loadButtonLang(iniciarBtn, "reg");
         LangUtils.getInstance().loadButtonLang(regBtn, "reg");
         LangUtils.getInstance().loadLabelLang(lblNuevaCuenta, "nueva");
+        cargarLenguajeCambio();
+        cargarLenguajeRecuperacion();
+        cargarLenguajeRegistro();
+        cargarLenguajeLogin();
+    }
+    
+    private void cargarLenguajeLogin(){
+        
+    }
+    
+    private void cargarLenguajeRegistro(){
+        
+    }
+    
+    private void cargarLenguajeRecuperacion(){
+        
+    }
+    
+    private void cargarLenguajeCambio(){
+        
     }
 
     @FXML

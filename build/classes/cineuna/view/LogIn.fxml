@@ -53,15 +53,15 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </JFXCheckBox>
-            <JFXButton onAction="#irMain" prefHeight="41.0" prefWidth="142.0" text="Entrar">
+            <JFXButton fx:id="btnEntrar" onAction="#irMain" prefHeight="41.0" prefWidth="142.0" text="Entrar">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </JFXButton>
             <VBox fx:id="vbOpcUsu" alignment="CENTER" prefHeight="93.0" prefWidth="460.0" spacing="20.0">
                <children>
-                  <Hyperlink onAction="#irRecuperacion" text="¿Olvidó su cuenta?" />
-                  <Hyperlink onAction="#irRegistro" text="Auto Registro" underline="true" />
+                  <Hyperlink fx:id="hlRecuperar" onAction="#irRecuperacion" text="¿Olvidó su cuenta?" />
+                  <Hyperlink fx:id="hlAutoReg" onAction="#irRegistro" text="Auto Registro" underline="true" />
                </children>
             </VBox>
          </children>
@@ -75,17 +75,17 @@
             <JFXPasswordField fx:id="tfRegContra" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Contraseña" />
             <JFXPasswordField fx:id="tfRegcontraRep" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Repita Contraseña" />
             <JFXTextField fx:id="tfRegCorreo" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Correo Electrónico" />
-            <JFXButton onAction="#registrarCliente" text="Registrar" />
+            <JFXButton fx:id="btnRegistrar" onAction="#registrarCliente" text="Registrar" />
          </children>
       </VBox>
       <VBox fx:id="vbpassChange" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
-            <Label prefHeight="21.0" prefWidth="441.0" text="Estimado usuario, para cambiar su contraseña se le enviara" textFill="#fffefe">
+            <Label fx:id="lblMsj1" prefHeight="25.0" prefWidth="440.0" text="Estimado usuario, para cambiar su contraseña se le enviara" textFill="#fffefe">
                <VBox.margin>
                   <Insets left="20.0" top="90.0" />
                </VBox.margin>
             </Label>
-            <Label prefHeight="21.0" prefWidth="430.0" text="un correo Electronico con una contraseña probicional." textFill="#fffefe">
+            <Label fx:id="lblMsj2" prefHeight="21.0" prefWidth="430.0" text="un correo Electronico con una contraseña probicional." textFill="#fffefe">
                <VBox.margin>
                   <Insets left="25.0" top="20.0" />
                </VBox.margin>
@@ -97,12 +97,12 @@
             </JFXTextField>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton onAction="#btnVlvPassChange" prefHeight="31.0" prefWidth="114.0" text="Volver">
+                  <JFXButton fx:id="btnVolver" onAction="#btnVlvPassChange" prefHeight="31.0" prefWidth="114.0" text="Volver">
                      <HBox.margin>
                         <Insets left="80.0" top="90.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton onAction="#btnMailPassChange" prefHeight="31.0" prefWidth="119.0" text="Enviar Correo">
+                  <JFXButton fx:id="btnEnviarCorreo" onAction="#btnMailPassChange" prefHeight="31.0" prefWidth="119.0" text="Enviar Correo">
                      <HBox.margin>
                         <Insets left="60.0" top="90.0" />
                      </HBox.margin>
@@ -113,7 +113,7 @@
       </VBox>
       <VBox fx:id="vbNewPass" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
-            <Label prefHeight="21.0" prefWidth="441.0" text="Ingrese la nueva contraseña" textFill="#fffefe">
+            <Label fx:id="lblMsjNewPass" prefHeight="21.0" prefWidth="344.0" text="Ingrese la nueva contraseña" textFill="#fffefe">
                <VBox.margin>
                   <Insets left="25.0" top="90.0" />
                </VBox.margin>
@@ -133,12 +133,12 @@
             </JFXPasswordField>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton onAction="#btnNewPassVlv" prefHeight="31.0" prefWidth="114.0" text="Volver">
+                  <JFXButton fx:id="btnVolverNewPass" onAction="#btnNewPassVlv" prefHeight="31.0" prefWidth="114.0" text="Volver">
                      <HBox.margin>
                         <Insets left="90.0" top="90.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton onAction="#btnNewPassCont" prefHeight="31.0" prefWidth="119.0" text="Cambiar">
+                  <JFXButton fx:id="btnCambiar" onAction="#btnNewPassCont" prefHeight="31.0" prefWidth="119.0" text="Cambiar">
                      <HBox.margin>
                         <Insets left="50.0" top="90.0" />
                      </HBox.margin>
