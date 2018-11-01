@@ -31,7 +31,7 @@ public final class Request {
     private WebTarget webTarget;
     private Response response;
     // public String urlBase = null;
-    public String urlBase = "http://localhost:80/WsCineUNA/wsCine/";//todo
+    public String urlBase = "http://localhost:8080/WsCineUNA/wsCine/";//todo
    //public String urlBase = "http://localhost:8080/ElectricPosWs/wsPos/";
 
     /**

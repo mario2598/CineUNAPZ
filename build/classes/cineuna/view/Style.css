@@ -474,8 +474,8 @@ and open the template in the editor.
 .jfx-button:hover{
     -fx-background-color: -fx-base-color-but-hover;
     -fx-text-fill: -fx-base-color-but-tf-hover;
-    -fx-scale-x: 1.2;
-    -fx-scale-y: 1.2;
+    /*-fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;*/
 }
 
 .jfx-button-green{
