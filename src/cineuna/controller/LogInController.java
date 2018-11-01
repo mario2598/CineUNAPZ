@@ -166,7 +166,7 @@ public class LogInController extends Controller implements Initializable {
 
     @FXML
     private void irInicioSesion(ActionEvent event) {
-        desabilitaInicio();
+        //desabilitaInicio();
         this.vbLogIn.setVisible(false);
         this.vbInicioSesion.setVisible(true);
     }
