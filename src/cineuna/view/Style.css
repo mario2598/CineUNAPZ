@@ -577,7 +577,14 @@ and open the template in the editor.
 
 .label-titulo{
     -fx-text-fill: -fx-base-color-lbl-tf;
-    -fx-alignment: CENTER_LEFT;
+    -fx-alignment: BASELINE_LEFT;
+   
+    -fx-font-size: 20;
+}
+
+.label-titulo-cine{
+    -fx-text-fill: -fx-base-color-lbl-tf;
+    -fx-alignment: center;
    
     -fx-font-size: 20;
 }

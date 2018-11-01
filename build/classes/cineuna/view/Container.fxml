@@ -2,6 +2,8 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -12,10 +14,16 @@
          <children>
             <FontAwesomeIconView fx:id="btnOpcionesUsu" layoutX="1174.0" layoutY="35.0" text="" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="10.0" />
             <Hyperlink fx:id="hlNombreUsuario" layoutX="1176.0" layoutY="11.0" prefHeight="23.0" prefWidth="117.0" styleClass="hyperlink-dark" text="USUARIO" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="11.0" />
+            <FontAwesomeIconView layoutX="8.0" layoutY="29.0" onMouseClicked="#volver" text="" wrappingWidth="32.0" AnchorPane.leftAnchor="8.0" />
+            <ImageView fitHeight="55.0" fitWidth="71.0" layoutX="52.0" onMouseClicked="#irInicio" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="52.0">
+               <image>
+                  <Image url="@../resources/images/logoEjemplo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </top>
    <center>
-      <StackPane fx:id="centerHP" prefHeight="554.0" prefWidth="1079.0" BorderPane.alignment="CENTER" />
+      <StackPane fx:id="centerHP" prefHeight="580.0" prefWidth="1079.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

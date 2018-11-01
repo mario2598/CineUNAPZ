@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
  * @author robri
  */
 public class MovieCard2 extends Card{
+    private VBox vbRoot;
     private StackPane root;
     private ImageView poster;
     private VBox infoRoot;
@@ -42,11 +43,13 @@ public class MovieCard2 extends Card{
     }
     
     private void initRoot(){
+        vbRoot=new VBox();
         root=new StackPane();
         root.setPrefSize(130, 150);
         root.setMaxSize(USE_PREF_SIZE, USE_PREF_SIZE);
         root.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        this.getChildren().add(root);
+        vbRoot.getChildren().add(root);
+        this.getChildren().add(vbRoot);
         initPoster();
         initInfoRoot();
     }
@@ -92,7 +95,7 @@ public class MovieCard2 extends Card{
     private void addTitle(){
         Hyperlink titulo=new Hyperlink("Nombre");
         titulo.setAlignment(Pos.CENTER);
-        infoRoot.getChildren().add(titulo);
+        vbRoot.getChildren().add(titulo);
     }
     
     private void addDescription(){

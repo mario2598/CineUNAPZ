@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -81,13 +82,22 @@ public class ContainerController extends Controller implements Initializable {
      */
     public void llenarOpcionesUsu(){
         for (int i = 0; i < 10; i++) {
-            Hyperlink hl= new Hyperlink();
+            Hyperlink hl;
             switch (i) {
                 case 1:
+                    hl= new Hyperlink();
                     hl.setText("Cerrar Sesión");
                     hl.setOnAction(e->{
                         ((Stage) root.getScene().getWindow()).close();
                         FlowController.getInstance().goViewInWindow("LogIn");
+                    });
+                    this.vbOpcionesUsu.getChildren().add(hl);
+                    break;
+                case 2:
+                    hl= new Hyperlink();
+                    hl.setText("Información cine");
+                    hl.setOnAction(e->{
+                        FlowController.getInstance().goView("UsuInfoCine");
                     });
                     this.vbOpcionesUsu.getChildren().add(hl);
                     break;
@@ -108,6 +118,15 @@ public class ContainerController extends Controller implements Initializable {
     }
     
     public void seleccionarUsuario(){
+        FlowController.getInstance().goView("UsuCines");
+    }
+
+    @FXML
+    private void volver(MouseEvent event) {
+    }
+
+    @FXML
+    private void irInicio(MouseEvent event) {
         FlowController.getInstance().goView("UsuCines");
     }
 }
