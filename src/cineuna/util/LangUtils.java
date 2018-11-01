@@ -6,10 +6,12 @@
 package cineuna.util;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 
 /**
@@ -80,21 +82,43 @@ public class LangUtils {
      * @param lbl label sobre el cual cargar texto
      * @param tag etiqueta del property a la cual quiere acceder
      */
-    public void loadTFLang(JFXTextField lbl,String tag){
+    public void loadTextFieldLang(JFXTextField lbl,String tag){
         locale = new Locale(lang);
         propFile = ResourceBundle.getBundle(localPath,locale);
         lbl.setPromptText(propFile.getString(tag));
     }
     
     /**
-     * recibe un Passwor field y le aplica el texto de un tag
+     * recibe un Password field y le aplica el texto de un tag
      * @param lbl label sobre el cual cargar texto
      * @param tag etiqueta del property a la cual quiere acceder
      */
-    public void loadPFLang(JFXPasswordField lbl,String tag){
+    public void loadPasswordFieldLang(JFXPasswordField lbl,String tag){
         locale = new Locale(lang);
         propFile = ResourceBundle.getBundle(localPath,locale);
         lbl.setPromptText(propFile.getString(tag));
+    }
+    
+    /**
+     * recibe un Hyperlink y le aplica el texto de un tag
+     * @param lbl label sobre el cual cargar texto
+     * @param tag etiqueta del property a la cual quiere acceder
+     */
+    public void loadHyperlinkLang(Hyperlink lbl,String tag){
+        locale = new Locale(lang);
+        propFile = ResourceBundle.getBundle(localPath,locale);
+        lbl.setText(propFile.getString(tag));
+    }
+    
+    /**
+     * recibe un CheckBox y le aplica el texto de un tag
+     * @param lbl label sobre el cual cargar texto
+     * @param tag etiqueta del property a la cual quiere acceder
+     */
+    public void loadCheckBoxLang(JFXCheckBox lbl,String tag){
+        locale = new Locale(lang);
+        propFile = ResourceBundle.getBundle(localPath,locale);
+        lbl.setText(propFile.getString(tag));
     }
     
 }
