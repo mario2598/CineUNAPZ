@@ -205,7 +205,6 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
         LangUtils.getInstance().loadButtonLang(btnCancelar,"btnCancelar");
         LangUtils.getInstance().loadButtonLang(btnConfirmar,"btnConfirmar");
         LangUtils.getInstance().loadButtonLang(btnEditar,"btnEditar");
-
     }
     
 }
