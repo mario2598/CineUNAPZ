@@ -5,9 +5,9 @@
  */
 package cineuna.controller;
 
-import cineuna.logic.BotonTanda;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import cineuna.util.LangUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXListView;
@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -41,10 +42,12 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @FXML
     private JFXTextArea lblResenna;
     @FXML
-    private Label lblFechaFin;
-    @FXML
     private JFXListView<JFXButton> listaTandas;
     private Boolean disponible;
+    @FXML
+    private VBox vbRoot;
+    @FXML
+    private Label lblMsjFecha;
 
     /**
      * Initializes the controller class.
@@ -58,6 +61,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     public void initialize() {
         disponible = (Boolean) AppContext.getInstance().get("peliDisponible");
         cargarTandas();
+        cargarIdioma();
         cargarInfoPelicula();
     }
 
@@ -88,5 +92,15 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
                 listaTandas.getItems().add(btnTanda);
             }
         }
+    }
+    
+    private void cargarIdioma(){
+        Integer idioma=Integer.valueOf(AppContext.getInstance().getUsuario().usuIdioma.getValue());
+        if(idioma.equals(1))
+            LangUtils.getInstance().setLang("es");
+        else
+            LangUtils.getInstance().setLang("eng");
+        
+        LangUtils.getInstance().loadLabelLang(lblMsjFecha, "lblMsjFecha");
     }
 }

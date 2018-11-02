@@ -5,6 +5,7 @@
  */
 package cineuna.controller;
 
+import cineuna.model.UsuarioDto;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import com.jfoenix.controls.JFXButton;
@@ -43,7 +44,7 @@ public class ContainerController extends Controller implements Initializable {
     private VBox vbOpcionesUsu;
     @FXML
     private StackPane centerHP;
-
+    private UsuarioDto usuario;
     /**
      * Initializes the controller class.
      */
@@ -83,12 +84,18 @@ public class ContainerController extends Controller implements Initializable {
      * llena el vbox de las opciones del perfil de usuario
      */
     public void llenarOpcionesUsu(){
+        usuario=AppContext.getInstance().getUsuario();
+        Integer idioma=Integer.valueOf(usuario.usuIdioma.getValue());
+        
         for (int i = 0; i < 10; i++) {
             Hyperlink hl;
             switch (i) {
                 case 1:
                     hl= new Hyperlink();
+                    if(idioma.equals(1))
                     hl.setText("Cerrar Sesión");
+                    else
+                       hl.setText("Log out"); 
                     hl.setOnAction(e->{
                         ((Stage) root.getScene().getWindow()).close();
                         FlowController.getInstance().goViewInWindow("LogIn");
@@ -97,7 +104,10 @@ public class ContainerController extends Controller implements Initializable {
                     break;
                 case 2:
                     hl= new Hyperlink();
+                    if(idioma.equals(1))
                     hl.setText("Información cine");
+                    else
+                       hl.setText("About us"); 
                     hl.setOnAction(e->{
                         FlowController.getInstance().goView("UsuInfoCine");
                     });
