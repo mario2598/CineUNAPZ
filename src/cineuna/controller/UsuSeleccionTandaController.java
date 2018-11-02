@@ -5,6 +5,9 @@
  */
 package cineuna.controller;
 
+import cineuna.util.AppContext;
+import cineuna.util.LangUtils;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,6 +36,14 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private Label lblCosto;
     @FXML
     private TilePane apReserva;
+    @FXML
+    private Label lblMsjAsientos;
+    @FXML
+    private Label lblMsjCosto;
+    @FXML
+    private JFXButton btnReservar;
+    @FXML
+    private JFXButton btnCancelar;
 
     /**
      * Initializes the controller class.
@@ -44,6 +55,19 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
 
     @Override
     public void initialize() {
+        cargarIdioma();
     }
     
+    private void cargarIdioma(){
+        Integer idioma=Integer.valueOf(AppContext.getInstance().getUsuario().usuIdioma.getValue());
+        if(idioma.equals(1))
+            LangUtils.getInstance().setLang("es");
+        else
+            LangUtils.getInstance().setLang("eng");
+        
+        LangUtils.getInstance().loadLabelLang(lblMsjAsientos, "lblMsjAsientos");
+        LangUtils.getInstance().loadLabelLang(lblMsjCosto, "lblMsjCosto");
+        LangUtils.getInstance().loadButtonLang(btnReservar, "btnReservar");
+        LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
+    }    
 }

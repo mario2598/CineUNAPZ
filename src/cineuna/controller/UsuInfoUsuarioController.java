@@ -196,7 +196,7 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
         if(idioma.equals(1))
             LangUtils.getInstance().setLang("es");
         else
-            LangUtils.getInstance().setLang("es");
+            LangUtils.getInstance().setLang("eng");
         
         LangUtils.getInstance().loadTextFieldLang(txtNombre,"txtNombre");
         LangUtils.getInstance().loadTextFieldLang(txtPApellido,"txtPApellido");
