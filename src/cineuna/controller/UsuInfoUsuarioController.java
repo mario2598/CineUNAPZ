@@ -9,6 +9,8 @@ import cineuna.model.UsuarioDto;
 import cineuna.service.UsuarioService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import cineuna.util.LangUtils;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -61,6 +63,12 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
     private ImageView imgUsuarioLbl;
     @FXML
     private ImageView imgUsuarioTxt;
+    @FXML
+    private JFXButton btnEditar;
+    @FXML
+    private JFXButton btnConfirmar;
+    @FXML
+    private JFXButton btnCancelar;
 
     /**
      * Initializes the controller class.
@@ -72,6 +80,7 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
 
     @Override
     public void initialize() {
+        cargarIdioma();
         bindUsuarioLbls();
     }
 
@@ -180,6 +189,23 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
     @FXML
     private void cancelarCambios(ActionEvent event) {
         bindUsuarioLbls();
+    }
+    
+    private void cargarIdioma(){
+        Integer idioma=Integer.valueOf(AppContext.getInstance().getUsuario().usuIdioma.getValue());
+        if(idioma.equals(1))
+            LangUtils.getInstance().setLang("es");
+        else
+            LangUtils.getInstance().setLang("es");
+        
+        LangUtils.getInstance().loadTextFieldLang(txtNombre,"txtNombre");
+        LangUtils.getInstance().loadTextFieldLang(txtPApellido,"txtPApellido");
+        LangUtils.getInstance().loadTextFieldLang(txtSApellido,"txtSApellido");
+        LangUtils.getInstance().loadTextFieldLang(txtUsuario,"txtUsuario");
+        LangUtils.getInstance().loadButtonLang(btnCancelar,"btnCancelar");
+        LangUtils.getInstance().loadButtonLang(btnConfirmar,"btnConfirmar");
+        LangUtils.getInstance().loadButtonLang(btnEditar,"btnEditar");
+
     }
     
 }
