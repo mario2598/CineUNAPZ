@@ -150,19 +150,41 @@ public class LogInController extends Controller implements Initializable {
     }
     
     private void cargarLenguajeLogin(){
+        LangUtils.getInstance().loadTextFieldLang(txtUsuario, "txtUsuario");
+        LangUtils.getInstance().loadPasswordFieldLang(txtClave, "txtClave");
+        LangUtils.getInstance().loadCheckBoxLang(cbAdmin, "cbAdmin");
+        LangUtils.getInstance().loadButtonLang(btnEntrar, "btnEntrar");
+        LangUtils.getInstance().loadHyperlinkLang(hlRecuperar, "hlRecuperar");
+        LangUtils.getInstance().loadHyperlinkLang(hlAutoReg, "hlAutoReg");
         
     }
     
     private void cargarLenguajeRegistro(){
+        LangUtils.getInstance().loadTextFieldLang(tfRegNombre, "tfRegNombre");
+        LangUtils.getInstance().loadTextFieldLang(tfRegApe, "tfRegApe");
+        LangUtils.getInstance().loadTextFieldLang(tfRegApe1, "tfRegApe1");
+        LangUtils.getInstance().loadTextFieldLang(tfRegUsu, "tfRegUsu");
+        LangUtils.getInstance().loadPasswordFieldLang(tfRegContra, "tfRegContra");
+        LangUtils.getInstance().loadPasswordFieldLang(tfRegcontraRep, "tfRegcontraRep");
+        LangUtils.getInstance().loadTextFieldLang(tfRegCorreo, "tfRegCorreo");
+        LangUtils.getInstance().loadButtonLang(btnRegistrar, "btnRegistrar");
+    }
+    
+    private void cargarLenguajeCambio(){
+        LangUtils.getInstance().loadLabelLang(lblMsjNewPass, "lblMsjNewPass");
+        LangUtils.getInstance().loadPasswordFieldLang(txtNewPass, "txtNewPass");
+        LangUtils.getInstance().loadPasswordFieldLang(txtNewPassConf, "txtNewPassConf");
+        LangUtils.getInstance().loadButtonLang(btnVolverNewPass, "btnVolverNewPass");
+        LangUtils.getInstance().loadButtonLang(btnCambiar, "btnCambiar");
         
     }
     
     private void cargarLenguajeRecuperacion(){
-        
-    }
-    
-    private void cargarLenguajeCambio(){
-        
+        LangUtils.getInstance().loadLabelLang(lblMsj1, "lblMsj1");
+        LangUtils.getInstance().loadLabelLang(lblMsj2, "lblMsj2");
+        LangUtils.getInstance().loadTextFieldLang(txtPassChange, "txtPassChange");
+        LangUtils.getInstance().loadButtonLang(btnVolver, "btnVolver");
+        LangUtils.getInstance().loadButtonLang(btnEnviarCorreo, "btnEnviarCorreo");
     }
 
     @FXML
