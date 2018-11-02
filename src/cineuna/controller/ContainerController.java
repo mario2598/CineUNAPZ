@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXPopup;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
@@ -32,11 +33,6 @@ public class ContainerController extends Controller implements Initializable {
     @FXML
     private BorderPane root;
     private Boolean isAdmin;
-    private JFXButton b;
-    @FXML
-    private VBox menuAdmin;
-    @FXML
-    private VBox menuUsu;
     @FXML
     private FontAwesomeIconView btnOpcionesUsu;
     @FXML
@@ -47,6 +43,10 @@ public class ContainerController extends Controller implements Initializable {
     private VBox vbOpcionesUsu;
     @FXML
     private StackPane centerHP;
+    @FXML
+    private JFXButton btnVolver;
+    @FXML
+    private StackPane dialogsPane;
 
     /**
      * Initializes the controller class.
@@ -55,53 +55,15 @@ public class ContainerController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         initContainers();
         isAdmin =(Boolean)(AppContext.getInstance().get("administrador"));
-        if(isAdmin){
-            menuAdmin.setVisible(true);
-            menuUsu.setVisible(false);
-        }
         llenarInfoUsuario();
     }    
 
     @Override
     public void initialize() {
-        if(isAdmin){
-            menuAdmin.setVisible(true);
-            menuUsu.setVisible(false);
-        }
+        btnVolver.setVisible(false);
         llenarInfoUsuario();
     }
 
-    @FXML
-    private void irParamG(MouseEvent event) {
-    }
-
-    @FXML
-    private void irMantUsuarios(MouseEvent event) {
-    }
-
-    @FXML
-    private void irMantPeliculas(MouseEvent event) {
-    }
-
-    @FXML
-    private void irMantSalas(MouseEvent event) {
-    }
-
-    @FXML
-    private void irInfoUsuario(MouseEvent event) {
-    }
-
-    @FXML
-    private void irInfoCine(MouseEvent event) {
-    }
-
-    @FXML
-    private void irCartelera(MouseEvent event) {
-    }
-
-    @FXML
-    private void irProximas(MouseEvent event) {
-    }
     
     /**
      * llena el hyperlink del nombre de usuario y asigna el popup
@@ -111,7 +73,6 @@ public class ContainerController extends Controller implements Initializable {
         this.hlNombreUsuario.setOnAction(e->{
             //FlowController.getInstance().goView("InfoUsuario");
         });
-        
         this.btnOpcionesUsu.setOnMouseClicked(event ->{
             this.popUp.show(btnOpcionesUsu,JFXPopup.PopupVPosition.TOP,JFXPopup.PopupHPosition.LEFT,event.getX(),event.getY());
         });
@@ -148,5 +109,18 @@ public class ContainerController extends Controller implements Initializable {
     
     public StackPane getHolderPane(){
         return this.centerHP;
+    }
+
+    @FXML
+    private void btnVolverAction(ActionEvent event) {
+        FlowController.getInstance().goView("AdminMenu");
+    }
+    
+    public void btnVolverVisible(boolean b){
+        this.btnVolver.setVisible(b);
+    }
+    
+    public StackPane getDialogsPane(){
+        return this.dialogsPane;
     }
 }

@@ -7,6 +7,8 @@ package cineuna.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,9 +29,9 @@ public class SalaDto {
     @XmlTransient
     private String salaImgfondo;
     @XmlTransient
-    private String salaTipo;
+    public StringProperty salaTipo;
     @XmlTransient
-    private String salaNombre;
+    public StringProperty salaNombre;
     @XmlTransient
     private Long salaFilas;
     @XmlTransient
@@ -45,7 +47,8 @@ public class SalaDto {
     
     //Constructors
     public SalaDto() {
-        
+        salaTipo = new SimpleStringProperty();
+        salaNombre = new SimpleStringProperty();
     }
 
     //Methods
@@ -53,8 +56,8 @@ public class SalaDto {
         this.salaId = s.getSalaId();
         this.salaEstado = s.getSalaEstado();
         this.salaImgfondo = s.getSalaImgfondo();
-        this.salaTipo = s.getSalaTipo();
-        this.salaNombre = s.getSalaNombre();
+        this.setSalaTipo(s.getSalaTipo());
+        this.setSalaNombre(s.getSalaNombre());
         this.salaFilas = s.getSalaFilas();
         this.salaCol = s.getSalaCol();  
         this.cineId = s.getCineId();
@@ -86,19 +89,19 @@ public class SalaDto {
     }
 
     public String getSalaTipo() {
-        return salaTipo;
+        return salaTipo.get();
     }
 
     public void setSalaTipo(String salaTipo) {
-        this.salaTipo = salaTipo;
+        this.salaTipo.set(salaTipo);
     }
 
     public String getSalaNombre() {
-        return salaNombre;
+        return salaNombre.get();
     }
 
     public void setSalaNombre(String salaNombre) {
-        this.salaNombre = salaNombre;
+        this.salaNombre.set(salaNombre);
     }
 
     public Long getSalaFilas() {

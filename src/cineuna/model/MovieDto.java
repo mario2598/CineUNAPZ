@@ -9,6 +9,8 @@ import cineuna.util.LocalDateAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,13 +28,13 @@ public class MovieDto {
     @XmlTransient
     private Long movieId;
     @XmlTransient
-    private String movieNombre;
+    public StringProperty movieNombre;
     @XmlTransient
-    private String movieResena;
+    public StringProperty movieResena;
     @XmlTransient
-    private String movieUrlesp;
+    public StringProperty movieUrlesp;
     @XmlTransient
-    private String movieUrleng;
+    public StringProperty movieUrleng;
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlTransient
     private LocalDate movieDate;
@@ -51,16 +53,19 @@ public class MovieDto {
      
     //Constructors     
     public MovieDto() {
-        
+        movieNombre = new SimpleStringProperty();
+        movieResena = new SimpleStringProperty();
+        movieUrlesp = new SimpleStringProperty();
+        movieUrleng = new SimpleStringProperty();
     }
     
     //Methods
     public void duplicateData(MovieDto m){
         this.movieId = m.getMovieId();
-        this.movieNombre = m.getMovieNombre();
-        this.movieResena = m.getMovieResena();
-        this.movieUrlesp = m.getMovieUrlesp();
-        this.movieUrleng = m.getMovieUrleng();
+        this.setMovieNombre(getMovieNombre());
+        this.setMovieResena(m.getMovieResena());
+        this.setMovieUrlesp(m.getMovieUrlesp());
+        this.setMovieUrleng(m.getMovieUrleng());
         this.movieDate = m.getMovieDate();
         this.movieEstado = m.getMovieEstado();
         this.moviePortada = m.getMoviePortada();
@@ -77,35 +82,35 @@ public class MovieDto {
     }
 
     public String getMovieNombre() {
-        return movieNombre;
+        return movieNombre.get();
     }
 
     public void setMovieNombre(String movieNombre) {
-        this.movieNombre = movieNombre;
+        this.movieNombre.set(movieNombre);
     }
 
     public String getMovieResena() {
-        return movieResena;
+        return movieResena.get();
     }
 
     public void setMovieResena(String movieResena) {
-        this.movieResena = movieResena;
+        this.movieResena.set(movieResena);
     }
 
     public String getMovieUrlesp() {
-        return movieUrlesp;
+        return movieUrlesp.get();
     }
 
     public void setMovieUrlesp(String movieUrlesp) {
-        this.movieUrlesp = movieUrlesp;
+        this.movieUrlesp.set(movieUrlesp);
     }
 
     public String getMovieUrleng() {
-        return movieUrleng;
+        return movieUrleng.get();
     }
 
     public void setMovieUrleng(String movieUrleng) {
-        this.movieUrleng = movieUrleng;
+        this.movieUrleng.set(movieUrleng);
     }
 
     public LocalDate getMovieDate() {

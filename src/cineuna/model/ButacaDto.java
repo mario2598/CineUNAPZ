@@ -33,7 +33,7 @@ public class ButacaDto {
     @XmlTransient
     private Long salaId;
     @XmlTransient
-    private String butActiva;
+    private Boolean butActiva;
     
     //Constructors
     public ButacaDto() {
@@ -109,11 +109,11 @@ public class ButacaDto {
         this.salaId = salaId;
     }
 
-    public String getButActiva() {
+    public Boolean getButActiva() {
         return butActiva;
     }
 
-    public void setButActiva(String butActiva) {
+    public void setButActiva(Boolean butActiva) {
         this.butActiva = butActiva;
     }
      

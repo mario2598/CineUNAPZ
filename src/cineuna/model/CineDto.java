@@ -8,6 +8,8 @@ package cineuna.model;
 import cineuna.util.LocalDateAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,11 +27,11 @@ public class CineDto {
     @XmlTransient
     private Long cineId;
     @XmlTransient
-    private String cineNombre;
+    public StringProperty cineNombre;
     @XmlTransient
-    private Long cineTel;
+    public StringProperty cineTel;
     @XmlTransient
-    private String cineEmail;
+    public StringProperty cineEmail;
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlTransient
     private LocalDate cineAbre;
@@ -43,15 +45,17 @@ public class CineDto {
     
     //Constructors
     public CineDto(){
-        
+        cineNombre = new SimpleStringProperty();
+        cineTel = new SimpleStringProperty();
+        cineEmail = new SimpleStringProperty();
     }
     
     //Methods
     public void duplicateData(CineDto c) {
         this.cineId = c.getCineId();
-        this.cineNombre = c.getCineNombre();
-        this.cineTel = c.getCineTel();
-        this.cineEmail = c.getCineEmail();
+        this.setCineNombre(c.getCineNombre());
+        this.setCineTel(c.getCineTel());
+        this.setCineEmail(c.getCineEmail());
         this.cineAbre = c.getCineAbre();
         this.cineCierra = c.getCineCierra();
         this.salaList = c.getSalaList();
@@ -68,27 +72,30 @@ public class CineDto {
     }
 
     public String getCineNombre() {
-        return cineNombre;
+        return cineNombre.get();
     }
 
     public void setCineNombre(String cineNombre) {
-        this.cineNombre = cineNombre;
+        this.cineNombre.set(cineNombre);
     }
 
     public Long getCineTel() {
-        return cineTel;
+        if(cineTel.get()!=null)
+            return Long.valueOf(cineTel.get());
+        else
+            return null;
     }
 
     public void setCineTel(Long cineTel) {
-        this.cineTel = cineTel;
+        this.cineTel.set(cineTel.toString());
     }
 
     public String getCineEmail() {
-        return cineEmail;
+        return cineEmail.get();
     }
 
     public void setCineEmail(String cineEmail) {
-        this.cineEmail = cineEmail;
+        this.cineEmail.set(cineEmail);
     }
 
     public LocalDate getCineAbre() {
