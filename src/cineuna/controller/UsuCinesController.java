@@ -127,11 +127,11 @@ public class UsuCinesController extends Controller implements Initializable {
         usuario=AppContext.getInstance().getUsuario();
         Integer idioma=Integer.valueOf(usuario.usuIdioma.getValue());
         if(idioma.equals(1)){
-            LangUtils.getInstance().setLang("eng");
-            System.out.println("español-> "+idioma);
+            LangUtils.getInstance().setLang("es");
+            //System.out.println("español-> "+idioma);
         }
         else{
-            System.out.println("inglés-> "+idioma);
+           // System.out.println("inglés-> "+idioma);
             LangUtils.getInstance().setLang("eng");
         }
         

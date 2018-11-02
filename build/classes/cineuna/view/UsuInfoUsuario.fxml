@@ -24,7 +24,7 @@
             <Label fx:id="lblNombre" prefHeight="21.0" prefWidth="199.0" />
             <Label fx:id="lblPApellido" prefHeight="21.0" prefWidth="199.0" />
             <Label fx:id="lblSApellido" prefHeight="21.0" prefWidth="199.0" />
-            <JFXButton onAction="#editarInfo" text="Editar" />
+            <JFXButton fx:id="btnEditar" onAction="#editarInfo" text="Editar" />
          </children>
       </VBox>
       <VBox fx:id="vbEditar" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="382.0" prefWidth="196.0" spacing="30.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -43,11 +43,11 @@
             <JFXTextField fx:id="txtPApellido" maxWidth="-Infinity" prefHeight="25.0" prefWidth="195.0" promptText="P Apellido" />
             <JFXTextField fx:id="txtSApellido" maxWidth="-Infinity" prefHeight="25.0" prefWidth="193.0" promptText="S Apellido" />
             <JFXPasswordField fx:id="txtContrasenna1" maxWidth="-Infinity" prefHeight="23.0" prefWidth="195.0" promptText="Contraseña" />
-            <JFXPasswordField fx:id="txtContrasenna2" promptText="Contraseña" />
+            <JFXPasswordField fx:id="txtContrasenna2" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="23.0" prefWidth="195.0" promptText="Contraseña" />
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="780.0" spacing="30.0">
                <children>
-                  <JFXButton maxHeight="1.7976931348623157E308" onAction="#confirmarCambios" text="Confirmar" />
-                  <JFXButton onAction="#cancelarCambios" text="Cancelar" />
+                  <JFXButton fx:id="btnConfirmar" maxHeight="1.7976931348623157E308" onAction="#confirmarCambios" text="Confirmar" />
+                  <JFXButton fx:id="btnCancelar" onAction="#cancelarCambios" text="Cancelar" />
                </children>
             </HBox>
          </children>

@@ -47,14 +47,12 @@
             </Label>
             <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="597.0">
                <children>
-                  <Label prefHeight="28.0" prefWidth="101.0" text="En cartelera: " textFill="#f8f6f6">
+                  <Label fx:id="lblMsjFecha" prefHeight="28.0" prefWidth="119.0" text="En cartelera: " textFill="#f8f6f6">
                      <padding>
                         <Insets left="30.0" />
                      </padding>
                   </Label>
                   <Label fx:id="lblFecha" alignment="CENTER" prefHeight="28.0" prefWidth="87.0" text="28/10/18" textFill="#f8f4f4" />
-                  <Label alignment="CENTER" prefHeight="28.0" prefWidth="38.0" text="hasta: " textFill="#f8f4f4" />
-                  <Label fx:id="lblFechaFin" alignment="CENTER" prefHeight="28.0" prefWidth="86.0" text="28/10/18" textFill="#f8f4f4" />
                </children>
             </HBox>
             <Separator prefWidth="200.0" />

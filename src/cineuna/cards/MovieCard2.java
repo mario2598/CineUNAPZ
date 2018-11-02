@@ -126,7 +126,6 @@ public class MovieCard2 extends Card{
     }
     
     private void eventoMostrarInfo(){
-        
         infoRoot.setOnMouseExited(e->infoRoot.setVisible(false));
     }
     
