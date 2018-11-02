@@ -7,8 +7,10 @@ package cineuna.controller;
 
 import cineuna.cards.MovieCard;
 import cineuna.cards.MovieCard2;
+import cineuna.model.UsuarioDto;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import cineuna.util.LangUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPopup;
@@ -53,6 +55,11 @@ public class UsuCinesController extends Controller implements Initializable {
     private JFXListView<MovieCard2> listaCartelera;
     @FXML
     private JFXListView<MovieCard2> listaProximas;
+    @FXML
+    private Label lblCartelera;
+    @FXML
+    private Label lblProximas;
+    private UsuarioDto usuario;
     
 
     /**
@@ -61,12 +68,14 @@ public class UsuCinesController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AppContext.getInstance().set("spDialogos",spDialogos);
-        initContainers();
+        //initContainers();
+        //cargarIdioma();
     }    
 
     @Override
     public void initialize() {
         initContainers();
+        cargarIdioma();
         llenarCartelera();
         llenarProximas();
     }
@@ -94,28 +103,39 @@ public class UsuCinesController extends Controller implements Initializable {
         }
     }
 
-    @FXML
     private void volver(MouseEvent event) {
         FlowController.getInstance().goView("UsuSeleccionCines");
     }
 
-    @FXML
     private void atrasCartelera(MouseEvent event) {
         listaCartelera.scrollTo(0);
     }
 
-    @FXML
     private void adelanteCartelera(MouseEvent event) {
         listaCartelera.scrollTo(listaCartelera.getItems().size());
     }
 
-    @FXML
     private void atrasProximas(MouseEvent event) {
         listaProximas.scrollTo(0);
     }
 
-    @FXML
     private void adelanteProximas(MouseEvent event) {
         listaProximas.scrollTo(listaProximas.getItems().size());
+    }
+    
+    private void cargarIdioma(){
+        usuario=AppContext.getInstance().getUsuario();
+        Integer idioma=Integer.valueOf(usuario.usuIdioma.getValue());
+        if(idioma.equals(1)){
+            LangUtils.getInstance().setLang("eng");
+            System.out.println("español-> "+idioma);
+        }
+        else{
+            System.out.println("inglés-> "+idioma);
+            LangUtils.getInstance().setLang("eng");
+        }
+        
+        LangUtils.getInstance().loadLabelLang(lblCartelera, "lblCartelera");
+        LangUtils.getInstance().loadLabelLang(lblProximas, "lblProximas");
     }
 }

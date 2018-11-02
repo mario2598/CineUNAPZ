@@ -140,7 +140,7 @@ public class LogInController extends Controller implements Initializable {
     
     private void cargarLenguaje(){
         //recibe el botón al cual cargar y un tag que está en el archivo de idioma
-        LangUtils.getInstance().loadButtonLang(iniciarBtn, "reg");
+        LangUtils.getInstance().loadButtonLang(iniciarBtn, "iniciar");
         LangUtils.getInstance().loadButtonLang(regBtn, "reg");
         LangUtils.getInstance().loadLabelLang(lblNuevaCuenta, "nueva");
         cargarLenguajeCambio();
