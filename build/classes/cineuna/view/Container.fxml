@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
+<<<<<<< HEAD
 <BorderPane fx:id="root" prefHeight="600.0" prefWidth="1150.0" style="-fx-background-color: white;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.ContainerController">
    <top>
       <AnchorPane fx:id="apTop" styleClass="menu-lateral" BorderPane.alignment="CENTER">
@@ -27,3 +27,28 @@
       <StackPane fx:id="centerHP" prefHeight="580.0" prefWidth="1079.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
+=======
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.ContainerController">
+   <children>
+      <BorderPane fx:id="root" prefHeight="600.0" prefWidth="1150.0" style="-fx-background-color: white;" stylesheets="@Style.css">
+         <top>
+            <AnchorPane fx:id="apTop" styleClass="menu-lateral" BorderPane.alignment="CENTER">
+               <children>
+                  <FontAwesomeIconView fx:id="btnOpcionesUsu" layoutX="1174.0" layoutY="35.0" text="" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="10.0" />
+                  <Hyperlink fx:id="hlNombreUsuario" layoutX="1176.0" layoutY="11.0" prefHeight="23.0" prefWidth="117.0" styleClass="hyperlink-dark" text="USUARIO" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="11.0" />
+                  <JFXButton fx:id="btnVolver" contentDisplay="GRAPHIC_ONLY" onAction="#btnVolverAction" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="10.0">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <StackPane fx:id="centerHP" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+      <StackPane fx:id="dialogsPane" visible="false" />
+   </children>
+</StackPane>
+>>>>>>> Fallas
