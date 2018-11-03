@@ -201,48 +201,31 @@ public class LogInController extends Controller implements Initializable {
                  Respuesta respuesta = usuarioService.getUsuario(txtUsuario.getText(), txtClave.getText());
                  
                 if (respuesta.getEstado()) {
-                       usuDto = (UsuarioDto)respuesta.getResultado("Usuario");
-                       if(txtClave.getText().equals(usuDto.getUsuNewpassword())){
-                            if(usuDto.getUsuCambio().equals("N")){
-                                usuDto.setUsuCambio("S");
-                                usuarioService.guardarUsuario(usuDto);
-                            }
-                            this.vbInicioSesion.setVisible(false);
-                            this.vbNewPass.setVisible(true);  
-                        }else{
-                                if(usuDto.getUsuEstado().equals("A")){//si está activo
-                                     if(usuDto.getUsuAdmin().equals("S") || this.cbAdmin.isSelected()){
-                                         AppContext.getInstance().set("administrador", (Boolean)true);
-                                    } 
-                                    else{
-                                        AppContext.getInstance().set("administrador", (Boolean)false);   
-                                     } 
-                                     AppContext.getInstance().setUsuario((UsuarioDto)respuesta.getResultado("Usuario"));
-                                     FlowController.getInstance().goMain();
-                                     ((Stage) root.getScene().getWindow()).close();
-                                     //nuevo
-                                    AppContext.getInstance().setUsuario(usuDto);
-                                    FlowController.getInstance().goView("UsuCines");
-                                     
-                                }else{                    
-                                     new Mensaje().show(Alert.AlertType.ERROR, "Cuenta Inactiva", "Es necesario activar la cuenta mediante el correo electronico");
-                                 }
-                               
-                             //para que entre como admin   
-                            /*if(usuDto.getUsuEstado().equals("A")){
-                                 if(usuDto.getUsuAdmin().equals("S") || this.cbAdmin.isSelected()){
-                                     AppContext.getInstance().set("administrador", (Boolean)true);
-                                } 
-                                else{
-                                    AppContext.getInstance().set("administrador", (Boolean)false);   
-                                 } 
-                                 AppContext.getInstance().setUsuario((UsuarioDto)respuesta.getResultado("Usuario"));
-                                 FlowController.getInstance().goMain();
-                                 //((Stage) root.getScene().getWindow()).close();  
-                            }else{                    
-                                 new Mensaje().show(Alert.AlertType.ERROR, "Cuenta Inactiva", "Es necesario activar la cuenta mediante el correo electronico");
-                             }*/
-                        }
+                    usuDto = (UsuarioDto)respuesta.getResultado("Usuario");
+                    if(txtClave.getText().equals(usuDto.getUsuNewpassword())){
+                         if(usuDto.getUsuCambio().equals("N")){
+                             usuDto.setUsuCambio("S");
+                             usuarioService.guardarUsuario(usuDto);
+                         }
+                         this.vbInicioSesion.setVisible(false);
+                         this.vbNewPass.setVisible(true);  
+                     }else{
+                         if(usuDto.getUsuEstado().equals("A")){//si está activo
+                             if(usuDto.getUsuAdmin().equals("S")){
+                                 AppContext.getInstance().set("administrador", (Boolean)true);
+                             } 
+                             else{
+                                 AppContext.getInstance().set("administrador", (Boolean)false);   
+                                 //nuevo
+                                 AppContext.getInstance().setUsuario(usuDto);
+                             } 
+                             AppContext.getInstance().setUsuario((UsuarioDto)respuesta.getResultado("Usuario"));
+                             FlowController.getInstance().goMain();
+                             ((Stage) root.getScene().getWindow()).close();
+                         }else{                    
+                             new Mensaje().show(Alert.AlertType.ERROR, "Cuenta Inactiva", "Es necesario activar la cuenta mediante el correo electronico");
+                         }
+                     }
                 }
                 else {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Usuario no registrado", getStage(), respuesta.getMensaje());

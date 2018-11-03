@@ -100,7 +100,7 @@ public class FlowController {
             if((boolean) AppContext.getInstance().get("administrador")){
                 goView("AdminMenu");
             } else {
-                //View para usuarios
+                goView("UsuCines");
             }
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);

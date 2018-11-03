@@ -96,7 +96,7 @@ public class AdminSalasController extends Controller implements Initializable {
     
     private void mostrarSala(SalaDto sala){
         AppContext.getInstance().set("manteSala", sala);
-        FXMLLoader loader = getLoader("AdminManteSala");
+        FXMLLoader loader = getLoader("AdminInfoSala");
         Controller controller = loader.getController();
         controller.setAccion(null);
         controller.initialize();
