@@ -3,26 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cineuna.controller;
+package cineuna.view;
 
+import com.jfoenix.controls.JFXListView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
  *
  * @author robri
  */
-public class MainController extends Controller implements Initializable {
+public class PruebasCardsController implements Initializable {
 
     @FXML
-    private BorderPane root;
+    private Label lblNombreCine;
     @FXML
-    private StackPane spDialogo;
+    private Hyperlink lblNumTel;
+    @FXML
+    private Hyperlink lblCorreo;
+    @FXML
+    private Label lblAbre;
+    @FXML
+    private Label lblCierra;
+    @FXML
+    private JFXListView<?> tpCartelera;
+    @FXML
+    private JFXListView<?> tpProximas;
 
     /**
      * Initializes the controller class.
@@ -31,9 +42,5 @@ public class MainController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @Override
-    public void initialize() {
-    }
     
 }
