@@ -44,12 +44,12 @@ public class UsuarioDto {
     @XmlTransient
     public SimpleStringProperty usuCambio;
     @XmlTransient
-
     public SimpleStringProperty usuCodAct;
-    public Long cineId;
    // @XmlTransient
    // List<CineDto> cineList;
-        
+     public UsuarioDto() {
+    public Long cineId;
+    
     //Constructors
     public UsuarioDto() {
         this.usuId = new SimpleStringProperty();
@@ -65,6 +65,7 @@ public class UsuarioDto {
         this.usuNewpassword = new SimpleStringProperty();
         this.usuCambio = new SimpleStringProperty("N");
         this.usuCodAct = new SimpleStringProperty();
+        
     }    
 
     //Methods
@@ -182,7 +183,6 @@ public class UsuarioDto {
     public void setUsuCambio(String usuCambio) {
         this.usuCambio.set(usuCambio);
     }
-
     public String getUsuCodAct() {
         return usuCodAct.get();
     }
@@ -191,6 +191,7 @@ public class UsuarioDto {
         this.usuCodAct.set(usuCodAct);
     }
     
+
     public Long getCineId() {
         return cineId;
     }
