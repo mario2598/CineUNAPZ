@@ -10,7 +10,6 @@ import cineuna.controller.ContainerController;
 import cineuna.controller.Controller;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,7 +18,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -89,21 +87,15 @@ public class FlowController {
         }
         return loader;
     }
-
-//    public void goMain() {
-//        try {
-//            this.mainStage.setScene(new Scene(FXMLLoader.load(CineUNA.class.getResource("view/Container.fxml"), this.idioma)));
-//            this.mainStage.show();
-//            AppContext.setMainStage(mainStage);
-//        } catch (IOException ex) {
-//            java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
-//        }
-//    }
     
     public void goMain() {
         try {
+            loaders.clear();
             FXMLLoader loader = getLoader("Container");
             mainStage.setScene(new Scene(loader.getRoot()));
+            mainStage.setMinHeight(600);
+            mainStage.setMinWidth(1000);
+            mainStage.setTitle("Cine UNA");
             mainStage.show();
             if((boolean) AppContext.getInstance().get("administrador")){
                 goView("AdminMenu");
@@ -243,17 +235,26 @@ public class FlowController {
         FlowController.idioma = idioma;
     }
     
-    /*
-    public StackPane getDialogsPane(){
-        return ((MainController) getLoader("Main").getController()).getDialogsPane();
-    }*/
-    
     public void initialize() {
         this.loaders.clear();
     }
 
     public void salir() {
         this.mainStage.close();
+    }
+    
+    public void btnVolverVisible(boolean b){
+        ((ContainerController) getLoader("Container").getController()).btnVolverVisible(b);
+    }
+    
+    public ResourceBundle getIdioma(){
+        return idioma;
+    }
+    
+    public StackPane getDialogsPane(){
+        FXMLLoader loader = getLoader("Container");
+        Controller controller = loader.getController();
+        return ((ContainerController) controller).getDialogsPane();
     }
 
 }
