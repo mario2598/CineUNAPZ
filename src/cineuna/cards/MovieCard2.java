@@ -128,6 +128,7 @@ public class MovieCard2 extends Card{
         
         icon.setOnMouseClicked(e->{
             AppContext.getInstance().set("peliDisponible",disponible);
+            AppContext.getInstance().set("peliculaSel",movie);
             FlowController.getInstance().goViewOnDialog("UsuInfoPelicula", (StackPane) AppContext.getInstance().get("spDialogos"));
         });
         infoRoot.getChildren().add(icon);

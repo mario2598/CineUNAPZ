@@ -5,6 +5,7 @@
  */
 package cineuna.controller;
 
+import cineuna.model.MovieDto;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import cineuna.util.LangUtils;
@@ -48,6 +49,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     private VBox vbRoot;
     @FXML
     private Label lblMsjFecha;
+    private MovieDto pelicula;
 
     /**
      * Initializes the controller class.
@@ -60,6 +62,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @Override
     public void initialize() {
         disponible = (Boolean) AppContext.getInstance().get("peliDisponible");
+        pelicula=(MovieDto) AppContext.getInstance().get("peliculaSel");
         cargarTandas();
         cargarIdioma();
         cargarInfoPelicula();
@@ -75,9 +78,9 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     
     private void cargarInfoPelicula(){
         //imgPoster.setImage(value);
-        lblFecha.setText("28/10/18");
-        lblNombre.setText("DeadPool 2");
-        lblResenna.setText("Deadpool debe proteger a Russell, un adolescente mutante, de Cable un soldado del futuro genéticamente modificado. Deadpool se alía con otros superhéroes para poder derrotar al poderoso Cable.");
+        lblFecha.setText(pelicula.getMovieDate().toString());
+        lblNombre.setText(pelicula.getMovieNombre());
+        lblResenna.setText(pelicula.getMovieResena());
     }
     
     private void cargarTandas(){
