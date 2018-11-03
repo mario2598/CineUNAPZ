@@ -5,6 +5,7 @@
  */
 package cineuna.cards;
 
+import cineuna.model.MovieDto;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import com.jfoenix.controls.JFXTextArea;
@@ -30,9 +31,15 @@ public class MovieCard2 extends Card{
     private ImageView poster;
     private VBox infoRoot;
     private Boolean disponible;
+    private MovieDto movie;
     
     public MovieCard2(Boolean disponible) {
         this.disponible = disponible;
+    }
+    
+    public MovieCard2(Boolean disponible,MovieDto movie) {
+        this.disponible = disponible;
+        this.movie = movie;
     }
     
     @Override
@@ -93,7 +100,7 @@ public class MovieCard2 extends Card{
     }
     
     private void addTitle(){
-        Hyperlink titulo=new Hyperlink("Nombre");
+        Hyperlink titulo=new Hyperlink(movie.getMovieNombre());
         titulo.setAlignment(Pos.CENTER);
         vbRoot.getChildren().add(titulo);
     }

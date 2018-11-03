@@ -6,10 +6,11 @@
 package cineuna.service;
 
 import cineuna.model.MovieDto;
-import cineuna.model.UsuarioDto;
 import cineuna.util.Request;
 import cineuna.util.Respuesta;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.core.GenericType;
@@ -31,6 +32,27 @@ public class MovieService {
             request.get();
 
             if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
+            List<MovieDto> movies = (List<MovieDto>) request.readEntity(new GenericType<List<MovieDto>>() {
+            });
+            
+            return new Respuesta(true, "", "", "Movies", movies);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error guardando el usuario.", ex);
+            return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
+        }
+    }
+    
+    public Respuesta getMovies(String estado){
+        try {
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("estado", estado);
+            Request request = new Request("movieController/getMovieList","/{estado}",parametros);
+            request.get();
+
+            if (request.isError()) {
+                //System.out.println("error");
                 return new Respuesta(false, request.getError(), "");
             }
             List<MovieDto> movies = (List<MovieDto>) request.readEntity(new GenericType<List<MovieDto>>() {
