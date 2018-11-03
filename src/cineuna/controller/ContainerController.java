@@ -34,7 +34,10 @@ public class ContainerController extends Controller implements Initializable {
     @FXML
     private BorderPane root;
     private Boolean isAdmin;
+<<<<<<< HEAD
     private JFXButton b;
+=======
+>>>>>>> Fallas
     @FXML
     private FontAwesomeIconView btnOpcionesUsu;
     @FXML
@@ -45,26 +48,36 @@ public class ContainerController extends Controller implements Initializable {
     private VBox vbOpcionesUsu;
     @FXML
     private StackPane centerHP;
+<<<<<<< HEAD
     private UsuarioDto usuario;
+=======
     @FXML
     private JFXButton btnVolver;
     @FXML
     private StackPane dialogsPane;
+
+>>>>>>> Fallas
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initContainers();
+<<<<<<< HEAD
+=======
         isAdmin =(Boolean)(AppContext.getInstance().get("administrador"));
+>>>>>>> Fallas
         llenarInfoUsuario();
         bindUsuario();
     }    
 
     @Override
     public void initialize() {
+<<<<<<< HEAD
         isAdmin =(Boolean)(AppContext.getInstance().get("administrador"));
+=======
         btnVolver.setVisible(false);
+>>>>>>> Fallas
         llenarInfoUsuario();
         bindUsuario();
     }
@@ -146,6 +159,7 @@ public class ContainerController extends Controller implements Initializable {
     public StackPane getHolderPane(){
         return this.centerHP;
     }
+<<<<<<< HEAD
     
     public void seleccionarUsuario(){
         FlowController.getInstance().goView("UsuCines");
@@ -158,8 +172,8 @@ public class ContainerController extends Controller implements Initializable {
     @FXML
     private void irInicio(MouseEvent event) {
         FlowController.getInstance().goView("UsuCines");
-    }
-    
+=======
+
     @FXML
     private void btnVolverAction(ActionEvent event) {
         FlowController.getInstance().goView("AdminMenu");
@@ -171,5 +185,6 @@ public class ContainerController extends Controller implements Initializable {
     
     public StackPane getDialogsPane(){
         return this.dialogsPane;
+>>>>>>> Fallas
     }
 }
