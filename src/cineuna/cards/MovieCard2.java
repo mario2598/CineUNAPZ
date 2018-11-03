@@ -51,6 +51,7 @@ public class MovieCard2 extends Card{
     
     private void initRoot(){
         vbRoot=new VBox();
+        vbRoot.setAlignment(Pos.CENTER);
         root=new StackPane();
         root.setPrefSize(130, 150);
         root.setMaxSize(USE_PREF_SIZE, USE_PREF_SIZE);
@@ -113,7 +114,7 @@ public class MovieCard2 extends Card{
     }
     
     private void addDate(){
-        Label fecha=new Label("20/8/18");
+        Label fecha=new Label(movie.getMovieDate().toString());
         fecha.setAlignment(Pos.CENTER);
         infoRoot.getChildren().add(fecha);
     }
