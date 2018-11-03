@@ -6,6 +6,7 @@
 package cineuna.controller;
 
 import cineuna.model.MovieDto;
+import cineuna.model.TandaDto;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import cineuna.util.LangUtils;
@@ -14,6 +15,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -84,12 +86,24 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     }
     
     private void cargarTandas(){
+        System.out.println("intenta cargar tandas");
         listaTandas.getItems().clear();
         if(disponible){
-            for (int i = 0; i < 3; i++) {
+            System.out.println("estaba disponible");
+            /*for (int i = 0; i < 3; i++) {
                 JFXButton btnTanda = new JFXButton("16:30");
                 btnTanda.setOnAction(c->{  
                 //AppContext.getInstance().set("tandaSeleccionada",tanda);
+                 FlowController.getInstance().goView("UsuSeleccionTanda");
+                });
+                listaTandas.getItems().add(btnTanda);
+            }*/
+            List<TandaDto> tandas = pelicula.getTandaList();
+            System.out.println("lista tandas size:"+ tandas.size());
+            for(TandaDto t: tandas){
+                JFXButton btnTanda = new JFXButton(t.getTandaHinicio().toString());
+                btnTanda.setOnAction(c->{  
+                AppContext.getInstance().set("tandaSeleccionada",t);
                  FlowController.getInstance().goView("UsuSeleccionTanda");
                 });
                 listaTandas.getItems().add(btnTanda);

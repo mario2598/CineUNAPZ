@@ -96,7 +96,7 @@ public class UsuCinesController extends Controller implements Initializable {
         System.out.println("movies size:" + movies.size());
         movies.stream().forEach(e->{
             System.out.println("peli");
-            MovieCard2 card = new MovieCard2(false,e);
+            MovieCard2 card = new MovieCard2(true,e);
             card.initCard();
             listaCartelera.getItems().add(card);
         }); 
