@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement(name = "UsuarioDto")
 @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class UsuarioDto {
-    //Attributes
+    
     @XmlTransient
     public SimpleStringProperty usuId;
     @XmlTransient
@@ -48,10 +48,6 @@ public class UsuarioDto {
    // @XmlTransient
    // List<CineDto> cineList;
      public UsuarioDto() {
-    public Long cineId;
-    
-    //Constructors
-    public UsuarioDto() {
         this.usuId = new SimpleStringProperty();
         this.usuUser = new SimpleStringProperty();
         this.usuNombre = new SimpleStringProperty();
@@ -68,23 +64,6 @@ public class UsuarioDto {
         
     }    
 
-    //Methods
-    public void duplicateData(UsuarioDto u){
-        this.usuId = u.usuId;
-        this.usuUser = u.usuUser;
-        this.usuNombre = u.usuNombre;
-        this.usuPapellido = u.usuPapellido;
-        this.usuSapellido = u.usuSapellido;
-        this.usuPassword = u.usuPassword;
-        this.usuEmail = u.usuEmail;
-        this.usuIdioma = u.usuIdioma;
-        this.usuEstado = u.usuEstado;
-        this.usuAdmin = u.usuAdmin;
-        this.usuNewpassword = u.usuNewpassword;
-        this.usuCambio = u.usuCambio;
-    }
-    
-    //Getters and Setters
     public Long getUsuId() {
         if(usuId.get()!=null && !usuId.get().isEmpty())
             return Long.valueOf(usuId.get());
@@ -191,13 +170,5 @@ public class UsuarioDto {
         this.usuCodAct.set(usuCodAct);
     }
     
-
-    public Long getCineId() {
-        return cineId;
-    }
-
-    public void setCineId(Long cineId) {
-        this.cineId = cineId;
-    }
      
 }

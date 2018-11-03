@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.TilePane;
 
 /**
  * FXML Controller class
@@ -19,9 +18,6 @@ import javafx.scene.layout.TilePane;
  * @author Chris
  */
 public class AdminMenuController extends Controller implements Initializable {
-
-    @FXML
-    private TilePane tilepAdminMenu;
 
     /**
      * Initializes the controller class.
@@ -38,37 +34,32 @@ public class AdminMenuController extends Controller implements Initializable {
      */
     @Override
     public void initialize() {
-        FlowController.getInstance().btnVolverVisible(false);
+        
     }
 
     @FXML
     private void btnCinesAction(ActionEvent event) {
         FlowController.getInstance().goView("AdminCines");
-        FlowController.getInstance().btnVolverVisible(true);
     }
 
     @FXML
     private void btnSalasAction(ActionEvent event) {
         FlowController.getInstance().goView("AdminSalas");
-        FlowController.getInstance().btnVolverVisible(true);
     }
 
     @FXML
     private void btnMoviesAction(ActionEvent event) {
         FlowController.getInstance().goView("AdminMovies");
-        FlowController.getInstance().btnVolverVisible(true);
     }
 
     @FXML
     private void btnUsersAction(ActionEvent event) {
         FlowController.getInstance().goView("AdminUsers");
-        FlowController.getInstance().btnVolverVisible(true);
     }
 
     @FXML
     private void btnReportsAction(ActionEvent event) {
         FlowController.getInstance().goView("AdminReportes");
-        FlowController.getInstance().btnVolverVisible(true);
     }
 
     @FXML

@@ -3,71 +3,69 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
 <StackPane prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: #1f2d42;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminMenuController">
    <children>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" StackPane.alignment="CENTER">
-         <StackPane.margin>
-            <Insets />
-         </StackPane.margin>
+      <TilePane alignment="CENTER" hgap="40.0" vgap="40.0" StackPane.alignment="CENTER">
          <children>
-            <TilePane fx:id="tilepAdminMenu" alignment="CENTER" hgap="40.0" prefColumns="3" prefRows="3" vgap="40.0">
-               <children>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnCinesAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Mantenimiento de Cines" textAlignment="CENTER" wrapText="true">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="TICKET" size="80" />
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnSalasAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Mantenimiento de Salas" textAlignment="CENTER" wrapText="true">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="TICKET" size="80" />
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnMoviesAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Mantenimiento de Películas" textAlignment="CENTER" wrapText="true">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="TICKET" size="80" />
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnUsersAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Mantenimiento de Usuarios" textAlignment="CENTER" wrapText="true">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="TICKET" size="80" />
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnReportsAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Reportes y Estadísticas" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView glyphName="TICKET" size="80" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnConfigAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Configuraciones de la app" textAlignment="CENTER" wrapText="true">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="TICKET" size="80" />
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </TilePane>
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnCinesAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Mantenimiento de Cines" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView glyphName="TICKET" size="80" />
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnSalasAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Mantenimiento de Salas" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView glyphName="TICKET" size="80" />
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnMoviesAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Mantenimiento de Películas" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView glyphName="TICKET" size="80" />
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnUsersAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Mantenimiento de Usuarios" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView glyphName="TICKET" size="80" />
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnReportsAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Reportes y Estadísticas" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView glyphName="TICKET" size="80" />
+               </graphic>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnConfigAction" prefHeight="175.0" prefWidth="175.0" style="-fx-background-color: #bcbcbc;" text="Configuraciones de la app" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <FontAwesomeIconView glyphName="TICKET" size="80" />
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
          </children>
-      </FlowPane>
+         <StackPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </StackPane.margin>
+         <padding>
+            <Insets left="200.0" right="200.0" />
+         </padding>
+      </TilePane>
    </children>
 </StackPane>

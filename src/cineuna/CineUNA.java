@@ -19,6 +19,7 @@ public class CineUNA extends Application {
     public void start(Stage primaryStage) {
         FlowController.getInstance().InitializeFlow(primaryStage,null);
         //primaryStage.getIcons().add(new Image("unaplanilla2/resources/Agregar-48.png"));
+        primaryStage.setTitle("UNA PLANILLA");
         FlowController.getInstance().goViewInWindow("LogIn");
     }
 
