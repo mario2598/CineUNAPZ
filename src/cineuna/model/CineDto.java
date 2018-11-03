@@ -32,11 +32,11 @@ public class CineDto {
     public StringProperty cineTel;
     @XmlTransient
     public StringProperty cineEmail;
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlTransient
+//    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate cineAbre;
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlTransient
+//    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate cineCierra;
     @XmlTransient
     private ArrayList<SalaDto> salaList;
@@ -98,18 +98,22 @@ public class CineDto {
         this.cineEmail.set(cineEmail);
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getCineAbre() {
         return cineAbre;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public void setCineAbre(LocalDate cineAbre) {
         this.cineAbre = cineAbre;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getCineCierra() {
         return cineCierra;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public void setCineCierra(LocalDate cineCierra) {
         this.cineCierra = cineCierra;
     }
