@@ -9,6 +9,8 @@ import cineuna.util.LocalDateAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -35,9 +37,9 @@ public class MovieDto {
     public StringProperty movieUrlesp;
     @XmlTransient
     public StringProperty movieUrleng;
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    //@XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlTransient
-    private LocalDate movieDate;
+    private ObjectProperty<LocalDate> movieDate;
     @XmlTransient
     private String movieEstado;
     @XmlTransient
@@ -57,6 +59,7 @@ public class MovieDto {
         movieResena = new SimpleStringProperty();
         movieUrlesp = new SimpleStringProperty();
         movieUrleng = new SimpleStringProperty();
+        movieDate = new SimpleObjectProperty<>();
     }
     
     //Methods
@@ -66,7 +69,7 @@ public class MovieDto {
         this.setMovieResena(m.getMovieResena());
         this.setMovieUrlesp(m.getMovieUrlesp());
         this.setMovieUrleng(m.getMovieUrleng());
-        this.movieDate = m.getMovieDate();
+        this.movieDate.set(m.getMovieDate());
         this.movieEstado = m.getMovieEstado();
         this.moviePortada = m.getMoviePortada();
         this.movieDuracion = m.getMovieDuracion();
@@ -113,14 +116,27 @@ public class MovieDto {
         this.movieUrleng.set(movieUrleng);
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getMovieDate() {
-        return movieDate;
+        return movieDate.get();
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public void setMovieDate(LocalDate movieDate) {
-        this.movieDate = movieDate;
+        this.movieDate.set(movieDate);
     }
 
+    /*
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public LocalDate getEmpFingreso() {
+        return empFingreso.get();
+    }
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public void setEmpFingreso(LocalDate empFingreso) {
+        this.empFingreso.set(empFingreso);
+    }
+    */
     public String getMovieEstado() {
         return movieEstado;
     }

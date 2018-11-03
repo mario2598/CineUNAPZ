@@ -7,15 +7,19 @@ package cineuna.controller;
 
 import cineuna.cards.MovieCard;
 import cineuna.cards.MovieCard2;
+import cineuna.model.MovieDto;
 import cineuna.model.UsuarioDto;
+import cineuna.service.MovieService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import cineuna.util.LangUtils;
+import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPopup;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -76,8 +80,9 @@ public class UsuCinesController extends Controller implements Initializable {
     public void initialize() {
         initContainers();
         cargarIdioma();
-        llenarCartelera();
-        llenarProximas();
+        cargarCartelera();
+        //llenarCartelera();
+        //llenarProximas();
     }
     
     private void initContainers(){
@@ -85,13 +90,29 @@ public class UsuCinesController extends Controller implements Initializable {
         this.vbOpcionesUsu=new VBox();
     }
     
-    private void llenarCartelera(){
+    private void llenarCartelera(ArrayList<MovieDto> movies){
         listaCartelera.getItems().clear();
-        for (int i = 0; i < 10; i++) {
-            MovieCard2 card = new MovieCard2(true);
+        
+        movies.stream().forEach(e->{
+            MovieCard2 card = new MovieCard2(false);
             card.initCard();
-            listaCartelera.getItems().add(card);
+            listaProximas.getItems().add(card);
+        });
+        
+        
+    }
+    
+    private void cargarCartelera(){
+        ArrayList<MovieDto> listaDto=new ArrayList<>();
+
+        MovieService ms = new MovieService();
+        Respuesta r = ms.getMovies();
+        
+        if(r.getEstado()){
+            listaDto=(ArrayList<MovieDto>) r.getResultado("Movies");
         }
+        
+        
     }
     
     private void llenarProximas(){
