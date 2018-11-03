@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="cineuna.controller.AdminSalasController">
-   <children>
-      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="400.0" prefWidth="600.0" text="En Construcción: AdminSalas" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="53.0" />
-         </font>
-         <graphic>
-            <FontAwesomeIconView glyphName="PENCIL_SQUARE_ALT" size="100" />
-         </graphic>
-      </Label>
-   </children>
-</AnchorPane>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminSalasController">
+   <left>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="50.0">
+               <children>
+                  <JFXButton fx:id="btnVolver" contentDisplay="GRAPHIC_ONLY" onAction="#btnVolverAction" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <graphic>
+                        <FontAwesomeIconView boundsType="VISUAL" glyphName="ARROW_CIRCLE_LEFT" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnAgregar" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#btnAgregarAction" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <graphic>
+                        <FontAwesomeIconView boundsType="VISUAL" glyphName="PLUS" size="20" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <JFXListView fx:id="listvSalas" focusTraversable="false" prefHeight="1080.0" prefWidth="250.0" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <StackPane fx:id="salasHolderPane" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

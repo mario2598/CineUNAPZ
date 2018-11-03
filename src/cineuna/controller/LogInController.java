@@ -210,6 +210,7 @@ public class LogInController extends Controller implements Initializable {
                             this.vbInicioSesion.setVisible(false);
                             this.vbNewPass.setVisible(true);  
                         }else{
+<<<<<<< HEAD
                                 if(usuDto.getUsuEstado().equals("A")){
                                      if(usuDto.getUsuAdmin().equals("S") || this.cbAdmin.isSelected()){
                                          AppContext.getInstance().set("administrador", (Boolean)true);
@@ -227,6 +228,21 @@ public class LogInController extends Controller implements Initializable {
                                 }else{                    
                                      new Mensaje().show(Alert.AlertType.ERROR, "Cuenta Inactiva", "Es necesario activar la cuenta mediante el correo electronico");
                                  }
+=======
+                            if(usuDto.getUsuEstado().equals("A")){
+                                 if(usuDto.getUsuAdmin().equals("S") || this.cbAdmin.isSelected()){
+                                     AppContext.getInstance().set("administrador", (Boolean)true);
+                                } 
+                                else{
+                                    AppContext.getInstance().set("administrador", (Boolean)false);   
+                                 } 
+                                 AppContext.getInstance().setUsuario((UsuarioDto)respuesta.getResultado("Usuario"));
+                                 FlowController.getInstance().goMain();
+                                 ((Stage) root.getScene().getWindow()).close();  
+                            }else{                    
+                                 new Mensaje().show(Alert.AlertType.ERROR, "Cuenta Inactiva", "Es necesario activar la cuenta mediante el correo electronico");
+                             }
+>>>>>>> Fallas
                         }
                 }
                 else {

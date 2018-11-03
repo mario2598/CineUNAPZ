@@ -631,6 +631,7 @@ and open the template in the editor.
 }
 */
 
+/* comente estos porque quiero intentar ponerle tamaños dinamicos a las butacas dependiendo del tamaño del stage
 .glyph-icon{
     -fx-fill: -fx-base-color-glyph;
     -glyph-size: 25px;
@@ -644,7 +645,7 @@ and open the template in the editor.
     -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 0);
     -fx-fill: -fx-base-color-glyph-hover;
 }
-
+*/
 .glyph-icon-login{
     -fx-fill: -fx-base-color-glyph-login;
     -glyph-size: 70px;
@@ -697,4 +698,10 @@ and open the template in the editor.
     -fx-text-fill: -fx-base-color-tp-tab-lbltf-sel;
     /*-fx-scale-x: 1.2;*/
     /*-fx-scale-y: 1.2;*/
+}
+
+/*Admin Views CSS*/
+
+.btnButaca{
+    
 }
