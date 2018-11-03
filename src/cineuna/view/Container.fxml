@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
+<<<<<<< HEAD
 <BorderPane fx:id="root" prefHeight="600.0" prefWidth="1150.0" style="-fx-background-color: white;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.ContainerController">
    <top>
       <AnchorPane fx:id="apTop" styleClass="menu-lateral" BorderPane.alignment="CENTER">
@@ -26,6 +27,7 @@
       <StackPane fx:id="centerHP" prefHeight="580.0" prefWidth="1079.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
+=======
 <StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.ContainerController">
    <children>
       <BorderPane fx:id="root" prefHeight="600.0" prefWidth="1150.0" style="-fx-background-color: white;" stylesheets="@Style.css">
@@ -49,3 +51,4 @@
       <StackPane fx:id="dialogsPane" visible="false" />
    </children>
 </StackPane>
+>>>>>>> Fallas
