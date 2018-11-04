@@ -5,14 +5,7 @@
  */
 package cineuna.controller;
 
-import cineuna.model.ButacaDto;
-import cineuna.model.CineDto;
-import cineuna.model.SalaDto;
-import cineuna.service.ButacaService;
-import cineuna.service.CineService;
-import cineuna.service.SalaService;
 import cineuna.util.FlowController;
-import cineuna.util.Respuesta;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -81,15 +74,6 @@ public class AdminMenuController extends Controller implements Initializable {
     @FXML
     private void btnConfigAction(ActionEvent event) {
         //TODO
-        CineService cineServ = new CineService();
-        Respuesta resp = cineServ.getCine();
-        if(resp.getEstado()){
-            CineDto cine = (CineDto) resp.getResultado("Cine");
-            System.out.println("Se ha cargado el cine: " + cine.getCineNombre());
-        } else {
-            System.out.println("Error cargando el cine: " + resp.getMensaje());
-        }
-        
     }
     
 }

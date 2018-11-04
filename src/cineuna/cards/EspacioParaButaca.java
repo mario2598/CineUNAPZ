@@ -30,7 +30,6 @@ public class EspacioParaButaca extends Label{
 
     public EspacioParaButaca(Integer dim) {
         dimension = new SimpleIntegerProperty(dim);
-        this.status = false;
         this.setPrefSize(dim, dim);
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         this.setAlignment(Pos.CENTER);
@@ -44,11 +43,13 @@ public class EspacioParaButaca extends Label{
                 toggleStatus();
             }
         });
-        toggleStatus();
+        this.status = true;
+        this.setGraphic(icon);
     }
     
     private void toggleStatus(){
         this.status = !this.status;
+        this.butaca.setButActiva(this.status ? "A":"I");
         if(status){
             this.setGraphic(icon);
         } else {
@@ -60,4 +61,39 @@ public class EspacioParaButaca extends Label{
         this.setPrefSize(dim, dim);
         icon.setSize(String.valueOf(dim*1.1));
     }
+
+    //Getters and Setters
+    public ButacaDto getButaca() {
+        return butaca;
+    }
+
+    public void setButaca(ButacaDto butaca) {
+        this.butaca = butaca;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public MaterialDesignIconView getIcon() {
+        return icon;
+    }
+
+    public void setIcon(MaterialDesignIconView icon) {
+        this.icon = icon;
+    }
+
+    public IntegerProperty getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(IntegerProperty dimension) {
+        this.dimension = dimension;
+    }
+    
+    
 }

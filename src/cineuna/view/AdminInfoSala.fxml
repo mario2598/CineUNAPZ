@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="550.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminInfoSalaController">
+<BorderPane prefHeight="550.0" prefWidth="1000.0" style="-fx-background-color: #bcbcbc;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminInfoSalaController">
    <center>
       <Label fx:id="txtPrueba" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" />
    </center>

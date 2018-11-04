@@ -26,7 +26,7 @@
                   </JFXButton>
                </children>
             </AnchorPane>
-            <JFXListView fx:id="listvSalas" focusTraversable="false" prefHeight="1080.0" prefWidth="250.0" />
+            <JFXListView fx:id="listvSalas" focusTraversable="false" prefHeight="1080.0" prefWidth="250.0" style="-fx-background-color: #bcbcbc;" />
          </children>
       </VBox>
    </left>

@@ -8,8 +8,10 @@ package cineuna.controller;
 import cineuna.CineUNA;
 import cineuna.cards.SalaCard;
 import cineuna.model.SalaDto;
+import cineuna.service.SalaService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.net.URL;
@@ -38,9 +40,9 @@ public class AdminSalasController extends Controller implements Initializable {
     @FXML
     private JFXButton btnVolver, btnAgregar;
     //Attributes
+    private final SalaService salaService = new SalaService();
     private HashMap<String, FXMLLoader> loaders;
     private ArrayList<SalaDto> salasList;
-    private Boolean agregandoNuevaSala;
     
     
     //Initializers
@@ -52,12 +54,8 @@ public class AdminSalasController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         listvSalas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(!agregandoNuevaSala){
-                if(newValue!=null)
-                    mostrarSala(newValue.getSala());
-            } else {
-                System.out.println("Actualmente estas agregando una nueva sala, guarda o cancela cambios antes de salir");
-            }
+            if(newValue!=null)
+                mostrarSala(newValue.getSala());
         });
     }       
 
@@ -72,16 +70,17 @@ public class AdminSalasController extends Controller implements Initializable {
         salasHolderPane.getChildren().clear();
         cargarSalas();
         generarSalasCard();
-        agregandoNuevaSala = false;
     }
     
     //Methods
     private void cargarSalas(){
         //Aqui mas adelante se deberan cargar las salas
-        for (int i = 0; i < 3; i++) {
-            SalaDto sala = new SalaDto();
-            sala.setSalaNombre("Sala " + String.valueOf(i+1));
-            salasList.add(sala);
+        Respuesta resp = salaService.getListaSalas();
+        if(resp.getEstado()){
+            ArrayList<SalaDto> salaList = (ArrayList<SalaDto>) resp.getResultado("SalaList");
+            salaList.stream().forEach(sala -> {
+                salasList.add(sala);
+            });
         }
     }
     
@@ -107,22 +106,6 @@ public class AdminSalasController extends Controller implements Initializable {
         }
         salasHolderPane.getChildren().clear();
         salasHolderPane.getChildren().add(loader.getRoot());
-    }
-    
-    private void agregarNuevaSala(SalaDto sala){
-        AppContext.getInstance().set("manteSala", sala);
-        FXMLLoader loader = getLoader("AdminNuevaSala");
-        Controller controller = loader.getController();
-        controller.setAccion(null);
-        controller.initialize();
-        Stage stage = controller.getStage();
-        if (stage == null) {
-            stage = this.getStage();
-            controller.setStage(stage);
-        }
-        salasHolderPane.getChildren().clear();
-        salasHolderPane.getChildren().add(loader.getRoot());
-        agregandoNuevaSala = true;
     }
     
     private FXMLLoader getLoader(String name) {
@@ -153,18 +136,7 @@ public class AdminSalasController extends Controller implements Initializable {
 
     @FXML
     private void btnAgregarAction(ActionEvent event) {
-        if(!agregandoNuevaSala){
-            SalaDto sala = new SalaDto();
-            sala.setSalaNombre("Sala " + String.valueOf(listvSalas.getItems().size()+1));
-            salasList.add(sala);
-            SalaCard card = new SalaCard();
-            card.setSala(sala);
-            card.initCard();
-            listvSalas.getItems().add(card);
-            agregarNuevaSala(sala);
-        } else {
-            System.out.println("Actualmente estas agregando una nueva sala, guarda o cancela cambios antes de salir");
-        }
+        FlowController.getInstance().goView("AdminNuevaSala");
     }
     
 }
