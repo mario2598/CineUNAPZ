@@ -211,12 +211,11 @@ public class LogInController extends Controller implements Initializable {
                          this.vbNewPass.setVisible(true);  
                      }else{
                          if(usuDto.getUsuEstado().equals("A")){//si está activo
-                             if(usuDto.getUsuAdmin().equals("S")){
+                             if(usuDto.getUsuAdmin().equalsIgnoreCase("S")){
                                  AppContext.getInstance().set("administrador", (Boolean)true);
                              } 
                              else{
                                  AppContext.getInstance().set("administrador", (Boolean)false);   
-                                 //nuevo
                                  AppContext.getInstance().setUsuario(usuDto);
                              } 
                              AppContext.getInstance().setUsuario((UsuarioDto)respuesta.getResultado("Usuario"));

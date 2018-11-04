@@ -86,10 +86,8 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     }
     
     private void cargarTandas(){
-        System.out.println("intenta cargar tandas");
         listaTandas.getItems().clear();
         if(disponible){
-            System.out.println("estaba disponible");
             /*for (int i = 0; i < 3; i++) {
                 JFXButton btnTanda = new JFXButton("16:30");
                 btnTanda.setOnAction(c->{  
@@ -119,5 +117,10 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             LangUtils.getInstance().setLang("eng");
         
         LangUtils.getInstance().loadLabelLang(lblMsjFecha, "lblMsjFecha");
+    }
+    
+    private void buscarTandas(){
+        //TandaService ts= new TandaService();
+        
     }
 }
