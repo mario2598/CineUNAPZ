@@ -93,9 +93,9 @@ public class UsuCinesController extends Controller implements Initializable {
     private void llenarCartelera(List<MovieDto> movies){
         listaCartelera.getItems().clear();
         
-        System.out.println("movies size:" + movies.size());
+        //System.out.println("movies size:" + movies.size());
         movies.stream().forEach(e->{
-            System.out.println("peli");
+            //System.out.println("peli");
             MovieCard2 card = new MovieCard2(true,e);
             card.initCard();
             listaCartelera.getItems().add(card);
@@ -109,7 +109,7 @@ public class UsuCinesController extends Controller implements Initializable {
         Respuesta r = ms.getMovies("C");
         
         if(r.getEstado()){
-            System.out.println("true");
+            //System.out.println("true");
             listaDto=(List<MovieDto>) r.getResultado("Movies");
             llenarCartelera(listaDto);
         }
@@ -123,9 +123,11 @@ public class UsuCinesController extends Controller implements Initializable {
         listaProximas.getItems().clear();
         //System.out.println("movies size:" + movies.size());
         movies.stream().forEach(e->{
-            System.out.println("peli");
+            //System.out.println("peli");
             MovieCard2 card = new MovieCard2(false,e);
             card.initCard();
+            //card.prefHeightProperty().bind(listaProximas.widthProperty());
+            card.prefHeightProperty().bind(listaProximas.heightProperty());
             listaProximas.getItems().add(card);
         });
     }
@@ -137,7 +139,7 @@ public class UsuCinesController extends Controller implements Initializable {
         Respuesta r = ms.getMovies("P");
         
         if(r.getEstado()){
-            System.out.println("true");
+            //System.out.println("true");
             listaDto=(List<MovieDto>) r.getResultado("Movies");
             llenarProximas(listaDto);
         }

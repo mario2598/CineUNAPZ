@@ -120,15 +120,16 @@ and open the template in the editor.
     -fx-base-color-glyph-hover:#FF0A0A;
     -fx-base-color-glyph-login: white;
 }
-/*
+
 #root{
     -fx-background-color: -fx-base-color-root;
 }
 
+
 .menu-lateral{
     -fx-background-color: -fx-base-color-lateral;
 }
-
+/*
 .jfx-btn-general{
     -fx-background-color: #64B5F6;
 }

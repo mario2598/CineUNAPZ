@@ -13,12 +13,11 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -48,6 +47,7 @@ public class MovieCard2 extends Card{
         this.getStylesheets().add("cineuna/cards/StyleCards.css");
         this.setId("root");
         initRoot();
+        binds();
     }
     
     private void initRoot(){
@@ -146,5 +146,15 @@ public class MovieCard2 extends Card{
         infoRoot.setOnMouseExited(e->infoRoot.setVisible(false));
     }
     
+    private void binds(){
+        //this.setMaxSize(100, 100);
+        //vbRoot.prefHeightProperty().bind(this.widthProperty());
+        //vbRoot.prefWidthProperty().bind(this.heightProperty());
+        //root.prefHeightProperty().bind(vbRoot.widthProperty());
+        //root.prefWidthProperty().bind(vbRoot.heightProperty());
+        //poster.fitWidthProperty().bind(root.widthProperty());
+        //poster.fitHeightProperty().bind(root.heightProperty());
+        
+    }
     
 }

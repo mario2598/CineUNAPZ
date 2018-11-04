@@ -15,7 +15,7 @@
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="290.0" prefWidth="780.0">
                      <children>
                         <Label fx:id="lblCartelera" maxHeight="1.7976931348623157E308" prefHeight="20.0" prefWidth="353.0" styleClass="label-titulo" text="En Cartelera" AnchorPane.leftAnchor="30.0" />
-                        <JFXListView fx:id="listaCartelera" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="HORIZONTAL" prefHeight="239.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+                        <JFXListView fx:id="listaCartelera" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" orientation="HORIZONTAL" prefHeight="239.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="290.0" prefWidth="780.0">
