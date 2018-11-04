@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -101,13 +102,20 @@ public class MovieCard2 extends Card{
     }
     
     private void addTitle(){
-        Hyperlink titulo=new Hyperlink(movie.getMovieNombre());
+        VBox hb=new VBox();
+        hb.setAlignment(Pos.CENTER);
+        Label titulo=new Label(movie.getMovieNombre());
         titulo.setAlignment(Pos.CENTER);
-        vbRoot.getChildren().add(titulo);
+        Label fecha=new Label(movie.getMovieDate().toString());
+        fecha.setAlignment(Pos.CENTER);
+        fecha.getStyleClass().add("label-small");
+        hb.getChildren().add(titulo);
+        hb.getChildren().add(fecha);
+        vbRoot.getChildren().add(hb);
     }
     
     private void addDescription(){
-        JFXTextArea info=new JFXTextArea("asdddddddddddddddddddddddddddddddddddddddddd sddddddddddddddddd");
+        JFXTextArea info=new JFXTextArea("asddddddddddddd");
         info.setDisable(false);
         info.setEditable(false);
         infoRoot.getChildren().add(info);
