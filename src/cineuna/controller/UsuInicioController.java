@@ -5,19 +5,13 @@
  */
 package cineuna.controller;
 
-import cineuna.cards.MovieCard;
 import cineuna.cards.MovieCard2;
 import cineuna.model.MovieDto;
 import cineuna.model.UsuarioDto;
 import cineuna.service.MovieService;
 import cineuna.util.AppContext;
-import cineuna.util.FlowController;
 import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXPopup;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,31 +20,27 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
  * @author robri
  */
-public class UsuCinesController extends Controller implements Initializable {
+public class UsuInicioController extends Controller implements Initializable {
 
     @FXML
     private StackPane root;
-    @FXML
-    private StackPane spDialogos;
-    private UsuarioDto usuario;
     @FXML
     private Hyperlink hlCartelera;
     @FXML
     private Hyperlink hlProximas;
     @FXML
     private TilePane tpPeliculas;
-    
+    @FXML
+    private StackPane spDialogos;
+    private UsuarioDto usuario;
 
     /**
      * Initializes the controller class.
@@ -62,12 +52,21 @@ public class UsuCinesController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
-        //initContainers();
-        cargarIdioma2();
+        cargarIdioma();
         cargarCartelera();
     }
+
+    @FXML
+    private void irCartelera(ActionEvent event) {
+        cargarCartelera();
+    }
+
+    @FXML
+    private void irProximas(ActionEvent event) {
+        cargarProximas();
+    }
     
-    private void llenarCartelera2(List<MovieDto> movies){
+    private void llenarCartelera(List<MovieDto> movies){
         tpPeliculas.getChildren().clear();
         
         //System.out.println("movies size:" + movies.size());
@@ -88,7 +87,7 @@ public class UsuCinesController extends Controller implements Initializable {
         if(r.getEstado()){
             //System.out.println("true");
             listaDto=(List<MovieDto>) r.getResultado("Movies");
-            llenarCartelera2(listaDto);
+            llenarCartelera(listaDto);
         }
         else{
             System.out.println("false");
@@ -96,7 +95,7 @@ public class UsuCinesController extends Controller implements Initializable {
  
     }
     
-    private void llenarProximas2(List<MovieDto> movies){
+    private void llenarProximas(List<MovieDto> movies){
         tpPeliculas.getChildren().clear();
         //System.out.println("movies size:" + movies.size());
         movies.stream().forEach(e->{
@@ -118,7 +117,7 @@ public class UsuCinesController extends Controller implements Initializable {
         if(r.getEstado()){
             //System.out.println("true");
             listaDto=(List<MovieDto>) r.getResultado("Movies");
-            llenarProximas2(listaDto);
+            llenarProximas(listaDto);
         }
         else{
             System.out.println("false");
@@ -127,7 +126,7 @@ public class UsuCinesController extends Controller implements Initializable {
         
     }
     
-    private void cargarIdioma2(){
+    private void cargarIdioma(){
         usuario=AppContext.getInstance().getUsuario();
         Integer idioma=Integer.valueOf(usuario.usuIdioma.getValue());
         if(idioma.equals(1)){
@@ -142,14 +141,5 @@ public class UsuCinesController extends Controller implements Initializable {
         LangUtils.getInstance().loadHyperlinkLang(hlCartelera, "lblCartelera");
         LangUtils.getInstance().loadHyperlinkLang(hlProximas, "lblProximas");
     }
-
-    @FXML
-    private void irCartelera(ActionEvent event) {
-        cargarCartelera();
-    }
-
-    @FXML
-    private void irProximas(ActionEvent event) {
-        cargarProximas();
-    }
+    
 }

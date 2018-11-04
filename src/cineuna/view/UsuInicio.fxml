@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXScrollPane?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="959.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInicioController">
+   <children>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="585.0" prefWidth="780.0">
+         <children>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="780.0" spacing="20.0">
+               <children>
+                  <Hyperlink fx:id="hlCartelera" onAction="#irCartelera" text="Hyperlink" />
+                  <Hyperlink fx:id="hlProximas" onAction="#irProximas" text="Hyperlink" />
+               </children>
+            </HBox>
+            <JFXScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="598.0" prefWidth="959.0" style="-fx-background-color: transparent;">
+               <children>
+                  <TilePane fx:id="tpPeliculas" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefColumns="4" prefHeight="539.0" prefRows="4" prefWidth="778.0" style="-fx-background-color: black;" />
+               </children>
+            </JFXScrollPane>
+         </children>
+      </VBox>
+      <StackPane fx:id="spDialogos" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="610.0" prefWidth="1561.0" visible="false" />
+   </children>
+</StackPane>

@@ -27,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 
 /**
  * FXML Controller class
@@ -55,13 +56,15 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @FXML
     private Label lblMsjFecha;
     private MovieDto pelicula;
+    @FXML
+    private WebView webView;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        webView=new WebView();
     }    
 
     @Override
@@ -79,6 +82,8 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
      */
     @FXML
     private void verTrailer(MouseEvent event) {
+        this.apVideo.setVisible(true);
+        webView.getEngine().load("https://www.youtube.com");
     }
     
     private void cargarInfoPelicula(){

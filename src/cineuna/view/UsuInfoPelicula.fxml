@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
 <JFXDialogLayout fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="400.0" prefHeight="519.0" prefWidth="409.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoPeliculaController">
    <children>
@@ -31,7 +32,10 @@
                         <FontAwesomeIconView onMouseClicked="#verTrailer" size="100.0" styleClass="glyph-icon-login" text="" wrappingWidth="68.0" />
                      </children>
                   </StackPane>
-                  <AnchorPane fx:id="apVideo" prefHeight="200.0" prefWidth="200.0" visible="false" />
+                  <AnchorPane fx:id="apVideo" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <WebView fx:id="webView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
                </children>
             </StackPane>
             <Label fx:id="lblNombre" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="38.0" prefWidth="678.0" text="DeadPool 2" textFill="#f5f0f0">
