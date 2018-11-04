@@ -5,6 +5,7 @@
  */
 package cineuna.cards;
 
+import cineuna.model.MovieDto;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import com.jfoenix.controls.JFXTextArea;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -30,9 +32,15 @@ public class MovieCard2 extends Card{
     private ImageView poster;
     private VBox infoRoot;
     private Boolean disponible;
+    private MovieDto movie;
     
     public MovieCard2(Boolean disponible) {
         this.disponible = disponible;
+    }
+    
+    public MovieCard2(Boolean disponible,MovieDto movie) {
+        this.disponible = disponible;
+        this.movie = movie;
     }
     
     @Override
@@ -44,6 +52,7 @@ public class MovieCard2 extends Card{
     
     private void initRoot(){
         vbRoot=new VBox();
+        vbRoot.setAlignment(Pos.CENTER);
         root=new StackPane();
         root.setPrefSize(130, 150);
         root.setMaxSize(USE_PREF_SIZE, USE_PREF_SIZE);
@@ -93,20 +102,27 @@ public class MovieCard2 extends Card{
     }
     
     private void addTitle(){
-        Hyperlink titulo=new Hyperlink("Nombre");
+        VBox hb=new VBox();
+        hb.setAlignment(Pos.CENTER);
+        Label titulo=new Label(movie.getMovieNombre());
         titulo.setAlignment(Pos.CENTER);
-        vbRoot.getChildren().add(titulo);
+        Label fecha=new Label(movie.getMovieDate().toString());
+        fecha.setAlignment(Pos.CENTER);
+        fecha.getStyleClass().add("label-small");
+        hb.getChildren().add(titulo);
+        hb.getChildren().add(fecha);
+        vbRoot.getChildren().add(hb);
     }
     
     private void addDescription(){
-        JFXTextArea info=new JFXTextArea("asdddddddddddddddddddddddddddddddddddddddddd sddddddddddddddddd");
+        JFXTextArea info=new JFXTextArea("asddddddddddddd");
         info.setDisable(false);
         info.setEditable(false);
         infoRoot.getChildren().add(info);
     }
     
     private void addDate(){
-        Label fecha=new Label("20/8/18");
+        Label fecha=new Label(movie.getMovieDate().toString());
         fecha.setAlignment(Pos.CENTER);
         infoRoot.getChildren().add(fecha);
     }
@@ -120,6 +136,7 @@ public class MovieCard2 extends Card{
         
         icon.setOnMouseClicked(e->{
             AppContext.getInstance().set("peliDisponible",disponible);
+            AppContext.getInstance().set("peliculaSel",movie);
             FlowController.getInstance().goViewOnDialog("UsuInfoPelicula", (StackPane) AppContext.getInstance().get("spDialogos"));
         });
         infoRoot.getChildren().add(icon);

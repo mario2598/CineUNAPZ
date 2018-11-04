@@ -170,4 +170,13 @@ public class ContainerController extends Controller implements Initializable {
         return this.dialogsPane;
 
     }
+
+    @FXML
+    private void volverInicio(MouseEvent event) {
+        if(isAdmin)
+            FlowController.getInstance().goView("AdminMenu");
+        else
+            FlowController.getInstance().goView("UsuCines");
+            
+    }
 }

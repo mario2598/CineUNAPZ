@@ -20,16 +20,15 @@ import com.jfoenix.controls.JFXPopup;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -81,6 +80,7 @@ public class UsuCinesController extends Controller implements Initializable {
         initContainers();
         cargarIdioma();
         cargarCartelera();
+        cargarProximas();
         //llenarCartelera();
         //llenarProximas();
     }
@@ -90,40 +90,64 @@ public class UsuCinesController extends Controller implements Initializable {
         this.vbOpcionesUsu=new VBox();
     }
     
-    private void llenarCartelera(ArrayList<MovieDto> movies){
+    private void llenarCartelera(List<MovieDto> movies){
         listaCartelera.getItems().clear();
         
+        System.out.println("movies size:" + movies.size());
         movies.stream().forEach(e->{
-            MovieCard2 card = new MovieCard2(false);
+            System.out.println("peli");
+            MovieCard2 card = new MovieCard2(true,e);
             card.initCard();
-            listaProximas.getItems().add(card);
-        });
-        
-        
+            listaCartelera.getItems().add(card);
+        }); 
     }
     
     private void cargarCartelera(){
-        ArrayList<MovieDto> listaDto=new ArrayList<>();
+        List<MovieDto> listaDto=new ArrayList<>();
 
         MovieService ms = new MovieService();
-        Respuesta r = ms.getMovies();
+        Respuesta r = ms.getMovies("C");
         
         if(r.getEstado()){
-            listaDto=(ArrayList<MovieDto>) r.getResultado("Movies");
+            System.out.println("true");
+            listaDto=(List<MovieDto>) r.getResultado("Movies");
+            llenarCartelera(listaDto);
+        }
+        else{
+            System.out.println("false");
+        }
+ 
+    }
+    
+    private void llenarProximas(List<MovieDto> movies){
+        listaProximas.getItems().clear();
+        //System.out.println("movies size:" + movies.size());
+        movies.stream().forEach(e->{
+            System.out.println("peli");
+            MovieCard2 card = new MovieCard2(false,e);
+            card.initCard();
+            listaProximas.getItems().add(card);
+        });
+    }
+
+     private void cargarProximas(){
+        List<MovieDto> listaDto=new ArrayList<>();
+
+        MovieService ms = new MovieService();
+        Respuesta r = ms.getMovies("P");
+        
+        if(r.getEstado()){
+            System.out.println("true");
+            listaDto=(List<MovieDto>) r.getResultado("Movies");
+            llenarProximas(listaDto);
+        }
+        else{
+            System.out.println("false");
         }
         
         
     }
     
-    private void llenarProximas(){
-        listaProximas.getItems().clear();
-        for (int i = 0; i < 10; i++) {
-            MovieCard2 card = new MovieCard2(false);
-            card.initCard();
-            listaProximas.getItems().add(card);
-        }
-    }
-
     private void volver(MouseEvent event) {
         FlowController.getInstance().goView("UsuSeleccionCines");
     }
