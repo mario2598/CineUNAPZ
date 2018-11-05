@@ -64,7 +64,8 @@ public class MovieCard2 extends Card{
     }
     
     private void initPoster(){
-        poster=new ImageView(new Image("cineuna/resources/images/Ejemplo.JPG"));
+        poster=new ImageView(new Image("cineuna/resources/images/Frozen.jpg"));
+        System.out.println(movie.getMoviePortada().toString());
         poster.setFitWidth(130);
         poster.setFitHeight(150);
         poster.setPreserveRatio(false);
@@ -111,6 +112,7 @@ public class MovieCard2 extends Card{
         fecha.getStyleClass().add("label-small");
         hb.getChildren().add(titulo);
         hb.getChildren().add(fecha);
+        hb.getStyleClass().add("h-box");
         vbRoot.getChildren().add(hb);
     }
     

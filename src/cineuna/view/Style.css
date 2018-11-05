@@ -422,6 +422,14 @@ and open the template in the editor.
     -fx-border-color: transparent;
 }
 
+.hyperlink-ini{
+    -fx-alignment: center;
+    -fx-font-size: 25;
+    -fx-text-fill: -fx-base-color-hyper-tf;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
 .hyperlink:hover{
     -fx-text-fill: -fx-base-color-hyper-tf-focus;
 }
@@ -431,20 +439,6 @@ and open the template in the editor.
     -fx-text-fill: white;
     -fx-background-color: transparent;
 }
-
-/*todo*/
-/*
-.jfx-slider .thumb{
-    -fx-background-image: url("../resources/imgs/trollebusp.png"); 
-   -fx-padding: 5; 
-   -fx-pref-width: 30; 
-   -fx-pref-height: 20;
-    -fx-background-size: 30 20;
-    -fx-text-fill: ;
-    
-    -fx-background-color:;
-}
-*/
 
 .glyph-icon{
     -fx-fill: -fx-base-color-glyph;
@@ -707,3 +701,17 @@ and open the template in the editor.
     -fx-background-color:;
     -jfx-selected-color:;
 }*/
+
+/*todo*/
+/*
+.jfx-slider .thumb{
+    -fx-background-image: url("../resources/imgs/trollebusp.png"); 
+   -fx-padding: 5; 
+   -fx-pref-width: 30; 
+   -fx-pref-height: 20;
+    -fx-background-size: 30 20;
+    -fx-text-fill: ;
+    
+    -fx-background-color:;
+}
+*/

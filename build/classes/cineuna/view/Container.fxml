@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.ContainerController">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.ContainerController">
    <children>
-      <BorderPane fx:id="root" prefHeight="600.0" prefWidth="1150.0" style="-fx-background-color: white;" stylesheets="@Style.css">
+      <BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1150.0" style="-fx-background-color: white;" stylesheets="@Style.css">
          <top>
-            <AnchorPane fx:id="apTop" styleClass="menu-lateral" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="apTop" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="menu-lateral" BorderPane.alignment="CENTER">
                <children>
                   <FontAwesomeIconView fx:id="btnOpcionesUsu" layoutX="930.0" layoutY="26.0" text="" wrappingWidth="27.85714292526245" AnchorPane.rightAnchor="192.14285707473755" AnchorPane.topAnchor="15.714285850524902" />
                   <Hyperlink fx:id="hlNombreUsuario" layoutX="1176.0" layoutY="11.0" prefHeight="23.0" prefWidth="117.0" styleClass="hyperlink-dark" text="USUARIO" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="11.0" />
@@ -35,9 +35,9 @@
             </AnchorPane>
          </top>
          <center>
-            <StackPane fx:id="centerHP" BorderPane.alignment="CENTER" />
+            <StackPane fx:id="centerHP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <StackPane fx:id="dialogsPane" visible="false" />
+      <StackPane fx:id="dialogsPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false" />
    </children>
 </StackPane>
