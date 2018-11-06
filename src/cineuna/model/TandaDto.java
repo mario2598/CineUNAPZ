@@ -34,9 +34,9 @@ public class TandaDto {
     //private LocalDate tandaHfin;
     private ObjectProperty<LocalDate> tandaHfin;
     @XmlTransient
-    private MovieDto movieId;
+    private MovieDto movieId;//antes estaba en Long
     @XmlTransient
-    private SalaDto salaId;
+    private SalaDto salaId;//antes estaba en Long
     
     //Constructors
     public TandaDto() {
