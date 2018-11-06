@@ -5,19 +5,13 @@
  */
 package cineuna.controller;
 
-import cineuna.cards.MovieCard;
 import cineuna.cards.MovieCard2;
 import cineuna.model.MovieDto;
 import cineuna.model.UsuarioDto;
 import cineuna.service.MovieService;
 import cineuna.util.AppContext;
-import cineuna.util.FlowController;
 import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXPopup;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +20,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class

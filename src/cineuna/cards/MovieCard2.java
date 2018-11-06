@@ -17,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -64,8 +63,9 @@ public class MovieCard2 extends Card{
     }
     
     private void initPoster(){
-        poster=new ImageView(new Image("cineuna/resources/images/Frozen.jpg"));
-        System.out.println(movie.getMoviePortada().toString());
+        //poster=new ImageView(new Image("cineuna/resources/images/Frozen.jpg"));
+        poster=new ImageView(movie.getMoviePortada().toString());
+        //System.out.println(movie.getMoviePortada().toString());
         poster.setFitWidth(130);
         poster.setFitHeight(150);
         poster.setPreserveRatio(false);
