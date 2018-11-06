@@ -176,7 +176,7 @@ public class ContainerController extends Controller implements Initializable {
         if(isAdmin)
             FlowController.getInstance().goView("AdminMenu");
         else
-            FlowController.getInstance().goView("UsuCines");
+            FlowController.getInstance().goView("UsuInicio");
             
     }
 }
