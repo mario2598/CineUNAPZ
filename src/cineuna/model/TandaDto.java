@@ -73,12 +73,12 @@ public class TandaDto {
     public void setTandaCobro(Long tandaCobro) {
         this.tandaCobro = tandaCobro;
     }
-
+    
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getTandaHinicio() {
         return tandaHinicio.get();
     }
-
+    
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public void setTandaHinicio(LocalDate tandaHinicio) {
         this.tandaHinicio.set(tandaHinicio);
@@ -88,12 +88,30 @@ public class TandaDto {
     public LocalDate getTandaHfin() {
         return tandaHfin.get();
     }
-
+    
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public void setTandaHfin(LocalDate tandaHfin) {
         this.tandaHfin.set(tandaHfin);
     }
-
+    
+    /*
+    public LocalDate getTandaHinicio() {
+        return tandaHinicio;
+    }
+    
+    public void setTandaHinicio(LocalDate tandaHinicio) {
+        this.tandaHinicio = tandaHinicio;
+    }
+    
+    public LocalDate getTandaHfin() {
+        return tandaHfin;
+    }
+    
+    public void setTandaHfin(LocalDate tandaHfin) {
+        this.tandaHfin = tandaHfin;
+    }
+    */
+    
     public MovieDto getMovieId() {
         return movieId;
     }

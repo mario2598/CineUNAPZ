@@ -50,20 +50,17 @@ public class UsuInicioController extends Controller implements Initializable {
         AppContext.getInstance().set("spDialogos",spDialogos);
     }    
 
-    @Override
-    public void initialize() {
-        cargarIdioma();
-        cargarCartelera();
-    }
-
     @FXML
     private void irCartelera(ActionEvent event) {
-        cargarCartelera();
     }
 
     @FXML
     private void irProximas(ActionEvent event) {
-        cargarProximas();
+    }
+
+    @Override
+    public void initialize() {
+        
     }
     
     private void llenarCartelera(List<MovieDto> movies){
@@ -141,5 +138,4 @@ public class UsuInicioController extends Controller implements Initializable {
         LangUtils.getInstance().loadHyperlinkLang(hlCartelera, "lblCartelera");
         LangUtils.getInstance().loadHyperlinkLang(hlProximas, "lblProximas");
     }
-    
 }
