@@ -113,7 +113,10 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
                 listaDto=(List<TandaDto>) r.getResultado("tandasM");
                 System.out.println("lista tandas size:"+ listaDto.size());
             for(TandaDto t: listaDto){
-                JFXButton btnTanda = new JFXButton(t.getTandaHinicio().toString());
+                //JFXButton btnTanda = new JFXButton(t.getTandaHinicio().toString());
+                
+                System.out.println(""+t.getTandaHinicio());
+                JFXButton btnTanda = new JFXButton("");
                 btnTanda.setOnAction(c->{  
                 AppContext.getInstance().set("tandaSeleccionada",t);
                  FlowController.getInstance().goView("UsuSeleccionTanda");
