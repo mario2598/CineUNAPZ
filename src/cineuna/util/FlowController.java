@@ -91,7 +91,8 @@ public class FlowController {
         try {
             loaders.clear();
             FXMLLoader loader = getLoader("Container");
-            mainStage.setScene(new Scene(loader.getRoot()));
+            Scene scene = new Scene(loader.getRoot());
+            mainStage.setScene(scene);
             mainStage.setMinHeight(600);
             mainStage.setMinWidth(1000);
             mainStage.setTitle("Cine UNA");
@@ -121,7 +122,7 @@ public class FlowController {
         controller.initialize();
         Stage stage = controller.getStage();
         if (stage == null) {
-            stage = this.mainStage;
+            stage = mainStage;
             controller.setStage(stage);
         }
         switch (location) {
@@ -235,11 +236,15 @@ public class FlowController {
     }
     
     public void initialize() {
-        this.loaders.clear();
+        loaders.clear();
     }
 
     public void salir() {
-        this.mainStage.close();
+        mainStage.close();
+    }
+    
+    public Stage getStage(){
+        return mainStage;
     }
     
     public void btnVolverVisible(boolean b){
