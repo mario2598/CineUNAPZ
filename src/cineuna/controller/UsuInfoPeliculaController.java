@@ -114,9 +114,9 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
                 listaDto=(List<TandaDto>) r.getResultado("tandasM");
                 System.out.println("lista tandas size:"+ listaDto.size());
             for(TandaDto t: listaDto){
-                JFXButton btnTanda = new JFXButton(t.getTandaHinicio().toString());
+                JFXButton btnTanda = new JFXButton(t.getHoraTanda().toString());
                 
-                System.out.println(""+t.getTandaHinicio());
+                System.out.println("Hora"+t.getHoraTanda());
                 //JFXButton btnTanda = new JFXButton("");
                 btnTanda.setOnAction(c->{  
                 AppContext.getInstance().set("tandaSeleccionada",t);

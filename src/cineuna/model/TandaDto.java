@@ -33,6 +33,7 @@ public class TandaDto {
      private ObjectProperty<LocalDate> tandaHfin;
      private MovieDto movieId;
      private SalaDto salaId;
+     private Integer horaTanda;
 
     public TandaDto() {
         this.tandaHinicio=new SimpleObjectProperty<>();
@@ -101,6 +102,7 @@ public class TandaDto {
         this.salaId = salaId;
     }
     
+    
     /*
     public Long getMovieId() {
         return movieId;
@@ -118,5 +120,13 @@ public class TandaDto {
         this.salaId = salaId.getSalaId();
     }
     */
+
+    public Integer getHoraTanda() {
+        return horaTanda;
+    }
+
+    public void setHoraTanda(Integer horaTanda) {
+        this.horaTanda = horaTanda;
+    }
       
 }
