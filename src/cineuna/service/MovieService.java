@@ -8,6 +8,7 @@ package cineuna.service;
 import cineuna.model.MovieDto;
 import cineuna.util.Request;
 import cineuna.util.Respuesta;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,25 @@ public class MovieService {
             });
             
             return new Respuesta(true, "", "", "Movies", movies);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error guardando el usuario.", ex);
+            return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
+        }
+    }
+    
+        public Respuesta getReport(Date f1,Date f2){
+        try {
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("date1", f1);
+            parametros.put("date2", f2);
+            Request request = new Request("movieController/moviesReport", "/{date1}/{date2}", parametros);
+            request.get();
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
+            
+            
+            return new Respuesta(true, "", "", "Movies", "");
         } catch (Exception ex) {
             Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error guardando el usuario.", ex);
             return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
