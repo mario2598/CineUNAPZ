@@ -8,6 +8,7 @@ package cineuna.service;
 import cineuna.model.MovieDto;
 import cineuna.util.Request;
 import cineuna.util.Respuesta;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +46,7 @@ public class MovieService {
         }
     }
     
-        public Respuesta getReport(Date f1,Date f2){
+        public Respuesta getReport(LocalDate f1,LocalDate f2){
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("date1", f1);
