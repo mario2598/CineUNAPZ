@@ -52,15 +52,18 @@ public class UsuInicioController extends Controller implements Initializable {
 
     @FXML
     private void irCartelera(ActionEvent event) {
+        cargarCartelera();
     }
 
     @FXML
     private void irProximas(ActionEvent event) {
+        cargarProximas();
     }
 
     @Override
     public void initialize() {
-        
+        cargarIdioma();
+        cargarCartelera();
     }
     
     private void llenarCartelera(List<MovieDto> movies){

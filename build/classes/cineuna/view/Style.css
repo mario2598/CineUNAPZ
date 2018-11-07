@@ -434,7 +434,7 @@ and open the template in the editor.
 
 .hyperlink-ini{
     -fx-alignment: center;
-    -fx-font-size: 25;
+    -fx-font-size: 15;
     -fx-text-fill: -fx-base-color-hyper-tf;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
