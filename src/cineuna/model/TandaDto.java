@@ -7,10 +7,12 @@ package cineuna.model;
 
 import cineuna.util.LocalDateAdapter;
 import java.time.LocalDate;
-import java.time.ZoneId;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
@@ -22,14 +24,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class TandaDto {
      private Long tandaId;
      private Long tandaCobro;
-     @XmlJavaTypeAdapter(LocalDateAdapter.class)
-     private LocalDate tandaHinicio;
-     @XmlJavaTypeAdapter(LocalDateAdapter.class)
-     private LocalDate tandaHfin;
+     @XmlTransient
+     //@XmlJavaTypeAdapter(LocalDateAdapter.class)
+     private ObjectProperty<LocalDate> tandaHinicio;
+     //@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+     //private LocalDateTime tandaHfin;
      private MovieDto movieId;
      private SalaDto salaId;
 
     public TandaDto() {
+        this.tandaHinicio=new SimpleObjectProperty<>();
     }
     
       
@@ -50,22 +54,24 @@ public class TandaDto {
         this.tandaCobro = tandaCobro;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getTandaHinicio() {
-        return tandaHinicio;
+        return tandaHinicio.get();
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public void setTandaHinicio(LocalDate tandaHinicio) {
-        this.tandaHinicio = tandaHinicio;
+        this.tandaHinicio.set(tandaHinicio);
     }
-
-    public LocalDate getTandaHfin() {
+/*
+    public LocalDateTime getTandaHfin() {
         return tandaHfin;
     }
 
-    public void setTandaHfin(LocalDate tandaHfin) {
+    public void setTandaHfin(LocalDateTime tandaHfin) {
         this.tandaHfin = tandaHfin;
     }
-
+*/
     public MovieDto getMovieId() {
         return movieId;
     }
