@@ -5,6 +5,7 @@
  */
 package cineuna.controller;
 
+import cineuna.model.TandaDto;
 import cineuna.util.AppContext;
 import cineuna.util.LangUtils;
 import com.jfoenix.controls.JFXButton;
@@ -43,6 +44,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private JFXButton btnReservar;
     @FXML
     private JFXButton btnCancelar;
+    TandaDto tanda;
+    @FXML
+    private Label lblTotal;
 
     /**
      * Initializes the controller class.
@@ -55,6 +59,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     @Override
     public void initialize() {
         cargarIdioma();
+        cargarInfoTanda();
     }
     
     private void cargarIdioma(){
@@ -68,5 +73,19 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         LangUtils.getInstance().loadLabelLang(lblMsjCosto, "lblMsjCosto");
         LangUtils.getInstance().loadButtonLang(btnReservar, "btnReservar");
         LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
-    }    
+    }
+
+    private void cargarInfoTanda(){
+        try{
+            this.tanda=(TandaDto) AppContext.getInstance().get("tandaSeleccionada");
+            this.lblSala.setText(tanda.getSalaId().getSalaNombre());
+            this.lblTotal.setText(tanda.getTandaCobro().toString());
+            System.out.println("Tanda sala: "+tanda.getSalaId().getSalaNombre());
+        }
+        catch(NullPointerException e){
+            System.out.println("Ninguna tanda seleccionada");
+        }
+        
+        //this.lblCine.setText(tanda.getC);
+    }
 }
