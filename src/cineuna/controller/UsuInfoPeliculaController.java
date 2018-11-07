@@ -17,6 +17,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -113,10 +114,10 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
                 listaDto=(List<TandaDto>) r.getResultado("tandasM");
                 System.out.println("lista tandas size:"+ listaDto.size());
             for(TandaDto t: listaDto){
-                //JFXButton btnTanda = new JFXButton(t.getTandaHinicio().toString());
+                JFXButton btnTanda = new JFXButton(t.getTandaHinicio().toString());
                 
                 System.out.println(""+t.getTandaHinicio());
-                JFXButton btnTanda = new JFXButton("");
+                //JFXButton btnTanda = new JFXButton("");
                 btnTanda.setOnAction(c->{  
                 AppContext.getInstance().set("tandaSeleccionada",t);
                  FlowController.getInstance().goView("UsuSeleccionTanda");

@@ -29,11 +29,14 @@ public class TandaDto {
      private ObjectProperty<LocalDate> tandaHinicio;
      //@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
      //private LocalDateTime tandaHfin;
+     @XmlTransient
+     private ObjectProperty<LocalDate> tandaHfin;
      private MovieDto movieId;
      private SalaDto salaId;
 
     public TandaDto() {
         this.tandaHinicio=new SimpleObjectProperty<>();
+        this.tandaHfin=new SimpleObjectProperty<>();
     }
     
       
@@ -62,6 +65,16 @@ public class TandaDto {
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public void setTandaHinicio(LocalDate tandaHinicio) {
         this.tandaHinicio.set(tandaHinicio);
+    }
+    
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public LocalDate getTandaHfin() {
+        return tandaHfin.get();
+    }
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public void setTandaHfin(LocalDate tandaHinicio) {
+        this.tandaHfin.set(tandaHinicio);
     }
 /*
     public LocalDateTime getTandaHfin() {
