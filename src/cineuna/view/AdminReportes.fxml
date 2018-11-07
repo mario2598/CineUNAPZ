@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminReportesController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminReportesController">
    <children>
-      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="400.0" prefWidth="600.0" text="En Construcción: AdminReportes" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <font>
-            <Font size="53.0" />
-         </font>
-         <graphic>
-            <FontAwesomeIconView glyphName="PENCIL_SQUARE_ALT" size="100" />
-         </graphic>
-      </Label>
+      <VBox layoutX="276.0" layoutY="63.0" prefHeight="200.0" prefWidth="168.0">
+         <children>
+            <JFXDatePicker fx:id="DP1" promptText="fecha 1" />
+            <JFXDatePicker fx:id="DP2" promptText="fecha 2" />
+            <JFXButton onAction="#genReporte" prefHeight="45.0" prefWidth="152.0" text="Generar Reporte" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
