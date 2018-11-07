@@ -38,7 +38,6 @@ public class FlowController {
     private boolean showingDialog = false;
 
     private FlowController() {
-        
     }
 
     private static void createInstance() {
@@ -101,7 +100,7 @@ public class FlowController {
             if((boolean) AppContext.getInstance().get("administrador")){
                 goView("AdminMenu");
             } else {
-                goView("UsuCines");
+                goView("UsuInicio");
             }
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);

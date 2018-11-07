@@ -149,12 +149,12 @@ public class ContainerController extends Controller implements Initializable {
     }
     
     public void seleccionarUsuario(){
-        FlowController.getInstance().goView("UsuCines");
+        FlowController.getInstance().goView("UsuInicio");
     }
 
 
     private void irInicio(MouseEvent event) {
-        FlowController.getInstance().goView("UsuCines");
+        FlowController.getInstance().goView("UsuInicio");
     }
     
     @FXML
@@ -176,7 +176,7 @@ public class ContainerController extends Controller implements Initializable {
         if(isAdmin)
             FlowController.getInstance().goView("AdminMenu");
         else
-            FlowController.getInstance().goView("UsuCines");
+            FlowController.getInstance().goView("UsuInicio");
             
     }
 }

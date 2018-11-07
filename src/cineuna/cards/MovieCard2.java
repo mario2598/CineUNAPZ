@@ -13,12 +13,10 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -48,6 +46,7 @@ public class MovieCard2 extends Card{
         this.getStylesheets().add("cineuna/cards/StyleCards.css");
         this.setId("root");
         initRoot();
+        binds();
     }
     
     private void initRoot(){
@@ -64,7 +63,9 @@ public class MovieCard2 extends Card{
     }
     
     private void initPoster(){
-        poster=new ImageView(new Image("cineuna/resources/images/Ejemplo.JPG"));
+        //poster=new ImageView(new Image("cineuna/resources/images/Frozen.jpg"));
+        poster=new ImageView(movie.getMoviePortada().toString());
+        //System.out.println(movie.getMoviePortada().toString());
         poster.setFitWidth(130);
         poster.setFitHeight(150);
         poster.setPreserveRatio(false);
@@ -111,6 +112,7 @@ public class MovieCard2 extends Card{
         fecha.getStyleClass().add("label-small");
         hb.getChildren().add(titulo);
         hb.getChildren().add(fecha);
+        hb.getStyleClass().add("h-box");
         vbRoot.getChildren().add(hb);
     }
     
@@ -146,5 +148,15 @@ public class MovieCard2 extends Card{
         infoRoot.setOnMouseExited(e->infoRoot.setVisible(false));
     }
     
+    private void binds(){
+        //this.setMaxSize(100, 100);
+        //vbRoot.prefHeightProperty().bind(this.widthProperty());
+        //vbRoot.prefWidthProperty().bind(this.heightProperty());
+        //root.prefHeightProperty().bind(vbRoot.widthProperty());
+        //root.prefWidthProperty().bind(vbRoot.heightProperty());
+        //poster.fitWidthProperty().bind(root.widthProperty());
+        //poster.fitHeightProperty().bind(root.heightProperty());
+        
+    }
     
 }

@@ -7,14 +7,18 @@ package cineuna.controller;
 
 import cineuna.model.MovieDto;
 import cineuna.model.TandaDto;
+import cineuna.service.TandaService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import cineuna.util.LangUtils;
+import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -24,6 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 
 /**
  * FXML Controller class
@@ -52,13 +57,15 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @FXML
     private Label lblMsjFecha;
     private MovieDto pelicula;
+    @FXML
+    private WebView webView;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        webView=new WebView();
     }    
 
     @Override
@@ -76,6 +83,8 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
      */
     @FXML
     private void verTrailer(MouseEvent event) {
+        this.apVideo.setVisible(true);
+        webView.getEngine().load("https://www.youtube.com");
     }
     
     private void cargarInfoPelicula(){
@@ -96,16 +105,32 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
                 });
                 listaTandas.getItems().add(btnTanda);
             }*/
-            List<TandaDto> tandas = pelicula.getTandaList();
-            System.out.println("lista tandas size:"+ tandas.size());
-            for(TandaDto t: tandas){
-                JFXButton btnTanda = new JFXButton(t.getTandaHinicio().toString());
+            List<TandaDto> listaDto=new ArrayList<>();
+            TandaService ts=new TandaService();
+            System.out.println("buscar por id: "+pelicula.getMovieId());
+            Respuesta r = ts.getTandasM(pelicula.getMovieId());
+            if(r.getEstado()){
+                System.out.println("true");
+                listaDto=(List<TandaDto>) r.getResultado("tandasM");
+                System.out.println("lista tandas size:"+ listaDto.size());
+            for(TandaDto t: listaDto){
+                JFXButton btnTanda = new JFXButton(t.getHoraTanda().toString());
+                
+                System.out.println("Hora"+t.getHoraTanda());
+                //JFXButton btnTanda = new JFXButton("");
                 btnTanda.setOnAction(c->{  
                 AppContext.getInstance().set("tandaSeleccionada",t);
                  FlowController.getInstance().goView("UsuSeleccionTanda");
                 });
                 listaTandas.getItems().add(btnTanda);
             }
+            }
+            else{
+                System.out.println("false");
+            }
+            
+            //List<TandaDto> tandas = (List<TandaDto>) ts.getTandasM(pelicula.getMovieId());
+            
         }
     }
     
