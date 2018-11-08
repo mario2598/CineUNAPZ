@@ -85,9 +85,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         costoTotal=new SimpleIntegerProperty(0);
         AppContext.getInstance().set("asientos",asientos);
         redimensionado();
-        cargarIdioma();
-        cargarInfoTanda();
-        cargarDistribucion();
+        //cargarIdioma();
+        //cargarInfoTanda();
+        //cargarDistribucion();
     }    
 
     @Override

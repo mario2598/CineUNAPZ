@@ -27,14 +27,14 @@ public class CampoButaca extends Label{
     
     private ButacaDto butaca;
     private Boolean status;
-    private SimpleBooleanProperty ocupada;
+    private SimpleBooleanProperty disponible;
     private MaterialDesignIconView icon;
     private IntegerProperty dimension;
     private SimpleBooleanProperty seleccionada;
     private SimpleIntegerProperty asientos;
 
-    public CampoButaca(Integer dim,Boolean ocupada,Boolean activa) {
-        inicializaVariables(dim,ocupada,activa);
+    public CampoButaca(Integer dim,Boolean disponible,Boolean activa) {
+        inicializaVariables(dim,disponible,activa);
 
         this.setPrefSize(dim, dim);
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -44,24 +44,23 @@ public class CampoButaca extends Label{
         
         this.setOnMouseClicked(event -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
-                if(!this.ocupada.get())
+                if(this.disponible.get())
                 this.seleccionada.set(!this.seleccionada.get());
             }
         });
         
-        this.ocupada.set(ocupada);
+        this.disponible.set(disponible);
         this.status = false;
         
         
-        inicializaIcono(dim,ocupada,activa);
+        inicializaIcono(dim,disponible,activa);
         iniciarListenerButaca();
     }
     
-    private void inicializaVariables(Integer dim,Boolean ocupada,Boolean activa){
+    private void inicializaVariables(Integer dim,Boolean disponible,Boolean activa){
         asientos=(SimpleIntegerProperty) AppContext.getInstance().get("asientos");
         dimension = new SimpleIntegerProperty(dim);
-        dimension = new SimpleIntegerProperty(dim);
-        this.ocupada = new SimpleBooleanProperty(ocupada);
+        this.disponible = new SimpleBooleanProperty(true);
         this.seleccionada=new SimpleBooleanProperty();
     }
     
@@ -69,13 +68,19 @@ public class CampoButaca extends Label{
         if(activa){
             MaterialDesignIconView iconButaca = new MaterialDesignIconView(MaterialDesignIcon.READABILITY);
             iconButaca.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
-            iconButaca.setSize(String.valueOf(dim*1.1));
-            iconButaca.setFill(Paint.valueOf("#000000"));
+            //iconButaca.setSize(String.valueOf(dim*1.1));
+            //iconButaca.setFill(Paint.valueOf("#000000"));
             this.icon = iconButaca;
             this.getStylesheets().add("cineuna/cards/StyleCards.css");
-            if(disponible)
+            icon.getStyleClass().clear();
+            if(disponible){
+                System.out.println("butaca disponible");
                 icon.getStyleClass().add("campo-butaca"); 
-            else icon.getStyleClass().add("campo-butaca"); 
+            }
+            else{
+                System.out.println("butaca no disponible");
+                icon.getStyleClass().add("campo-butaca-ocupada");
+            } 
                 
             this.setGraphic(icon);
         
@@ -86,10 +91,9 @@ public class CampoButaca extends Label{
         seleccionada.addListener(e->{
             icon.getStyleClass().clear();
             icon.setSize(String.valueOf(dimension.get()*1.1));
-            //cambiarDimension(dimension.get());
+            cambiarDimension(dimension.get());//revisar esto
             if(seleccionada.get()){
                icon.getStyleClass().add("campo-butaca-sel");
-                //System.out.println("asientos campo butaca: "+asientos);
                asientos.set(asientos.get()+1);
             }
             else{
@@ -97,19 +101,20 @@ public class CampoButaca extends Label{
                asientos.set(asientos.get()-1);
             }
         });
-        ocupada.addListener(l->{
-            if(ocupada.get()){
-                icon.getStyleClass().add("campo-butaca-ocupada");
+        
+        disponible.addListener(l->{
+            if(disponible.get()){
+                icon.getStyleClass().add("campo-butaca");
             }
             else{
-               icon.getStyleClass().add("campo-butaca"); 
+               icon.getStyleClass().add("campo-butaca-ocupada"); 
             }
         });
     }
     
     public void cambiarDimension(Integer dim){
         this.setPrefSize(dim, dim);
-        icon.setSize(String.valueOf(dim*1.1));
+        //icon.setSize(String.valueOf(dim*1.1));
     }
 
     //Getters and Setters

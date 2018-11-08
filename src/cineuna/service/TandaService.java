@@ -46,4 +46,20 @@ public class TandaService {
             return new Respuesta(false, "Error obteniendo tandasM(Service Cliente).", "getTandasM " + ex.getMessage());
         }
     }
-}
+    
+    public Respuesta eliminarSala(TandaDto dto){
+        try{
+            HashMap<String, Object> parametros = new HashMap<>();
+            parametros.put("id", dto.getTandaId());
+            Request request = new Request("tandaController/eliminarTanda", "/{salaID}", parametros);
+            request.delete();
+            if(request.isError()){
+                return new Respuesta(false, request.getError(), "");
+            }
+            return new Respuesta(true, "", "");
+        }catch(Exception ex){
+            Logger.getLogger(SalaService.class.getName()).log(Level.SEVERE, "Se ha producido un error eliminando la sala.", ex);
+            return new Respuesta(false, "Se ha producido un error eliminando la sala.", ex.getMessage());
+        }
+    }
+            }
