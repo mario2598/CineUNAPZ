@@ -27,6 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 
@@ -66,10 +67,16 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         webView=new WebView();
+        StackPane spDialogos = (StackPane) AppContext.getInstance().get("spDialogos");
+        this.root.prefHeightProperty().bind(spDialogos.heightProperty());
+        this.vbRoot.prefHeightProperty().bind(root.heightProperty());
+        this.vbRoot.prefWidthProperty().bind(root.widthProperty());
+        //this.root.prefWidthProperty().bind(spDialogos.widthProperty());
     }    
 
     @Override
     public void initialize() {
+        apVideo.setVisible(false);
         disponible = (Boolean) AppContext.getInstance().get("peliDisponible");
         pelicula=(MovieDto) AppContext.getInstance().get("peliculaSel");
         cargarTandas();
@@ -88,7 +95,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     }
     
     private void cargarInfoPelicula(){
-        //imgPoster.setImage(value);
+        imgPoster.setImage(pelicula.abrirImagen());
         lblFecha.setText(pelicula.getMovieDate().toString());
         lblNombre.setText(pelicula.getMovieNombre());
         lblResenna.setText(pelicula.getMovieResena());
