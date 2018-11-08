@@ -89,7 +89,7 @@ public class MovieDto {
         this.movieDuracion = m.getMovieDuracion();
     }
     
-    public void cargarImagenByte() throws FileNotFoundException, IOException{
+    public void crearImagenDesdeByte() throws FileNotFoundException, IOException{
             String outPutFile = "src\\cineuna\\resources\\images\\"+movieNombre+".jpg";
             File someFile = new File(outPutFile);
         try (FileOutputStream fos = new FileOutputStream(someFile)) {
