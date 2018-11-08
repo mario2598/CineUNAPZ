@@ -39,7 +39,7 @@ public class AdminInfoSalaController extends Controller implements Initializable
     @Override
     public void initialize() {
         sala = (SalaDto) AppContext.getInstance().get("manteSala");
-        this.txtPrueba.setText("Mostrando informacion de la sala: " + sala.getSalaNombre());
+        //this.txtPrueba.setText("Mostrando informacion de la sala: " + sala.getSalaNombre());
     }
     
     //Methods
