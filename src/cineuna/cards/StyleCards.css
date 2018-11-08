@@ -44,6 +44,10 @@ and open the template in the editor.
     /*font awesome*/
     -fx-base-color-glyph-hover: #FF0A0A;
     -fx-base-color-glyph: white; 
+    -fx-base-color-campo-butaca:white;
+    -fx-base-color-campo-butaca-hover:#2B2B2B;
+    -fx-base-color-campo-butaca-sel:green;
+    -fx-base-color-campo-butaca-oc:#FF0A0A;
     
     -fx-base-color-hb:#272727;
 }
@@ -189,4 +193,30 @@ and open the template in the editor.
 .h-box{
     -fx-opacity: 0.6;
     -fx-background-color: -fx-base-color-hb;
+}
+
+.campo-butaca{
+    -fx-fill: -fx-base-color-campo-butaca;
+    -glyph-size: 40px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 10; 
+}
+
+.campo-butaca:hover{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 0);
+    -fx-fill: -fx-base-color-campo-butaca-hover;
+}
+
+.campo-butaca-sel{
+    -glyph-size: 40px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 10;
+    -fx-fill: -fx-base-color-campo-butaca-sel;
+}
+
+.campo-butaca-ocupada{
+    -glyph-size: 40px;
+    -fx-fill: -fx-base-color-campo-butaca-oc;
 }

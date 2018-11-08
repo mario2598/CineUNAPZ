@@ -480,6 +480,9 @@ and open the template in the editor.
 }
 
 .campo-butaca-sel{
+    -glyph-size: 25px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 10;
     -fx-fill: -fx-base-color-campo-butaca-sel;
 }
 

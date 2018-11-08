@@ -16,6 +16,9 @@ import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -63,6 +66,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private BorderPane bpButacas;
     @FXML
     private HBox hbCont;
+    private static SimpleIntegerProperty asientos;
+    private static SimpleIntegerProperty costoTotal;
+    private Integer costoPorAsiento;
 
     /**
      * Initializes the controller class.
@@ -71,6 +77,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     public void initialize(URL url, ResourceBundle rb) {
         butacasDistribuidas=false;
         butacaList = new ArrayList<>();
+        asientos=new SimpleIntegerProperty(0);
+        costoTotal=new SimpleIntegerProperty(0);
+        AppContext.getInstance().set("asientos",asientos);
         redimensionado();
         cargarIdioma();
         cargarInfoTanda();
@@ -81,6 +90,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
 
     @Override
     public void initialize() {
+        
+        asientos.set(0);
+        costoTotal.set(0);
         cargarIdioma();
         cargarInfoTanda();
         cargarDistribucion();
@@ -120,9 +132,18 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private void cargarInfoTanda(){
         try{
             this.tanda=(TandaDto) AppContext.getInstance().get("tandaSeleccionada");
+            costoPorAsiento=tanda.getTandaCobro().intValue();
+            lblAsientos.setText(asientos.getValue().toString());
+            lblTotal.setText(costoTotal.getValue().toString());
             this.lblSala.setText(tanda.getSalaId().getSalaNombre());
-            this.lblCosto.setText(tanda.getTandaCobro().toString());
-            System.out.println("Tanda sala: "+tanda.getSalaId().getSalaNombre());
+            this.lblCosto.setText(costoPorAsiento.toString());
+            asientos.addListener(l->{
+                lblAsientos.setText(asientos.getValue().toString());
+                costoTotal.set(asientos.getValue()*costoPorAsiento);
+            });
+            costoTotal.addListener(l->{
+                lblTotal.setText(costoTotal.getValue().toString());
+            });
         }
         catch(NullPointerException e){
             System.out.println("Ninguna tanda seleccionada");
@@ -153,7 +174,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
             if(dimButaca>0){
                 for(int i = 0; i < this.filas; i++){
                     for (int j = 0; j < this.columnas; j++) {
-                        CampoButaca espacioB = new CampoButaca(dimButaca);
+                        CampoButaca espacioB = new CampoButaca(dimButaca,false);
                         ButacaDto butaca = new ButacaDto();
                         butaca.setButFila(new Long(i));
                         butaca.setButColumna(new Long(j));
