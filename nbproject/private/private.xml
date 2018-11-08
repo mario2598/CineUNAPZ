@@ -2,19 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/controller/UsuCinesController.java</file>
+            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/service/ButacaService.java</file>
+            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/cards/CampoButaca.java</file>
             <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/controller/UsuInfoPeliculaController.java</file>
-            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/cards/MovieCard2.java</file>
             <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/view/Style.css</file>
-            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/controller/LogInController.java</file>
-            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/controller/ContainerController.java</file>
-            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/controller/UsuInicioController.java</file>
+            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/controller/UsuSeleccionTandaController.java</file>
+            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/controller/AdminNuevaSalaController.java</file>
+            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/cards/EspacioParaButaca.java</file>
+            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/util/AppContext.java</file>
             <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/cards/StyleCards.css</file>
         </group>
-=======
-        <group/>
->>>>>>> master5_fallas1
     </open-files>
 </project-private>

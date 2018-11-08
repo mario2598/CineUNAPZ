@@ -6,7 +6,6 @@
 package cineuna.controller;
 
 import cineuna.cards.CampoButaca;
-import cineuna.cards.EspacioParaButaca;
 import cineuna.model.ButacaDto;
 import cineuna.model.TandaDto;
 import cineuna.service.ButacaService;
@@ -18,9 +17,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -91,7 +88,6 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         cargarIdioma();
         cargarInfoTanda();
         cargarDistribucion();
-        cargarButacas();
     }    
 
     @Override
@@ -102,7 +98,6 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         cargarIdioma();
         cargarInfoTanda();
         cargarDistribucion();
-        cargarButacas();
         cargarListaButacasDtos();
     }
     
@@ -177,22 +172,23 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     
     private void cargarButacas(){
         butacaList.clear();
+        
             Double anchura = bpButacas.getWidth()*0.82;
             Integer dimButaca = ((anchura.intValue())/columnas);
 //            System.out.println("Dimension de la butaca: " + dimButaca);
             if(dimButaca>0){
                 for(int i = 0; i < this.filas; i++){
                     for (int j = 0; j < this.columnas; j++) {
-                        CampoButaca espacioB = new CampoButaca(dimButaca,false);
+                        //CampoButaca espacioB = new CampoButaca(dimButaca,false);
                         ButacaDto butaca = new ButacaDto();
                         butaca.setButFila(new Long(i));
                         butaca.setButColumna(new Long(j));
                         butaca.setButLetra(getLetraFila(i) + String.valueOf(j+1));
                         butaca.setButActiva("A");
                         butaca.setButEstado("D");
-                        espacioB.setButaca(butaca);
-                        butacaList.add(espacioB);
-                        apReserva.getChildren().add(espacioB);
+                        //espacioB.setButaca(butaca);
+                        //butacaList.add(espacioB);
+                        //apReserva.getChildren().add(espacioB);
                     }
                 }
                 this.butacasDistribuidas = true;
@@ -225,5 +221,30 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         catch(Exception e){
              System.out.println("ya valió");
         }
+        
+        cargaButacas();
     }
+    
+    private void cargaButacas(){
+        butacaList.clear();
+        Double anchura = bpButacas.getWidth()*0.82;
+        Integer dimButaca = ((anchura.intValue())/columnas);
+        Boolean activa,disponible;
+        
+        for(ButacaDto b:butacasDtoList){
+            if(b.getButActiva().equalsIgnoreCase("A"))
+                activa=true;
+            else activa=false;
+            
+            if(b.getButEstado().equalsIgnoreCase("D")||b.getButEstado()==null)
+                disponible=true;
+            else disponible=false;
+            
+            CampoButaca espacioB = new CampoButaca(dimButaca,disponible,activa);
+            espacioB.setButaca(b);
+            butacaList.add(espacioB);
+            apReserva.getChildren().add(espacioB);
+        }
+    }
+    
 }

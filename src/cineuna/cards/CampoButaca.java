@@ -33,32 +33,53 @@ public class CampoButaca extends Label{
     private SimpleBooleanProperty seleccionada;
     private SimpleIntegerProperty asientos;
 
-    public CampoButaca(Integer dim,Boolean ocupada) {
-        asientos=(SimpleIntegerProperty) AppContext.getInstance().get("asientos");
-        //System.out.println("ASIENTOS** "+(Integer) AppContext.getInstance().get("asientos"));
-        dimension = new SimpleIntegerProperty(dim);
-        this.ocupada = new SimpleBooleanProperty(false);
+    public CampoButaca(Integer dim,Boolean ocupada,Boolean activa) {
+        inicializaVariables(dim,ocupada,activa);
+
         this.setPrefSize(dim, dim);
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         this.setAlignment(Pos.CENTER);
-        MaterialDesignIconView iconButaca = new MaterialDesignIconView(MaterialDesignIcon.READABILITY);
-        iconButaca.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
-        iconButaca.setSize(String.valueOf(dim*1.1));
-        iconButaca.setFill(Paint.valueOf("#000000"));
-        this.icon = iconButaca;
+        
+        
+        
         this.setOnMouseClicked(event -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
                 if(!this.ocupada.get())
                 this.seleccionada.set(!this.seleccionada.get());
             }
         });
-        this.getStylesheets().add("cineuna/cards/StyleCards.css");
-        icon.getStyleClass().add("campo-butaca"); 
+        
         this.ocupada.set(ocupada);
         this.status = false;
-        this.seleccionada=new SimpleBooleanProperty();
-        this.setGraphic(icon);
+        
+        
+        inicializaIcono(dim,ocupada,activa);
         iniciarListenerButaca();
+    }
+    
+    private void inicializaVariables(Integer dim,Boolean ocupada,Boolean activa){
+        asientos=(SimpleIntegerProperty) AppContext.getInstance().get("asientos");
+        dimension = new SimpleIntegerProperty(dim);
+        dimension = new SimpleIntegerProperty(dim);
+        this.ocupada = new SimpleBooleanProperty(ocupada);
+        this.seleccionada=new SimpleBooleanProperty();
+    }
+    
+    private void inicializaIcono(Integer dim,Boolean disponible,Boolean activa){
+        if(activa){
+            MaterialDesignIconView iconButaca = new MaterialDesignIconView(MaterialDesignIcon.READABILITY);
+            iconButaca.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
+            iconButaca.setSize(String.valueOf(dim*1.1));
+            iconButaca.setFill(Paint.valueOf("#000000"));
+            this.icon = iconButaca;
+            this.getStylesheets().add("cineuna/cards/StyleCards.css");
+            if(disponible)
+                icon.getStyleClass().add("campo-butaca"); 
+            else icon.getStyleClass().add("campo-butaca"); 
+                
+            this.setGraphic(icon);
+        
+        }
     }
     
     private void iniciarListenerButaca(){
