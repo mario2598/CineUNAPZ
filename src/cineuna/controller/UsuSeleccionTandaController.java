@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 
@@ -69,6 +70,8 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private static SimpleIntegerProperty asientos;
     private static SimpleIntegerProperty costoTotal;
     private Integer costoPorAsiento;
+    @FXML
+    private FlowPane fp;
 
     /**
      * Initializes the controller class.
@@ -109,6 +112,8 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                 });
             }
         });
+        fp.prefHeightProperty().bind(hbCont.heightProperty());
+        fp.prefWidthProperty().bind(hbCont.widthProperty());
         hbCont.prefWidthProperty().bind(root.widthProperty());
         hbCont.prefHeightProperty().bind(root.heightProperty());
         bpButacas.prefHeightProperty().bind(hbCont.heightProperty());
@@ -159,7 +164,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         apReserva.setPrefColumns(columnas);
         apReserva.setPrefRows(filas);
         apReserva.getChildren().clear();
-            //System.out.println("filas: "+filas+"\ncolumnas: "+columnas);
+            System.out.println("filas: "+filas+"\ncolumnas: "+columnas);
         }
         catch(NullPointerException e){
             System.out.println("Ocurrió un error al cargar filas y columnas");
