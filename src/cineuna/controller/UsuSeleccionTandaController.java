@@ -231,7 +231,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         Double anchura = bpButacas.getWidth()*0.82;
         Integer dimButaca = ((anchura.intValue())/columnas);
         Boolean activa,disponible;
-        ordenarListaButacas();
+        butacasDtoList.sort(ButacaDto.butFilCol);
         for(ButacaDto b:butacasDtoList){
             if(b.getButActiva().equalsIgnoreCase("A"))
                 activa=true;
@@ -249,8 +249,6 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     }
     
     private void ordenarListaButacas(){
-        //Collections.sort(butacasDtoList, ButacaDto.butFilCol);
-        //Collections.sort(butacasDtoList, ButacaDto.butCol);
         butacasDtoList.sort(ButacaDto.butFilCol);
     }
     
