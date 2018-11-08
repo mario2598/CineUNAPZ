@@ -15,7 +15,7 @@
    <children>
       <HBox fx:id="hbCont" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="531.0" prefWidth="98.0">
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="531.0" prefWidth="122.0">
                <children>
                   <Label fx:id="lblCine" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="161.0" text="CinePZ">
                      <VBox.margin>
@@ -54,7 +54,7 @@
                      <content>
                         <FlowPane fx:id="fp" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="471.0" prefWidth="978.0" style="-fx-background-color: black;">
                            <children>
-                              <TilePane fx:id="apReserva" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="471.0" prefWidth="927.0" style="-fx-background-color: black;" />
+                              <TilePane fx:id="apReserva" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="471.0" prefWidth="929.0" style="-fx-background-color: black;" />
                            </children>
                         </FlowPane>
                      </content>

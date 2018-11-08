@@ -100,4 +100,22 @@ public class ButacaService {
         }
     }
     
+    public Respuesta getListaButacasSala(Long salaID){
+        try{
+            HashMap<String, Object> parametros = new HashMap<>();
+            parametros.put("salaID", salaID);
+            Request request = new Request("ButacaController/butacas","/{salaID}",parametros);
+            request.get();
+            if(request.isError()){
+                return new Respuesta(false, request.getError(), "");
+            }
+            ArrayList<ButacaDto> salaList = (ArrayList<ButacaDto>) request.readEntity(new GenericType<ArrayList<ButacaDto>>() {
+            });
+            return new Respuesta(true, "", "", "ButacaList", salaList);
+        } catch (Exception ex) {
+            Logger.getLogger(ButacaService.class.getName()).log(Level.SEVERE, "Error cargando lista de butacas.", ex);
+            return new Respuesta(false, "Error cargando lista de butacas.", "getListaButacas Exception: " + ex.getMessage());
+        }
+    }
+    
 }

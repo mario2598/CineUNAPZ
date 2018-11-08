@@ -9,8 +9,10 @@ import cineuna.cards.CampoButaca;
 import cineuna.cards.EspacioParaButaca;
 import cineuna.model.ButacaDto;
 import cineuna.model.TandaDto;
+import cineuna.service.ButacaService;
 import cineuna.util.AppContext;
 import cineuna.util.LangUtils;
+import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
@@ -60,6 +62,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     @FXML
     private Label lblPantalla;
     private ArrayList<CampoButaca> butacaList;
+    private ArrayList<ButacaDto> butacasDtoList;
     Integer filas;
     Integer columnas;
     private Boolean butacasDistribuidas;
@@ -78,6 +81,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        butacasDtoList=new ArrayList<>();
         butacasDistribuidas=false;
         butacaList = new ArrayList<>();
         asientos=new SimpleIntegerProperty(0);
@@ -88,7 +92,6 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         cargarInfoTanda();
         cargarDistribucion();
         cargarButacas();
-        
     }    
 
     @Override
@@ -100,6 +103,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         cargarInfoTanda();
         cargarDistribucion();
         cargarButacas();
+        cargarListaButacasDtos();
     }
     
     private void redimensionado(){
@@ -206,6 +210,20 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
             return ""+letter;
         } else {
             return getLetraFila(quot-1) + letter;
+        }
+    }
+    
+    private void cargarListaButacasDtos(){
+        ButacaService bs= new ButacaService();
+        try{
+        Respuesta res= bs.getListaButacasSala(tanda.getSalaId().getSalaId());
+        if(res.getEstado()){
+            butacasDtoList = (ArrayList<ButacaDto>) res.getResultado("ButacaList");
+            System.out.println("butacas cargadas: "+butacasDtoList.size());
+        }
+        }
+        catch(Exception e){
+             System.out.println("ya valió");
         }
     }
 }
