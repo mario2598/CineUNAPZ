@@ -90,7 +90,7 @@ public class MovieDto {
     }
     
     public void crearImagenDesdeByte() throws FileNotFoundException, IOException{
-            String outPutFile = "src\\cineuna\\resources\\images\\"+movieNombre+".jpg";
+            String outPutFile = "src\\cineuna\\resources\\images\\"+movieNombre.getValue()+".jpg";
             File someFile = new File(outPutFile);
         try (FileOutputStream fos = new FileOutputStream(someFile)) {
             fos.write(movieUrlimg);
@@ -113,7 +113,8 @@ public class MovieDto {
     }
     
     public Image abrirImagen(){
-        return new Image("src\\cineuna\\resources\\images\\"+movieNombre+".jpg");
+        //System.out.println();
+        return new Image("cineuna/resources/images/"+this.movieNombre.getValue()+".jpg");
     }
     
     //Setters and Getters

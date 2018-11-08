@@ -64,7 +64,7 @@ public class MovieCard2 extends Card{
     
     private void initPoster(){
         //poster=new ImageView(new Image("cineuna/resources/images/Frozen.jpg"));
-        poster=new ImageView(movie.getMoviePortada().toString());
+        poster=new ImageView(movie.abrirImagen());
         //System.out.println(movie.getMoviePortada().toString());
         poster.setFitWidth(130);
         poster.setFitHeight(150);
