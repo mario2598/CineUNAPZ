@@ -118,22 +118,11 @@ public class ButacaDto{
         this.butActiva = butActiva;
     }
 
-    /*comparador para ordenamiento por filas*/
-    public static Comparator<ButacaDto> butFil = (ButacaDto b1, ButacaDto b2) -> {
-        Long fil1 = b1.getButFila();
-        Long fil2 = b2.getButFila();
-        
-        return (int) (fil1-fil2);
-        
-    };
-    
-    /*comparador para ordenamiento por filas*/
-    public static Comparator<ButacaDto> butCol = (ButacaDto b1, ButacaDto b2) -> {
-        Long fil1 = b1.getButColumna();
-        Long fil2 = b2.getButColumna();
-        
-        return (int) (fil1-fil2);
-        
+    /*comparador para ordenamiento por filas y luego columnas*/
+    public static Comparator<ButacaDto> butFilCol = (ButacaDto b1, ButacaDto b2) -> {
+        return Comparator.comparing((ButacaDto b)->b.getButFila())
+                .thenComparing(b->b.getButFila())
+                .compare(b1, b2);
     };
      
 }

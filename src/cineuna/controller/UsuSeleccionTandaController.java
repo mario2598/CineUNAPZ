@@ -249,9 +249,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     }
     
     private void ordenarListaButacas(){
-        
-        Collections.sort(butacasDtoList, ButacaDto.butFil);
-        Collections.sort(butacasDtoList, ButacaDto.butCol);
+        //Collections.sort(butacasDtoList, ButacaDto.butFilCol);
+        //Collections.sort(butacasDtoList, ButacaDto.butCol);
+        butacasDtoList.sort(ButacaDto.butFilCol);
     }
     
 }
