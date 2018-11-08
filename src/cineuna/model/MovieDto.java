@@ -6,13 +6,21 @@
 package cineuna.model;
 
 import cineuna.util.LocalDateAdapter;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -52,6 +60,7 @@ public class MovieDto {
     private List<TandaDto> tandaList = new ArrayList<>();
     @XmlTransient
     private List<ReviewDto> reviewList = new ArrayList<>();
+    private byte[] movieUrlimg;
      
     //Constructors     
     public MovieDto() {
@@ -60,6 +69,11 @@ public class MovieDto {
         movieUrlesp = new SimpleStringProperty();
         movieUrleng = new SimpleStringProperty();
         movieDate = new SimpleObjectProperty<>();
+        if(movieUrlimg!=null)
+        System.out.println("movieUrlimg"+movieUrlimg.toString());
+        else{
+            System.out.println("movieUrlimg: null");
+        }
     }
     
     //Methods
@@ -73,6 +87,33 @@ public class MovieDto {
         this.movieEstado = m.getMovieEstado();
         this.moviePortada = m.getMoviePortada();
         this.movieDuracion = m.getMovieDuracion();
+    }
+    
+    public void cargarImagenByte() throws FileNotFoundException, IOException{
+            String outPutFile = "src\\cineuna\\resources\\images\\"+movieNombre+".jpg";
+            File someFile = new File(outPutFile);
+        try (FileOutputStream fos = new FileOutputStream(someFile)) {
+            fos.write(movieUrlimg);
+            fos.flush();
+        }
+    }
+    
+    public void guardarImagenByte(String path) throws FileNotFoundException{
+        File file = new File(path);
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        try {
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum);
+            }
+        } catch (IOException ex) {
+        }
+        movieUrlimg = bos.toByteArray();
+    }
+    
+    public Image abrirImagen(){
+        return new Image("src\\cineuna\\resources\\images\\"+movieNombre+".jpg");
     }
     
     //Setters and Getters
