@@ -6,7 +6,7 @@
 package cineuna.controller;
 
 import cineuna.CineUNA;
-import cineuna.cards.SalaCard;
+import cineuna.cards.AdminSalaCard;
 import cineuna.model.SalaDto;
 import cineuna.service.SalaService;
 import cineuna.util.AppContext;
@@ -34,7 +34,7 @@ import javafx.stage.Stage;
 public class AdminSalasController extends Controller implements Initializable {
     //FXML Attributes
     @FXML
-    private JFXListView<SalaCard> listvSalas;
+    private JFXListView<AdminSalaCard> listvSalas;
     @FXML
     private StackPane salasHolderPane;
     @FXML
@@ -74,7 +74,6 @@ public class AdminSalasController extends Controller implements Initializable {
     
     //Methods
     private void cargarSalas(){
-        //Aqui mas adelante se deberan cargar las salas
         Respuesta resp = salaService.getListaSalas();
         if(resp.getEstado()){
             ArrayList<SalaDto> salaList = (ArrayList<SalaDto>) resp.getResultado("SalaList");
@@ -86,7 +85,7 @@ public class AdminSalasController extends Controller implements Initializable {
     
     private void generarSalasCard(){
         salasList.stream().forEach(sala -> {
-            SalaCard card = new SalaCard();
+            AdminSalaCard card = new AdminSalaCard();
             card.setSala(sala);
             card.initCard();
             listvSalas.getItems().add(card);

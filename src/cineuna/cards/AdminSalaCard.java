@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
  *
  * @author Chris
  */
-public class SalaCard extends Card{
+public class AdminSalaCard extends Card{
 
     //Attributes
     private SalaDto sala;

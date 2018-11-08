@@ -5,7 +5,7 @@
  */
 package cineuna.controller;
 
-import cineuna.cards.EspacioParaButaca;
+import cineuna.cards.AdminEspacioButaca;
 import cineuna.model.ButacaDto;
 import cineuna.model.SalaDto;
 import cineuna.service.SalaService;
@@ -55,7 +55,7 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
     private Integer columnas;
     private Integer filas;
     private Boolean butacasDistribuidas;
-    private ArrayList<EspacioParaButaca> butacaList;
+    private ArrayList<AdminEspacioButaca> butacaList;
 
     //Initializers
     /**
@@ -76,8 +76,13 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
         cmbBoxTipo.getSelectionModel().selectFirst();
         lblPantalla.widthProperty().addListener((observable, oldValue, newValue)->{
             if(!butacaList.isEmpty() && newValue!=null){
-                Double anchura = bpButacas.getWidth()*0.82;
-                Integer dimButaca = ((anchura.intValue())/columnas);
+                Double anchura = (bpButacas.getWidth()*0.82)/columnas;
+                Double altura = (bpButacas.getHeight()*0.65)/filas;
+                Integer dimButaca;
+                if(anchura > altura)
+                    dimButaca = altura.intValue();
+                else
+                    dimButaca = anchura.intValue();
                 butacaList.stream().forEach(butaca -> {
                     butaca.cambiarDimension(dimButaca);
                 });
@@ -115,13 +120,18 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
             tpButacas.setPrefRows(filas);
             tpButacas.getChildren().clear();
             butacaList.clear();
-            Double anchura = bpButacas.getWidth()*0.82;
-            Integer dimButaca = ((anchura.intValue())/columnas);
+            Double anchura = (bpButacas.getWidth()*0.82)/columnas;
+            Double altura = (bpButacas.getHeight()*0.65)/filas;
+            Integer dimButaca;
+            if(anchura > altura)
+                dimButaca = altura.intValue();
+            else
+                dimButaca = anchura.intValue();
 //            System.out.println("Dimension de la butaca: " + dimButaca);
             if(dimButaca>0){
                 for(int i = 0; i < this.filas; i++){
                     for (int j = 0; j < this.columnas; j++) {
-                        EspacioParaButaca espacioB = new EspacioParaButaca(dimButaca);
+                        AdminEspacioButaca espacioB = new AdminEspacioButaca(dimButaca);
                         ButacaDto butaca = new ButacaDto();
                         butaca.setButFila(new Long(i));
                         butaca.setButColumna(new Long(j));
@@ -180,7 +190,7 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
             newSala.setSalaFilas(new Long(this.spnrFilas.getValue()));
             newSala.setSalaEstado(this.toggleBtnHabilitada.isSelected() ? "A":"I");
             newSala.setSalaTipo(this.cmbBoxTipo.getValue());
-            this.butacaList.stream().map(EspacioParaButaca::getButaca).forEach(butaca -> {
+            this.butacaList.stream().map(AdminEspacioButaca::getButaca).forEach(butaca -> {
                 newSala.getButacaList().add(butaca);
             });
             newSala.setCineId(new Long(3));
