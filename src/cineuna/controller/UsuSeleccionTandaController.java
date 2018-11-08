@@ -16,6 +16,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
@@ -230,7 +231,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         Double anchura = bpButacas.getWidth()*0.82;
         Integer dimButaca = ((anchura.intValue())/columnas);
         Boolean activa,disponible;
-        
+        ordenarListaButacas();
         for(ButacaDto b:butacasDtoList){
             if(b.getButActiva().equalsIgnoreCase("A"))
                 activa=true;
@@ -245,6 +246,12 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
             butacaList.add(espacioB);
             apReserva.getChildren().add(espacioB);
         }
+    }
+    
+    private void ordenarListaButacas(){
+        
+        Collections.sort(butacasDtoList, ButacaDto.butFil);
+        Collections.sort(butacasDtoList, ButacaDto.butCol);
     }
     
 }

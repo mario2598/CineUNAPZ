@@ -88,7 +88,9 @@ public class CampoButaca extends Label{
     }
     
     private void iniciarListenerButaca(){
+        //if(butaca.getButActiva().equalsIgnoreCase("A")){
         seleccionada.addListener(e->{
+            if(butaca.getButActiva().equalsIgnoreCase("A")){
             icon.getStyleClass().clear();
             icon.setSize(String.valueOf(dimension.get()*1.1));
             cambiarDimension(dimension.get());//revisar esto
@@ -100,7 +102,9 @@ public class CampoButaca extends Label{
                icon.getStyleClass().add("campo-butaca");
                asientos.set(asientos.get()-1);
             }
+            }
         });
+        //}
         
         disponible.addListener(l->{
             if(disponible.get()){
@@ -149,6 +153,7 @@ public class CampoButaca extends Label{
     public void setDimension(IntegerProperty dimension) {
         this.dimension = dimension;
     }
+
     
     
 }
