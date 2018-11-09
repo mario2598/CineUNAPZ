@@ -29,12 +29,12 @@
                   <Label fx:id="lblAsientos" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="161.0" text="6" />
                   <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="161.0" text="Total:" />
                   <Label fx:id="lblTotal" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="161.0" text="6" />
-                  <JFXButton fx:id="btnReservar" maxHeight="1.7976931348623157E308" styleClass="jfx-button-green" text="Reservar">
+                  <JFXButton fx:id="btnReservar" maxHeight="1.7976931348623157E308" onAction="#reservar" styleClass="jfx-button-green" text="Reservar">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="btnCancelar" maxHeight="1.7976931348623157E308" text="Cancelar">
+                  <JFXButton fx:id="btnCancelar" maxHeight="1.7976931348623157E308" onAction="#cancelar" text="Cancelar">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>

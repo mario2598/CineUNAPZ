@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -73,6 +74,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private Integer costoPorAsiento;
     @FXML
     private FlowPane fp;
+    private static ArrayList<ButacaDto> butacasSeleccionadas;
 
     /**
      * Initializes the controller class.
@@ -93,7 +95,8 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
 
     @Override
     public void initialize() {
-        
+        butacasSeleccionadas=new ArrayList<>();
+        AppContext.getInstance().set("butacasSeleccionadas",butacasSeleccionadas);
         asientos.set(0);
         costoTotal.set(0);
         cargarIdioma();
@@ -250,6 +253,34 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     
     private void ordenarListaButacas(){
         butacasDtoList.sort(ButacaDto.butFilCol);
+    }
+    
+    private void guardarButacasSeleccionadas(){
+        ButacaService bs = new ButacaService();
+        
+        butacasSeleccionadas.stream().forEach(e->{
+            Respuesta res = new Respuesta();
+            e.setButEstado("O");
+            res = bs.guardarButaca(e);
+            if(res.getEstado()){
+                System.out.println("se guardó");
+            }
+            else{
+                e.setButEstado("D");
+                System.out.println("No se guardó");
+            }
+        });
+    }
+
+    @FXML
+    private void reservar(ActionEvent event) {
+        guardarButacasSeleccionadas();
+        cargarDistribucion();
+        cargarListaButacasDtos();
+    }
+
+    @FXML
+    private void cancelar(ActionEvent event) {
     }
     
 }

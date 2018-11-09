@@ -6,9 +6,12 @@
 package cineuna.cards;
 
 import cineuna.model.ButacaDto;
+import cineuna.service.ButacaService;
 import cineuna.util.AppContext;
+import cineuna.util.Respuesta;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import java.util.ArrayList;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -32,6 +35,7 @@ public class CampoButaca extends Label{
     private IntegerProperty dimension;
     private SimpleBooleanProperty seleccionada;
     private SimpleIntegerProperty asientos;
+    private ArrayList<ButacaDto> butacasSeleccionadas;
 
     public CampoButaca(Integer dim,Boolean disponible,Boolean activa) {
         inicializaVariables(dim,disponible,activa);
@@ -58,6 +62,7 @@ public class CampoButaca extends Label{
     }
     
     private void inicializaVariables(Integer dim,Boolean disponible,Boolean activa){
+        butacasSeleccionadas = (ArrayList<ButacaDto>) AppContext.getInstance().get("butacasSeleccionadas");
         asientos=(SimpleIntegerProperty) AppContext.getInstance().get("asientos");
         dimension = new SimpleIntegerProperty(dim);
         this.disponible = new SimpleBooleanProperty(true);
@@ -97,10 +102,14 @@ public class CampoButaca extends Label{
             if(seleccionada.get()){
                icon.getStyleClass().add("campo-butaca-sel");
                asientos.set(asientos.get()+1);
+               butacasSeleccionadas.add(butaca);
+               System.out.println("Butaca añadida:"+butacasSeleccionadas.size());
             }
             else{
                icon.getStyleClass().add("campo-butaca");
                asientos.set(asientos.get()-1);
+               butacasSeleccionadas.remove(butaca);
+               System.out.println("Butaca eliminada:"+butacasSeleccionadas.size());
             }
             }
         });
@@ -153,7 +162,5 @@ public class CampoButaca extends Label{
     public void setDimension(IntegerProperty dimension) {
         this.dimension = dimension;
     }
-
-    
-    
+ 
 }
