@@ -48,11 +48,19 @@ public class TandaService {
         }
     }
     
-    public Respuesta eliminarSala(TandaDto dto){
+    /*public Respuesta eliminarSala(TandaDto dto){
         try{
             HashMap<String, Object> parametros = new HashMap<>();
             parametros.put("id", dto.getTandaId());
             Request request = new Request("tandaController/eliminarTanda", "/{salaID}", parametros);
+            }
+            Logger.getLogger(TandaService.class.getName()).log(Level.SEVERE, "Se ha producido un error eliminando la tanda.", ex);
+            return new Respuesta(false, "Se ha producido un error eliminando la tanda.", ex.getMessage());
+        }
+    }
+    */
+
+            
     public Respuesta getTandasS(Long id){
         try {
             Map<String, Object> parametros = new HashMap<>();
@@ -89,10 +97,6 @@ public class TandaService {
             return new Respuesta(false, "Se ha producido un error eliminando la sala.", ex.getMessage());
         }
     }
-            }
-            Logger.getLogger(TandaService.class.getName()).log(Level.SEVERE, "Se ha producido un error eliminando la tanda.", ex);
-            return new Respuesta(false, "Se ha producido un error eliminando la tanda.", ex.getMessage());
-        }
-    }
+            
     
 }

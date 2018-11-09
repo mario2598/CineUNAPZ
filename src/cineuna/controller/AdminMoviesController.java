@@ -6,6 +6,7 @@
 package cineuna.controller;
 
 import cineuna.cards.AdminMovieCard;
+import cineuna.cards.MovieCard2;
 import cineuna.model.MovieDto;
 import cineuna.service.MovieService;
 import cineuna.util.AppContext;
@@ -83,11 +84,11 @@ public class AdminMoviesController extends Controller implements Initializable {
         //cargarProximasPeliculas();
         cargarCartelera();
         cargarProximas();
-        tilePaneEnCartelera.getChildren().clear();
-        tilePaneProximanete.getChildren().clear();
-        cargarPeliculasEnCartelera();
-        cargarProximasPeliculas();
-        tabPaneMovies.getSelectionModel().selectFirst();
+        //tilePaneEnCartelera.getChildren().clear();
+        //tilePaneProximanete.getChildren().clear();
+        //cargarPeliculasEnCartelera();
+        //cargarProximasPeliculas();
+        //tabPaneMovies.getSelectionModel().selectFirst();
     }
     
     //Methods

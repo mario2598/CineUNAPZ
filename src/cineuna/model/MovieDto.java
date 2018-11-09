@@ -14,10 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -62,9 +59,9 @@ public class MovieDto {
     @XmlTransient
     private ArrayList<TandaDto> tandaList = new ArrayList<>();
     @XmlTransient
-    private List<ReviewDto> reviewList = new ArrayList<>();
-    private byte[] movieUrlimg;
     private ArrayList<ReviewDto> reviewList = new ArrayList<>();
+    private byte[] movieUrlimg;
+    
      
     //Constructors     
     public MovieDto() {

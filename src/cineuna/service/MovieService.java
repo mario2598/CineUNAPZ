@@ -46,7 +46,7 @@ public class MovieService {
         }
     }
     
-        public Respuesta getReport(LocalDate f1,LocalDate f2){
+    public Respuesta getReport(LocalDate f1,LocalDate f2){
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("date1", f1);
@@ -85,7 +85,6 @@ public class MovieService {
             return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
         }
     }
-            }
     
     public Respuesta guardarMovie(MovieDto dto){
         try{
