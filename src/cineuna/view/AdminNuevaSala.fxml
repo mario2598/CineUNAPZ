@@ -84,7 +84,7 @@
                <content>
                   <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" styleClass="background-pane">
                      <children>
-                        <TilePane fx:id="tpButacas" alignment="CENTER" style="-fx-background-color: #1e1438;" />
+                        <TilePane fx:id="tpButacas" alignment="CENTER" />
                      </children>
                   </FlowPane>
                </content>

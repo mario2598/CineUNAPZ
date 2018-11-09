@@ -57,6 +57,32 @@ and open the template in the editor.
     -jfx-rippler-fill: -fx-text-ligh-color;
 }
 
+.admin-menu-option{
+    -fx-background-color: derive(-fx-pallet-color2, 75%);
+    -fx-text-fill: -fx-pallet-color1;
+    -fx-font-size: 15px;
+    -jfx-button-type: RAISED;
+    -fx-graphic-text-gap: 10px;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+}
+
+.admin-menu-option .glyph-icon {
+    -fx-fill: -fx-pallet-color1;
+}
+
+.admin-menu-option:hover{
+    -fx-text-fill: -fx-text-pallet-color;
+}
+
+.admin-menu-option:hover .glyph-icon{
+    -fx-fill: -fx-text-pallet-color;
+}
+
+.admin-menu-option .jfx-rippler {
+    -jfx-rippler-fill: -fx-pallet-color2;
+}
+
 /*Text Fill*/
 .jfx-text-field {
     -fx-text-fill: -fx-text-ligh-color;
