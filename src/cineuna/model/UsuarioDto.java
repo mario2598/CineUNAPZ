@@ -52,6 +52,7 @@ public class UsuarioDto {
    // List<CineDto> cineList;
     public Long cineId;
     private ArrayList<ButacaDto> butacasSeleccionadas;
+    private Boolean existe;
     
     
     //Constructors
@@ -212,9 +213,16 @@ public class UsuarioDto {
     }
     
     public Boolean isSeleccionada(ButacaDto butaca){
-        if(butacasSeleccionadas.size()>0)
-            return butacasSeleccionadas.contains(butaca);
-        else return false;
+        existe=false;
+        if(butacasSeleccionadas.size()>0){
+            System.out.println("buscando en butacas seleccionadas: "+butacasSeleccionadas.size());
+            butacasSeleccionadas.stream().forEach(b->{
+                if(butaca.getButId().equals(b.getButId()))
+                    existe = true;
+            });
+        }
+        System.out.println("existe= "+existe.toString());
+        return existe;
     }
     
     public void pushSeleccionada(ButacaDto butaca){

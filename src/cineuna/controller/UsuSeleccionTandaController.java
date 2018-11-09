@@ -18,6 +18,9 @@ import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,6 +79,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private FlowPane fp;
     //private static ArrayList<ButacaDto> butacasSeleccionadas;
     private UsuarioDto usuario;
+    private Hilo hilo;
 
     /**
      * Initializes the controller class.
@@ -102,6 +106,42 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         cargarInfoTanda();
         cargarDistribucion();
         cargarListaButacas();
+        hilo=new Hilo();
+        //hilo.detener();
+        
+        hilo.start();
+    }
+    
+    public class Hilo extends Thread{
+        private Boolean activado;
+        
+        public Hilo(){
+            this.activado=true;
+        }
+        
+        public void detener(){
+            this.activado=false;
+        }
+        
+        @Override
+        public void run() {
+            while(activado){
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        cargarDistribucion();
+                        cargarListaButacas();
+                    }
+                });
+                
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(UsuSeleccionTandaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
     }
     
     private void redimensionado(){
@@ -187,7 +227,6 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         catch(Exception e){
              //System.out.println("ya valió");
         }
-        
         cargarCamposButacas();
     }
     
@@ -218,6 +257,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                     if(usuario.isSeleccionada(b)){
                         propia = true;System.out.println("Seleccionada por usuario");//era propia
                     }
+                    else System.out.println("Seleccionada por otro");//era propia
                 }
             }
             
@@ -227,21 +267,24 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
             apReserva.getChildren().add(espacioB);
         }
     }
+    
+    private void reiniciarDatos(){
+        costoTotal.set(0);
+        asientos.set(0);
+        cargarDistribucion();
+        cargarListaButacas();
+    }
   
     @FXML
     private void reservar(ActionEvent event) {
         usuario.guardaButacasSeleccionadas();
-        cargarDistribucion();
-        cargarListaButacas();
+        reiniciarDatos();
     }
 
     @FXML
     private void cancelar(ActionEvent event) {
         usuario.desSeleccionaButacas();
-        costoTotal.set(0);
-        asientos.set(0);
-        cargarDistribucion();
-        cargarListaButacas();
+        reiniciarDatos();
     }
     
 }
