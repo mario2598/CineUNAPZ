@@ -59,7 +59,7 @@ public class CampoButaca extends Label{
         
         
         inicializaIcono(dim,disponible,activa,seleccionada,propia);
-        seleccionaEstadoInicial(seleccionada,propia);
+        //seleccionaEstadoInicial(seleccionada,propia);
         iniciarListenerButaca(propia);
     }
     
@@ -148,7 +148,7 @@ public class CampoButaca extends Label{
     
     private void seleccionaEstadoInicial(Boolean seleccionada,Boolean propia){
         if(seleccionada&&propia){
-            seleccionaButaca();
+            //seleccionaButaca();
         }
     }
     
