@@ -16,7 +16,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -154,7 +153,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
             });
         }
         catch(NullPointerException e){
-            System.out.println("Ninguna tanda seleccionada");
+            //System.out.println("Ninguna tanda seleccionada");
         }
         
         //this.lblCine.setText(tanda.getC);
@@ -167,16 +166,15 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         apReserva.setPrefColumns(columnas);
         apReserva.setPrefRows(filas);
         apReserva.getChildren().clear();
-            System.out.println("filas: "+filas+"\ncolumnas: "+columnas);
+            //System.out.println("filas: "+filas+"\ncolumnas: "+columnas);
         }
         catch(NullPointerException e){
-            System.out.println("Ocurrió un error al cargar filas y columnas");
+            //System.out.println("Ocurrió un error al cargar filas y columnas");
         }
     }
     
     private void cargarButacas(){
-        butacaList.clear();
-        
+            butacaList.clear();
             Double anchura = bpButacas.getWidth()*0.82;
             Integer dimButaca = ((anchura.intValue())/columnas);
 //            System.out.println("Dimension de la butaca: " + dimButaca);
@@ -219,11 +217,11 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         Respuesta res= bs.getListaButacasSala(tanda.getSalaId().getSalaId());
         if(res.getEstado()){
             butacasDtoList = (ArrayList<ButacaDto>) res.getResultado("ButacaList");
-            System.out.println("butacas cargadas: "+butacasDtoList.size());
+            //System.out.println("butacas cargadas: "+butacasDtoList.size());
         }
         }
         catch(Exception e){
-             System.out.println("ya valió");
+             //System.out.println("ya valió");
         }
         
         cargaButacas();
@@ -258,16 +256,17 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private void guardarButacasSeleccionadas(){
         ButacaService bs = new ButacaService();
         
+        //System.out.println("guardar butacas:"+butacasSeleccionadas.size());
         butacasSeleccionadas.stream().forEach(e->{
             Respuesta res = new Respuesta();
             e.setButEstado("O");
             res = bs.guardarButaca(e);
             if(res.getEstado()){
-                System.out.println("se guardó");
+                //System.out.println("se guardó");
             }
             else{
                 e.setButEstado("D");
-                System.out.println("No se guardó");
+                //System.out.println("No se guardó");
             }
         });
     }
@@ -275,12 +274,16 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     @FXML
     private void reservar(ActionEvent event) {
         guardarButacasSeleccionadas();
+        butacasSeleccionadas.clear();
         cargarDistribucion();
         cargarListaButacasDtos();
     }
 
     @FXML
     private void cancelar(ActionEvent event) {
+        butacasSeleccionadas.clear();
+        cargarDistribucion();
+        cargarListaButacasDtos();
     }
     
 }
