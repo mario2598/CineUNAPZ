@@ -42,7 +42,7 @@
                <children>
                   <HBox fx:id="hbPoster" alignment="CENTER" prefHeight="413.0" prefWidth="300.0">
                      <children>
-                        <ImageView fx:id="imgPoster" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#buscarImagen" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgPoster" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children></HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.rowIndex="1">
                      <children>
@@ -92,7 +92,7 @@
                      <children>
                         <VBox alignment="CENTER_LEFT" GridPane.rowIndex="1">
                            <children>
-                              <Label focusTraversable="false" text="Lenguajes:">
+                              <Label fx:id="lblLenguajes" focusTraversable="false" text="Lenguajes:">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -107,7 +107,7 @@
                         </VBox>
                         <VBox alignment="CENTER_LEFT" GridPane.rowIndex="2">
                            <children>
-                              <Label focusTraversable="false" text="Estreno:">
+                              <Label fx:id="lblEstreno" focusTraversable="false" text="Estreno:">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -122,7 +122,7 @@
                         </VBox>
                         <VBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <children>
-                              <Label focusTraversable="false" text="Estado:">
+                              <Label fx:id="lblEstado" focusTraversable="false" text="Estado:">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -137,7 +137,7 @@
                         </VBox>
                         <VBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <children>
-                              <Label focusTraversable="false" text="Tipo:">
+                              <Label fx:id="lblTipo" focusTraversable="false" text="Tipo:">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -193,7 +193,7 @@
                         </VBox>
                         <VBox alignment="CENTER_LEFT" GridPane.rowIndex="3">
                            <children>
-                              <Label focusTraversable="false" text="Duracion:">
+                              <Label fx:id="lblDuracion" focusTraversable="false" text="Duracion:">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -215,7 +215,7 @@
                                           <Insets left="10.0" />
                                        </padding>
                                     </JFXTextField>
-                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="200.0" text="(segundos)">
+                                    <Label fx:id="lblSegundos" alignment="CENTER" prefHeight="27.0" prefWidth="200.0" text="(segundos)">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -228,7 +228,7 @@
                   </GridPane>
                   <JFXTabPane GridPane.rowIndex="1">
                      <tabs>
-                        <Tab text="Información en español">
+                        <Tab fx:id="tabInfoEsp" text="Información en español">
                            <content>
                               <GridPane>
                                  <columnConstraints>
@@ -361,7 +361,7 @@
                               </GridPane>
                            </content>
                         </Tab>
-                        <Tab text="Información en inglés">
+                        <Tab fx:id="tabInfoEng" text="Información en inglés">
                            <content>
                               <GridPane>
                                  <columnConstraints>

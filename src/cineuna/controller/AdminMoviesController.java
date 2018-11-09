@@ -11,6 +11,7 @@ import cineuna.model.MovieDto;
 import cineuna.service.MovieService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
@@ -84,6 +85,7 @@ public class AdminMoviesController extends Controller implements Initializable {
         //cargarProximasPeliculas();
         cargarCartelera();
         cargarProximas();
+        cargarIdioma();
         //tilePaneEnCartelera.getChildren().clear();
         //tilePaneProximanete.getChildren().clear();
         //cargarPeliculasEnCartelera();
@@ -224,6 +226,11 @@ public class AdminMoviesController extends Controller implements Initializable {
     @FXML
     private void btn3Action(ActionEvent event) {
         //TODO
+    }
+    
+    private void cargarIdioma(){
+        LangUtils.getInstance().loadTabLang(tabEnCartelera, "lblCartelera");
+        LangUtils.getInstance().loadTabLang(tabProximamente, "lblProximas");
     }
     
 }

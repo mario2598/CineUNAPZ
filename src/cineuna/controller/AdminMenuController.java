@@ -5,7 +5,10 @@
  */
 package cineuna.controller;
 
+import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import cineuna.util.LangUtils;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,6 +25,18 @@ public class AdminMenuController extends Controller implements Initializable {
 
     @FXML
     private TilePane tilepAdminMenu;
+    @FXML
+    private JFXButton btnCines;
+    @FXML
+    private JFXButton btnSalas;
+    @FXML
+    private JFXButton btnPeliculas;
+    @FXML
+    private JFXButton btnUsuarios;
+    @FXML
+    private JFXButton btnReportes;
+    @FXML
+    private JFXButton btnConfig;
 
     /**
      * Initializes the controller class.
@@ -39,6 +54,7 @@ public class AdminMenuController extends Controller implements Initializable {
     @Override
     public void initialize() {
         FlowController.getInstance().btnVolverVisible(false);
+        cargarIdioma();
     }
 
     @FXML
@@ -74,6 +90,18 @@ public class AdminMenuController extends Controller implements Initializable {
     @FXML
     private void btnConfigAction(ActionEvent event) {
         //TODO
+    }
+    
+    private void cargarIdioma(){
+        if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
+            LangUtils.getInstance().setLang("es");
+        
+        LangUtils.getInstance().loadButtonLang(btnCines, "btnCines");
+        LangUtils.getInstance().loadButtonLang(btnConfig, "btnConfig");
+        LangUtils.getInstance().loadButtonLang(btnPeliculas, "btnPeliculas");
+        LangUtils.getInstance().loadButtonLang(btnReportes, "btnReportes");
+        LangUtils.getInstance().loadButtonLang(btnSalas, "btnSalas");
+        LangUtils.getInstance().loadButtonLang(btnUsuarios, "btnUsuarios");
     }
     
 }

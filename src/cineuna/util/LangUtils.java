@@ -13,6 +13,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 
 /**
  *
@@ -116,6 +117,17 @@ public class LangUtils {
      * @param tag etiqueta del property a la cual quiere acceder
      */
     public void loadCheckBoxLang(JFXCheckBox lbl,String tag){
+        locale = new Locale(lang);
+        propFile = ResourceBundle.getBundle(localPath,locale);
+        lbl.setText(propFile.getString(tag));
+    }
+    
+    /**
+     * recibe un CheckBox y le aplica el texto de un tag
+     * @param lbl label sobre el cual cargar texto
+     * @param tag etiqueta del property a la cual quiere acceder
+     */
+    public void loadTabLang(Tab lbl,String tag){
         locale = new Locale(lang);
         propFile = ResourceBundle.getBundle(localPath,locale);
         lbl.setText(propFile.getString(tag));

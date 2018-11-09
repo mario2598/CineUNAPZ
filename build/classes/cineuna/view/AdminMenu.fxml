@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="600.0" prefWidth="1100.0" styleClass="background-pane" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminMenuController">
+<StackPane prefHeight="600.0" prefWidth="1100.0" styleClass="background-pane" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminMenuController">
    <children>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" StackPane.alignment="CENTER">
          <StackPane.margin>
@@ -17,7 +17,7 @@
          <children>
             <TilePane fx:id="tilepAdminMenu" alignment="CENTER" hgap="40.0" prefColumns="3" prefRows="3" vgap="40.0">
                <children>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnCinesAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Mantenimiento de Cines" textAlignment="CENTER" wrapText="true">
+                  <JFXButton fx:id="btnCines" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnCinesAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Mantenimiento de Cines" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <FontAwesomeIconView glyphName="TICKET" size="80" />
                      </graphic>
@@ -25,7 +25,7 @@
                         <Font size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnSalasAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Mantenimiento de Salas" textAlignment="CENTER" wrapText="true">
+                  <JFXButton fx:id="btnSalas" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnSalasAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Mantenimiento de Salas" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <FontAwesomeIconView glyphName="TICKET" size="80" />
                      </graphic>
@@ -33,7 +33,7 @@
                         <Font size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnMoviesAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Mantenimiento de Películas" textAlignment="CENTER" wrapText="true">
+                  <JFXButton fx:id="btnPeliculas" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnMoviesAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Mantenimiento de Películas" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <FontAwesomeIconView glyphName="TICKET" size="80" />
                      </graphic>
@@ -41,7 +41,7 @@
                         <Font size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnUsersAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Mantenimiento de Usuarios" textAlignment="CENTER" wrapText="true">
+                  <JFXButton fx:id="btnUsuarios" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnUsersAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Mantenimiento de Usuarios" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <FontAwesomeIconView glyphName="TICKET" size="80" />
                      </graphic>
@@ -49,7 +49,7 @@
                         <Font size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnReportsAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Reportes y Estadísticas" textAlignment="CENTER" wrapText="true">
+                  <JFXButton fx:id="btnReportes" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnReportsAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Reportes y Estadísticas" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -57,7 +57,7 @@
                         <FontAwesomeIconView glyphName="TICKET" size="80" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnConfigAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Configuraciones de la app" textAlignment="CENTER" wrapText="true">
+                  <JFXButton fx:id="btnConfig" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnConfigAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Configuraciones de la app" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <FontAwesomeIconView glyphName="TICKET" size="80" />
                      </graphic>

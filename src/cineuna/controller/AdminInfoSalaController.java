@@ -13,6 +13,7 @@ import cineuna.model.TandaDto;
 import cineuna.service.TandaService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
@@ -59,6 +60,16 @@ public class AdminInfoSalaController extends Controller implements Initializable
     private final ReadOnlyDoubleProperty widthProp = FlowController.getInstance().getStage().widthProperty();
     private SalaDto sala;
     private AdminMovieCard card;
+    @FXML
+    private Label lblDistribucion;
+    @FXML
+    private JFXButton lblVer;
+    @FXML
+    private JFXButton btnEliminar;
+    @FXML
+    private JFXButton btnEditar;
+    @FXML
+    private Label lblTandas;
     
     //Initializers
     /**
@@ -104,6 +115,7 @@ public class AdminInfoSalaController extends Controller implements Initializable
         //this.txtPrueba.setText("Mostrando informacion de la sala: " + sala.getSalaNombre());
         mostrarInfoSala();
         cargarTandas();
+        cargarIdioma();
     }
     
     //Methods
@@ -185,5 +197,17 @@ public class AdminInfoSalaController extends Controller implements Initializable
         //TODO
     }
     
+    private void cargarIdioma(){
+        LangUtils.getInstance().loadLabelLang(lblDistribucion, "lblDistribucion");
+        LangUtils.getInstance().loadButtonLang(lblVer, "lblVer");
+        LangUtils.getInstance().loadLabelLang(lblTandas, "lblTandas");
+        LangUtils.getInstance().loadButtonLang(btnEliminar, "btnEliminar");
+        LangUtils.getInstance().loadButtonLang(btnEditar, "btnEditar");
+        LangUtils.getInstance().loadButtonLang(btnGuardar, "btnGuardar");
+        LangUtils.getInstance().loadButtonLang(btnEliminarTanda, "btnEliminarTanda");
+        LangUtils.getInstance().loadButtonLang(btnEditarTanda, "btnEditarTanda");
+        
+    }
+        
     
 }

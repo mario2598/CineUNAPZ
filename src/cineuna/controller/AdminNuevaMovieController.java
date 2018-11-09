@@ -9,6 +9,7 @@ import cineuna.model.MovieDto;
 import cineuna.service.MovieService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -23,6 +24,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -61,6 +64,22 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     private final MovieService movieService = new MovieService();
     private MovieDto movie;
     private Boolean editando;
+    @FXML
+    private Label lblLenguajes;
+    @FXML
+    private Label lblEstreno;
+    @FXML
+    private Label lblEstado;
+    @FXML
+    private Label lblTipo;
+    @FXML
+    private Label lblDuracion;
+    @FXML
+    private Label lblSegundos;
+    @FXML
+    private Tab tabInfoEsp;
+    @FXML
+    private Tab tabInfoEng;
     
     //Initializers
     /**
@@ -86,7 +105,10 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         });
         //Info Listeners
         cmboBoxTipo.getItems().addAll("2D", "3D");
+        if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
         cmboBoxEstado.getItems().addAll("Próximamente", "En Cartelera", "Inactiva");
+        else
+            cmboBoxEstado.getItems().addAll("Coming Soon", "Available", "Inactive");
         cmboBoxTipo.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(movie!=null){
                 movie.setMovieTipo(newValue);
@@ -104,6 +126,15 @@ public class AdminNuevaMovieController extends Controller implements Initializab
                     case "Inactiva":
                         movie.setMovieEstado("I");
                         break;
+                    case "Coming Soon":
+                        movie.setMovieEstado("P");
+                        break;
+                    case "Available":
+                        movie.setMovieEstado("C");
+                        break;
+                    case "Inactive":
+                        movie.setMovieEstado("I");
+                        break;    
                 }
             }
         });
@@ -131,6 +162,7 @@ public class AdminNuevaMovieController extends Controller implements Initializab
             cmboBoxEstado.setValue("Próximamente");
             cmboBoxTipo.setValue("2D");
         }
+        cargarIdioma();
     }
 
     private void imgPosterAction(MouseEvent event) {
@@ -220,7 +252,6 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         }
     }
 
-    @FXML
     private void buscarImagen(MouseEvent event) throws FileNotFoundException {
         FileChooser fc=new FileChooser();
         File sel = fc.showOpenDialog(null);
@@ -231,6 +262,21 @@ public class AdminNuevaMovieController extends Controller implements Initializab
             System.out.println("imagen obtenida desde windows vacía");
         }
         //FileNameExtensionFilter filter;
+    }
+    
+    private void cargarIdioma(){
+        LangUtils.getInstance().loadLabelLang(lblLenguajes, "lblLenguajes");
+        LangUtils.getInstance().loadLabelLang(lblEstreno, "lblEstreno");
+        LangUtils.getInstance().loadLabelLang(lblEstado, "lblEstado");
+        LangUtils.getInstance().loadLabelLang(lblTipo, "lblTipo");
+        LangUtils.getInstance().loadLabelLang(lblDuracion, "lblDuracion");
+        LangUtils.getInstance().loadLabelLang(lblSegundos, "lblSegundos");
+        LangUtils.getInstance().loadCheckBoxLang(chkBoxEsp1, "chkBoxEsp1");
+        LangUtils.getInstance().loadCheckBoxLang(chkBoxEng1, "chkBoxEng1");
+        LangUtils.getInstance().loadTabLang(tabInfoEsp, "tabInfoEsp");
+        LangUtils.getInstance().loadTabLang(tabInfoEng, "tabInfoEng");
+        LangUtils.getInstance().loadButtonLang(btnGuardar, "btnGuardar");
+        LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
     }
     
 }
