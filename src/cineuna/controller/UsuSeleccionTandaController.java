@@ -74,7 +74,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private Integer costoPorAsiento;
     @FXML
     private FlowPane fp;
-    private static ArrayList<ButacaDto> butacasSeleccionadas;
+    //private static ArrayList<ButacaDto> butacasSeleccionadas;
     private UsuarioDto usuario;
 
     /**
@@ -94,8 +94,8 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     @Override
     public void initialize() {
         this.usuario = AppContext.getInstance().getUsuario();
-        butacasSeleccionadas=new ArrayList<>();
-        AppContext.getInstance().set("butacasSeleccionadas",butacasSeleccionadas);
+        //butacasSeleccionadas=new ArrayList<>();
+        //AppContext.getInstance().set("butacasSeleccionadas",butacasSeleccionadas);
         asientos.set(0);
         costoTotal.set(0);
         cargarIdioma();
@@ -234,7 +234,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
      * carga las butacas y su estado (usada cada vez que refresca)
      */
     private void cargaButacas(){
-        butacasSeleccionadas.clear();//ver si sirve
+        //butacasSeleccionadas.clear();//ver si sirve
         butacaList.clear();
         Double anchura = bpButacas.getWidth()*0.82;
         Integer dimButaca = ((anchura.intValue())/columnas);
@@ -266,50 +266,16 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
             apReserva.getChildren().add(espacioB);
         }
     }
-    
-    private void ordenarListaButacas(){
-        butacasDtoList.sort(ButacaDto.butFilCol);
-    }
-    
-    private void guardarButacasSeleccionadas(){
-        ButacaService bs = new ButacaService();
-        
-        butacasSeleccionadas.stream().forEach(e->{
-            Respuesta res = new Respuesta();
-            e.setButEstado("O");
-            res = bs.guardarButaca(e);
-            if(!res.getEstado())
-               e.setButEstado("D");
-        });
-        butacasSeleccionadas.clear();
-    }
-    
-    private void cancelarButacasSeleccionadas(){
-        ButacaService bs = new ButacaService();
-        
-        butacasSeleccionadas.stream().forEach(e->{
-            Respuesta res = new Respuesta();
-            e.setButEstado("D");
-            res = bs.guardarButaca(e);
-            if(!res.getEstado())
-               e.setButEstado("S");
-        });
-        butacasSeleccionadas.clear();
-        costoTotal.set(0);
-        asientos.set(0);
-    }
-
+  
     @FXML
     private void reservar(ActionEvent event) {
-        //guardarButacasSeleccionadas();
-        usuario.getButacasSeleccionadas();
+        usuario.guardaButacasSeleccionadas();
         cargarDistribucion();
         cargarListaButacasDtos();
     }
 
     @FXML
     private void cancelar(ActionEvent event) {
-        //cancelarButacasSeleccionadas();
         usuario.desSeleccionaButacas();
         costoTotal.set(0);
         asientos.set(0);

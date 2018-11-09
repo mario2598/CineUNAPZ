@@ -133,7 +133,7 @@ public class CampoButaca extends Label{
         icon.getStyleClass().add("campo-butaca-sel");
         asientos.set(asientos.get()+1);
         butaca.setButEstado("S");
-        butacasSeleccionadas.add(butaca);
+        //butacasSeleccionadas.add(butaca);
         // System.out.println("Butaca añadida:"+butacasSeleccionadas.size());
     }
     
@@ -142,7 +142,7 @@ public class CampoButaca extends Label{
         icon.getStyleClass().add("campo-butaca");
         asientos.set(asientos.get()-1);
         butaca.setButEstado("D");
-        butacasSeleccionadas.remove(butaca);
+        //butacasSeleccionadas.remove(butaca);
         //System.out.println("Butaca eliminada:"+butacasSeleccionadas.size());
     }
     

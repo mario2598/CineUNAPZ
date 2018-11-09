@@ -228,34 +228,38 @@ public class UsuarioDto {
     }
     
     public void desSeleccionaButacas(){
+        System.out.println("Desseleciconar "+butacasSeleccionadas.size());
         ButacaService bs = new ButacaService();
         butacasSeleccionadas.stream().forEach(b->{
             try{
-            Respuesta res = new Respuesta();
-            b.setButEstado("D");
-            res = bs.guardarButaca(b);
-            popSeleccionada(b);
+                Respuesta res = new Respuesta();
+                b.setButEstado("D");
+                res = bs.guardarButaca(b);
+                if(!res.getEstado())
+                   System.out.println("fallo peristir");b.setButEstado("S");  
             }
             catch(Exception e){
-                System.out.println("problema desseleccionado butacas del usuario actual");
+                System.out.println("problema desseleccionado butacas del usuario actual"+e.getMessage());
             }
         });
+        butacasSeleccionadas.clear();
     }
     
     public void guardaButacasSeleccionadas(){
+        System.out.println("guardar "+butacasSeleccionadas.size());
         ButacaService bs = new ButacaService();
         butacasSeleccionadas.stream().forEach(e->{
             try{
             Respuesta res = new Respuesta();
             e.setButEstado("O");
             res = bs.guardarButaca(e);
-            popSeleccionada(e);
             if(!res.getEstado())
-               e.setButEstado("D");
+                e.setButEstado("D");
             }
             catch(Exception ex){
-              System.out.println("problema desseleccionado butacas del usuario actual");  
+              System.out.println("problema guardando butacas del usuario actual");  
             }
         });
+        butacasSeleccionadas.clear();
     }
 }
