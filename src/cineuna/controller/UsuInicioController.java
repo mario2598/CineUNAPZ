@@ -12,10 +12,13 @@ import cineuna.service.MovieService;
 import cineuna.util.AppContext;
 import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -71,7 +74,12 @@ public class UsuInicioController extends Controller implements Initializable {
         
         //System.out.println("movies size:" + movies.size());
         movies.stream().forEach(e->{
-            //System.out.println("peli");
+           // try {
+                //System.out.println("peli");
+                //e.crearImagenDesdeByte();
+            //} catch (IOException ex) {
+                //Logger.getLogger(UsuInicioController.class.getName()).log(Level.SEVERE, null, ex);
+            //}
             MovieCard2 card = new MovieCard2(true,e);
             card.initCard();
             tpPeliculas.getChildren().add(card);

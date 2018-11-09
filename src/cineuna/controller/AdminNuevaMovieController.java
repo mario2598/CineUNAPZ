@@ -16,6 +16,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -26,6 +28,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javax.swing.JFileChooser;
 
 /**
  * FXML Controller class
@@ -214,6 +218,19 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         } catch(Exception ex){
             System.out.println("Ha ocurrido un error en la parte del cliente guardando la película\nError: " + ex);
         }
+    }
+
+    @FXML
+    private void buscarImagen(MouseEvent event) throws FileNotFoundException {
+        FileChooser fc=new FileChooser();
+        File sel = fc.showOpenDialog(null);
+        if(fc!=null){
+            movie.guardarImagenByte(sel);
+        }
+        else{
+            System.out.println("imagen obtenida desde windows vacía");
+        }
+        //FileNameExtensionFilter filter;
     }
     
 }

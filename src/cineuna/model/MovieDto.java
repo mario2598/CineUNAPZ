@@ -101,8 +101,9 @@ public class MovieDto {
         }
     }
     
-    public void guardarImagenByte(String path) throws FileNotFoundException{
-        File file = new File(path);
+    public void guardarImagenByte(File file) throws FileNotFoundException{
+        //File file = new File(path);
+        try{
         FileInputStream fis = new FileInputStream(file);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte[] buf = new byte[1024];
@@ -113,6 +114,11 @@ public class MovieDto {
         } catch (IOException ex) {
         }
         movieUrlimg = bos.toByteArray();
+        System.out.println("imagen creada: "+movieUrlimg.toString());
+        }
+        catch(NullPointerException e){
+                System.out.println("Imagen seleccionada nula");
+        }
     }
     
     public Image abrirImagen(){

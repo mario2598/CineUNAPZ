@@ -257,7 +257,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                     if(usuario.isSeleccionada(b)){
                         propia = true;
                     }
-                    else System.out.println("Seleccionada por otro");//era propia
+                    //else System.out.println("");//era propia
                 }
             }
             

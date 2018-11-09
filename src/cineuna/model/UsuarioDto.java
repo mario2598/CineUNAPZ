@@ -7,8 +7,15 @@ package cineuna.model;
 
 import cineuna.service.ButacaService;
 import cineuna.util.Respuesta;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -215,13 +222,13 @@ public class UsuarioDto {
     public Boolean isSeleccionada(ButacaDto butaca){
         existe=false;
         if(butacasSeleccionadas.size()>0){
-            System.out.println("buscando en butacas seleccionadas: "+butacasSeleccionadas.size());
+            //System.out.println("buscando en butacas seleccionadas: "+butacasSeleccionadas.size());
             butacasSeleccionadas.stream().forEach(b->{
                 if(butaca.getButId().equals(b.getButId()))
                     existe = true;
             });
         }
-        System.out.println("existe= "+existe.toString());
+        //System.out.println("existe= "+existe.toString());
         return existe;
     }
     
@@ -236,7 +243,7 @@ public class UsuarioDto {
     }
     
     public void desSeleccionaButacas(){
-        System.out.println("Desseleciconar "+butacasSeleccionadas.size());
+        //System.out.println("Desseleciconar "+butacasSeleccionadas.size());
         ButacaService bs = new ButacaService();
         butacasSeleccionadas.stream().forEach(b->{
             try{
@@ -254,7 +261,7 @@ public class UsuarioDto {
     }
     
     public void guardaButacasSeleccionadas(){
-        System.out.println("guardar "+butacasSeleccionadas.size());
+        //System.out.println("guardar "+butacasSeleccionadas.size());
         ButacaService bs = new ButacaService();
         butacasSeleccionadas.stream().forEach(e->{
             try{
@@ -269,5 +276,39 @@ public class UsuarioDto {
             }
         });
         butacasSeleccionadas.clear();
+    }
+    
+    public void crearImagenDesdeByte() throws FileNotFoundException, IOException{
+            String outPutFile = "src\\cineuna\\resources\\images\\"+usuNombre.getValue()+".jpg";
+            File someFile = new File(outPutFile);
+        try (FileOutputStream fos = new FileOutputStream(someFile)) {
+            //fos.write(movieUrlimg);
+            fos.flush();
+        }
+    }
+    
+    public void guardarImagenByte(File file) throws FileNotFoundException{
+        //File file = new File(path);
+        try{
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        try {
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum);
+            }
+        } catch (IOException ex) {
+        }
+        //movieUrlimg = bos.toByteArray();
+        //System.out.println("imagen creada: "+movieUrlimg.toString());
+        }
+        catch(NullPointerException e){
+                System.out.println("Imagen seleccionada nula");
+        }
+    }
+    
+    public Image abrirImagen(){
+        //System.out.println();
+        return new Image("cineuna/resources/images/"+this.usuNombre.getValue()+".jpg");
     }
 }
