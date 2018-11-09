@@ -101,7 +101,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         cargarIdioma();
         cargarInfoTanda();
         cargarDistribucion();
-        cargarListaButacasDtos();
+        cargarListaButacas();
     }
     
     private void redimensionado(){
@@ -166,55 +166,16 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         apReserva.setPrefColumns(columnas);
         apReserva.setPrefRows(filas);
         apReserva.getChildren().clear();
-            //System.out.println("filas: "+filas+"\ncolumnas: "+columnas);
         }
         catch(NullPointerException e){
-            //System.out.println("Ocurrió un error al cargar filas y columnas");
-        }
-    }
-    
-    private void cargarButacas(){
-            butacaList.clear();
-            Double anchura = bpButacas.getWidth()*0.82;
-            Integer dimButaca = ((anchura.intValue())/columnas);
-//            System.out.println("Dimension de la butaca: " + dimButaca);
-            if(dimButaca>0){
-                for(int i = 0; i < this.filas; i++){
-                    for (int j = 0; j < this.columnas; j++) {
-                        //CampoButaca espacioB = new CampoButaca(dimButaca,false);
-                        ButacaDto butaca = new ButacaDto();
-                        butaca.setButFila(new Long(i));
-                        butaca.setButColumna(new Long(j));
-                        butaca.setButLetra(getLetraFila(i) + String.valueOf(j+1));
-                        butaca.setButActiva("A");
-                        butaca.setButEstado("D");
-                        //espacioB.setButaca(butaca);
-                        //butacaList.add(espacioB);
-                        //apReserva.getChildren().add(espacioB);
-                    }
-                }
-                this.butacasDistribuidas = true;
-            }
-    }
-    
-    private String getLetraFila(Integer fila){
-        if( fila<0 ) {
-            return "-" + getLetraFila(-fila-1);
-        }
-        int quot = fila/26;
-        int rem = fila%26;
-        char letter = (char)((int)'A' + rem);
-        if( quot == 0 ) {
-            return ""+letter;
-        } else {
-            return getLetraFila(quot-1) + letter;
+
         }
     }
     
     /**
      * carga el arrayList de butacas
      */
-    private void cargarListaButacasDtos(){
+    private void cargarListaButacas(){
         ButacaService bs= new ButacaService();
         try{
         Respuesta res= bs.getListaButacasSala(tanda.getSalaId().getSalaId());
@@ -227,13 +188,13 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
              //System.out.println("ya valió");
         }
         
-        cargaButacas();
+        cargarCamposButacas();
     }
     
     /**
      * carga las butacas y su estado (usada cada vez que refresca)
      */
-    private void cargaButacas(){
+    private void cargarCamposButacas(){
         //butacasSeleccionadas.clear();//ver si sirve
         butacaList.clear();
         Double anchura = bpButacas.getWidth()*0.82;
@@ -271,7 +232,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private void reservar(ActionEvent event) {
         usuario.guardaButacasSeleccionadas();
         cargarDistribucion();
-        cargarListaButacasDtos();
+        cargarListaButacas();
     }
 
     @FXML
@@ -280,7 +241,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         costoTotal.set(0);
         asientos.set(0);
         cargarDistribucion();
-        cargarListaButacasDtos();
+        cargarListaButacas();
     }
     
 }
