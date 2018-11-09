@@ -85,7 +85,7 @@ and open the template in the editor.
 
 /*Toggle Button*/
 .admin-toggle-button {
-    -fx-text-fill: -fx-text-light-color;
+    -fx-text-fill: -fx-text-ligh-color;
     -jfx-toggle-color: -fx-pallet-color3;
     -jfx-untoggle-color: white;
     -jfx-untoggle-line-color: -fx-text-ligh-color;
