@@ -22,25 +22,27 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement(name = "TandaDto")
 @XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class TandaDto {
-     private Long tandaId;
-     private Long tandaCobro;
-     @XmlTransient
-     //@XmlJavaTypeAdapter(LocalDateAdapter.class)
-     private ObjectProperty<LocalDate> tandaHinicio;
-     //@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
-     //private LocalDateTime tandaHfin;
-     @XmlTransient
-     private ObjectProperty<LocalDate> tandaHfin;
-     private MovieDto movieId;
-     private SalaDto salaId;
-     private Integer horaTanda;
-
+    @XmlTransient
+    private Long tandaId;
+    @XmlTransient
+    private Long tandaCobro;
+    @XmlTransient
+    //@XmlJavaTypeAdapter(LocalDateAdapter.class)
+    private ObjectProperty<LocalDate> tandaHinicio;
+    //@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    //private LocalDateTime tandaHfin;
+    @XmlTransient
+    private ObjectProperty<LocalDate> tandaHfin;
+    @XmlTransient
+    private MovieDto movieId;
+    @XmlTransient
+    private SalaDto salaId;
+    private Integer horaTanda;
+     
     public TandaDto() {
         this.tandaHinicio=new SimpleObjectProperty<>();
         this.tandaHfin=new SimpleObjectProperty<>();
     }
-    
-      
 
     public Long getTandaId() {
         return tandaId;

@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
  *
  * @author Chris
  */
-public class SalaCard extends Card{
+public class AdminSalaCard extends Card{
 
     //Attributes
     private SalaDto sala;
@@ -28,6 +28,7 @@ public class SalaCard extends Card{
     private Label initNameLbl(){
         Label lbl = new Label();
         lbl.setPrefSize(224, 70);
+        lbl.setStyle("-fx-text-fill: WHITE; -fx-font-size: 20px;");
         lbl.setText(sala.getSalaNombre());
         lbl.setAlignment(Pos.CENTER);
         lbl.setFont(Font.font(30.0));

@@ -21,14 +21,14 @@ import javafx.scene.text.TextBoundsType;
  *
  * @author Chris
  */
-public class EspacioParaButaca extends Label{
+public class AdminEspacioButaca extends Label{
     
     private ButacaDto butaca;
     private Boolean status;
     private MaterialDesignIconView icon;
     private IntegerProperty dimension;
 
-    public EspacioParaButaca(Integer dim) {
+    public AdminEspacioButaca(Integer dim) {
         dimension = new SimpleIntegerProperty(dim);
         this.setPrefSize(dim, dim);
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

@@ -8,3 +8,200 @@ and open the template in the editor.
     Author     : Chris
 */
 
+*{
+    /*Color base, el mas oscuro*/
+    -fx-pallet-color1: #110c0d;
+    /*Color secundario, un poco mas claro*/
+    -fx-pallet-color2: #262122;
+    /*Color para detalles, el mas encendido*/
+    -fx-pallet-color3: #af0a0a;
+    
+    -fx-text-ligh-color: #bcbcbc;
+    -fx-text-pallet-color: #af0a0a;
+    -fx-text-dark-color: black;
+    
+}
+
+/*Contenedores*/
+.background-pane {
+    -fx-background-color: -fx-pallet-color1;
+}
+
+.details-Pane {
+    -fx-background-color: -fx-pallet-color2;
+}
+
+/*Botones*/
+.pallet-button {
+    -fx-text-fill: -fx-text-ligh-color;
+    -fx-font-size: 15px;
+    -jfx-button-type: RAISED;
+    -fx-graphic-text-gap: 10px;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+}
+
+.pallet-button .glyph-icon {
+    -fx-fill: -fx-text-ligh-color;
+}
+
+.pallet-button:hover{
+    -fx-text-fill: -fx-text-pallet-color;
+}
+
+.pallet-button:hover .glyph-icon{
+    -fx-fill: -fx-text-pallet-color;
+}
+
+.pallet-button .jfx-rippler {
+    -jfx-rippler-fill: -fx-text-ligh-color;
+}
+
+.admin-menu-option{
+    -fx-background-color: derive(-fx-pallet-color2, 75%);
+    -fx-text-fill: -fx-pallet-color1;
+    -fx-font-size: 15px;
+    -jfx-button-type: RAISED;
+    -fx-graphic-text-gap: 10px;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+}
+
+.admin-menu-option .glyph-icon {
+    -fx-fill: -fx-pallet-color1;
+}
+
+.admin-menu-option:hover{
+    -fx-text-fill: -fx-text-pallet-color;
+}
+
+.admin-menu-option:hover .glyph-icon{
+    -fx-fill: -fx-text-pallet-color;
+}
+
+.admin-menu-option .jfx-rippler {
+    -jfx-rippler-fill: -fx-pallet-color2;
+}
+
+/*Text Fill*/
+.jfx-text-field {
+    -fx-text-fill: -fx-text-ligh-color;
+}
+
+/*List View*/
+.customListView{
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-pallet-color2;
+    -fx-border-width: 2px;
+}
+
+.customListView .list-cell {
+    -fx-padding: 0px;
+}
+
+.customListView .list-cell{
+    -fx-background-color: -fx-pallet-color2;
+}
+
+.customListView .list-cell:odd {
+    -fx-background-color: derive(-fx-pallet-color2,10%);
+}
+
+.customListView .list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(derive(-fx-pallet-color3,10%) 100%, derive(-fx-pallet-color3,30%) 75%);
+}
+
+.customListView .list-cell .jfx-rippler {
+    -jfx-rippler-fill: -fx-pallet-color3;
+}
+
+/*TabePane*/
+.tab{
+    -fx-background-color: -fx-pallet-color2;
+    -fx-pref-width: 200;
+    -fx-pref-height: 45;
+}
+
+.tab-label{
+    -fx-text-fill: -fx-text-ligh-color;
+}
+
+.tab-label:hover{
+    -fx-text-fill: -fx-pallet-color3;
+}
+
+.jfx-tab-pane .tab-selected-line {
+    -fx-background-color: -fx-pallet-color3;
+    -fx-pref-height: 3;
+}
+
+.jfx-tab-pane .tab-header-area .jfx-rippler {
+    -jfx-rippler-fill: -fx-text-ligh-color;
+}
+
+.tab-header-background{
+    -fx-background-color: -fx-pallet-color2;
+}
+
+/*ScrollPane*/
+.scroll-pane {  
+    -fx-background-color: -fx-pallet-color1;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-pref-tile-width: 3;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color :transparent;
+    -fx-border-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-border-radius :2.0em;
+}
+
+.scroll-bar:horizontal .increment-button ,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 0.0 10.0 0.0;
+
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 10.0 0.0 0.0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow{
+    -fx-shape : " ";    
+    -fx-padding :0.15em 0.0 0.0 0.0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";    
+    -fx-padding :0.0 0.15em 0.0 0.0;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color : #394c56;
+    -fx-background-radius: 5;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color : -fx-pallet-color3;
+    -fx-background-radius: 5;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+}

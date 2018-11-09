@@ -86,3 +86,20 @@ public class MovieService {
         }
     }
             }
+    
+    public Respuesta guardarMovie(MovieDto dto){
+        try{
+            Request request = new Request("movieController/guardarMovie");
+            request.post(dto);
+            if(request.isError()){
+                return new Respuesta(false, "Se ha producido un error guardando el cine.", request.getError());
+            }
+            MovieDto Movie = (MovieDto) request.readEntity(MovieDto.class);
+            return new Respuesta(true, "", "", "Movie", Movie);
+        } catch (Exception ex) {
+            Logger.getLogger(CineService.class.getName()).log(Level.SEVERE, "Error guardando Movie.", ex);
+            return new Respuesta(false, "Error guardando Movie.", "guardarCine " + ex.getMessage());
+        }
+    }
+    
+}

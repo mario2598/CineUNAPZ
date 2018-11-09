@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -45,22 +46,25 @@ public class MovieDto {
     public StringProperty movieUrlesp;
     @XmlTransient
     public StringProperty movieUrleng;
+    @XmlTransient
+    public SimpleStringProperty movieDuracion;
+    @XmlTransient
+    public SimpleStringProperty moviePortada;
     //@XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlTransient
-    private ObjectProperty<LocalDate> movieDate;
+    public ObjectProperty<LocalDate> movieDate;
     @XmlTransient
     private String movieEstado;
     @XmlTransient
-    private String moviePortada;
+    private String movieTipo;
     @XmlTransient
-    private Long movieDuracion;
+    private ArrayList<ComprobanteDto> comprobanteList = new ArrayList<>();
     @XmlTransient
-    private List<ComprobanteDto> comprobanteList = new ArrayList<>();
-    @XmlTransient
-    private List<TandaDto> tandaList = new ArrayList<>();
+    private ArrayList<TandaDto> tandaList = new ArrayList<>();
     @XmlTransient
     private List<ReviewDto> reviewList = new ArrayList<>();
     private byte[] movieUrlimg;
+    private ArrayList<ReviewDto> reviewList = new ArrayList<>();
      
     //Constructors     
     public MovieDto() {
@@ -74,6 +78,8 @@ public class MovieDto {
         else{
             System.out.println("movieUrlimg: null");
         }
+        moviePortada = new SimpleStringProperty();
+        movieDuracion = new SimpleStringProperty();
     }
     
     //Methods
@@ -85,8 +91,8 @@ public class MovieDto {
         this.setMovieUrleng(m.getMovieUrleng());
         this.movieDate.set(m.getMovieDate());
         this.movieEstado = m.getMovieEstado();
-        this.moviePortada = m.getMoviePortada();
-        this.movieDuracion = m.getMovieDuracion();
+        this.setMoviePortada(m.getMoviePortada());
+        this.setMovieDuracion(m.getMovieDuracion());
     }
     
     public void crearImagenDesdeByte() throws FileNotFoundException, IOException{
@@ -168,17 +174,16 @@ public class MovieDto {
         this.movieDate.set(movieDate);
     }
 
-    /*
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    public LocalDate getEmpFingreso() {
-        return empFingreso.get();
-    }
-
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    public void setEmpFingreso(LocalDate empFingreso) {
-        this.empFingreso.set(empFingreso);
-    }
-    */
+//    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+//    public LocalDate getEmpFingreso() {
+//        return empFingreso.get();
+//    }
+//
+//    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+//    public void setEmpFingreso(LocalDate empFingreso) {
+//        this.empFingreso.set(empFingreso);
+//    }
+    
     public String getMovieEstado() {
         return movieEstado;
     }
@@ -188,44 +193,54 @@ public class MovieDto {
     }
 
     public String getMoviePortada() {
-        return moviePortada;
+        return moviePortada.get();
     }
 
     public void setMoviePortada(String moviePortada) {
-        this.moviePortada = moviePortada;
+        this.moviePortada.set(moviePortada);
     }
 
     public Long getMovieDuracion() {
-        return movieDuracion;
+        if(movieDuracion.get()!=null)
+            return Long.valueOf(movieDuracion.get());
+        else
+            return null;
     }
 
     public void setMovieDuracion(Long movieDuracion) {
-        this.movieDuracion = movieDuracion;
+        this.movieDuracion.set(movieDuracion.toString());
     }
 
-    public List<ComprobanteDto> getComprobanteList() {
+    public ArrayList<ComprobanteDto> getComprobanteList() {
         return comprobanteList;
     }
 
-    public void setComprobanteList(List<ComprobanteDto> comprobanteList) {
+    public void setComprobanteList(ArrayList<ComprobanteDto> comprobanteList) {
         this.comprobanteList = comprobanteList;
     }
 
-    public List<TandaDto> getTandaList() {
+    public ArrayList<TandaDto> getTandaList() {
         return tandaList;
     }
 
-    public void setTandaList(List<TandaDto> tandaList) {
+    public void setTandaList(ArrayList<TandaDto> tandaList) {
         this.tandaList = tandaList;
     }
 
-    public List<ReviewDto> getReviewList() {
+    public ArrayList<ReviewDto> getReviewList() {
         return reviewList;
     }
 
-    public void setReviewList(List<ReviewDto> reviewList) {
+    public void setReviewList(ArrayList<ReviewDto> reviewList) {
         this.reviewList = reviewList;
     }
     
+    public String getMovieTipo() {
+        return movieTipo;
+    }
+
+    public void setMovieTipo(String movieTipo) {
+        this.movieTipo = movieTipo;
+    }
     
 }
