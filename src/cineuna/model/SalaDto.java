@@ -6,7 +6,6 @@
 package cineuna.model;
 
 import java.util.ArrayList;
-import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -39,11 +38,11 @@ public class SalaDto {
     @XmlTransient
     private Long cineId;
     @XmlTransient
-    private List<TandaDto> tandaList = new ArrayList<>();
+    private ArrayList<TandaDto> tandaList = new ArrayList<>();
     @XmlTransient
-    private List<ButacaDto> butacaList = new ArrayList<>();
+    private ArrayList<ButacaDto> butacaList = new ArrayList<>();
     @XmlTransient
-    private List<ComprobanteDto> comprobanteList = new ArrayList<>();
+    private ArrayList<ComprobanteDto> comprobanteList = new ArrayList<>();
     
     //Constructors
     public SalaDto() {
@@ -120,27 +119,27 @@ public class SalaDto {
         this.salaCol = salaCol;
     }
 
-    public List<TandaDto> getTandaList() {
+    public ArrayList<TandaDto> getTandaList() {
         return tandaList;
     }
 
-    public void setTandaList(List<TandaDto> tandaList) {
+    public void setTandaList(ArrayList<TandaDto> tandaList) {
         this.tandaList = tandaList;
     }
 
-    public List<ButacaDto> getButacaList() {
+    public ArrayList<ButacaDto> getButacaList() {
         return butacaList;
     }
 
-    public void setButacaList(List<ButacaDto> butacaList) {
+    public void setButacaList(ArrayList<ButacaDto> butacaList) {
         this.butacaList = butacaList;
     }
 
-    public List<ComprobanteDto> getComprobanteList() {
+    public ArrayList<ComprobanteDto> getComprobanteList() {
         return comprobanteList;
     }
 
-    public void setComprobanteList(List<ComprobanteDto> comprobanteList) {
+    public void setComprobanteList(ArrayList<ComprobanteDto> comprobanteList) {
         this.comprobanteList = comprobanteList;
     }
 

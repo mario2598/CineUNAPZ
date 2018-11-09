@@ -28,9 +28,9 @@ public class AdminMovieCard extends Card{
     private MovieDto movie;
     private SimpleStringProperty posterUrlProp;
     private ObjectProperty<LocalDate> dateProp;
+    //Size variables
     private final Integer anchoBase = 24;
     private final Integer altoBase = 36;
-    private Integer tamanho;
     private SimpleIntegerProperty widthProp = new SimpleIntegerProperty();
     private SimpleIntegerProperty heightProp = new SimpleIntegerProperty();
     //Graphic Components
@@ -41,24 +41,37 @@ public class AdminMovieCard extends Card{
     public AdminMovieCard() {
         
     }
+    
+    /**
+     * Constructor que define tamaño de la card por defecto
+     * Tamaño por defecto = 6 veces el tamaño estandar de un poster
+     * Tamaño estandar = 24x36
+     * @param m 
+     */
+    public AdminMovieCard(MovieDto m) {
+        this();
+        this.movie = m;
+        this.widthProp.setValue(anchoBase*6);
+        this.heightProp.setValue(altoBase*6);
+    }
 
     /**
-     * 
+     * Constructor que define tamaño a la card
      * @param m
-     * @param t 
+     * @param width
+     * @param height
      */
-    public AdminMovieCard(MovieDto m, Integer t) {
+    public AdminMovieCard(MovieDto m, Double width, Double height) {
+        this();
         this.movie = m;
-        this.tamanho = t;
+        preserveRatioSize(width, height);
     }
     
     //Methods
     @Override
     public void initCard() {
         if(!this.isInitialized()){
-            this.widthProp.setValue(anchoBase * tamanho);
-            this.heightProp.setValue(altoBase * tamanho);
-            this.setPrefSize(this.widthProp.get(), this.heightProp.get() + (5 * tamanho)*2);
+            this.setPrefSize(this.widthProp.get(), this.heightProp.get() + (this.heightProp.get()*0.14)*2);
             this.getChildren().add(initPoster());
             this.getChildren().add(initNameLbl());
             this.getChildren().add(initDateLbl());
@@ -90,7 +103,7 @@ public class AdminMovieCard extends Card{
         nameLbl = new Label();
         //Styling se quita cuando haya css
         nameLbl.setStyle("-fx-text-fill: white; -font-size: 20px;");
-        nameLbl.setPrefSize(this.widthProp.get(), 5 * tamanho);
+        nameLbl.setPrefSize(this.widthProp.get(), this.heightProp.get()*0.14);
         nameLbl.setLayoutY(this.heightProp.get());
         nameLbl.setTextAlignment(TextAlignment.CENTER);
         nameLbl.setAlignment(Pos.CENTER);
@@ -103,8 +116,8 @@ public class AdminMovieCard extends Card{
         dateLbl = new Label();
         //Styling se quita cuando haya css
         dateLbl.setStyle("-fx-text-fill: white; -font-size: 20px;");
-        dateLbl.setPrefSize(this.widthProp.get(), 5 * tamanho);
-        dateLbl.setLayoutY(this.heightProp.get() + (5 * tamanho));
+        dateLbl.setPrefSize(this.widthProp.get(), this.heightProp.get()*0.14);
+        dateLbl.setLayoutY(this.heightProp.get() + this.heightProp.get()*0.14);
         dateLbl.setTextAlignment(TextAlignment.CENTER);
         dateLbl.setAlignment(Pos.CENTER);
         dateLbl.setText(DateUtil.LocalDate2String(movie.getMovieDate()));
@@ -114,7 +127,7 @@ public class AdminMovieCard extends Card{
     
     private JFXRippler initRipplerEffect(){
         ripplerLbl = new Label();
-        ripplerLbl.setPrefSize(this.widthProp.get(), this.heightProp.get() + (5 * tamanho)*2);
+        ripplerLbl.setPrefSize(this.widthProp.get(), this.heightProp.get() + (this.heightProp.get()*0.14)*2);
         ripplerLbl.setOnMouseClicked((t) -> {
             if(t.getButton().equals(MouseButton.PRIMARY)){
                 //Evento para mostrar informacion de la movie
@@ -128,20 +141,35 @@ public class AdminMovieCard extends Card{
         return rip;
     }
     
-    public void cambiarTamanho(Integer t){
-        this.tamanho = t;
-        this.widthProp.setValue(anchoBase * tamanho);
-        this.heightProp.setValue(altoBase * tamanho);
-        this.setPrefSize(this.widthProp.get(), this.heightProp.get() + (5 * tamanho)*2);
+    public void cambiarTamanho(Double width, Double height){
+        preserveRatioSize(width, height);
+        this.setPrefSize(this.widthProp.get(), this.heightProp.get() + (this.heightProp.get()*0.14)*2);
         ImgView.setFitWidth(this.widthProp.getValue());
         ImgView.setFitHeight(this.heightProp.get());
         nameLbl.setPrefWidth(this.widthProp.getValue());
-        nameLbl.setPrefSize(this.widthProp.get(), 5 * tamanho);
+        nameLbl.setPrefSize(this.widthProp.get(), (this.heightProp.get()*0.14));
         nameLbl.setLayoutY(this.heightProp.get());
         dateLbl.setPrefWidth(this.widthProp.getValue());
-        dateLbl.setPrefSize(this.widthProp.get(), 5 * tamanho);
-        dateLbl.setLayoutY(this.heightProp.get() + (5 * tamanho));
-        ripplerLbl.setPrefSize(this.widthProp.get(), this.heightProp.get() + (5 * tamanho)*2);
+        dateLbl.setPrefSize(this.widthProp.get(), (this.heightProp.get()*0.14));
+        dateLbl.setLayoutY(this.heightProp.get() + (this.heightProp.get()*0.14));
+        ripplerLbl.setPrefSize(this.widthProp.get(), this.heightProp.get() + (this.heightProp.get()*0.14)*2);
+    }
+    
+    private void preserveRatioSize(Double width, Double height){
+        Double finalWidth, finalHeight;
+        Double ratio = height/altoBase;
+        finalWidth = anchoBase * ratio;
+        if(finalWidth <= width){
+            this.widthProp.setValue(finalWidth);
+            this.heightProp.setValue(height);
+            System.out.println("Se queda con los valores 1");
+        } else {
+            ratio = width/anchoBase;
+            finalHeight = altoBase * ratio;
+            this.widthProp.setValue(width);
+            this.heightProp.setValue(finalHeight);
+            System.out.println("Se queda con los valores 2");
+        }
     }
 
     public MovieDto getMovie() {
@@ -150,14 +178,6 @@ public class AdminMovieCard extends Card{
 
     public void setMovie(MovieDto movie) {
         this.movie = movie;
-    }
-
-    public Integer getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(Integer tamanho) {
-        this.tamanho = tamanho;
     }
 
     public SimpleIntegerProperty getWidthProp() {

@@ -191,7 +191,8 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
             newSala.setSalaEstado(this.toggleBtnHabilitada.isSelected() ? "A":"I");
             newSala.setSalaTipo(this.cmbBoxTipo.getValue());
             this.butacaList.stream().map(AdminEspacioButaca::getButaca).forEach(butaca -> {
-                newSala.getButacaList().add(butaca);
+                if(butaca!=null)
+                    newSala.getButacaList().add(butaca);
             });
             newSala.setCineId(new Long(3));
             SalaService salaServ = new SalaService();

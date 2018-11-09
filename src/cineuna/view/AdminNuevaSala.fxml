@@ -18,25 +18,25 @@
 
 <BorderPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminNuevaSalaController">
    <left>
-      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="241.0" spacing="60.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="241.0" spacing="60.0" styleClass="details-Pane" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" spacing="20.0">
                <children>
                   <JFXTextField fx:id="txtNombre" maxWidth="180.0" prefHeight="27.0" promptText="Nombre" />
                   <JFXComboBox fx:id="cmbBoxTipo" prefHeight="27.0" prefWidth="165.0" promptText="Tipo" />
-                  <JFXToggleButton fx:id="toggleBtnHabilitada" contentDisplay="RIGHT" graphicTextGap="10.0" selected="true" size="8.0" text="Habilitada" />
+                  <JFXToggleButton fx:id="toggleBtnHabilitada" contentDisplay="RIGHT" graphicTextGap="10.0" selected="true" size="8.0" text="Habilitada" textFill="#bcbcbc" />
                </children>
             </VBox>
             <VBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Label alignment="CENTER" focusTraversable="false" prefWidth="600.0" text="Distribución de las butacas" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" focusTraversable="false" prefWidth="600.0" text="Distribución de las butacas" textAlignment="CENTER" textFill="#bcbcbc" wrapText="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
                   <HBox alignment="CENTER_RIGHT" spacing="10.0">
                      <children>
-                        <Label focusTraversable="false" text="Columnas" />
+                        <Label focusTraversable="false" text="Columnas" textFill="#bcbcbc" />
                         <Spinner fx:id="spnrColumnas" maxWidth="100.0" />
                      </children>
                      <padding>
@@ -45,7 +45,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" spacing="10.0">
                      <children>
-                        <Label focusTraversable="false" text="Filas" />
+                        <Label focusTraversable="false" text="Filas" textFill="#bcbcbc" />
                         <Spinner fx:id="spnrFilas" maxWidth="100.0" />
                      </children>
                      <padding>
@@ -56,12 +56,12 @@
             </VBox>
             <HBox alignment="CENTER" spacing="15.0">
                <children>
-                  <JFXButton fx:id="btnCancelar" buttonType="RAISED" graphicTextGap="10.0" onAction="#btnCancelarAction" text="Cancelar">
+                  <JFXButton fx:id="btnCancelar" buttonType="RAISED" graphicTextGap="10.0" onAction="#btnCancelarAction" styleClass="pallet-button" text="Cancelar">
                      <graphic>
                         <FontAwesomeIconView boundsType="VISUAL" glyphName="REMOVE" size="20" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="btnGuardar" buttonType="RAISED" graphicTextGap="10.0" onAction="#btnGuardarAction" text="Guardar">
+                  <JFXButton fx:id="btnGuardar" buttonType="RAISED" graphicTextGap="10.0" onAction="#btnGuardarAction" styleClass="pallet-button" text="Guardar">
                      <graphic>
                         <FontAwesomeIconView boundsType="VISUAL" glyphName="SAVE" size="20" />
                      </graphic>
@@ -78,11 +78,11 @@
       </VBox>
    </left>
    <center>
-      <BorderPane fx:id="bpButacas" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #1e1438;" BorderPane.alignment="CENTER">
+      <BorderPane fx:id="bpButacas" prefHeight="200.0" prefWidth="200.0" styleClass="background-pane" BorderPane.alignment="CENTER">
          <center>
-            <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+            <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <content>
-                  <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" style="-fx-background-color: #1e1438;">
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" styleClass="background-pane">
                      <children>
                         <TilePane fx:id="tpButacas" alignment="CENTER" style="-fx-background-color: #1e1438;" />
                      </children>
@@ -91,7 +91,7 @@
             </ScrollPane>
          </center>
          <top>
-            <Label fx:id="lblPantalla" alignment="CENTER" focusTraversable="false" prefHeight="70.0" prefWidth="2000.0" style="-fx-background-color: grey;" text="PANTALLA" BorderPane.alignment="CENTER">
+            <Label fx:id="lblPantalla" alignment="CENTER" focusTraversable="false" prefHeight="70.0" prefWidth="2000.0" styleClass="details-Pane" text="PANTALLA" textFill="#bcbcbc" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="150.0" right="150.0" top="25.0" />
                </BorderPane.margin>

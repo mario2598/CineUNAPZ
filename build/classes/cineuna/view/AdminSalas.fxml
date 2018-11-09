@@ -8,25 +8,25 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminSalasController">
+<BorderPane styleClass="background-pane" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminSalasController">
    <left>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="50.0">
+            <AnchorPane prefHeight="50.0" styleClass="details-Pane">
                <children>
-                  <JFXButton fx:id="btnVolver" contentDisplay="GRAPHIC_ONLY" onAction="#btnVolverAction" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <JFXButton fx:id="btnVolver" contentDisplay="GRAPHIC_ONLY" onAction="#btnVolverAction" styleClass="pallet-button" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <graphic>
                         <FontAwesomeIconView boundsType="VISUAL" glyphName="ARROW_CIRCLE_LEFT" size="20" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="btnAgregar" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#btnAgregarAction" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <JFXButton fx:id="btnAgregar" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#btnAgregarAction" styleClass="pallet-button" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <graphic>
                         <FontAwesomeIconView boundsType="VISUAL" glyphName="PLUS" size="20" />
                      </graphic>
                   </JFXButton>
                </children>
             </AnchorPane>
-            <JFXListView fx:id="listvSalas" focusTraversable="false" prefHeight="1080.0" prefWidth="250.0" style="-fx-background-color: #bcbcbc;" />
+            <JFXListView fx:id="listvSalas" focusTraversable="false" prefHeight="1080.0" prefWidth="250.0" styleClass="customListView" />
          </children>
       </VBox>
    </left>

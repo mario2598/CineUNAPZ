@@ -90,7 +90,7 @@ public class AdminMoviesController extends Controller implements Initializable {
         Respuesta resp = movieService.getMovies("C");
         ArrayList<MovieDto> movieList = new ArrayList<>((List<MovieDto>) resp.getResultado("Movies"));
         movieList.stream().forEach(movie -> {
-            AdminMovieCard newCard = new AdminMovieCard(movie, 6);
+            AdminMovieCard newCard = new AdminMovieCard(movie);
             newCard.initCard();
             CarteleraCardList.add(newCard);
             tilePaneEnCartelera.getChildren().add(newCard);
@@ -103,7 +103,7 @@ public class AdminMoviesController extends Controller implements Initializable {
         Respuesta resp = movieService.getMovies("P");
         ArrayList<MovieDto> movieList = new ArrayList<>((List<MovieDto>) resp.getResultado("Movies"));
         movieList.stream().forEach(movie -> {
-            AdminMovieCard newCard = new AdminMovieCard(movie, 6);
+            AdminMovieCard newCard = new AdminMovieCard(movie);
             newCard.initCard();
             ProximasCardList.add(newCard);
             tilePaneProximanete.getChildren().add(newCard);
