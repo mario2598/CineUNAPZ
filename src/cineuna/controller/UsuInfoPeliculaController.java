@@ -17,7 +17,6 @@ import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -60,13 +59,13 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     private MovieDto pelicula;
     @FXML
     private WebView webView;
+    //public ObjectProperty<YouTubeVideo> youTubeVideo;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        webView=new WebView();
         StackPane spDialogos = (StackPane) AppContext.getInstance().get("spDialogos");
         this.root.prefHeightProperty().bind(spDialogos.heightProperty());
         this.vbRoot.prefHeightProperty().bind(root.heightProperty());
@@ -91,7 +90,13 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @FXML
     private void verTrailer(MouseEvent event) {
         this.apVideo.setVisible(true);
-        webView.getEngine().load("https://www.youtube.com");
+        //webView.getEngine().load("http://www.youtube.com/embed/" + "?v=yVjEnuPUSMk" + "?fs=0&rel=0&showinfo=0&autoplay=1");
+        webView.getEngine().load("http://www.youtube.com/embed?v="+"k0BWlvnBmIE"+"?fs=0&rel=0&showinfo=0&autoplay=1");
+    }
+    
+    private void getVideoID(){
+        String link = pelicula.getMovieUrlesp();
+        //link.
     }
     
     private void cargarInfoPelicula(){

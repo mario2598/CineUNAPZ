@@ -5,9 +5,12 @@
  */
 package cineuna.controller;
 
+import cineuna.model.CineDto;
 import cineuna.model.UsuarioDto;
+import cineuna.service.CineService;
 import cineuna.util.AppContext;
 import cineuna.util.LangUtils;
+import cineuna.util.Respuesta;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -58,11 +61,20 @@ public class UsuInfoCineController extends Controller implements Initializable {
     }
     
     private void llenaInfo(){
-        lblNombreCine.setText("CineUNA");
-        lblCorreo.setText("correoEjemplo@cineuna.com");
-        lblNumTel.setText("27785664");
-        lblAbre.setText("8:00");
-        lblCierra.setText("21:00");
+        CineService cs = new CineService();
+        Respuesta res = cs.getCine();
+        if(res.getEstado()){
+            CineDto cine = (CineDto) res.getResultado("Cine");
+            lblNombreCine.setText(cine.getCineNombre());
+            lblCorreo.setText(cine.getCineEmail());
+            lblNumTel.setText(cine.getCineTel().toString());
+            lblAbre.setText(cine.getCineAbre().toString());
+            lblCierra.setText(cine.getCineCierra().toString());
+        }
+        else{
+            System.out.println("No se pudo obtener el cine para mostrar");
+        }
+        
     }
     
     private void cargarIdioma(){
