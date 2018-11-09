@@ -5,7 +5,6 @@
  */
 package cineuna.service;
 
-import cineuna.model.MovieDto;
 import cineuna.model.TandaDto;
 import cineuna.util.Request;
 import cineuna.util.Respuesta;

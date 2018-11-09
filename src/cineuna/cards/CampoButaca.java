@@ -6,6 +6,7 @@
 package cineuna.cards;
 
 import cineuna.model.ButacaDto;
+import cineuna.model.UsuarioDto;
 import cineuna.service.ButacaService;
 import cineuna.util.AppContext;
 import cineuna.util.Respuesta;
@@ -29,6 +30,7 @@ import javafx.scene.text.TextBoundsType;
 public class CampoButaca extends Label{
     
     private ButacaDto butaca;
+    private UsuarioDto usuario;
     private Boolean status;
     private SimpleBooleanProperty disponible;
     private MaterialDesignIconView icon;
@@ -68,6 +70,7 @@ public class CampoButaca extends Label{
         dimension = new SimpleIntegerProperty(dim);
         this.disponible = new SimpleBooleanProperty(true);
         this.seleccionada=new SimpleBooleanProperty(false);
+        this.usuario=AppContext.getInstance().getUsuario();
     }
     
     private void inicializaIcono(Integer dim,Boolean disponible,Boolean activa,Boolean seleccionada,Boolean propia){
@@ -126,6 +129,7 @@ public class CampoButaca extends Label{
     }
     
     private void seleccionaButaca(){
+        usuario.pushSeleccionada(butaca);
         icon.getStyleClass().add("campo-butaca-sel");
         asientos.set(asientos.get()+1);
         butaca.setButEstado("S");
@@ -134,6 +138,7 @@ public class CampoButaca extends Label{
     }
     
     private void desSeleccionaButaca(){
+        usuario.popSeleccionada(butaca);
         icon.getStyleClass().add("campo-butaca");
         asientos.set(asientos.get()-1);
         butaca.setButEstado("D");
@@ -148,16 +153,14 @@ public class CampoButaca extends Label{
     }
     
     private void guardarButaca(){
+        try{
             ButacaService bs = new ButacaService();
             Respuesta res = new Respuesta();
             res = bs.guardarButaca(butaca);
-            if(res.getEstado()){
-                //System.out.println("actulización en butaca");
-            }
-            else{
-                //butaca.setButEstado("D");
-                //System.out.println("fallo actulización en butaca");
-            }
+        }
+        catch(Exception e){
+            System.out.println("problema guardando estado de butaca");
+        }
     }
     
     public void cambiarDimension(Integer dim){

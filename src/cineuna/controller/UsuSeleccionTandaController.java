@@ -8,6 +8,7 @@ package cineuna.controller;
 import cineuna.cards.CampoButaca;
 import cineuna.model.ButacaDto;
 import cineuna.model.TandaDto;
+import cineuna.model.UsuarioDto;
 import cineuna.service.ButacaService;
 import cineuna.util.AppContext;
 import cineuna.util.LangUtils;
@@ -74,6 +75,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     @FXML
     private FlowPane fp;
     private static ArrayList<ButacaDto> butacasSeleccionadas;
+    private UsuarioDto usuario;
 
     /**
      * Initializes the controller class.
@@ -87,13 +89,11 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         costoTotal=new SimpleIntegerProperty(0);
         AppContext.getInstance().set("asientos",asientos);
         redimensionado();
-        //cargarIdioma();
-        //cargarInfoTanda();
-        //cargarDistribucion();
     }    
 
     @Override
     public void initialize() {
+        this.usuario = AppContext.getInstance().getUsuario();
         butacasSeleccionadas=new ArrayList<>();
         AppContext.getInstance().set("butacasSeleccionadas",butacasSeleccionadas);
         asientos.set(0);
@@ -211,6 +211,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         }
     }
     
+    /**
+     * carga el arrayList de butacas
+     */
     private void cargarListaButacasDtos(){
         ButacaService bs= new ButacaService();
         try{
@@ -227,6 +230,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         cargaButacas();
     }
     
+    /**
+     * carga las butacas y su estado (usada cada vez que refresca)
+     */
     private void cargaButacas(){
         butacasSeleccionadas.clear();//ver si sirve
         butacaList.clear();
@@ -248,10 +254,10 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                     disponible=true;
                 }else if(b.getButEstado().equalsIgnoreCase("S")){
                     seleccionada=true;//estaba seleccionada
-                    //if(propia)
-                    propia = false;//era propia
+                    if(usuario.isSeleccionada(b)){
+                        propia = true;System.out.println("Seleccionada por usuario");//era propia
+                    }
                 }
-                
             }
             
             CampoButaca espacioB = new CampoButaca(dimButaca,disponible,activa,seleccionada,propia);
@@ -295,14 +301,18 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
 
     @FXML
     private void reservar(ActionEvent event) {
-        guardarButacasSeleccionadas();
+        //guardarButacasSeleccionadas();
+        usuario.getButacasSeleccionadas();
         cargarDistribucion();
         cargarListaButacasDtos();
     }
 
     @FXML
     private void cancelar(ActionEvent event) {
-        cancelarButacasSeleccionadas();
+        //cancelarButacasSeleccionadas();
+        usuario.desSeleccionaButacas();
+        costoTotal.set(0);
+        asientos.set(0);
         cargarDistribucion();
         cargarListaButacasDtos();
     }

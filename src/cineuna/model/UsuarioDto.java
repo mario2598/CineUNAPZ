@@ -5,6 +5,9 @@
  */
 package cineuna.model;
 
+import cineuna.service.ButacaService;
+import cineuna.util.Respuesta;
+import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -48,6 +51,8 @@ public class UsuarioDto {
    // @XmlTransient
    // List<CineDto> cineList;
     public Long cineId;
+    private ArrayList<ButacaDto> butacasSeleccionadas;
+    
     
     //Constructors
     public UsuarioDto() {
@@ -64,7 +69,7 @@ public class UsuarioDto {
         this.usuNewpassword = new SimpleStringProperty();
         this.usuCambio = new SimpleStringProperty("N");
         this.usuCodAct = new SimpleStringProperty();
-        
+        this.butacasSeleccionadas=new ArrayList<>();
     }    
 
     //Methods
@@ -197,5 +202,60 @@ public class UsuarioDto {
     public void setCineId(Long cineId) {
         this.cineId = cineId;
     }
-     
+
+    public ArrayList<ButacaDto> getButacasSeleccionadas() {
+        return butacasSeleccionadas;
+    }
+
+    public void setButacasSeleccionadas(ArrayList<ButacaDto> butacasSeleccionadas) {
+        this.butacasSeleccionadas = butacasSeleccionadas;
+    }
+    
+    public Boolean isSeleccionada(ButacaDto butaca){
+        if(butacasSeleccionadas.size()>0)
+            return butacasSeleccionadas.contains(butaca);
+        else return false;
+    }
+    
+    public void pushSeleccionada(ButacaDto butaca){
+        if(!butacasSeleccionadas.contains(butaca))
+            butacasSeleccionadas.add(butaca);System.out.println("push: "+butacasSeleccionadas.size());
+    }
+    
+    public void popSeleccionada(ButacaDto butaca){
+        if(butacasSeleccionadas.contains(butaca))
+            butacasSeleccionadas.remove(butaca);System.out.println("pop: "+butacasSeleccionadas.size());
+    }
+    
+    public void desSeleccionaButacas(){
+        ButacaService bs = new ButacaService();
+        butacasSeleccionadas.stream().forEach(b->{
+            try{
+            Respuesta res = new Respuesta();
+            b.setButEstado("D");
+            res = bs.guardarButaca(b);
+            popSeleccionada(b);
+            }
+            catch(Exception e){
+                System.out.println("problema desseleccionado butacas del usuario actual");
+            }
+        });
+    }
+    
+    public void guardaButacasSeleccionadas(){
+        ButacaService bs = new ButacaService();
+        butacasSeleccionadas.stream().forEach(e->{
+            try{
+            Respuesta res = new Respuesta();
+            e.setButEstado("O");
+            res = bs.guardarButaca(e);
+            popSeleccionada(e);
+            if(!res.getEstado())
+               e.setButEstado("D");
+            }
+            catch(Exception ex){
+              System.out.println("problema desseleccionado butacas del usuario actual");  
+            }
+        });
+    }
 }
