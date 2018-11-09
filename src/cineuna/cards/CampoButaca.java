@@ -37,39 +37,40 @@ public class CampoButaca extends Label{
     private SimpleIntegerProperty asientos;
     private ArrayList<ButacaDto> butacasSeleccionadas;
 
-    public CampoButaca(Integer dim,Boolean disponible,Boolean activa) {
-        inicializaVariables(dim,disponible,activa);
+    public CampoButaca(Integer dim,Boolean disponible,Boolean activa,Boolean seleccionada,Boolean propia) {
+        inicializaVariables(dim,disponible,activa,seleccionada);
 
         this.setPrefSize(dim, dim);
         this.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         this.setAlignment(Pos.CENTER);
         
-        
-        
         this.setOnMouseClicked(event -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
-                if(this.disponible.get())
-                this.seleccionada.set(!this.seleccionada.get());
+                if(this.disponible.get()||propia)
+                    this.seleccionada.set(!this.seleccionada.get());
             }
         });
         
         this.disponible.set(disponible);
+        this.seleccionada.set(seleccionada);
         this.status = false;
         
         
-        inicializaIcono(dim,disponible,activa);
-        iniciarListenerButaca();
+        inicializaIcono(dim,disponible,activa,seleccionada,propia);
+        seleccionaEstadoInicial(seleccionada,propia);
+        iniciarListenerButaca(propia);
     }
     
-    private void inicializaVariables(Integer dim,Boolean disponible,Boolean activa){
+    private void inicializaVariables(Integer dim,Boolean disponible,Boolean activa,Boolean seleccionada){
+        this.icon=new MaterialDesignIconView();
         butacasSeleccionadas = (ArrayList<ButacaDto>) AppContext.getInstance().get("butacasSeleccionadas");
         asientos=(SimpleIntegerProperty) AppContext.getInstance().get("asientos");
         dimension = new SimpleIntegerProperty(dim);
         this.disponible = new SimpleBooleanProperty(true);
-        this.seleccionada=new SimpleBooleanProperty();
+        this.seleccionada=new SimpleBooleanProperty(false);
     }
     
-    private void inicializaIcono(Integer dim,Boolean disponible,Boolean activa){
+    private void inicializaIcono(Integer dim,Boolean disponible,Boolean activa,Boolean seleccionada,Boolean propia){
         if(activa){
             MaterialDesignIconView iconButaca = new MaterialDesignIconView(MaterialDesignIcon.READABILITY);
             iconButaca.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
@@ -78,42 +79,41 @@ public class CampoButaca extends Label{
             this.icon = iconButaca;
             this.getStylesheets().add("cineuna/cards/StyleCards.css");
             icon.getStyleClass().clear();
-            if(disponible){
-                System.out.println("butaca disponible");
-                icon.getStyleClass().add("campo-butaca"); 
-            }
-            else{
-                System.out.println("butaca no disponible");
-                icon.getStyleClass().add("campo-butaca-ocupada");
-            } 
-                
+            seleccionaEstiloInicial(disponible,seleccionada,propia);
+               
             this.setGraphic(icon);
         
         }
     }
     
-    private void iniciarListenerButaca(){
-        //if(butaca.getButActiva().equalsIgnoreCase("A")){
+    private void seleccionaEstiloInicial(Boolean disponible,Boolean seleccionada,Boolean propia){
+        if(disponible)
+            icon.getStyleClass().add("campo-butaca");
+        else if(seleccionada){
+            if(propia)
+              icon.getStyleClass().add("campo-butaca-sel");//seleccionada propia
+            else
+              icon.getStyleClass().add("campo-butaca-sel-otro");//seleccionada otro  
+        }
+        else
+           icon.getStyleClass().add("campo-butaca-ocupada");//reservada    
+    }
+    
+    private void iniciarListenerButaca(Boolean propia){
         seleccionada.addListener(e->{
-            if(butaca.getButActiva().equalsIgnoreCase("A")){
+            if(butaca.getButActiva().equalsIgnoreCase("A")){//&& seleccionador==AppContext.getInstance().getUsuario();
             icon.getStyleClass().clear();
             icon.setSize(String.valueOf(dimension.get()*1.1));
             cambiarDimension(dimension.get());//revisar esto
             if(seleccionada.get()){
-               icon.getStyleClass().add("campo-butaca-sel");
-               asientos.set(asientos.get()+1);
-               butacasSeleccionadas.add(butaca);
-               System.out.println("Butaca añadida:"+butacasSeleccionadas.size());
+               seleccionaButaca();
             }
             else{
-               icon.getStyleClass().add("campo-butaca");
-               asientos.set(asientos.get()-1);
-               butacasSeleccionadas.remove(butaca);
-               System.out.println("Butaca eliminada:"+butacasSeleccionadas.size());
+               desSeleccionaButaca();
             }
+            guardarButaca();
             }
         });
-        //}
         
         disponible.addListener(l->{
             if(disponible.get()){
@@ -123,6 +123,41 @@ public class CampoButaca extends Label{
                icon.getStyleClass().add("campo-butaca-ocupada"); 
             }
         });
+    }
+    
+    private void seleccionaButaca(){
+        icon.getStyleClass().add("campo-butaca-sel");
+        asientos.set(asientos.get()+1);
+        butaca.setButEstado("S");
+        butacasSeleccionadas.add(butaca);
+        // System.out.println("Butaca añadida:"+butacasSeleccionadas.size());
+    }
+    
+    private void desSeleccionaButaca(){
+        icon.getStyleClass().add("campo-butaca");
+        asientos.set(asientos.get()-1);
+        butaca.setButEstado("D");
+        butacasSeleccionadas.remove(butaca);
+        //System.out.println("Butaca eliminada:"+butacasSeleccionadas.size());
+    }
+    
+    private void seleccionaEstadoInicial(Boolean seleccionada,Boolean propia){
+        if(seleccionada&&propia){
+            seleccionaButaca();
+        }
+    }
+    
+    private void guardarButaca(){
+            ButacaService bs = new ButacaService();
+            Respuesta res = new Respuesta();
+            res = bs.guardarButaca(butaca);
+            if(res.getEstado()){
+                //System.out.println("actulización en butaca");
+            }
+            else{
+                //butaca.setButEstado("D");
+                //System.out.println("fallo actulización en butaca");
+            }
     }
     
     public void cambiarDimension(Integer dim){

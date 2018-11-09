@@ -48,6 +48,7 @@ and open the template in the editor.
     -fx-base-color-campo-butaca-hover:#2B2B2B;
     -fx-base-color-campo-butaca-sel:green;
     -fx-base-color-campo-butaca-oc:#FF0A0A;
+    -fx-base-color-campo-butaca-sel-otro:#2B2B2B;
     
     -fx-base-color-hb:#272727;
 }
@@ -219,4 +220,11 @@ and open the template in the editor.
 .campo-butaca-ocupada{
     -glyph-size: 40px;
     -fx-fill: -fx-base-color-campo-butaca-oc;
+}
+
+.campo-butaca-sel-otro{
+    -glyph-size: 40px;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 10;
+    -fx-fill: -fx-base-color-campo-butaca-sel-otro;
 }
