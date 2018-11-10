@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -71,19 +72,21 @@ public class MovieDto {
     //Constructors     
     public MovieDto() {
         movieNombre = new SimpleStringProperty();
+        movieNombreing = new SimpleStringProperty();
         movieResena = new SimpleStringProperty();
+        movieResenaing = new SimpleStringProperty();
         movieUrlesp = new SimpleStringProperty();
         movieUrleng = new SimpleStringProperty();
         movieDate = new SimpleObjectProperty<>();
-        if(movieUrlimg!=null)
-        System.out.println("movieUrlimg"+movieUrlimg.toString());
-        else{
-            System.out.println("movieUrlimg: null");
-        }
         moviePortada = new SimpleStringProperty();
         movieDuracion = new SimpleStringProperty();
         movieNombreing = new SimpleStringProperty();
         movieResenaing = new SimpleStringProperty();
+        if(movieUrlimg!=null)
+            System.out.println("movieUrlimg" + Arrays.toString(movieUrlimg));
+        else{
+            System.out.println("movieUrlimg: null");
+        }
     }
     
     //Methods
@@ -102,8 +105,8 @@ public class MovieDto {
     }
     
     public void crearImagenDesdeByte() throws FileNotFoundException, IOException{
-            String outPutFile = "src\\cineuna\\resources\\images\\"+movieNombre.getValue()+".jpg";
-            File someFile = new File(outPutFile);
+        String outPutFile = "src\\cineuna\\resources\\images\\" + movieNombre.getValue()+".jpg";
+        File someFile = new File(outPutFile);
         try (FileOutputStream fos = new FileOutputStream(someFile)) {
             fos.write(movieUrlimg);
             fos.flush();
@@ -113,17 +116,18 @@ public class MovieDto {
     public void guardarImagenByte(File file) throws FileNotFoundException{
         //File file = new File(path);
         try{
-        FileInputStream fis = new FileInputStream(file);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        byte[] buf = new byte[1024];
-        try {
-            for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                bos.write(buf, 0, readNum);
+            FileInputStream fis = new FileInputStream(file);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            try {
+                for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                    bos.write(buf, 0, readNum);
+                }
+            } catch (IOException ex) {
+
             }
-        } catch (IOException ex) {
-        }
-        movieUrlimg = bos.toByteArray();
-        System.out.println("imagen creada: "+movieUrlimg.toString());
+            movieUrlimg = bos.toByteArray();
+            System.out.println("imagen creada: "+Arrays.toString(movieUrlimg));
         }
         catch(NullPointerException e){
                 System.out.println("Imagen seleccionada nula");

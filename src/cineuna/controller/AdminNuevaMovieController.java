@@ -265,18 +265,18 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     }
     
     private void cargarIdioma(){
-        LangUtils.getInstance().loadLabelLang(lblLenguajes, "lblLenguajes");
-        LangUtils.getInstance().loadLabelLang(lblEstreno, "lblEstreno");
-        LangUtils.getInstance().loadLabelLang(lblEstado, "lblEstado");
-        LangUtils.getInstance().loadLabelLang(lblTipo, "lblTipo");
-        LangUtils.getInstance().loadLabelLang(lblDuracion, "lblDuracion");
-        LangUtils.getInstance().loadLabelLang(lblSegundos, "lblSegundos");
-        LangUtils.getInstance().loadCheckBoxLang(chkBoxEsp1, "chkBoxEsp1");
-        LangUtils.getInstance().loadCheckBoxLang(chkBoxEng1, "chkBoxEng1");
-        LangUtils.getInstance().loadTabLang(tabInfoEsp, "tabInfoEsp");
-        LangUtils.getInstance().loadTabLang(tabInfoEng, "tabInfoEng");
-        LangUtils.getInstance().loadButtonLang(btnGuardar, "btnGuardar");
-        LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
+//        LangUtils.getInstance().loadLabelLang(lblLenguajes, "lblLenguajes");
+//        LangUtils.getInstance().loadLabelLang(lblEstreno, "lblEstreno");
+//        LangUtils.getInstance().loadLabelLang(lblEstado, "lblEstado");
+//        LangUtils.getInstance().loadLabelLang(lblTipo, "lblTipo");
+//        LangUtils.getInstance().loadLabelLang(lblDuracion, "lblDuracion");
+//        LangUtils.getInstance().loadLabelLang(lblSegundos, "lblSegundos");
+//        LangUtils.getInstance().loadCheckBoxLang(chkBoxEsp1, "chkBoxEsp1");
+//        LangUtils.getInstance().loadCheckBoxLang(chkBoxEng1, "chkBoxEng1");
+//        LangUtils.getInstance().loadTabLang(tabInfoEsp, "tabInfoEsp");
+//        LangUtils.getInstance().loadTabLang(tabInfoEng, "tabInfoEng");
+//        LangUtils.getInstance().loadButtonLang(btnGuardar, "btnGuardar");
+//        LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
     }
     
 }
