@@ -8,7 +8,9 @@ package cineuna.controller;
 import cineuna.cards.AdminEspacioButaca;
 import cineuna.model.ButacaDto;
 import cineuna.model.SalaDto;
+import cineuna.model.UsuarioDto;
 import cineuna.service.SalaService;
+import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
@@ -194,7 +196,7 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
                 if(butaca!=null)
                     newSala.getButacaList().add(butaca);
             });
-            newSala.setCineId(new Long(3));
+            newSala.setCineId(AppContext.getInstance().getUsuario().getCineID());
             SalaService salaServ = new SalaService();
             Respuesta resp = salaServ.guardarSala(newSala);
             if(resp.getEstado()){

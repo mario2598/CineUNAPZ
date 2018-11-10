@@ -56,10 +56,11 @@ public class UsuarioDto {
     @XmlTransient
     public SimpleStringProperty usuCodAct;
     @XmlTransient
+    private Long cineID;
+    @XmlTransient
     public byte[] usuImg;
    // @XmlTransient
    // List<CineDto> cineList;
-    public Long cineId;
     private ArrayList<ButacaDto> butacasSeleccionadas;
     private Boolean existe;
     
@@ -96,6 +97,7 @@ public class UsuarioDto {
         this.usuAdmin = u.usuAdmin;
         this.usuNewpassword = u.usuNewpassword;
         this.usuCambio = u.usuCambio;
+        this.cineID = u.getCineID();
     }
     
     //Getters and Setters
@@ -204,14 +206,6 @@ public class UsuarioDto {
     public void setUsuCodAct(String usuCodAct) {
         this.usuCodAct.set(usuCodAct);
     }
-    
-    public Long getCineId() {
-        return cineId;
-    }
-
-    public void setCineId(Long cineId) {
-        this.cineId = cineId;
-    }
 
     public ArrayList<ButacaDto> getButacasSeleccionadas() {
         return butacasSeleccionadas;
@@ -219,6 +213,14 @@ public class UsuarioDto {
 
     public void setButacasSeleccionadas(ArrayList<ButacaDto> butacasSeleccionadas) {
         this.butacasSeleccionadas = butacasSeleccionadas;
+    }
+
+    public Long getCineID() {
+        return cineID;
+    }
+
+    public void setCineID(Long cineID) {
+        this.cineID = cineID;
     }
     
     public Boolean isSeleccionada(ButacaDto butaca){
