@@ -60,6 +60,10 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @FXML
     private WebView webView;
     //public ObjectProperty<YouTubeVideo> youTubeVideo;
+    @FXML
+    private Label lblDuracion;
+    @FXML
+    private Label lblMsjDuracion;
 
     /**
      * Initializes the controller class.
@@ -80,7 +84,9 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
         pelicula=(MovieDto) AppContext.getInstance().get("peliculaSel");
         cargarTandas();
         cargarIdioma();
-        cargarInfoPelicula();
+        if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
+            cargarInfoPelicula();
+        else cargarInfoPeliculaI();
     }
 
     /**
@@ -115,6 +121,13 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
         lblFecha.setText(pelicula.getMovieDate().toString());
         lblNombre.setText(pelicula.getMovieNombre());
         lblResenna.setText(pelicula.getMovieResena());
+    }
+    
+    private void cargarInfoPeliculaI(){
+        imgPoster.setImage(pelicula.abrirImagen());
+        lblFecha.setText(pelicula.getMovieDate().toString());
+        lblNombre.setText(pelicula.getMovieNombreing());
+        lblResenna.setText(pelicula.getMovieResenaing());
     }
     
     private void cargarTandas(){
@@ -165,6 +178,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             LangUtils.getInstance().setLang("eng");
         
         LangUtils.getInstance().loadLabelLang(lblMsjFecha, "lblMsjFecha");
+        LangUtils.getInstance().loadLabelLang(lblMsjDuracion, "lblMsjDuracion");
     }
     
     private void buscarTandas(){
