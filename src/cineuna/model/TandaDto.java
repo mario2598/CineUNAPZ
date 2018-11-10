@@ -27,21 +27,29 @@ public class TandaDto {
     @XmlTransient
     private Long tandaCobro;
     @XmlTransient
-    //@XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private ObjectProperty<LocalDate> tandaHinicio;
-    //@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
-    //private LocalDateTime tandaHfin;
-    @XmlTransient
-    private ObjectProperty<LocalDate> tandaHfin;
-    @XmlTransient
     private MovieDto movieId;
     @XmlTransient
     private SalaDto salaId;
     private Integer horaTanda;
+    @XmlTransient
+    private Long tandaInihh;
+    @XmlTransient
+    private Long tandaInimm;
+    @XmlTransient
+    private Long tandaFinhh;
+    @XmlTransient
+    private Long tandaFinmm;
+    //@XmlTransient
+    //@XmlJavaTypeAdapter(LocalDateAdapter.class)
+    //private ObjectProperty<LocalDate> tandaHinicio;
+    //@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    //private LocalDateTime tandaHfin;
+    //@XmlTransient
+    //private ObjectProperty<LocalDate> tandaHfin;
      
     public TandaDto() {
-        this.tandaHinicio=new SimpleObjectProperty<>();
-        this.tandaHfin=new SimpleObjectProperty<>();
+        //this.tandaHinicio=new SimpleObjectProperty<>();
+        //this.tandaHfin=new SimpleObjectProperty<>();
     }
 
     public Long getTandaId() {
@@ -59,7 +67,7 @@ public class TandaDto {
     public void setTandaCobro(Long tandaCobro) {
         this.tandaCobro = tandaCobro;
     }
-
+/*
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getTandaHinicio() {
         return tandaHinicio.get();
@@ -79,6 +87,7 @@ public class TandaDto {
     public void setTandaHfin(LocalDate tandaHinicio) {
         this.tandaHfin.set(tandaHinicio);
     }
+    */
 /*
     public LocalDateTime getTandaHfin() {
         return tandaHfin;
@@ -129,6 +138,38 @@ public class TandaDto {
 
     public void setHoraTanda(Integer horaTanda) {
         this.horaTanda = horaTanda;
+    }
+
+    public Long getTandaInihh() {
+        return tandaInihh;
+    }
+
+    public void setTandaInihh(Long tandaInihh) {
+        this.tandaInihh = tandaInihh;
+    }
+
+    public Long getTandaInimm() {
+        return tandaInimm;
+    }
+
+    public void setTandaInimm(Long tandaInimm) {
+        this.tandaInimm = tandaInimm;
+    }
+
+    public Long getTandaFinhh() {
+        return tandaFinhh;
+    }
+
+    public void setTandaFinhh(Long tandaFinhh) {
+        this.tandaFinhh = tandaFinhh;
+    }
+
+    public Long getTandaFinmm() {
+        return tandaFinmm;
+    }
+
+    public void setTandaFinmm(Long tandaFinmm) {
+        this.tandaFinmm = tandaFinmm;
     }
       
 }
