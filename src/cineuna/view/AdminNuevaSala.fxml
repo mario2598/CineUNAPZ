@@ -22,9 +22,12 @@
          <children>
             <VBox alignment="CENTER" spacing="20.0">
                <children>
-                  <JFXTextField fx:id="txtNombre" maxWidth="180.0" prefHeight="27.0" promptText="Nombre" />
-                  <JFXComboBox fx:id="cmbBoxTipo" prefHeight="27.0" prefWidth="165.0" promptText="Tipo" />
-                  <JFXToggleButton fx:id="toggleBtnHabilitada" contentDisplay="RIGHT" graphicTextGap="10.0" selected="true" size="8.0" text="Habilitada" textFill="#bcbcbc" />
+                  <JFXTextField fx:id="txtNombre" maxWidth="180.0" prefHeight="27.0" promptText="Nombre" styleClass="admin-text-field" />
+                  <JFXComboBox fx:id="cmbBoxTipo" prefHeight="27.0" prefWidth="165.0" promptText="Tipo" styleClass="admin-combo-box" />
+                  <JFXToggleButton fx:id="toggleBtnHabilitada" contentDisplay="RIGHT" graphicTextGap="10.0" selected="true" styleClass="admin-toggle-button" text="Habilitada" textFill="#bcbcbc">
+                     <font>
+                        <Font size="15.0" />
+                     </font></JFXToggleButton>
                </children>
             </VBox>
             <VBox alignment="CENTER" spacing="20.0">

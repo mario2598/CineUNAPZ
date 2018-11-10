@@ -36,14 +36,13 @@ public class AdminEspacioButaca extends Label{
         MaterialDesignIconView iconButaca = new MaterialDesignIconView(MaterialDesignIcon.READABILITY);
         iconButaca.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
         iconButaca.setSize(String.valueOf(dim*1.1));
-        iconButaca.setFill(Paint.valueOf("#000000"));
+        iconButaca.setFill(Paint.valueOf("#bcbcbc"));
         this.icon = iconButaca;
         this.setOnMouseClicked(event -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
                 toggleStatus();
             }
         });
-        this.getStylesheets().add("cineuna/cards/StyleCards.css");
         this.status = true;
         this.setGraphic(icon);
     }
