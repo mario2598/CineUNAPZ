@@ -5,10 +5,15 @@
  */
 package cineuna.model;
 
+import cineuna.util.LocalDateAdapter;
+import java.time.LocalDate;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
@@ -30,10 +35,12 @@ public class ComprobanteDto {
     private Long salaId;
     @XmlTransient
     private Long usuId;
+    @XmlTransient
+    public ObjectProperty<LocalDate> compDate;
     
     //Constructors
     public ComprobanteDto() {
-        
+        compDate=new SimpleObjectProperty<>();
     }
     
     //Methods
@@ -93,6 +100,16 @@ public class ComprobanteDto {
 
     public void setUsuId(Long usuId) {
         this.usuId = usuId;
+    }
+    
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public LocalDate getCompDate() {
+        return compDate.get();
+    }
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public void setCompDate(LocalDate compDate) {
+        this.compDate.set(compDate);
     }
 
 }

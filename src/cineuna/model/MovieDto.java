@@ -60,7 +60,7 @@ public class MovieDto {
     private ArrayList<TandaDto> tandaList = new ArrayList<>();
     @XmlTransient
     private ArrayList<ReviewDto> reviewList = new ArrayList<>();
-    @XmlTransient
+    //@XmlTransient
     private byte[] movieUrlimg;
     @XmlTransient
     public SimpleStringProperty movieNombreing;
@@ -269,6 +269,14 @@ public class MovieDto {
 
     public void setMovieResenaing(String movieResenaing) {
         this.movieResenaing.set(movieResenaing);
+    }
+
+    public byte[] getMovieUrlimg() {
+        return movieUrlimg;
+    }
+
+    public void setMovieUrlimg(byte[] movieUrlimg) {
+        this.movieUrlimg = movieUrlimg;
     }
     
 }

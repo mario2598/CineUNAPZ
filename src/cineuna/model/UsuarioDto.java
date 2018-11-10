@@ -55,6 +55,8 @@ public class UsuarioDto {
     public SimpleStringProperty usuCambio;
     @XmlTransient
     public SimpleStringProperty usuCodAct;
+    @XmlTransient
+    public byte[] usuImg;
    // @XmlTransient
    // List<CineDto> cineList;
     public Long cineId;

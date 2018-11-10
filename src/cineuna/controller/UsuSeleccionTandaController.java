@@ -129,6 +129,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
+                        apReserva.getChildren().clear();
                         cargarDistribucion();
                         cargarListaButacas();
                     }
