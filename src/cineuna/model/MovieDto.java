@@ -60,7 +60,12 @@ public class MovieDto {
     private ArrayList<TandaDto> tandaList = new ArrayList<>();
     @XmlTransient
     private ArrayList<ReviewDto> reviewList = new ArrayList<>();
+    @XmlTransient
     private byte[] movieUrlimg;
+    @XmlTransient
+    public SimpleStringProperty movieNombreing;
+    @XmlTransient
+    public SimpleStringProperty movieResenaing;
     
      
     //Constructors     
@@ -77,6 +82,8 @@ public class MovieDto {
         }
         moviePortada = new SimpleStringProperty();
         movieDuracion = new SimpleStringProperty();
+        movieNombreing = new SimpleStringProperty();
+        movieResenaing = new SimpleStringProperty();
     }
     
     //Methods
@@ -90,6 +97,8 @@ public class MovieDto {
         this.movieEstado = m.getMovieEstado();
         this.setMoviePortada(m.getMoviePortada());
         this.setMovieDuracion(m.getMovieDuracion());
+        this.setMovieNombreing(m.getMovieNombreing());
+        this.setMovieResenaing(m.getMovieResenaing());
     }
     
     public void crearImagenDesdeByte() throws FileNotFoundException, IOException{
@@ -244,6 +253,22 @@ public class MovieDto {
 
     public void setMovieTipo(String movieTipo) {
         this.movieTipo = movieTipo;
+    }
+
+    public String getMovieNombreing() {
+        return movieNombreing.get();
+    }
+
+    public void setMovieNombreing(String movieNombreing) {
+        this.movieNombreing.set(movieNombreing);
+    }
+
+    public String getMovieResenaing() {
+        return movieResenaing.get();
+    }
+
+    public void setMovieResenaing(String movieResenaing) {
+        this.movieResenaing.set(movieResenaing);
     }
     
 }
