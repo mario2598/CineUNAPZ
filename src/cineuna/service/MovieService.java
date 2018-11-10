@@ -46,11 +46,7 @@ public class MovieService {
         }
     }
     
-<<<<<<< HEAD
-    public Respuesta getReport(LocalDate f1,LocalDate f2){
-=======
-        public Respuesta getReport(String f1,String f2){
->>>>>>> master5_mario/7/11
+  public Respuesta getReport(String f1,String f2){
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("date1", f1);

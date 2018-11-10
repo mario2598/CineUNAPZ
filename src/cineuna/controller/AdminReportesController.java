@@ -11,6 +11,7 @@ import cineuna.service.UsuarioService;
 import cineuna.util.LocalDateAdapter;
 import cineuna.util.Mensaje;
 import cineuna.util.Respuesta;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import java.awt.Desktop;
 import java.io.File;
@@ -30,6 +31,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
@@ -43,6 +46,14 @@ public class AdminReportesController extends Controller implements Initializable
     private JFXDatePicker DP1;
     @FXML
     private JFXDatePicker DP2;
+    @FXML
+    private VBox vbDate;
+    @FXML
+    private VBox vbId;
+    @FXML
+    private JFXComboBox<?> cbList;
+    @FXML
+    private StackPane spBtn;
     /* * Initializes the controller class.
      * @param url
      * @param rb
@@ -97,5 +108,22 @@ public class AdminReportesController extends Controller implements Initializable
             fos.flush();
             fos.close();
             new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar reporte", getStage(), "reporte creado correctamente.");
+    }
+
+    @FXML
+    private void genReporteMovie(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnVBList(ActionEvent event) {
+        vbDate.setVisible(true);
+        spBtn.setVisible(false);
+        
+    }
+
+    @FXML
+    private void btnVbId(ActionEvent event) {
+        vbDate.setVisible(true);
+        spBtn.setVisible(false);
     }
 }
