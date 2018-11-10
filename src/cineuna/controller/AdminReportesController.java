@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -42,8 +43,7 @@ public class AdminReportesController extends Controller implements Initializable
     private JFXDatePicker DP1;
     @FXML
     private JFXDatePicker DP2;
-    /**
-     * Initializes the controller class.
+    /* * Initializes the controller class.
      * @param url
      * @param rb
      */
@@ -62,17 +62,17 @@ public class AdminReportesController extends Controller implements Initializable
 
     @FXML
     private void genReporte(ActionEvent event) {
+        
         if(DP1.getValue() == null||DP2.getValue() == null){
             new Mensaje().showModal(Alert.AlertType.ERROR, "Datos vacios", getStage(), "Es necesario llenar los campos de la fecha");
         }
         else{
-            
-        
-         try {
+            String date1 = DP1.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE );
+            String date2 = DP2.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE );
+        try {
             MovieService mService = new MovieService();
-            String f1 = DP1.getValue().toString();
-            String f2 = DP2.getValue().toString();
-            Respuesta respuesta = mService.getReport(f1,f2);
+            
+            Respuesta respuesta = mService.getReport(date1,date2);
              if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Generar  reporte", getStage(), respuesta.getMensaje());
                 } else {
