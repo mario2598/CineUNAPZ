@@ -172,7 +172,9 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
         UsuarioService uService = new UsuarioService();
         try{
         uService.guardarUsuario(usuario);
-        
+        String str="";
+        if(str.contains("watch"))
+           str.replace("watch", "embed");
         }
         catch(Exception e){
             

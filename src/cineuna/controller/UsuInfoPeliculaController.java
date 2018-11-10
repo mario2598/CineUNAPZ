@@ -90,8 +90,19 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @FXML
     private void verTrailer(MouseEvent event) {
         this.apVideo.setVisible(true);
-        webView.getEngine().load("<iframe width=\"853\" height=\"480\" src=\"https://www.youtube.com/embed/yVjEnuPUSMk\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
-        //webView.getEngine().load("http://www.youtube.com/embed?v="+"k0BWlvnBmIE"+"?fs=0&rel=0&showinfo=0&autoplay=1");
+        String url;
+        if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
+            url=pelicula.getMovieUrleng();
+        else url=pelicula.getMovieUrlesp();
+        
+        cambiarTipoUrl(url);
+        webView.getEngine().load(url);
+        
+    }
+    
+    private void cambiarTipoUrl(String url){
+        if(url.contains("watch"))
+            url.replace("watch", "embed");
     }
     
     private void getVideoID(){
@@ -127,7 +138,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
                 System.out.println("lista tandas size:"+ listaDto.size());
             for(TandaDto t: listaDto){
                 //System.out.println("Hora"+t.getHoraTanda());
-                JFXButton btnTanda = new JFXButton(/*t.getHoraTanda().toString()*/);
+                JFXButton btnTanda = new JFXButton(t.getTandaInihh()+":"+t.getTandaInimm());
                 
                 //JFXButton btnTanda = new JFXButton("");
                 btnTanda.setOnAction(c->{  
