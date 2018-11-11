@@ -154,7 +154,7 @@ public class CampoButaca extends Label{
         usuario.pushSeleccionada(this);
         icon.getStyleClass().add("campo-butaca-sel");
         asientos.set(asientos.get()+1);
-        butaca.setButEstado("S");//cambiar a reserva
+        //butaca.setButEstado("S");//cambiar a reserva
         guardarButaca();
     }
     

@@ -213,6 +213,7 @@ public class LogInController extends Controller implements Initializable {
                          if(usuDto.getUsuEstado().equals("A")){//si está activo
                              if(usuDto.getUsuAdmin().equalsIgnoreCase("S")){
                                  AppContext.getInstance().set("administrador", (Boolean)true);
+                                 AppContext.getInstance().setUsuario(usuDto);
                              } 
                              else{
                                  AppContext.getInstance().set("administrador", (Boolean)false);   
