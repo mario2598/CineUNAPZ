@@ -60,6 +60,10 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @FXML
     private WebView webView;
     //public ObjectProperty<YouTubeVideo> youTubeVideo;
+    @FXML
+    private Label lblDuracion;
+    @FXML
+    private Label lblMsjDuracion;
 
     /**
      * Initializes the controller class.
@@ -80,7 +84,9 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
         pelicula=(MovieDto) AppContext.getInstance().get("peliculaSel");
         cargarTandas();
         cargarIdioma();
-        cargarInfoPelicula();
+        if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
+            cargarInfoPelicula();
+        else cargarInfoPeliculaI();
     }
 
     /**
@@ -90,8 +96,19 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @FXML
     private void verTrailer(MouseEvent event) {
         this.apVideo.setVisible(true);
-        webView.getEngine().load("<iframe width=\"853\" height=\"480\" src=\"https://www.youtube.com/embed/yVjEnuPUSMk\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
-        //webView.getEngine().load("http://www.youtube.com/embed?v="+"k0BWlvnBmIE"+"?fs=0&rel=0&showinfo=0&autoplay=1");
+        String url;
+        if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
+            url=pelicula.getMovieUrleng();
+        else url=pelicula.getMovieUrlesp();
+        
+        cambiarTipoUrl(url);
+        webView.getEngine().load(url);
+        
+    }
+    
+    private void cambiarTipoUrl(String url){
+        if(url.contains("watch"))
+            url.replace("watch", "embed");
     }
     
     private void getVideoID(){
@@ -104,6 +121,13 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
         lblFecha.setText(pelicula.getMovieDate().toString());
         lblNombre.setText(pelicula.getMovieNombre());
         lblResenna.setText(pelicula.getMovieResena());
+    }
+    
+    private void cargarInfoPeliculaI(){
+        imgPoster.setImage(pelicula.abrirImagen());
+        lblFecha.setText(pelicula.getMovieDate().toString());
+        lblNombre.setText(pelicula.getMovieNombreing());
+        lblResenna.setText(pelicula.getMovieResenaing());
     }
     
     private void cargarTandas(){
@@ -127,7 +151,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
                 System.out.println("lista tandas size:"+ listaDto.size());
             for(TandaDto t: listaDto){
                 //System.out.println("Hora"+t.getHoraTanda());
-                JFXButton btnTanda = new JFXButton(/*t.getHoraTanda().toString()*/);
+                JFXButton btnTanda = new JFXButton(t.getTandaInihh()+":"+t.getTandaInimm());
                 
                 //JFXButton btnTanda = new JFXButton("");
                 btnTanda.setOnAction(c->{  
@@ -154,6 +178,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             LangUtils.getInstance().setLang("eng");
         
         LangUtils.getInstance().loadLabelLang(lblMsjFecha, "lblMsjFecha");
+        LangUtils.getInstance().loadLabelLang(lblMsjDuracion, "lblMsjDuracion");
     }
     
     private void buscarTandas(){

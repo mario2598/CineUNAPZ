@@ -124,10 +124,8 @@ public class UsuInicioController extends Controller implements Initializable {
         Integer idioma=Integer.valueOf(usuario.usuIdioma.getValue());
         if(idioma.equals(1)){
             LangUtils.getInstance().setLang("es");
-            //System.out.println("español-> "+idioma);
         }
         else{
-           // System.out.println("inglés-> "+idioma);
             LangUtils.getInstance().setLang("eng");
         }
         
