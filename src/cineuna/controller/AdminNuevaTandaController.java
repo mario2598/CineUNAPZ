@@ -8,8 +8,10 @@ package cineuna.controller;
 import cineuna.cards.AdminMovieCard;
 import cineuna.cards.AdminSmallMovieCard;
 import cineuna.model.MovieDto;
+import cineuna.model.SalaDto;
 import cineuna.model.TandaDto;
 import cineuna.service.MovieService;
+import cineuna.service.TandaService;
 import cineuna.util.AppContext;
 import cineuna.util.DateUtil;
 import cineuna.util.FlowController;
@@ -53,9 +55,11 @@ public class AdminNuevaTandaController extends Controller implements Initializab
     
     //Attributes 
     private final MovieService movieService = new MovieService();
+    private final TandaService tandaService = new TandaService();
     private TandaDto tanda;
     private AdminMovieCard card;
     private Boolean editando;
+    private String mensajeAlerta;
     
     //Initializers
     /**
@@ -192,27 +196,31 @@ public class AdminNuevaTandaController extends Controller implements Initializab
             Integer mm = tanda.getTandaInimm().intValue();
             Integer mm2 = DateUtil.getMinutos(movieDuracion);
             mm += mm2;
-            if(mm>60){
+            if(mm>=60){
                 mm-=60;
                 hh++;
             }
-            if(hh>24)
+            if(hh>=24)
                 hh-=24;
-            if(hh>12)
+            tanda.setTandaFinhh(new Long(hh));
+            tanda.setTandaFinmm(new Long(mm));
+            String ampm;
+            if(hh>=12){
                 hh -= 12;
+                ampm = " pm";
+            } else {
+                ampm = " am";
+            }
             String horaFin = "";
             if(hh<10)
                 horaFin += "0";
-            horaFin = String.valueOf(hh);
+            horaFin += String.valueOf(hh);
             horaFin += ":";
-            horaFin += String.valueOf(mm);
-            if(hh<12){
-                horaFin += " am";
-            } else {
-                horaFin += " pm";
+            if(mm<10){
+                horaFin += "0";
             }
-            tanda.setTandaFinhh(new Long(hh));
-            tanda.setTandaFinmm(new Long(mm));
+            horaFin += String.valueOf(mm);
+            horaFin += ampm;
             lblHoraFinData.setText(horaFin);
         } else {
             System.out.println("entra al elseg jksndfgkjshdfg");
@@ -220,8 +228,30 @@ public class AdminNuevaTandaController extends Controller implements Initializab
     }
     
     private Boolean evaluarDatosRequeridos(){
-        //TODO
-        return true;
+        Boolean hayError = false;
+        mensajeAlerta = "Se ha producido los siguientes errores:";
+        if(txtPrecioEntrada.getText().isEmpty()){
+            mensajeAlerta += "\n\tFalta introducir el precio de la entrada en esta sala.";
+            hayError = true;
+        } else {
+            try{
+                Integer precio = Integer.valueOf(txtPrecioEntrada.getText());
+            } catch(NumberFormatException | ClassCastException ex){
+                hayError = true;
+                mensajeAlerta += "\n\tSe están ingresando datos alfabéticos como precio.";
+            }
+        }
+        if(timePickerHoraIni.getValue()==null){
+            hayError = true;
+            mensajeAlerta += "\n\tFalta registrar la hora de ingreso a esta tanda.";
+        }
+        if(tanda.getMovieId()==null){
+            hayError = true;
+            mensajeAlerta += "\n\tFalta seleccionar la película que estará en cartelera durante esta tanda.";
+        }
+        if(!hayError)
+            mensajeAlerta = null;
+        return hayError;
     }
     
     private void salir(){
@@ -238,12 +268,21 @@ public class AdminNuevaTandaController extends Controller implements Initializab
 
     @FXML
     private void btnGuardarAction(ActionEvent event) {
-        if(evaluarDatosRequeridos()){
-            //TODO (Guardar la tanda en base de datos)
-            ((SimpleBooleanProperty) AppContext.getInstance().get("AdminNewTandaProperty")).set(true);
-            salir();
+        if(!evaluarDatosRequeridos()){
+            try{
+                tanda.setSalaId((SalaDto) AppContext.getInstance().get("AdminShowingSala"));
+                Respuesta resp = tandaService.guardarTanda(tanda);
+                if(!resp.getEstado()){
+                    ((SimpleBooleanProperty) AppContext.getInstance().get("AdminNewTandaProperty")).set(true);
+                    salir();
+                } else {
+                    System.out.println("Se ha producido un error guardando la nueva tanda.\nError: " + resp.getMensaje());
+                }
+            } catch(Exception ex){
+                System.out.println("Se ha producido un error guardando la nueva tanda.\nError: " + ex);
+            }
         } else {
-            System.out.println("Hacen falta datos necesarios para poder crear la nueva tanda.");
+            System.out.println("Hacen falta datos necesarios para poder crear la nueva tanda.\n" + mensajeAlerta);
         }
     }
 

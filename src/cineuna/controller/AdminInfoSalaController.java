@@ -122,8 +122,7 @@ public class AdminInfoSalaController extends Controller implements Initializable
     @Override
     public void initialize() {
         spMovie.getChildren().clear();
-        sala = (SalaDto) AppContext.getInstance().get("manteSala");
-        //this.txtPrueba.setText("Mostrando informacion de la sala: " + sala.getSalaNombre());
+        sala = (SalaDto) AppContext.getInstance().get("AdminShowingSala");
         mostrarInfoSala();
         cargarTandas();
         cargarIdioma();
@@ -169,13 +168,39 @@ public class AdminInfoSalaController extends Controller implements Initializable
     private void mostrarInfoTanda(TandaDto tanda){
         spMovie.getChildren().clear();
         spMovie.getChildren().add(generarMovieCard(tanda.getMovieId()));
+        lblTandaHoraIni.setText(castTime(tanda.getTandaInihh(), tanda.getTandaInimm()));
+        lblTandaHoraFin.setText(castTime(tanda.getTandaFinhh(), tanda.getTandaFinmm()));
         lblTandaCosto.setText("Precio: ₡" + String.valueOf(tanda.getTandaCobro()));
+    }
+    
+    private String castTime(Long horas, Long minutos){
+        Integer hh = horas.intValue();
+        Integer mm = minutos.intValue();
+        String stringTime = "";
+        String ampm;
+        if(hh>=12){
+            hh -= 12;
+            ampm = " pm";
+        } else {
+            ampm = " am";
+        }
+        if(hh<10)
+            stringTime += "0";
+        stringTime += String.valueOf(hh);
+        stringTime += ":";
+        if(mm<10){
+            stringTime += "0";
+        }
+        stringTime += String.valueOf(mm);
+        stringTime += ampm;
+        return stringTime;
     }
 
     //FXML Methods
     @FXML
     private void btnNuevaTandaAction(ActionEvent event) {
         ((SimpleBooleanProperty) AppContext.getInstance().get("AdminNewTandaProperty")).set(false);
+        AppContext.getInstance().set("AdminEditingSala", null);
         FlowController.getInstance().goViewOnDialog("AdminNuevaTanda", FlowController.getInstance().getDialogsPane());
         
     }
@@ -192,6 +217,7 @@ public class AdminInfoSalaController extends Controller implements Initializable
 
     @FXML
     private void btnEditarSalaAction(ActionEvent event) {
+        ((SimpleBooleanProperty) AppContext.getInstance().get("AdminNewTandaProperty")).set(false);
         AppContext.getInstance().set("AdminEditingSala", sala);
         FlowController.getInstance().goView("AdminNuevaSala");
     }
@@ -209,7 +235,7 @@ public class AdminInfoSalaController extends Controller implements Initializable
     @FXML
     private void btnEditarTandaAction(ActionEvent event) {
         AppContext.getInstance().set("AdminEditingTanda", listViewTandas.getSelectionModel().getSelectedItem().getTanda());
-        FlowController.getInstance().goView("AdminNuevaTanda");
+        FlowController.getInstance().goViewOnDialog("AdminNuevaTanda", FlowController.getInstance().getDialogsPane());
     }
     
     private void cargarIdioma(){

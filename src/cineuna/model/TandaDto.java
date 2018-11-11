@@ -26,7 +26,6 @@ public class TandaDto {
     private MovieDto movieId;
     @XmlTransient
     private SalaDto salaId;
-    private Integer horaTanda;
     @XmlTransient
     private Long tandaInihh;
     @XmlTransient
@@ -35,18 +34,11 @@ public class TandaDto {
     private Long tandaFinhh;
     @XmlTransient
     private Long tandaFinmm;
-    //@XmlTransient
-    //@XmlJavaTypeAdapter(LocalDateAdapter.class)
-    //private ObjectProperty<LocalDate> tandaHinicio;
-    //@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
-    //private LocalDateTime tandaHfin;
-    //@XmlTransient
-    //private ObjectProperty<LocalDate> tandaHfin;
+    
+//    private Integer horaTanda;
      
     public TandaDto() {
         this.tandaCobro = new SimpleStringProperty();
-        //this.tandaHinicio=new SimpleObjectProperty<>();
-        //this.tandaHfin=new SimpleObjectProperty<>();
     }
 
     public Long getTandaId() {
@@ -67,40 +59,11 @@ public class TandaDto {
     public void setTandaCobro(Long tandaCobro) {
         this.tandaCobro.set(tandaCobro.toString());
     }
-/*
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    public LocalDate getTandaHinicio() {
-        return tandaHinicio.get();
-    }
 
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    public void setTandaHinicio(LocalDate tandaHinicio) {
-        this.tandaHinicio.set(tandaHinicio);
-    }
-    
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    public LocalDate getTandaHfin() {
-        return tandaHfin.get();
-    }
-
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    public void setTandaHfin(LocalDate tandaHinicio) {
-        this.tandaHfin.set(tandaHinicio);
-    }
-    */
-/*
-    public LocalDateTime getTandaHfin() {
-        return tandaHfin;
-    }
-
-    public void setTandaHfin(LocalDateTime tandaHfin) {
-        this.tandaHfin = tandaHfin;
-    }
-*/
     public MovieDto getMovieId() {
         return movieId;
     }
-    
+
     public void setMovieId(MovieDto movieId) {
         this.movieId = movieId;
     }
@@ -111,33 +74,6 @@ public class TandaDto {
 
     public void setSalaId(SalaDto salaId) {
         this.salaId = salaId;
-    }
-    
-    
-    /*
-    public Long getMovieId() {
-        return movieId;
-    }
-    
-    public void setMovieId(MovieDto movieId) {
-        this.movieId = movieId.getMovieId();
-    }
-
-    public Long getSalaId() {
-        return salaId;
-    }
-
-    public void setSalaId(SalaDto salaId) {
-        this.salaId = salaId.getSalaId();
-    }
-    */
-
-    public Integer getHoraTanda() {
-        return horaTanda;
-    }
-
-    public void setHoraTanda(Integer horaTanda) {
-        this.horaTanda = horaTanda;
     }
 
     public Long getTandaInihh() {
@@ -171,5 +107,13 @@ public class TandaDto {
     public void setTandaFinmm(Long tandaFinmm) {
         this.tandaFinmm = tandaFinmm;
     }
+
+//    public Integer getHoraTanda() {
+//        return horaTanda;
+//    }
+//
+//    public void setHoraTanda(Integer horaTanda) {
+//        this.horaTanda = horaTanda;
+//    }
       
 }

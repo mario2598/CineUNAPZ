@@ -150,48 +150,58 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
     
     //Methods
     private void aplicarDistribucion() {
-        if(spnrColumnas.getValue()!=null && spnrFilas.getValue()!=null){
-            this.columnas = spnrColumnas.getValue();
-            this.filas = spnrFilas.getValue();
-            tpButacas.setPrefColumns(columnas);
-            tpButacas.setPrefRows(filas);
-            tpButacas.getChildren().clear();
-            butacaList.clear();
-            Integer dimButaca;
-            if(bpButacas.getWidth()>0){
-                Double anchura = (bpButacas.getWidth()*0.82)/columnas;
-                Double altura = (bpButacas.getHeight()*0.65)/filas;
-                if(anchura > altura)
-                    dimButaca = altura.intValue();
-                else
-                    dimButaca = anchura.intValue();
-            } else {
-                Double anchura = ((stageWidthProp.get()-241)*0.82)/columnas;
-                Double altura = ((stageHeightProp.get()-110)*0.65)/filas;
-                if(anchura > altura)
-                    dimButaca = altura.intValue();
-                else
-                    dimButaca = anchura.intValue();
-            }
-            if(dimButaca>0){
-                for(int i = 0; i < this.filas; i++){
-                    for (int j = 0; j < this.columnas; j++) {
-                        AdminEspacioButaca espacioB = new AdminEspacioButaca(dimButaca);
-                        ButacaDto butaca = new ButacaDto();
-                        butaca.setButFila(new Long(i));
-                        butaca.setButColumna(new Long(j));
-                        butaca.setButLetra(getLetraFila(i) + String.valueOf(j+1));
-                        butaca.setButActiva("A");
-                        butaca.setButEstado("D");
-                        espacioB.setButaca(butaca);
-                        butacaList.add(espacioB);
-                        tpButacas.getChildren().add(espacioB);
-                    }
+        if(!editando){
+            if(spnrColumnas.getValue()!=null && spnrFilas.getValue()!=null){
+                this.columnas = spnrColumnas.getValue();
+                this.filas = spnrFilas.getValue();
+                tpButacas.setPrefColumns(columnas);
+                tpButacas.setPrefRows(filas);
+                tpButacas.getChildren().clear();
+                butacaList.clear();
+                Integer dimButaca;
+                if(bpButacas.getWidth()>0){
+                    Double anchura = (bpButacas.getWidth()*0.82)/columnas;
+                    Double altura = (bpButacas.getHeight()*0.65)/filas;
+                    if(anchura > altura)
+                        dimButaca = altura.intValue();
+                    else
+                        dimButaca = anchura.intValue();
+                } else {
+                    Double anchura = ((stageWidthProp.get()-241)*0.82)/columnas;
+                    Double altura = ((stageHeightProp.get()-110)*0.65)/filas;
+                    if(anchura > altura)
+                        dimButaca = altura.intValue();
+                    else
+                        dimButaca = anchura.intValue();
                 }
-                this.butacasDistribuidas = true;
-            } else {
-                System.out.println("No se ha aplicado la distribucion porque dimButaca <= 0");
+                if(dimButaca>0){
+                    for(int i = 0; i < this.filas; i++){
+                        for (int j = 0; j < this.columnas; j++) {
+                            AdminEspacioButaca espacioB = new AdminEspacioButaca(dimButaca);
+                            ButacaDto butaca = new ButacaDto();
+                            butaca.setButFila(new Long(i));
+                            butaca.setButColumna(new Long(j));
+                            butaca.setButLetra(getLetraFila(i) + String.valueOf(j+1));
+                            butaca.setButActiva("A");
+                            butaca.setButEstado("D");
+                            espacioB.setButaca(butaca);
+                            butacaList.add(espacioB);
+                            tpButacas.getChildren().add(espacioB);
+                        }
+                    }
+                    this.butacasDistribuidas = true;
+                } else {
+                    System.out.println("No se ha aplicado la distribucion porque dimButaca <= 0");
+                }
             }
+        } else {
+            tpButacas.getChildren().clear();
+            tpButacas.setPrefColumns(1);
+            tpButacas.setPrefRows(1);
+            Label mssg = new Label();
+            mssg.setText("No puedes modificar la distribución de las salas, una vez esta fue creada.");
+            mssg.setStyle("-fx-font-size: 20px; -fx-text-fill: #bcbcbc; -fx-text-aligment: CENTER;");
+            tpButacas.getChildren().add(mssg);
         }
     }
 
