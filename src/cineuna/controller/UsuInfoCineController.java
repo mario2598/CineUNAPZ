@@ -68,8 +68,8 @@ public class UsuInfoCineController extends Controller implements Initializable {
             lblNombreCine.setText(cine.getCineNombre());
             lblCorreo.setText(cine.getCineEmail());
             lblNumTel.setText(cine.getCineTel().toString());
-            lblAbre.setText(cine.getCineAbre().toString());
-            lblCierra.setText(cine.getCineCierra().toString());
+            //lblAbre.setText(cine.getCineAbre().toString());
+            //lblCierra.setText(cine.getCineCierra().toString());
         }
         else{
             System.out.println("No se pudo obtener el cine para mostrar");

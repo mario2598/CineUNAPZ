@@ -77,13 +77,14 @@ public class UsuInicioController extends Controller implements Initializable {
     
     private void cargarCartelera(){
         List<MovieDto> listaDto=new ArrayList<>();
-
+        System.out.println("intentando cargar cartelera");
         MovieService ms = new MovieService();
         Respuesta r = ms.getMovies("C");
         
         if(r.getEstado()){
-            //System.out.println("true");
+            
             listaDto=(List<MovieDto>) r.getResultado("Movies");
+            System.out.println("true:"+listaDto.size());
             llenarCartelera(listaDto);
         }
         else{
