@@ -71,7 +71,8 @@ public class ButacaDto{
     }
 
     public String getButEstado() {
-        return butEstado;
+        //return butEstado;
+        return "A";
     }
 
     public void setButEstado(String butEstado) {
