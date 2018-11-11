@@ -228,6 +228,10 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         }
     }
     
+    public void cargarListaReservas(){
+        //ReservaService rs=new Rese
+    }
+    
     /**
      * carga las butacas y su estado (usada cada vez que refresca)
      */
