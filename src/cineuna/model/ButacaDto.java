@@ -72,7 +72,7 @@ public class ButacaDto{
 
     public String getButEstado() {
         //return butEstado;
-        return "A";
+        return "D";
     }
 
     public void setButEstado(String butEstado) {
