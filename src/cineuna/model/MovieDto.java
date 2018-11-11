@@ -47,6 +47,8 @@ public class MovieDto {
     @XmlTransient
     public SimpleStringProperty movieDuracion;
     @XmlTransient
+    public SimpleStringProperty movieIdioma;
+    @XmlTransient
     public SimpleStringProperty moviePortada;
     //@XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlTransient
@@ -80,6 +82,7 @@ public class MovieDto {
         movieDate = new SimpleObjectProperty<>();
         moviePortada = new SimpleStringProperty();
         movieDuracion = new SimpleStringProperty();
+        movieIdioma = new SimpleStringProperty();
         movieNombreing = new SimpleStringProperty();
         movieResenaing = new SimpleStringProperty();
         if(movieUrlimg!=null)
@@ -100,6 +103,7 @@ public class MovieDto {
         this.movieEstado = m.getMovieEstado();
         this.setMoviePortada(m.getMoviePortada());
         this.setMovieDuracion(m.getMovieDuracion());
+        this.setMovieIdioma(m.getMovieIdioma());
         this.setMovieNombreing(m.getMovieNombreing());
         this.setMovieResenaing(m.getMovieResenaing());
     }
@@ -281,6 +285,18 @@ public class MovieDto {
 
     public void setMovieUrlimg(byte[] movieUrlimg) {
         this.movieUrlimg = movieUrlimg;
+    }
+    
+    public Long getMovieIdioma(){
+        if(this.movieIdioma.get()!=null){
+            return Long.valueOf(this.movieIdioma.get());
+        } else {
+            return null;
+        }
+    }
+    
+    public void setMovieIdioma(Long idioma){
+        this.movieIdioma.set(idioma.toString());
     }
     
 }

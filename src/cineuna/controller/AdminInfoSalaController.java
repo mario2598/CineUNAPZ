@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -106,6 +107,16 @@ public class AdminInfoSalaController extends Controller implements Initializable
                 }
             }
         });
+        //Este boolean es para actualizar la lista de tandas cada vez que se cree una nueva
+        SimpleBooleanProperty newTandaProp = new SimpleBooleanProperty();
+        newTandaProp.set(false);
+        newTandaProp.addListener((observable, oldValue, newValue) -> {
+            if(newValue && sala!=null){
+                listViewTandas.getItems().clear();
+                cargarTandas();
+            }
+        });
+        AppContext.getInstance().set("AdminNewTandaProperty", newTandaProp);
     }
     
     @Override
@@ -164,7 +175,9 @@ public class AdminInfoSalaController extends Controller implements Initializable
     //FXML Methods
     @FXML
     private void btnNuevaTandaAction(ActionEvent event) {
-        //TODO
+        ((SimpleBooleanProperty) AppContext.getInstance().get("AdminNewTandaProperty")).set(false);
+        FlowController.getInstance().goViewOnDialog("AdminNuevaTanda", FlowController.getInstance().getDialogsPane());
+        
     }
 
     @FXML
@@ -179,7 +192,8 @@ public class AdminInfoSalaController extends Controller implements Initializable
 
     @FXML
     private void btnEditarSalaAction(ActionEvent event) {
-        //TODO
+        AppContext.getInstance().set("AdminEditingSala", sala);
+        FlowController.getInstance().goView("AdminNuevaSala");
     }
 
     @FXML
@@ -194,7 +208,8 @@ public class AdminInfoSalaController extends Controller implements Initializable
 
     @FXML
     private void btnEditarTandaAction(ActionEvent event) {
-        //TODO
+        AppContext.getInstance().set("AdminEditingTanda", listViewTandas.getSelectionModel().getSelectedItem().getTanda());
+        FlowController.getInstance().goView("AdminNuevaTanda");
     }
     
     private void cargarIdioma(){

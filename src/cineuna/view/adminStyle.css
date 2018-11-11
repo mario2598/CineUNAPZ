@@ -107,7 +107,7 @@ and open the template in the editor.
 
 /*List View*/
 .customListView{
-    -fx-background-color: transparent;
+    -fx-background-color: -fx-pallet-color1;
     -fx-border-color: -fx-pallet-color2;
     -fx-border-width: 2px;
 }
@@ -121,8 +121,13 @@ and open the template in the editor.
     -fx-background-color: derive(-fx-pallet-color2,10%);
 }
 
-.customListView .list-cell:filled:selected:focused, .list-cell:filled:selected {
+.customListView .list-cell:filled:selected, .list-cell:filled:selected:hover {
     -fx-background-color: linear-gradient(derive(-fx-pallet-color3,10%) 100%, derive(-fx-pallet-color3,30%) 75%);
+    -fx-text-fill: -fx-text-dark-color;
+}
+
+.customListView .list-cell:hover {
+    -fx-text-fill: -fx-text-pallet-color;
 }
 
 .customListView .list-cell .jfx-rippler {

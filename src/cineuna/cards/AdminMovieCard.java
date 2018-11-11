@@ -5,7 +5,7 @@
  */
 package cineuna.cards;
 
-import canchaspz.util.DateUtil;
+import cineuna.util.DateUtil;
 import cineuna.model.MovieDto;
 import com.jfoenix.controls.JFXRippler;
 import java.time.LocalDate;
@@ -141,6 +141,10 @@ public class AdminMovieCard extends Card{
         return rip;
     }
     
+    public void enableRipplerEffect(Boolean bool){
+        ripplerLbl.setVisible(bool);
+    }
+    
     public void cambiarTamanho(Double width, Double height){
         preserveRatioSize(width, height);
         this.setPrefSize(this.widthProp.get(), this.heightProp.get() + (this.heightProp.get()*0.14)*2);
@@ -162,13 +166,11 @@ public class AdminMovieCard extends Card{
         if(finalWidth <= width){
             this.widthProp.setValue(finalWidth);
             this.heightProp.setValue(height);
-            System.out.println("Se queda con los valores 1");
         } else {
             ratio = width/anchoBase;
             finalHeight = altoBase * ratio;
             this.widthProp.setValue(width);
             this.heightProp.setValue(finalHeight);
-            System.out.println("Se queda con los valores 2");
         }
     }
 

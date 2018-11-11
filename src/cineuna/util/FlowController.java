@@ -36,6 +36,7 @@ public class FlowController {
     private static ResourceBundle idioma;
     private static HashMap<String, FXMLLoader> loaders = new HashMap<>();
     private boolean showingDialog = false;
+    private JFXDialog currentDialog;
 
     private FlowController() {
     }
@@ -182,6 +183,7 @@ public class FlowController {
             event.consume();
         });
         showingDialog = true;
+        currentDialog = dialog;
         dialog.show();
     }
     
@@ -259,6 +261,12 @@ public class FlowController {
         FXMLLoader loader = getLoader("Container");
         Controller controller = loader.getController();
         return ((ContainerController) controller).getDialogsPane();
+    }
+    
+    public void closeDialog(){
+        if(showingDialog){
+            currentDialog.close();
+        }
     }
 
 }

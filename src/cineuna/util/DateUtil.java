@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package canchaspz.util;
+package cineuna.util;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -114,7 +114,57 @@ public class DateUtil {
             }
             return strHour;
         }
-    } 
+    }
+    
+    /**
+     * Resta minutos a un tiempo en formato HH:MM
+     * Retornando solo las horas (HH) en formato 12h
+     * @param HHMM
+     * @return 
+     */
+    public static Integer getHH(Long HHMM){
+        Long horas = HHMM / 100;
+        horas = horas * 100;
+        if(horas<12){
+            return horas.intValue();
+        }
+        else{
+            horas -= 12;
+            return horas.intValue();
+        }
+    }
+    
+    /**
+     * Resta las horas a un tiempo en formato HH:MM
+     * Retornando solo los minutos (MM) en formato 12h
+     * @param HHMM
+     * @return 
+     */
+    public static Integer getMM(Long HHMM){
+        Long min = HHMM - getHH(HHMM);
+        return min.intValue();
+    }
+    
+    /**
+     * Calcula la cantidad de horas que hay en un tiempo dado en minutos
+     * @param minutos
+     * @return 
+     */
+    public static Integer getHoras(Long minutos){
+        Long hh = minutos/60;
+        return hh.intValue();
+    }
+    
+    /**
+     * Calcula el sobrante de minutos (sin contar horas) que hay en un tiempo dado en minutos
+     * @param minutos
+     * @return 
+     */
+    public static Integer getMinutos(Long minutos){
+        Integer hh = getHoras(minutos);
+        Integer mm = (Math.toIntExact(minutos)) - (hh * 60);
+        return mm;
+    }
     
     //Verifica si la fecha es valida
     public static boolean validDate(LocalDate date) {
