@@ -8,10 +8,12 @@ package cineuna.service;
 import cineuna.model.UsuarioDto;
 import cineuna.util.Request;
 import cineuna.util.Respuesta;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.core.GenericType;
 
 /**
  *
@@ -68,4 +70,21 @@ public class UsuarioService {
             return new Respuesta(false, "Error cargando el usuario.", "guardarUsuario " + ex.getMessage());
         }
     }
+    
+    public Respuesta getListaUsuarios(){
+        try{
+            Request request = new Request("UsuarioController/usuarios");
+            request.get();
+            if(request.isError()){
+                return new Respuesta(false, request.getError(), "");
+            }
+            ArrayList<UsuarioDto> salaList = (ArrayList<UsuarioDto>) request.readEntity(new GenericType<ArrayList<UsuarioDto>>() {
+            });
+            return new Respuesta(true, "", "", "UsuarioList", salaList);
+        } catch (Exception ex) {
+            Logger.getLogger(SalaService.class.getName()).log(Level.SEVERE, "Error cargando la lista completa de usuarios.", ex);
+            return new Respuesta(false, "Error cargando la lista completa de usuarios.", "getListaUsuarios Exception: " + ex.getMessage());
+        }
+    }
+    
 }

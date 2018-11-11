@@ -73,7 +73,7 @@ public class AdminMenuController extends Controller implements Initializable {
 
     @FXML
     private void btnUsersAction(ActionEvent event) {
-        FlowController.getInstance().goView("AdminUsers");
+        FlowController.getInstance().goView("AdminUsuarios");
     }
 
     @FXML

@@ -21,8 +21,10 @@ public class AdminSalaCard extends Card{
     
     @Override
     public void initCard() {
-        this.setPrefSize(224, 70);
-        this.getChildren().add(initNameLbl());
+        if(!this.isInitialized()){
+            this.setPrefSize(224, 70);
+            this.getChildren().add(initNameLbl());
+        }
     }
     
     private Label initNameLbl(){
