@@ -97,5 +97,18 @@ public class TandaService {
         }
     }
             
-    
+    public Respuesta guardarButaca(TandaDto dto){
+        try {
+            Request request = new Request("tandaController/guardarTandaDto");
+            request.post(dto);
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
+            TandaDto tandaDto = (TandaDto) request.readEntity(TandaDto.class);
+            return new Respuesta(true, "", "", "Tanda", tandaDto);
+        } catch (Exception ex) {
+            Logger.getLogger(ButacaService.class.getName()).log(Level.SEVERE, "Error guardando la tanda.", ex);
+            return new Respuesta(false, "Error guardando la tanda.", "guardarTanda " + ex.getMessage());
+        }
+    }
 }
