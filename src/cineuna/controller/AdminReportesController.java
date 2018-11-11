@@ -97,8 +97,8 @@ public class AdminReportesController extends Controller implements Initializable
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Generar  reporte", getStage(), respuesta.getMensaje());
                 } else {
             byte[] b = (byte[]) respuesta.getResultado("reporte");
-            convPdf(b,"src\\cineuna\\jasper\\moviesListReport.pdf");
- 
+            String r = convPdf(b,"src\\cineuna\\jasper\\moviesListReport.pdf");
+            showFile(r);
            }
         } catch (Exception ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, "Error registrando reporte.", ex);
@@ -106,8 +106,18 @@ public class AdminReportesController extends Controller implements Initializable
         }
          }
     }
+    
+     private void showFile(String dir){
+        try{ 
+            File path = new File (dir);
+            Desktop.getDesktop().open(path);
+     
+        }catch(IOException e){
+            System.out.println("error ruta");
+        }
+    }
  
-    void convPdf(byte[] b,String ruta) throws FileNotFoundException, IOException{
+    String convPdf(byte[] b,String ruta) throws FileNotFoundException, IOException{
         String outPutFile = ruta;
          String stream =Base64.getEncoder().encodeToString(b); 
             byte[] bytes = Base64.getDecoder().decode(stream);
@@ -117,6 +127,7 @@ public class AdminReportesController extends Controller implements Initializable
             fos.flush();
             fos.close();
             new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar reporte", getStage(), "Reporte creado correctamente.");
+            return ruta;
     }
 
     @FXML
@@ -131,8 +142,9 @@ public class AdminReportesController extends Controller implements Initializable
           }
           else{
               byte[] b = (byte[]) res.getResultado("reporte");
-             convPdf(b,"src\\cineuna\\jasper\\MovieReport.pdf");
+             String r = convPdf(b,"src\\cineuna\\jasper\\MovieReport.pdf");
              new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar reporte", getStage(), "Reporte creado correctamente."); 
+              showFile(r);
           }
         }
     }
