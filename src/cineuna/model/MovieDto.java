@@ -6,25 +6,35 @@
 package cineuna.model;
 
 import cineuna.util.LocalDateAdapter;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javax.imageio.ImageIO;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import static jdk.nashorn.internal.objects.ArrayBufferView.buffer;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -63,12 +73,11 @@ public class MovieDto {
     private ArrayList<TandaDto> tandaList = new ArrayList<>();
     @XmlTransient
     private ArrayList<ReviewDto> reviewList = new ArrayList<>();
-    //@XmlTransient
-    private byte[] movieUrlimg;
     @XmlTransient
     public SimpleStringProperty movieNombreing;
     @XmlTransient
     public SimpleStringProperty movieResenaing;
+    private String movieUrlimg;
     
      
     //Constructors     
@@ -85,8 +94,9 @@ public class MovieDto {
         movieIdioma = new SimpleStringProperty();
         movieNombreing = new SimpleStringProperty();
         movieResenaing = new SimpleStringProperty();
-        if(movieUrlimg!=null)
-            System.out.println("movieUrlimg" + Arrays.toString(movieUrlimg));
+        if(movieUrlimg!=null){
+          //System.out.println("movieUrlimg" + Arrays.toString(movieUrlimg));   
+        }
         else{
             System.out.println("movieUrlimg: null");
         }
@@ -111,11 +121,14 @@ public class MovieDto {
     public void crearImagenDesdeByte() throws FileNotFoundException, IOException{
         String outPutFile = "src\\cineuna\\resources\\images\\" + movieNombre.getValue()+".jpg";
         File someFile = new File(outPutFile);
+        //byte[] b = movieUrlimg.getBytes(StandardCharsets .UTF_8);
+        byte[] b = Base64.getDecoder().decode(movieUrlimg);
         try (FileOutputStream fos = new FileOutputStream(someFile)) {
-            fos.write(movieUrlimg);
+            fos.write(b);
             fos.flush();
         }
     }
+
     
     public void guardarImagenByte(File file) throws FileNotFoundException{
         //File file = new File(path);
@@ -130,8 +143,9 @@ public class MovieDto {
             } catch (IOException ex) {
 
             }
-            movieUrlimg = bos.toByteArray();
-            System.out.println("imagen creada: "+Arrays.toString(movieUrlimg));
+            byte[] by = bos.toByteArray();
+            movieUrlimg =Base64.getEncoder().encodeToString(by); 
+        //   System.out.println("imagen creada: "+Arrays.toString(movieUrlimg));
         }
         catch(NullPointerException e){
                 System.out.println("Imagen seleccionada nula");
@@ -230,7 +244,7 @@ public class MovieDto {
     public void setMovieDuracion(Long movieDuracion) {
         this.movieDuracion.set(movieDuracion.toString());
     }
-
+    @XmlTransient
     public ArrayList<ComprobanteDto> getComprobanteList() {
         return comprobanteList;
     }
@@ -238,7 +252,7 @@ public class MovieDto {
     public void setComprobanteList(ArrayList<ComprobanteDto> comprobanteList) {
         this.comprobanteList = comprobanteList;
     }
-
+     @XmlTransient
     public ArrayList<TandaDto> getTandaList() {
         return tandaList;
     }
@@ -246,7 +260,7 @@ public class MovieDto {
     public void setTandaList(ArrayList<TandaDto> tandaList) {
         this.tandaList = tandaList;
     }
-
+     @XmlTransient
     public ArrayList<ReviewDto> getReviewList() {
         return reviewList;
     }
@@ -278,12 +292,11 @@ public class MovieDto {
     public void setMovieResenaing(String movieResenaing) {
         this.movieResenaing.set(movieResenaing);
     }
-
-    public byte[] getMovieUrlimg() {
+    
+    public String getMovieUrlimg() {
         return movieUrlimg;
     }
-
-    public void setMovieUrlimg(byte[] movieUrlimg) {
+    public void setMovieUrlimg(String movieUrlimg) {
         this.movieUrlimg = movieUrlimg;
     }
     

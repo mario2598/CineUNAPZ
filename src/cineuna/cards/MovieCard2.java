@@ -11,6 +11,9 @@ import cineuna.util.FlowController;
 import com.jfoenix.controls.JFXTextArea;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -45,11 +48,15 @@ public class MovieCard2 extends Card{
     public void initCard() {
         this.getStylesheets().add("cineuna/cards/StyleCards.css");
         this.setId("root");
-        initRoot();
+        try {
+            initRoot();
+        } catch (IOException ex) {
+            Logger.getLogger(MovieCard2.class.getName()).log(Level.SEVERE, null, ex);
+        }
         binds();
     }
     
-    private void initRoot(){
+    private void initRoot() throws IOException{
         vbRoot=new VBox();
         vbRoot.setAlignment(Pos.CENTER);
         root=new StackPane();
@@ -62,8 +69,9 @@ public class MovieCard2 extends Card{
         initInfoRoot();
     }
     
-    private void initPoster(){
+    private void initPoster() throws IOException{
         //poster=new ImageView(new Image("cineuna/resources/images/Frozen.jpg"));
+        movie.crearImagenDesdeByte();
         poster=new ImageView(movie.abrirImagen());
         //System.out.println(movie.getMoviePortada().toString());
         poster.setFitWidth(130);

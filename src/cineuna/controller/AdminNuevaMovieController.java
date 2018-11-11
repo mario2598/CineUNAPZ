@@ -17,8 +17,11 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -32,6 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
 /**
@@ -282,12 +286,14 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     }
 
     @FXML
-    private void cargarPoster(MouseEvent event) throws FileNotFoundException {
+    @SuppressWarnings("empty-statement")
+    private void cargarPoster(MouseEvent event) throws FileNotFoundException, IOException {
         FileChooser fc=new FileChooser();
         File sel = fc.showOpenDialog(null);
         if(fc!=null){
             movie.guardarImagenByte(sel);
             imgPoster.setImage(new Image(sel.toURI().toString()));
+          
         }
         else{
             System.out.println("imagen obtenida desde windows vacía");

@@ -101,14 +101,15 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             url=pelicula.getMovieUrleng();
         else url=pelicula.getMovieUrlesp();
         
-        cambiarTipoUrl(url);
+        url = cambiarTipoUrl(url);
         webView.getEngine().load(url);
         
     }
     
-    private void cambiarTipoUrl(String url){
+    private String cambiarTipoUrl(String url){
         if(url.contains("watch"))
-            url.replace("watch", "embed");
+            url =  url.replaceAll("watch", "embed"); 
+        return url;
     }
     
     private void getVideoID(){

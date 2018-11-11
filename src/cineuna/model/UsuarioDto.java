@@ -58,6 +58,7 @@ public class UsuarioDto {
     private Long cineID;
     @XmlTransient
     public byte[] usuImg;
+    @XmlTransient
     private ArrayList<CampoButaca> butacasSeleccionadas;
     private Boolean existe;
     
@@ -202,8 +203,8 @@ public class UsuarioDto {
 
     public void setUsuCodAct(String usuCodAct) {
         this.usuCodAct.set(usuCodAct);
-    }
-
+    }   
+    @XmlTransient
     public ArrayList<CampoButaca> getButacasSeleccionadas() {
         return butacasSeleccionadas;
     }

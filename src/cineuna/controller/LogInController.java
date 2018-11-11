@@ -452,7 +452,7 @@ public class LogInController extends Controller implements Initializable {
         if(!this.txtPassChange.getText().isEmpty()){
             UsuarioDto usuDto;
             UsuarioService usuarioService = new UsuarioService();
-            Respuesta respuesta = usuarioService.getUsuarioUsu(txtUsuario.getText());
+            Respuesta respuesta = usuarioService.getUsuarioUsu(txtPassChange.getText());
  
                 if (respuesta.getEstado()) {
                     usuDto = (UsuarioDto)respuesta.getResultado("Usuario");
@@ -463,7 +463,8 @@ public class LogInController extends Controller implements Initializable {
                       usuDto.setUsuNewpassword(newPass);
                       usuarioService.guardarUsuario(usuDto);
                       this.vbpassChange.setVisible(false);
-                      this.vbLogIn.setVisible(true);  
+                      this.vbLogIn.setVisible(true);
+                       new Mensaje().show(INFORMATION, "Se envio el correo", "Se te envio una nueva contraseña probicional al correo");
                     } 
                     else{
             new Mensaje().show(ERROR, "Error Enviando Correo", "Reeintentelo");

@@ -104,7 +104,7 @@ public class MovieService {
     }
     
     public Respuesta guardarMovie(MovieDto dto){
-        try{
+      
             Request request = new Request("movieController/guardarMovie");
             request.post(dto);
             if(request.isError()){
@@ -112,10 +112,7 @@ public class MovieService {
             }
             MovieDto Movie = (MovieDto) request.readEntity(MovieDto.class);
             return new Respuesta(true, "", "", "Movie", Movie);
-        } catch (Exception ex) {
-            Logger.getLogger(CineService.class.getName()).log(Level.SEVERE, "Error guardando Movie.", ex);
-            return new Respuesta(false, "Error guardando Movie.", "guardarCine " + ex.getMessage());
-        }
+        
     }
     
 }
