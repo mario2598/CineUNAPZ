@@ -52,15 +52,16 @@ public class CampoButaca extends Label{
                     this.seleccionada.set(!this.seleccionada.get());
             }
         });
+        iniciarListenerButaca();
         
         //refrescaEstado();
         
-        //this.disponible.set(disponible);
-        //this.seleccionada.set(seleccionada);
+        this.disponible.set(disponible.get());
+        this.seleccionada.set(seleccionada.get());
 
         //inicializaIcono(dim);
         //seleccionaEstadoInicial(seleccionada,propia);
-        //iniciarListenerButaca();
+        //
     }
     
     private void inicializaVariables(Integer dim,ButacaDto butaca){
@@ -72,7 +73,7 @@ public class CampoButaca extends Label{
         dimension = new SimpleIntegerProperty(dim);
         this.disponible = new SimpleBooleanProperty(true);
         this.seleccionada=new SimpleBooleanProperty(false);
-        if(butaca.getButActiva()=="A")
+        if("A".equalsIgnoreCase(butaca.getButActiva()))
             activa=true;
         else
             activa=false;
@@ -82,8 +83,8 @@ public class CampoButaca extends Label{
     public void refrescaEstado(){
             refrescaButaca();
             this.icon.getStyleClass().clear();
-            this.disponible.set(true);
-            this.seleccionada.set(false);
+            //this.disponible.set(true);
+            //this.seleccionada.set(false);
             activa=false;
             propia=false;
             String estado="";
@@ -95,9 +96,10 @@ public class CampoButaca extends Label{
                     icon.getStyleClass().add("campo-butaca");
                     estado="D";
                 }else if(butaca.getButEstado().equalsIgnoreCase("S")){
-                    seleccionada.set(true);//estaba seleccionada
+                    
                     estado="S";
                     if(usuario.isSeleccionada(this)){//pregunta si el usuario la tenía seleccionada
+                        seleccionada.set(true);//estaba seleccionada
                         propia = true;
                         icon.getStyleClass().add("campo-butaca-sel");
                         estado="SP";
@@ -150,7 +152,6 @@ public class CampoButaca extends Label{
             else{
                desSeleccionaButaca();
             }
-            guardarButaca();
             }
         });
         
@@ -169,6 +170,7 @@ public class CampoButaca extends Label{
         icon.getStyleClass().add("campo-butaca-sel");
         asientos.set(asientos.get()+1);
         butaca.setButEstado("S");//cambiar a reserva
+        guardarButaca();
     }
     
     public void desSeleccionaButaca(){
@@ -176,6 +178,7 @@ public class CampoButaca extends Label{
         icon.getStyleClass().add("campo-butaca");
         asientos.set(asientos.get()-1);
         butaca.setButEstado("D");//cambiar a reserva
+        guardarButaca();
     }
     
     public void guardarButaca(){
@@ -194,6 +197,20 @@ public class CampoButaca extends Label{
         //icon.setSize(String.valueOf(dim*1.1));
     }
 
+    public void reservaButaca(){
+        this.butaca.setButEstado("O");
+        guardarButaca();
+        //icon.getStyleClass().add("campo-butaca");
+    }
+    
+    public void cancelaButaca(){
+        this.seleccionada=new SimpleBooleanProperty(false);
+        icon.getStyleClass().add("campo-butaca");
+        asientos.set(asientos.get()-1);
+        butaca.setButEstado("D");//cambiar a reserva
+        guardarButaca();
+    }
+    
     //Getters and Setters
     public ButacaDto getButaca() {
         return butaca;

@@ -223,15 +223,10 @@ public class UsuarioDto {
     
     public Boolean isSeleccionada(CampoButaca butaca){
         existe=false;
-        if(butacasSeleccionadas.size()>0){
-            butacasSeleccionadas.contains(butaca);
-            //System.out.println("buscando en butacas seleccionadas: "+butacasSeleccionadas.size());
-            //butacasSeleccionadas.stream().forEach(b->{
-                //if(butaca.getButacaId().equals(b.getButacaId()))
-                    //existe = true;
-            //});
-        }
-        //System.out.println("existe= "+existe.toString());
+        if(butacasSeleccionadas.size()>0)
+            if(butacasSeleccionadas.contains(butaca))
+                existe=true;System.out.println("propia");
+            
         return existe;
     }
     
@@ -246,10 +241,9 @@ public class UsuarioDto {
     }
     
     public void desSeleccionaButacas(){
-        //System.out.println("Desseleciconar "+butacasSeleccionadas.size());
-        ButacaService bs = new ButacaService();
+        System.out.println("Desseleccionar "+butacasSeleccionadas.size());
         butacasSeleccionadas.stream().forEach(b->{
-            b.desSeleccionaButaca();
+            b.cancelaButaca();
         });
         butacasSeleccionadas.clear();
     }
@@ -257,7 +251,7 @@ public class UsuarioDto {
     public void guardaButacasSeleccionadas(){
         //System.out.println("guardar "+butacasSeleccionadas.size());
         butacasSeleccionadas.stream().forEach(c->{
-            c.guardarButaca();
+            c.reservaButaca();
         });
         butacasSeleccionadas.clear();
     }

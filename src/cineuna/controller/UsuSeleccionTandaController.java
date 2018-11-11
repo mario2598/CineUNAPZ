@@ -106,6 +106,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         cargarDistribucion();
         cargarListaButacas();
         cargarCamposButacas();
+        refrescarCamposButaca();
         hilo=new Hilo();
         hilo.start();
     }
@@ -264,12 +265,14 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private void reservar(ActionEvent event) {
         usuario.guardaButacasSeleccionadas();
         reiniciarDatos();
+        refrescarCamposButaca();
     }
 
     @FXML
     private void cancelar(ActionEvent event) {
         usuario.desSeleccionaButacas();
         reiniciarDatos();
+        refrescarCamposButaca();
     }
     
 }
