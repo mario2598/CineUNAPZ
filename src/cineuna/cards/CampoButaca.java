@@ -48,7 +48,7 @@ public class CampoButaca extends Label{
         //cambia el estado de seleccionada si está disponible o es seleccionada y propia
         this.setOnMouseClicked(event -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
-                if(this.disponible.get()||propia)
+                if(this.disponible.get()||usuario.isSeleccionada(this))
                     this.seleccionada.set(!this.seleccionada.get());
             }
         });
@@ -96,10 +96,9 @@ public class CampoButaca extends Label{
                     icon.getStyleClass().add("campo-butaca");
                     estado="D";
                 }else if(butaca.getButEstado().equalsIgnoreCase("S")){
-                    
+                    //seleccionada.set(true);//estaba seleccionada
                     estado="S";
                     if(usuario.isSeleccionada(this)){//pregunta si el usuario la tenía seleccionada
-                        seleccionada.set(true);//estaba seleccionada
                         propia = true;
                         icon.getStyleClass().add("campo-butaca-sel");
                         estado="SP";
@@ -155,14 +154,14 @@ public class CampoButaca extends Label{
             }
         });
         
-        disponible.addListener(l->{
+        /*disponible.addListener(l->{
             if(disponible.get()){
                 icon.getStyleClass().add("campo-butaca");
             }
             else{
                icon.getStyleClass().add("campo-butaca-ocupada"); 
             }
-        });
+        });*/
     }
     
     private void seleccionaButaca(){

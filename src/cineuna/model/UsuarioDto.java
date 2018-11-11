@@ -223,10 +223,9 @@ public class UsuarioDto {
     
     public Boolean isSeleccionada(CampoButaca butaca){
         existe=false;
-        if(butacasSeleccionadas.size()>0)
-            if(butacasSeleccionadas.contains(butaca))
-                existe=true;System.out.println("propia");
-            
+        if(butacasSeleccionadas.size()>0&&butacasSeleccionadas.contains(butaca))
+                existe=true;
+
         return existe;
     }
     
@@ -241,7 +240,6 @@ public class UsuarioDto {
     }
     
     public void desSeleccionaButacas(){
-        System.out.println("Desseleccionar "+butacasSeleccionadas.size());
         butacasSeleccionadas.stream().forEach(b->{
             b.cancelaButaca();
         });
