@@ -9,6 +9,7 @@ import cineuna.cards.AdminEspacioButaca;
 import cineuna.model.ButacaDto;
 import cineuna.model.SalaDto;
 import cineuna.service.SalaService;
+import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
@@ -18,6 +19,7 @@ import com.jfoenix.controls.JFXToggleButton;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,10 +54,14 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
     private Label lblPantalla;
     
     //Attributes
+    private final ReadOnlyDoubleProperty stageWidthProp = FlowController.getInstance().getStage().widthProperty();
+    private final ReadOnlyDoubleProperty stageHeightProp = FlowController.getInstance().getStage().heightProperty();
     private Integer columnas;
     private Integer filas;
     private Boolean butacasDistribuidas;
     private ArrayList<AdminEspacioButaca> butacaList;
+    private SalaDto sala;
+    private Boolean editando;
 
     //Initializers
     /**
@@ -66,14 +72,18 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         butacaList = new ArrayList<>();
-        SpinnerValueFactory<Integer> columnasValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 15);
+        SpinnerValueFactory<Integer> columnasValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 30, 10);
         this.spnrColumnas.setValueFactory(columnasValueFactory);
-        SpinnerValueFactory<Integer> filasValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 15, 8);
+        SpinnerValueFactory<Integer> filasValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 15, 5);
         this.spnrFilas.setValueFactory(filasValueFactory);
         cmbBoxTipo.getItems().addAll(
             "2D", "3D"
         );
-        cmbBoxTipo.getSelectionModel().selectFirst();
+        cmbBoxTipo.valueProperty().addListener((observale, oldValue, newValue) -> {
+            if(newValue!=null && sala!=null){
+                sala.setSalaTipo(newValue);
+            }
+        });
         lblPantalla.widthProperty().addListener((observable, oldValue, newValue)->{
             if(!butacaList.isEmpty() && newValue!=null){
                 Double anchura = (bpButacas.getWidth()*0.82)/columnas;
@@ -88,13 +98,28 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
                 });
             }
         });
-        spnrColumnas.valueProperty().addListener(event -> {
-            this.columnas = spnrColumnas.getValue();
-            aplicarDistribucion();
+        spnrColumnas.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if(!editando && sala!=null){
+                columnas = newValue;
+                sala.setSalaCol(newValue.longValue());
+                aplicarDistribucion();
+            } else {
+                spnrColumnas.setDisable(true);
+            }
         });
-        spnrFilas.valueProperty().addListener(event -> {
-            this.filas = spnrFilas.getValue();
-            aplicarDistribucion();
+        spnrFilas.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if(!editando && sala!=null){
+                filas = newValue;
+                sala.setSalaFilas(newValue.longValue());
+                aplicarDistribucion();
+            } else{
+                spnrFilas.setDisable(true);
+            }
+        });
+        toggleBtnHabilitada.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue!=null && sala!=null){
+                sala.setSalaEstado(newValue ? "A":"I");
+            }
         });
     }    
 
@@ -103,12 +128,20 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
      */
     @Override
     public void initialize() {
-        tpButacas.getChildren().clear();
-        butacaList.clear();
-        this.butacasDistribuidas = false;
-        this.txtNombre.setText("");
-        this.spnrColumnas.getValueFactory().setValue(16);
-        this.spnrFilas.getValueFactory().setValue(8);
+        if(sala!=null)
+            unbindSala();
+        clearData();
+        if(AppContext.getInstance().get("AdminEditingSala")!=null){
+            sala = (SalaDto) AppContext.getInstance().get("AdminEditingSala");
+            this.editando = true;
+            bindSala();
+            loadData();
+        } else {
+            sala = new SalaDto();
+            this.editando = false;
+            bindSala();
+        }
+        setDefaultData();
     }
     
     //Methods
@@ -120,14 +153,22 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
             tpButacas.setPrefRows(filas);
             tpButacas.getChildren().clear();
             butacaList.clear();
-            Double anchura = (bpButacas.getWidth()*0.82)/columnas;
-            Double altura = (bpButacas.getHeight()*0.65)/filas;
             Integer dimButaca;
-            if(anchura > altura)
-                dimButaca = altura.intValue();
-            else
-                dimButaca = anchura.intValue();
-//            System.out.println("Dimension de la butaca: " + dimButaca);
+            if(bpButacas.getWidth()>0){
+                Double anchura = (bpButacas.getWidth()*0.82)/columnas;
+                Double altura = (bpButacas.getHeight()*0.65)/filas;
+                if(anchura > altura)
+                    dimButaca = altura.intValue();
+                else
+                    dimButaca = anchura.intValue();
+            } else {
+                Double anchura = ((stageWidthProp.get()-241)*0.82)/columnas;
+                Double altura = ((stageHeightProp.get()-110)*0.65)/filas;
+                if(anchura > altura)
+                    dimButaca = altura.intValue();
+                else
+                    dimButaca = anchura.intValue();
+            }
             if(dimButaca>0){
                 for(int i = 0; i < this.filas; i++){
                     for (int j = 0; j < this.columnas; j++) {
@@ -144,8 +185,47 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
                     }
                 }
                 this.butacasDistribuidas = true;
+            } else {
+                System.out.println("No se ha aplicado la distribucion porque dimButaca <= 0");
             }
         }
+    }
+
+    private void bindSala() {
+        txtNombre.textProperty().bindBidirectional(sala.salaNombre);
+    }
+
+    private void unbindSala() {
+        txtNombre.textProperty().unbindBidirectional(sala.salaNombre);
+    }
+
+    private void loadData() {
+        cmbBoxTipo.setValue(sala.getSalaTipo());
+        spnrColumnas.getValueFactory().setValue(sala.getSalaCol().intValue());
+        spnrFilas.getValueFactory().setValue(sala.getSalaFilas().intValue());
+        toggleBtnHabilitada.setSelected(sala.getSalaEstado().equalsIgnoreCase("A"));
+        aplicarDistribucion();
+        butacasDistribuidas = true;
+    }
+    
+    private void clearData(){
+        this.tpButacas.getChildren().clear();
+        this.butacaList.clear();
+        this.butacasDistribuidas = false;
+        this.editando = false;
+        this.txtNombre.setText("");
+        this.spnrColumnas.getValueFactory().setValue(15);
+        this.spnrFilas.getValueFactory().setValue(5);
+        this.spnrColumnas.setDisable(false);
+        this.spnrFilas.setDisable(false);
+    }
+    
+    private void setDefaultData(){
+        toggleBtnHabilitada.setSelected(!toggleBtnHabilitada.isSelected());
+        toggleBtnHabilitada.setSelected(!toggleBtnHabilitada.isSelected());
+        cmbBoxTipo.getSelectionModel().select(0);
+        spnrColumnas.getValueFactory().setValue(16);
+        spnrFilas.getValueFactory().setValue(8);
     }
     
     private String getLetraFila(Integer fila){
@@ -174,35 +254,37 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
         }
         return accepted;
     }
+    
+    private void salir(){
+        unbindSala();
+        sala = null;
+        FlowController.getInstance().goView("AdminSalas");
+    }
 
     //FXML Methods
     @FXML
     private void btnCancelarAction(ActionEvent event) {
-        FlowController.getInstance().goView("AdminSalas");
+        salir();
     }
 
     @FXML
     private void btnGuardarAction(ActionEvent event) {
         if(validarDatosNecesarios()){
-            SalaDto newSala = new SalaDto();
-            newSala.setSalaNombre(this.txtNombre.getText());
-            newSala.setSalaCol(new Long(this.spnrColumnas.getValue()));
-            newSala.setSalaFilas(new Long(this.spnrFilas.getValue()));
-            newSala.setSalaEstado(this.toggleBtnHabilitada.isSelected() ? "A":"I");
-            newSala.setSalaTipo(this.cmbBoxTipo.getValue());
-            this.butacaList.stream().map(AdminEspacioButaca::getButaca).forEach(butaca -> {
-                if(butaca!=null)
-                    newSala.getButacaList().add(butaca);
-            });
-            newSala.setCineId(new Long(3));
+            if(!editando){
+                this.butacaList.stream().map(AdminEspacioButaca::getButaca).forEach(butaca -> {
+                    if(butaca!=null)
+                        this.sala.getButacaList().add(butaca);
+                });
+            }
+            this.sala.setCineId(AppContext.getInstance().getUsuario().getCineID());
             SalaService salaServ = new SalaService();
-            Respuesta resp = salaServ.guardarSala(newSala);
+            Respuesta resp = salaServ.guardarSala(this.sala);
             if(resp.getEstado()){
                 System.out.println("Se ha guardado la sala satisfactoriamente.");
             } else {
                 System.out.println("Ha ocurrido un error guardando la sala\nError: " + resp.getMensaje());
             }
-            FlowController.getInstance().goView("AdminSalas");
+            salir();
         }
     }
     

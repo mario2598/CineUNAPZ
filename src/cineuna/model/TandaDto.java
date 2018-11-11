@@ -5,6 +5,7 @@
  */
 package cineuna.model;
 
+import javafx.beans.property.SimpleStringProperty;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,7 +21,7 @@ public class TandaDto {
     @XmlTransient
     private Long tandaId;
     @XmlTransient
-    private Long tandaCobro;
+    public SimpleStringProperty tandaCobro;
     @XmlTransient
     private MovieDto movieId;
     @XmlTransient
@@ -43,6 +44,7 @@ public class TandaDto {
     //private ObjectProperty<LocalDate> tandaHfin;
      
     public TandaDto() {
+        this.tandaCobro = new SimpleStringProperty();
         //this.tandaHinicio=new SimpleObjectProperty<>();
         //this.tandaHfin=new SimpleObjectProperty<>();
     }
@@ -56,11 +58,14 @@ public class TandaDto {
     }
 
     public Long getTandaCobro() {
-        return tandaCobro;
+        if(tandaCobro.get()!=null)
+            return Long.valueOf(tandaCobro.get());
+        else
+            return null;
     }
 
     public void setTandaCobro(Long tandaCobro) {
-        this.tandaCobro = tandaCobro;
+        this.tandaCobro.set(tandaCobro.toString());
     }
 /*
     @XmlJavaTypeAdapter(LocalDateAdapter.class)

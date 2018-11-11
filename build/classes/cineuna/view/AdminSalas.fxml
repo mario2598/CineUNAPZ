@@ -14,9 +14,9 @@
          <children>
             <AnchorPane prefHeight="50.0" styleClass="details-Pane">
                <children>
-                  <JFXButton fx:id="btnVolver" contentDisplay="GRAPHIC_ONLY" onAction="#btnVolverAction" styleClass="pallet-button" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <JFXButton fx:id="btnRefrescar" contentDisplay="GRAPHIC_ONLY" onAction="#btnRefrescarAction" styleClass="pallet-button" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <graphic>
-                        <FontAwesomeIconView boundsType="VISUAL" glyphName="ARROW_CIRCLE_LEFT" size="20" />
+                        <FontAwesomeIconView boundsType="VISUAL" glyphName="REFRESH" size="20" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="btnAgregar" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" onAction="#btnAgregarAction" styleClass="pallet-button" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">

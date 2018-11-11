@@ -50,6 +50,10 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     @FXML
     private JFXButton btnCancelar, btnGuardar;
     @FXML
+    private Label lblLenguajes, lblEstreno, lblEstado, lblTipo, lblDuracion, lblSegundos;
+    @FXML
+    private Tab tabInfoEsp, tabInfoEng;
+    @FXML
     private JFXTextField txtEspNombre, txtEngNombre, txtEspTrailer, txtEngTrailer, txtDuracion;
     @FXML
     private JFXTextArea txtEspSinopsis, txtEngSinopsis;
@@ -64,6 +68,7 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     private final MovieService movieService = new MovieService();
     private MovieDto movie;
     private Boolean editando;
+<<<<<<< HEAD
     private Label lblLenguajes;
     private Label lblEstreno;
     private Label lblEstado;
@@ -72,6 +77,8 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     private Label lblSegundos;
     private Tab tabInfoEsp;
     private Tab tabInfoEng;
+=======
+>>>>>>> master7_Fallas
     
     //Initializers
     /**
@@ -98,7 +105,7 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         //Info Listeners
         cmboBoxTipo.getItems().addAll("2D", "3D");
         if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
-        cmboBoxEstado.getItems().addAll("Próximamente", "En Cartelera", "Inactiva");
+            cmboBoxEstado.getItems().addAll("Próximamente", "En Cartelera", "Inactiva");
         else
             cmboBoxEstado.getItems().addAll("Coming Soon", "Available", "Inactive");
         cmboBoxTipo.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -109,24 +116,15 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         cmboBoxEstado.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(movie!=null){
                 switch(newValue){
-                    case "Próximamente":
+                    case "Próximamente": case "Coming Soon":
                         movie.setMovieEstado("P");
                         break;
-                    case "En Cartelera":
+                    case "En Cartelera": case "Available":
                         movie.setMovieEstado("C");
                         break;
-                    case "Inactiva":
+                    case "Inactiva": case "Inactive":
                         movie.setMovieEstado("I");
-                        break;
-                    case "Coming Soon":
-                        movie.setMovieEstado("P");
-                        break;
-                    case "Available":
-                        movie.setMovieEstado("C");
-                        break;
-                    case "Inactive":
-                        movie.setMovieEstado("I");
-                        break;    
+                        break;  
                 }
             }
         });
@@ -134,6 +132,12 @@ public class AdminNuevaMovieController extends Controller implements Initializab
             if(movie!=null){
                 movie.setMovieDate(newValue);
             }
+        });
+        chkBoxEsp1.selectedProperty().addListener(event -> {
+            changeLanguaje();
+        });
+        chkBoxEsp1.selectedProperty().addListener(event -> {
+            changeLanguaje();
         });
     }    
 
@@ -158,20 +162,26 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     }
 
     private void imgPosterAction(MouseEvent event) {
-        System.out.println("Cargar poster");
+        //TODO
     }
     
     private void bindMovie(){
         txtEspNombre.textProperty().bindBidirectional(movie.movieNombre);
+        txtEngNombre.textProperty().bindBidirectional(movie.movieNombreing);
         txtEspTrailer.textProperty().bindBidirectional(movie.movieUrlesp);
+        txtEngTrailer.textProperty().bindBidirectional(movie.movieUrleng);
         txtEspSinopsis.textProperty().bindBidirectional(movie.movieResena);
+        txtEngSinopsis.textProperty().bindBidirectional(movie.movieResenaing);
         txtDuracion.textProperty().bindBidirectional(movie.movieDuracion);
     }
     
     private void unbindMovie(){
         txtEspNombre.textProperty().unbindBidirectional(movie.movieNombre);
+        txtEngNombre.textProperty().unbindBidirectional(movie.movieNombreing);
         txtEspTrailer.textProperty().unbindBidirectional(movie.movieUrlesp);
+        txtEngTrailer.textProperty().unbindBidirectional(movie.movieUrleng);
         txtEspSinopsis.textProperty().unbindBidirectional(movie.movieResena);
+        txtEngSinopsis.textProperty().unbindBidirectional(movie.movieResenaing);
         txtDuracion.textProperty().unbindBidirectional(movie.movieDuracion);
     }
     
@@ -190,6 +200,27 @@ public class AdminNuevaMovieController extends Controller implements Initializab
                 cmboBoxEstado.setValue("Inactiva");
                 break;
         }
+        System.out.println("movie: " + movie.getMovieNombre() + ", idioma: " + movie.getMovieIdioma());
+        if(movie.getMovieIdioma().equals(Long.valueOf("3")) || movie.getMovieIdioma().equals(Long.valueOf("1"))){
+            chkBoxEsp1.setSelected(true);
+        }
+        if(movie.getMovieIdioma().equals(Long.valueOf("3")) || movie.getMovieIdioma().equals(Long.valueOf("2"))){
+            chkBoxEng1.setSelected(true);
+        }
+    }
+    
+    private void changeLanguaje(){
+        if(movie!=null){
+            if(chkBoxEsp1.isSelected() && chkBoxEng1.isSelected()){
+                movie.setMovieIdioma(new Long(3));
+            } else if(chkBoxEsp1.isSelected()){
+                 movie.setMovieIdioma(new Long(1));
+            } else if(chkBoxEng1.isSelected()){
+                movie.setMovieIdioma(new Long(2));
+            } else {
+                movie.setMovieIdioma(new Long(0));
+            }
+        }
     }
     
     private void cleanData(){
@@ -205,21 +236,15 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         datePickEstreno.setValue(null);
     }
     
+    private Boolean validadInfoNecesaria(){
+        //TODO
+        return true;
+    }
+    
     private void salir(){
         unbindMovie();
         movie = null;
         FlowController.getInstance().goView("AdminMovies");
-    }
-    
-    private void printDto(){
-        System.out.println("Info del MovieDto:"
-                        + "\n\tNombre: " + movie.getMovieNombre()
-                        + "\n\tReseña: " + movie.getMovieResena()
-                        + "\n\tTipo: " + movie.getMovieTipo()
-                        + "\n\tEstado: " + movie.getMovieEstado()
-                        + "\n\tDuración: " + movie.getMovieDuracion()
-                        + "\n\tEstreno: " + movie.getMovieDate()
-        );
     }
 
     @FXML
@@ -229,18 +254,21 @@ public class AdminNuevaMovieController extends Controller implements Initializab
 
     @FXML
     private void btcGuardarAction(ActionEvent event) {
-        unbindMovie();
-        printDto();
-        try{
-            Respuesta resp = movieService.guardarMovie(movie);
-            if(resp.getEstado()){
-                System.out.println("Se ha guardado la película satisfactoriamente.");
-                salir();
-            } else {
-                System.out.println("Ha ocurrido un error guardando la película\nError: " + resp.getMensaje());
+        if(validadInfoNecesaria()){
+            unbindMovie();
+            try{
+                Respuesta resp = movieService.guardarMovie(movie);
+                if(resp.getEstado()){
+                    System.out.println("Se ha guardado la película satisfactoriamente.");
+                    salir();
+                } else {
+                    System.out.println("Ha ocurrido un error guardando la película\nError: " + resp.getMensaje());
+                    bindMovie();
+                }
+            } catch(Exception ex){
+                System.out.println("Ha ocurrido un error en la parte del cliente guardando la película\nError: " + ex);
+                bindMovie();
             }
-        } catch(Exception ex){
-            System.out.println("Ha ocurrido un error en la parte del cliente guardando la película\nError: " + ex);
         }
     }
 
@@ -249,6 +277,7 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     }
     
     private void cargarIdioma(){
+<<<<<<< HEAD
         LangUtils.getInstance().setLang("es");
         LangUtils.getInstance().loadLabelLang(lblLenguajes, "lblLenguajes");
         LangUtils.getInstance().loadLabelLang(lblEstreno, "lblEstreno");
@@ -262,6 +291,20 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         LangUtils.getInstance().loadTabLang(tabInfoEng, "tabInfoEng");
         LangUtils.getInstance().loadButtonLang(btnGuardar, "btnGuardar");
         LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
+=======
+//        LangUtils.getInstance().loadLabelLang(lblLenguajes, "lblLenguajes");
+//        LangUtils.getInstance().loadLabelLang(lblEstreno, "lblEstreno");
+//        LangUtils.getInstance().loadLabelLang(lblEstado, "lblEstado");
+//        LangUtils.getInstance().loadLabelLang(lblTipo, "lblTipo");
+//        LangUtils.getInstance().loadLabelLang(lblDuracion, "lblDuracion");
+//        LangUtils.getInstance().loadLabelLang(lblSegundos, "lblSegundos");
+//        LangUtils.getInstance().loadCheckBoxLang(chkBoxEsp1, "chkBoxEsp1");
+//        LangUtils.getInstance().loadCheckBoxLang(chkBoxEng1, "chkBoxEng1");
+//        LangUtils.getInstance().loadTabLang(tabInfoEsp, "tabInfoEsp");
+//        LangUtils.getInstance().loadTabLang(tabInfoEng, "tabInfoEng");
+//        LangUtils.getInstance().loadButtonLang(btnGuardar, "btnGuardar");
+//        LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
+>>>>>>> master7_Fallas
     }
 
     @FXML

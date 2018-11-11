@@ -9,6 +9,7 @@ import cineuna.model.MovieDto;
 import cineuna.util.Request;
 import cineuna.util.Respuesta;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -92,8 +93,8 @@ public class MovieService {
                 //System.out.println("error");
                 return new Respuesta(false, request.getError(), "");
             }
-            List<MovieDto> movies = (List<MovieDto>) request.readEntity(new GenericType<List<MovieDto>>() {
-            });
+            ArrayList<MovieDto> movies = new ArrayList<>((List<MovieDto>) request.readEntity(new GenericType<List<MovieDto>>() {
+            }));
             
             return new Respuesta(true, "", "", "Movies", movies);
         } catch (Exception ex) {

@@ -38,7 +38,7 @@ public class AdminSalasController extends Controller implements Initializable {
     @FXML
     private StackPane salasHolderPane;
     @FXML
-    private JFXButton btnVolver, btnAgregar;
+    private JFXButton btnRefrescar, btnAgregar;
     //Attributes
     private final SalaService salaService = new SalaService();
     private HashMap<String, FXMLLoader> loaders;
@@ -128,14 +128,13 @@ public class AdminSalasController extends Controller implements Initializable {
 
     //FXML Methods
     @FXML
-    private void btnVolverAction(ActionEvent event) {
-        FlowController.getInstance().goView("AdminMenu");
-        FlowController.getInstance().btnVolverVisible(false);
+    private void btnAgregarAction(ActionEvent event) {
+        FlowController.getInstance().goView("AdminNuevaSala");
     }
 
     @FXML
-    private void btnAgregarAction(ActionEvent event) {
-        FlowController.getInstance().goView("AdminNuevaSala");
+    private void btnRefrescarAction(ActionEvent event) {
+        initialize();
     }
     
 }

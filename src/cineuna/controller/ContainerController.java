@@ -47,8 +47,6 @@ public class ContainerController extends Controller implements Initializable {
     private StackPane centerHP;
     private UsuarioDto usuario;
     @FXML
-    private JFXButton btnVolver;
-    @FXML
     private StackPane dialogsPane;
 
     /**
@@ -65,7 +63,6 @@ public class ContainerController extends Controller implements Initializable {
     @Override
     public void initialize() {
         isAdmin =(Boolean)(AppContext.getInstance().get("administrador"));
-        btnVolver.setVisible(false);
         llenarInfoUsuario();
         bindUsuario();
     }
@@ -152,18 +149,12 @@ public class ContainerController extends Controller implements Initializable {
         FlowController.getInstance().goView("UsuInicio");
     }
 
-
     private void irInicio(MouseEvent event) {
         FlowController.getInstance().goView("UsuInicio");
     }
     
-    @FXML
     private void btnVolverAction(ActionEvent event) {
         FlowController.getInstance().goView("AdminMenu");
-    }
-    
-    public void btnVolverVisible(boolean b){
-        this.btnVolver.setVisible(b);
     }
     
     public StackPane getDialogsPane(){
