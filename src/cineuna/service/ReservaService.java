@@ -5,6 +5,7 @@
  */
 package cineuna.service;
 
+import cineuna.model.ButacaDto;
 import cineuna.model.ReservaDto;
 import cineuna.model.TandaDto;
 import cineuna.util.Request;
@@ -39,6 +40,37 @@ public class ReservaService {
         } catch (Exception ex) {
             Logger.getLogger(TandaService.class.getName()).log(Level.SEVERE, "Error obteniendo lita tandas(TS Cliente)", ex);
             return new Respuesta(false, "Error obteniendo tandasM(Service Cliente).", "getTandasS " + ex.getMessage());
+        }
+    }
+    
+    public Respuesta guardarReserva(ReservaDto dto){
+        try {
+            Request request = new Request("reservaController/reserva");
+            request.post(dto);
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
+            ReservaDto resDto = (ReservaDto) request.readEntity(ReservaDto.class);
+            return new Respuesta(true, "", "", "Reserva", resDto);
+        } catch (Exception ex) {
+            Logger.getLogger(ButacaService.class.getName()).log(Level.SEVERE, "Error guardando la reserva.", ex);
+            return new Respuesta(false, "Error guardando la reserva.", "guardarReserva " + ex.getMessage());
+        }
+    }
+    
+    public Respuesta eliminarReserva(ReservaDto dto){
+        try{
+            HashMap<String, Object> parametros = new HashMap<>();
+            parametros.put("resId", dto.getResId());
+            Request request = new Request("reservaController/eliminarReserva", "/{resId}", parametros);
+            request.delete();
+            if(request.isError()){
+                return new Respuesta(false, request.getError(), "");
+            }
+            return new Respuesta(true, "", "");
+        }catch(Exception ex){
+            Logger.getLogger(ButacaService.class.getName()).log(Level.SEVERE, "Se ha producido un error eliminando la reserva.", ex);
+            return new Respuesta(false, "Se ha producido un error eliminando la reserva.", ex.getMessage());
         }
     }
 }
