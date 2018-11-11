@@ -5,8 +5,10 @@
  */
 package cineuna.controller;
 
+import cineuna.model.ComprobanteDto;
 import cineuna.model.MovieDto;
 import cineuna.model.UsuarioDto;
+import cineuna.service.ComprobanteService;
 import cineuna.service.MovieService;
 import cineuna.service.UsuarioService;
 import cineuna.util.LocalDateAdapter;
@@ -61,6 +63,7 @@ public class AdminReportesController extends Controller implements Initializable
     @FXML
     private StackPane spBtn;
     MovieService mService = new MovieService();
+    ComprobanteService cService = new ComprobanteService();
     @FXML
     private HBox hbBtn;
 
@@ -98,7 +101,10 @@ public class AdminReportesController extends Controller implements Initializable
                 } else {
             byte[] b = (byte[]) respuesta.getResultado("reporte");
             String r = convPdf(b,"src\\cineuna\\jasper\\moviesListReport.pdf");
-            showFile(r);
+           if(cService.exportToMail(r)){
+              showFile(r);  
+           }
+           new Mensaje().showModal(Alert.AlertType.ERROR, "Datos vacios", getStage(), "No se envio el correo");
            }
         } catch (Exception ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, "Error registrando reporte.", ex);

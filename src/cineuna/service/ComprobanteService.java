@@ -38,7 +38,7 @@ public class ComprobanteService {
     }
     
   
-    private void exportToMail(String pdf){
+    public Boolean exportToMail(String pdf){
      
         final String username = "proyectosuna83@gmail.com";
         final String password = "proy.una";
@@ -82,9 +82,10 @@ public class ComprobanteService {
             message.setContent(multipart);
 
             Transport.send(message);
-
+            return true;
         } catch (MessagingException e) {
-            e.printStackTrace();      
+            e.printStackTrace();   
+            return false;
         }
     }
 }
