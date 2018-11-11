@@ -61,7 +61,7 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
     private Boolean butacasDistribuidas;
     private ArrayList<AdminEspacioButaca> butacaList;
     private SalaDto sala;
-    private Boolean editando;
+    private Boolean editando = false;
 
     //Initializers
     /**
@@ -99,19 +99,23 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
             }
         });
         spnrColumnas.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if(!editando && sala!=null){
-                columnas = newValue;
-                sala.setSalaCol(newValue.longValue());
+            if(!editando){
+                if(sala!=null){
+                    columnas = newValue;
+                    sala.setSalaCol(newValue.longValue());
+                }
                 aplicarDistribucion();
             } else {
                 spnrColumnas.setDisable(true);
             }
         });
         spnrFilas.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if(!editando && sala!=null){
-                filas = newValue;
-                sala.setSalaFilas(newValue.longValue());
-                aplicarDistribucion();
+            if(!editando){
+                if(sala!=null){
+                    filas = newValue;
+                    sala.setSalaFilas(newValue.longValue());
+                    aplicarDistribucion();
+                }
             } else{
                 spnrFilas.setDisable(true);
             }
@@ -214,10 +218,10 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
         this.butacasDistribuidas = false;
         this.editando = false;
         this.txtNombre.setText("");
-        this.spnrColumnas.getValueFactory().setValue(15);
-        this.spnrFilas.getValueFactory().setValue(5);
         this.spnrColumnas.setDisable(false);
         this.spnrFilas.setDisable(false);
+        this.spnrColumnas.getValueFactory().setValue(15);
+        this.spnrFilas.getValueFactory().setValue(5);
     }
     
     private void setDefaultData(){

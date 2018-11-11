@@ -129,6 +129,7 @@ public class AdminSalasController extends Controller implements Initializable {
     //FXML Methods
     @FXML
     private void btnAgregarAction(ActionEvent event) {
+        AppContext.getInstance().set("AdminEditingSala", null);
         FlowController.getInstance().goView("AdminNuevaSala");
     }
 

@@ -6,7 +6,6 @@
 package cineuna.model;
 
 import cineuna.cards.CampoButaca;
-import cineuna.service.ButacaService;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -59,14 +58,7 @@ public class UsuarioDto {
     private Long cineID;
     @XmlTransient
     public byte[] usuImg;
-   // @XmlTransient
-   // List<CineDto> cineList;
-<<<<<<< HEAD
-    public Long cineId;
     private ArrayList<CampoButaca> butacasSeleccionadas;
-=======
-    private ArrayList<ButacaDto> butacasSeleccionadas;
->>>>>>> master7_Fallas
     private Boolean existe;
     
     

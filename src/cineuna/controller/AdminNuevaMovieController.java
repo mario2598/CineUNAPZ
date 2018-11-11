@@ -68,17 +68,6 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     private final MovieService movieService = new MovieService();
     private MovieDto movie;
     private Boolean editando;
-<<<<<<< HEAD
-    private Label lblLenguajes;
-    private Label lblEstreno;
-    private Label lblEstado;
-    private Label lblTipo;
-    private Label lblDuracion;
-    private Label lblSegundos;
-    private Tab tabInfoEsp;
-    private Tab tabInfoEng;
-=======
->>>>>>> master7_Fallas
     
     //Initializers
     /**
@@ -277,21 +266,7 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     }
     
     private void cargarIdioma(){
-<<<<<<< HEAD
-        LangUtils.getInstance().setLang("es");
-        LangUtils.getInstance().loadLabelLang(lblLenguajes, "lblLenguajes");
-        LangUtils.getInstance().loadLabelLang(lblEstreno, "lblEstreno");
-        LangUtils.getInstance().loadLabelLang(lblEstado, "lblEstado");
-        LangUtils.getInstance().loadLabelLang(lblTipo, "lblTipo");
-        LangUtils.getInstance().loadLabelLang(lblDuracion, "lblDuracion");
-        LangUtils.getInstance().loadLabelLang(lblSegundos, "lblSegundos");
-        LangUtils.getInstance().loadCheckBoxLang(chkBoxEsp1, "chkBoxEsp1");
-        LangUtils.getInstance().loadCheckBoxLang(chkBoxEng1, "chkBoxEng1");
-        LangUtils.getInstance().loadTabLang(tabInfoEsp, "tabInfoEsp");
-        LangUtils.getInstance().loadTabLang(tabInfoEng, "tabInfoEng");
-        LangUtils.getInstance().loadButtonLang(btnGuardar, "btnGuardar");
-        LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
-=======
+//        LangUtils.getInstance().setLang("es");
 //        LangUtils.getInstance().loadLabelLang(lblLenguajes, "lblLenguajes");
 //        LangUtils.getInstance().loadLabelLang(lblEstreno, "lblEstreno");
 //        LangUtils.getInstance().loadLabelLang(lblEstado, "lblEstado");
@@ -304,7 +279,6 @@ public class AdminNuevaMovieController extends Controller implements Initializab
 //        LangUtils.getInstance().loadTabLang(tabInfoEng, "tabInfoEng");
 //        LangUtils.getInstance().loadButtonLang(btnGuardar, "btnGuardar");
 //        LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
->>>>>>> master7_Fallas
     }
 
     @FXML

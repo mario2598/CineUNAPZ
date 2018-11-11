@@ -287,11 +287,6 @@ public class MovieDto {
         this.movieUrlimg = movieUrlimg;
     }
     
-<<<<<<< HEAD
-    public String toString(){
-        return this.getMovieNombre();
-    }
-=======
     public Long getMovieIdioma(){
         if(this.movieIdioma.get()!=null){
             return Long.valueOf(this.movieIdioma.get());
@@ -304,5 +299,8 @@ public class MovieDto {
         this.movieIdioma.set(idioma.toString());
     }
     
->>>>>>> master7_Fallas
+    public String toString(){
+        return this.getMovieNombre();
+    }
+    
 }
