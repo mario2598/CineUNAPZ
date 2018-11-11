@@ -64,16 +64,16 @@ public class ComprobanteService {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO,
-            InternetAddress.parse(AppContext.getInstance().getUsuario().getUsuEmail());
-            message.setSubject("Reporte de ganancias del usuario ") ;
-            message.setText("Documento de reporte de ganancias de la cancha ");
+            InternetAddress.parse(AppContext.getInstance().getUsuario().getUsuEmail()));
+            message.setSubject("Comptobante de compra en CINE UNA PZ ") ;
+            message.setText("Muchas gracias por preferirnos !!! ");
 
             MimeBodyPart messageBodyPart1 = new MimeBodyPart();
 
             Multipart multipart = new MimeMultipart();
             messageBodyPart1 = new MimeBodyPart();
             String fileName = ""
-                    + "ReporteGanancias.pdf";
+                    + "ComprobanteCompra.pdf";
             DataSource source = new FileDataSource(pdf);
             messageBodyPart1.setDataHandler(new DataHandler(source));
             messageBodyPart1.setFileName(fileName);
@@ -84,12 +84,7 @@ public class ComprobanteService {
             Transport.send(message);
 
         } catch (MessagingException e) {
-            e.printStackTrace();
-           
-        }
-        }
-        else{
-            System.out.print("falta llenar el campo del correo");
+            e.printStackTrace();      
         }
     }
 }
