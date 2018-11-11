@@ -83,7 +83,7 @@ public class AdminMovieCard extends Card{
     private ImageView initPoster(){
         posterUrlProp = movie.moviePortada;
         if(movie.getMoviePortada()!=null)
-            ImgView = new ImageView(new Image(movie.getMoviePortada()));
+            ImgView = new ImageView(new Image("cineuna/resources/images/VenomPoster.jpg"));
         else
             ImgView = new ImageView(new Image("cineuna/resources/images/VenomPoster.jpg"));
         ImgView.setPreserveRatio(false);

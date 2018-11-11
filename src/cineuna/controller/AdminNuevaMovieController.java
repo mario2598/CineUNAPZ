@@ -64,21 +64,13 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     private final MovieService movieService = new MovieService();
     private MovieDto movie;
     private Boolean editando;
-    @FXML
     private Label lblLenguajes;
-    @FXML
     private Label lblEstreno;
-    @FXML
     private Label lblEstado;
-    @FXML
     private Label lblTipo;
-    @FXML
     private Label lblDuracion;
-    @FXML
     private Label lblSegundos;
-    @FXML
     private Tab tabInfoEsp;
-    @FXML
     private Tab tabInfoEng;
     
     //Initializers
@@ -162,7 +154,7 @@ public class AdminNuevaMovieController extends Controller implements Initializab
             cmboBoxEstado.setValue("Próximamente");
             cmboBoxTipo.setValue("2D");
         }
-        cargarIdioma();
+       // cargarIdioma();
     }
 
     private void imgPosterAction(MouseEvent event) {
@@ -253,18 +245,11 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     }
 
     private void buscarImagen(MouseEvent event) throws FileNotFoundException {
-        FileChooser fc=new FileChooser();
-        File sel = fc.showOpenDialog(null);
-        if(fc!=null){
-            movie.guardarImagenByte(sel);
-        }
-        else{
-            System.out.println("imagen obtenida desde windows vacía");
-        }
-        //FileNameExtensionFilter filter;
+        
     }
     
     private void cargarIdioma(){
+        LangUtils.getInstance().setLang("es");
         LangUtils.getInstance().loadLabelLang(lblLenguajes, "lblLenguajes");
         LangUtils.getInstance().loadLabelLang(lblEstreno, "lblEstreno");
         LangUtils.getInstance().loadLabelLang(lblEstado, "lblEstado");
@@ -277,6 +262,20 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         LangUtils.getInstance().loadTabLang(tabInfoEng, "tabInfoEng");
         LangUtils.getInstance().loadButtonLang(btnGuardar, "btnGuardar");
         LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
+    }
+
+    @FXML
+    private void cargarPoster(MouseEvent event) throws FileNotFoundException {
+        FileChooser fc=new FileChooser();
+        File sel = fc.showOpenDialog(null);
+        if(fc!=null){
+            movie.guardarImagenByte(sel);
+            imgPoster.setImage(new Image(sel.toURI().toString()));
+        }
+        else{
+            System.out.println("imagen obtenida desde windows vacía");
+        }
+        //FileNameExtensionFilter filter;
     }
     
 }

@@ -232,13 +232,15 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         }
     }
     
+    /**
+     * cargar lista de reservas para tanda
+     */
     public void cargarListaReservas(){
         ReservaService rs=new ReservaService();
         Respuesta res = rs.getListReservas(tanda.getTandaId());
         if(res.getEstado())
             reservasDtoList = (ArrayList<ReservaDto>) res.getResultado("ReservasList");
-        else System.out.println("no se pudo cargar la lista de reservas para esta tanda");
-            
+        else System.out.println("no se pudo cargar la lista de reservas para esta tanda");        
     }
     
     /**
