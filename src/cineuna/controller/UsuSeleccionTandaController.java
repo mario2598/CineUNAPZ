@@ -20,6 +20,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -81,7 +82,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private FlowPane fp;
     private UsuarioDto usuario;
     private Hilo hilo;
-    private ArrayList<CampoButaca> listaButacas;
+    private ArrayList<CampoButaca> listaCamposButacas;
     TandaDto tanda;
     ReservaDto reserva;
     
@@ -92,7 +93,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     public void initialize(URL url, ResourceBundle rb) {
         butacasDtoList=new ArrayList<>();
         butacasDistribuidas=false;
+        reservasDtoList=new ArrayList<>();
         butacaList = new ArrayList<>();
+        listaCamposButacas=new ArrayList<>();
         asientos=new SimpleIntegerProperty(0);
         costoTotal=new SimpleIntegerProperty(0);
         AppContext.getInstance().set("asientos",asientos);
@@ -110,6 +113,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         cargarDistribucion();
         cargarListaButacas();
         cargarCamposButacas();
+        cargarListaReservas();
+        distribuirReservas();
+        eliminarReservasViejas();
         refrescarCamposButaca();
         hilo=new Hilo();
         hilo.start();
@@ -132,9 +138,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        //apReserva.getChildren().clear();
-                        //cargarDistribucion();
-                        //cargarListaButacas();
+                        cargarListaReservas();
+                        distribuirReservas();
+                        eliminarReservasViejas();
                         refrescarCamposButaca();
                     }
                 });
@@ -238,9 +244,22 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     public void cargarListaReservas(){
         ReservaService rs=new ReservaService();
         Respuesta res = rs.getListReservas(tanda.getTandaId());
-        if(res.getEstado())
-            reservasDtoList = (ArrayList<ReservaDto>) res.getResultado("ReservasList");
+        if(res.getEstado()){
+            reservasDtoList.addAll((ArrayList<ReservaDto>) res.getResultado("ReservasList"));
+            //System.out.println("reservas cargadas:"+reservasDtoList.size());
+        }
         else System.out.println("no se pudo cargar la lista de reservas para esta tanda");        
+    }
+    
+    private void distribuirReservas(){
+        reservasDtoList.stream().forEach(r->{
+            listaCamposButacas.stream().filter(b->{
+                if(b.getButaca()!=null){
+                    return b.getButaca().getButId().equals(r.getButId().getButId());
+                }
+                else return false;
+            }).forEach(cb->cb.setReserva(r));
+        });
     }
     
     /**
@@ -254,19 +273,26 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         butacasDtoList.sort(ButacaDto.butFilCol);
         
         for(ButacaDto b:butacasDtoList){
+            
             CampoButaca espacioB = new CampoButaca(dimButaca,b);
+            listaCamposButacas.add(espacioB);
             butacaList.add(espacioB);
             apReserva.getChildren().add(espacioB);
         }
     }
     
     private void refrescarCamposButaca(){
-        //System.out.println("refrescando campos butacas");
-        //apReserva.getChildren().clear();
         for(CampoButaca b:butacaList){
             b.refrescaEstado();
-            //apReserva.getChildren().add(b);
         }
+    }
+    
+    private void eliminarReservasViejas(){
+        listaCamposButacas.stream().filter(cb->cb.getReserva()!=null).forEach(cbf->{
+            if(!reservasDtoList.contains(cbf.getReserva())){
+                cbf.setReserva(null);
+            }
+        });
     }
     
     private void reiniciarDatos(){
@@ -289,5 +315,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         reiniciarDatos();
         refrescarCamposButaca();
     }
+    
+    
     
 }

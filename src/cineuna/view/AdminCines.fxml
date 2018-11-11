@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="cineuna.controller.AdminCinesController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="628.0" prefWidth="817.0" style="-fx-background-color: #110C0D;" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminCinesController">
    <children>
-      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="400.0" prefWidth="600.0" text="En Construcción: AdminCines" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <font>
-            <Font size="53.0" />
-         </font>
-         <graphic>
-            <FontAwesomeIconView glyphName="PENCIL_SQUARE_ALT" size="100" />
-         </graphic>
-      </Label>
+      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="585.0" prefWidth="780.0" spacing="10.0">
+         <children>
+            <ImageView fitHeight="95.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <image>
+                  <Image url="@../resources/images/logoEjemplo.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblNombreCine" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="263.0" styleClass="label-titulo-cine" text="CINE UNA " textFill="#f2e9e9">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="263.0">
+               <children>
+                  <FontAwesomeIconView glyphName="" size="20.0" text="" wrappingWidth="30.0" />
+                  <JFXTextField fx:id="txtNombreCine" prefHeight="25.0" prefWidth="223.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="51.0" prefWidth="263.0">
+               <children>
+                  <FontAwesomeIconView size="20.0" text="" wrappingWidth="19.0" />
+                  <JFXTextField fx:id="txtCorreoCine" prefHeight="25.0" prefWidth="219.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="780.0">
+               <children>
+                  <FontAwesomeIconView size="20.0" text="" wrappingWidth="27.0" />
+                  <Label fx:id="lblHorario" prefHeight="21.0" prefWidth="91.0" text="Horario:" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="780.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lblMsjAbre" prefHeight="21.0" prefWidth="48.0" text="Abre:" />
+                  <JFXTimePicker fx:id="tpAbre" styleClass="admin-date-picker" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="780.0" spacing="10.0">
+               <children>
+                  <Label fx:id="lblMsjCierra" prefHeight="21.0" prefWidth="48.0" text="Abre:" />
+                  <JFXTimePicker fx:id="tpCierra" styleClass="admin-date-picker" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
