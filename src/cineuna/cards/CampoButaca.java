@@ -71,7 +71,7 @@ public class CampoButaca extends Label{
         this.butaca=butaca;
         asientos=(SimpleIntegerProperty) AppContext.getInstance().get("asientos");//la misma que maneja selección de butacas para calcular costo
         dimension = new SimpleIntegerProperty(dim);
-        this.disponible = new SimpleBooleanProperty(true);
+        this.disponible = new SimpleBooleanProperty(false);
         this.seleccionada=new SimpleBooleanProperty(false);
         if("A".equalsIgnoreCase(butaca.getButActiva()))
             activa=true;
@@ -83,38 +83,30 @@ public class CampoButaca extends Label{
     public void refrescaEstado(){
             refrescaButaca();
             this.icon.getStyleClass().clear();
-            //this.disponible.set(true);
+            this.disponible.set(false);
             //this.seleccionada.set(false);
             activa=false;
             propia=false;
-            String estado="";
         if(butaca.getButActiva().equalsIgnoreCase("A")){
                 activa=true;//estaba activa
-                estado="A";
                 if(butaca.getButEstado().equalsIgnoreCase("D")){
                     disponible.set(true);
                     icon.getStyleClass().add("campo-butaca");
-                    estado="D";
                 }else if(butaca.getButEstado().equalsIgnoreCase("S")){
                     //seleccionada.set(true);//estaba seleccionada
-                    estado="S";
                     if(usuario.isSeleccionada(this)){//pregunta si el usuario la tenía seleccionada
                         propia = true;
                         icon.getStyleClass().add("campo-butaca-sel");
-                        estado="SP";
                     }
                     else{
                         icon.getStyleClass().add("campo-butaca-sel-otro");
-                        estado="SO";
                     }
                 }
                 else{
                     icon.getStyleClass().add("campo-butaca-ocupada");
-                    estado="O";
                 }
             }
         else{
-            estado="I";
         }
         
         //System.out.println("\nestado:"+butaca.getButLetra()+"-->"+estado);
@@ -185,6 +177,10 @@ public class CampoButaca extends Label{
             ButacaService bs = new ButacaService();
             Respuesta res = new Respuesta();
             res = bs.guardarButaca(butaca);//cambiar a reserva
+            if(res.getEstado()){
+                //envía comprobante con butaca.getButID();
+            }
+                
         }
         catch(Exception e){
             System.out.println("problema guardando estado de butaca");
@@ -203,10 +199,11 @@ public class CampoButaca extends Label{
     }
     
     public void cancelaButaca(){
-        this.seleccionada=new SimpleBooleanProperty(false);
+        //this.seleccionada=new SimpleBooleanProperty(false);
         icon.getStyleClass().add("campo-butaca");
         asientos.set(asientos.get()-1);
         butaca.setButEstado("D");//cambiar a reserva
+        this.disponible.set(true);
         guardarButaca();
     }
     
