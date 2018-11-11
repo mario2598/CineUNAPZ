@@ -14,49 +14,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminReportesController">
    <children>
-      <VBox fx:id="vbDate" layoutX="115.0" layoutY="80.0" prefHeight="200.0" prefWidth="400.0" visible="false">
-         <children>
-            <Label prefHeight="21.0" prefWidth="409.0" text="Ingrese las fechas que desea para consultar las Peliculas" textFill="#ee3131">
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </Label>
-            <JFXDatePicker fx:id="DP1" promptText="Despues de">
-               <VBox.margin>
-                  <Insets left="100.0" top="30.0" />
-               </VBox.margin></JFXDatePicker>
-            <JFXDatePicker fx:id="DP2" promptText="Antes de">
-               <VBox.margin>
-                  <Insets left="100.0" top="30.0" />
-               </VBox.margin></JFXDatePicker>
-            <JFXButton onAction="#genReporte" prefHeight="45.0" prefWidth="152.0" text="Generar Reporte">
-               <VBox.margin>
-                  <Insets left="130.0" top="20.0" />
-               </VBox.margin></JFXButton>
-         </children>
-      </VBox>
-      <VBox fx:id="vbId" layoutX="115.0" layoutY="87.0" prefHeight="200.0" prefWidth="400.0" visible="false">
-         <children>
-            <Label prefHeight="21.0" prefWidth="409.0" text="Seleccione la pelicula que desea consultar" textFill="#ee3131">
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Label>
-            <JFXComboBox fx:id="cbList" prefHeight="31.0" prefWidth="193.0" promptText="Lista Peliculas">
-               <VBox.margin>
-                  <Insets left="100.0" top="40.0" />
-               </VBox.margin>
-            </JFXComboBox>
-            <JFXButton onAction="#genReporteMovie" prefHeight="45.0" prefWidth="152.0" text="Generar Reporte">
-               <VBox.margin>
-                  <Insets left="130.0" top="20.0" />
-               </VBox.margin>
-            </JFXButton>
-         </children>
-      </VBox>
       <StackPane fx:id="spBtn" layoutX="72.0" layoutY="36.0" prefHeight="328.0" prefWidth="486.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="hbBtn" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnVBList" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Reporte Listado Peliculas con cantidad de visitas" textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -82,6 +42,59 @@
                   </JFXButton>
                </children>
             </HBox>
+            <VBox fx:id="vbDate" prefHeight="200.0" prefWidth="400.0" visible="false">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="409.0" text="Ingrese las fechas que desea para consultar las Peliculas" textFill="#ee3131">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <JFXDatePicker fx:id="DP1" promptText="Despues de">
+                     <VBox.margin>
+                        <Insets left="100.0" top="30.0" />
+                     </VBox.margin>
+                  </JFXDatePicker>
+                  <JFXDatePicker fx:id="DP2" promptText="Antes de">
+                     <VBox.margin>
+                        <Insets left="100.0" top="30.0" />
+                     </VBox.margin>
+                  </JFXDatePicker>
+                  <JFXButton onAction="#genReporte" prefHeight="45.0" prefWidth="152.0" text="Generar Reporte">
+                     <VBox.margin>
+                        <Insets left="130.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton onAction="#volverId" prefHeight="31.0" prefWidth="82.0" text="Volver">
+                     <VBox.margin>
+                        <Insets left="160.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <VBox fx:id="vbId" prefHeight="200.0" prefWidth="400.0" visible="false">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="409.0" text="Seleccione la pelicula que desea consultar" textFill="#ee3131">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Label>
+                  <JFXComboBox fx:id="cbList" prefHeight="31.0" prefWidth="193.0" promptText="Lista Peliculas">
+                     <VBox.margin>
+                        <Insets left="100.0" top="40.0" />
+                     </VBox.margin>
+                  </JFXComboBox>
+                  <JFXButton onAction="#genReporteMovie" prefHeight="45.0" prefWidth="152.0" text="Generar Reporte">
+                     <VBox.margin>
+                        <Insets left="130.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton onAction="#volverList" prefHeight="43.0" prefWidth="107.0" text="Volver">
+                     <VBox.margin>
+                        <Insets left="150.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
          </children>
       </StackPane>
    </children>

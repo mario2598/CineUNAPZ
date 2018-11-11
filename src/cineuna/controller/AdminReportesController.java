@@ -5,12 +5,14 @@
  */
 package cineuna.controller;
 
+import cineuna.model.MovieDto;
 import cineuna.model.UsuarioDto;
 import cineuna.service.MovieService;
 import cineuna.service.UsuarioService;
 import cineuna.util.LocalDateAdapter;
 import cineuna.util.Mensaje;
 import cineuna.util.Respuesta;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import java.awt.Desktop;
@@ -22,8 +24,10 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +35,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import static javafx.scene.control.Alert.AlertType.ERROR;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -51,9 +57,13 @@ public class AdminReportesController extends Controller implements Initializable
     @FXML
     private VBox vbId;
     @FXML
-    private JFXComboBox<?> cbList;
+    private JFXComboBox<MovieDto> cbList;
     @FXML
     private StackPane spBtn;
+    MovieService mService = new MovieService();
+    @FXML
+    private HBox hbBtn;
+
     /* * Initializes the controller class.
      * @param url
      * @param rb
@@ -81,14 +91,13 @@ public class AdminReportesController extends Controller implements Initializable
             String date1 = DP1.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE );
             String date2 = DP2.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE );
         try {
-            MovieService mService = new MovieService();
             
             Respuesta respuesta = mService.getReport(date1,date2);
              if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Generar  reporte", getStage(), respuesta.getMensaje());
                 } else {
             byte[] b = (byte[]) respuesta.getResultado("reporte");
-            convPdf(b);
+            convPdf(b,"src\\cineuna\\jasper\\moviesListReport.pdf");
  
            }
         } catch (Exception ex) {
@@ -98,8 +107,8 @@ public class AdminReportesController extends Controller implements Initializable
          }
     }
  
-    void convPdf(byte[] b) throws FileNotFoundException, IOException{
-        String outPutFile = "src\\cineuna\\jasper\\moviesReport.pdf";
+    void convPdf(byte[] b,String ruta) throws FileNotFoundException, IOException{
+        String outPutFile = ruta;
          String stream =Base64.getEncoder().encodeToString(b); 
             byte[] bytes = Base64.getDecoder().decode(stream);
             File someFile = new File(outPutFile);
@@ -107,23 +116,69 @@ public class AdminReportesController extends Controller implements Initializable
             fos.write(bytes);
             fos.flush();
             fos.close();
-            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar reporte", getStage(), "reporte creado correctamente.");
+            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar reporte", getStage(), "Reporte creado correctamente.");
     }
 
     @FXML
-    private void genReporteMovie(ActionEvent event) {
+    private void genReporteMovie(ActionEvent event) throws IOException {
+        if(cbList.getValue() == null){
+            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Pelicula Vacia ", getStage(), "Es necesario seleccionar una pelicula.");
+        }
+        else{
+          Respuesta res = mService.getReport(cbList.getValue().getMovieId());
+          if(!res.getEstado()){
+               new Mensaje().showModal(Alert.AlertType.ERROR, "Generar reporte", getStage(), res.getMensaje());
+          }
+          else{
+              byte[] b = (byte[]) res.getResultado("reporte");
+             convPdf(b,"src\\cineuna\\jasper\\MovieReport.pdf");
+             new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar reporte", getStage(), "Reporte creado correctamente."); 
+          }
+        }
     }
 
     @FXML
     private void btnVBList(ActionEvent event) {
         vbDate.setVisible(true);
-        spBtn.setVisible(false);
+        hbBtn.setVisible(false);
         
     }
 
     @FXML
     private void btnVbId(ActionEvent event) {
-        vbDate.setVisible(true);
-        spBtn.setVisible(false);
+        Boolean v = cargarCombo();
+        if(v){
+              vbId.setVisible(true);
+              hbBtn.setVisible(false); 
+        }
+     
+    }
+       public Boolean cargarCombo(){ // actualiza el box con los elementos de la lista
+           List<MovieDto> list = new ArrayList<>();
+           Respuesta res = mService.getMovies();
+           if(!res.getEstado()){
+                new Mensaje().showModal(ERROR, "Error en peliculas.", getStage(), "No se cargaron peliculas correctamente.");
+                return false;
+           }
+           else{
+               list = (List<MovieDto>) res.getResultado("Movie");
+              for(MovieDto u : list){
+              cbList.getItems().add(u);
+             
+                } 
+              return true;
+           }   
+    } 
+
+    @FXML
+    private void volverList(ActionEvent event) {
+         vbId.setVisible(false);
+        hbBtn.setVisible(true);
+    }
+
+    @FXML
+    private void volverId(ActionEvent event) {
+              vbDate.setVisible(false);        
+              hbBtn.setVisible(true); 
     }
 }

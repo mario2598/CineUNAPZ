@@ -3,14 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/cards/CampoButaca.java</file>
-            <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/controller/UsuSeleccionTandaController.java</file>
-=======
+            <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/model/MovieDto.java</file>
             <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/service/MovieService.java</file>
             <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/controller/AdminReportesController.java</file>
-            <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/model/ComprobanteDto.java</file>
->>>>>>> master5_mario/7/11
         </group>
     </open-files>
 </project-private>

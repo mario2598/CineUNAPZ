@@ -39,7 +39,7 @@ public class MovieService {
             List<MovieDto> movies = (List<MovieDto>) request.readEntity(new GenericType<List<MovieDto>>() {
             });
             
-            return new Respuesta(true, "", "", "Movies", movies);
+            return new Respuesta(true, "", "", "Movie", movies);
         } catch (Exception ex) {
             Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error guardando el usuario.", ex);
             return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
