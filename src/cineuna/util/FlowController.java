@@ -249,10 +249,6 @@ public class FlowController {
         return mainStage;
     }
     
-    public void btnVolverVisible(boolean b){
-        ((ContainerController) getLoader("Container").getController()).btnVolverVisible(b);
-    }
-    
     public ResourceBundle getIdioma(){
         return idioma;
     }
