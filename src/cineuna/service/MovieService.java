@@ -39,14 +39,14 @@ public class MovieService {
             List<MovieDto> movies = (List<MovieDto>) request.readEntity(new GenericType<List<MovieDto>>() {
             });
             
-            return new Respuesta(true, "", "", "Movies", movies);
+            return new Respuesta(true, "", "", "Movie", movies);
         } catch (Exception ex) {
             Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error guardando el usuario.", ex);
             return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
         }
     }
     
-    public Respuesta getReport(LocalDate f1,LocalDate f2){
+  public Respuesta getReport(String f1,String f2){
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("date1", f1);
@@ -55,12 +55,28 @@ public class MovieService {
             request.get();
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "");
-            }
-            
-            
-            return new Respuesta(true, "", "", "Movies", "");
+            }    
+            byte[] b = (byte[]) request.readEntity(new GenericType<byte[]>() {});
+            return new Respuesta(true, "", "", "reporte",b);
         } catch (Exception ex) {
-            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error guardando el usuario.", ex);
+            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error con comprobantes.", ex);
+            return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
+        }
+    }
+        
+     public Respuesta getReport(Long id){
+        try {
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("id", id);
+            Request request = new Request("movieController/moviesReport", "/{id}", parametros);
+            request.get();
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }    
+            byte[] b = (byte[]) request.readEntity(new GenericType<byte[]>() {});
+            return new Respuesta(true, "", "", "reporte",b);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error con comprobantes.", ex);
             return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
         }
     }

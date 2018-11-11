@@ -279,4 +279,7 @@ public class MovieDto {
         this.movieUrlimg = movieUrlimg;
     }
     
+    public String toString(){
+        return this.getMovieNombre();
+    }
 }

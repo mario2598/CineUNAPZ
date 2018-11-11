@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/model/MovieDto.java</file>
+            <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/service/MovieService.java</file>
+            <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/controller/AdminReportesController.java</file>
+=======
             <file>file:/C:/Users/robri/Documents/GitHub/CineUNAPZ/src/cineuna/controller/UsuInfoPeliculaController.java</file>
+>>>>>>> master7_R
         </group>
     </open-files>
 </project-private>

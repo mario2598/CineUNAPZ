@@ -6,17 +6,14 @@
 package cineuna.controller;
 
 import cineuna.cards.AdminMovieCard;
-import cineuna.cards.MovieCard2;
 import cineuna.model.MovieDto;
 import cineuna.service.MovieService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
-import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -79,33 +76,23 @@ public class AdminMoviesController extends Controller implements Initializable {
      */
     @Override
     public void initialize() {
-        //tilePaneEnCartelera.getChildren().clear();
-        //tilePaneProximanete.getChildren().clear();
-        //cargarPeliculasEnCartelera();
-        //cargarProximasPeliculas();
-        cargarCartelera();
-        cargarProximas();
-        cargarIdioma();
-        //tilePaneEnCartelera.getChildren().clear();
-        //tilePaneProximanete.getChildren().clear();
-        //cargarPeliculasEnCartelera();
-        //cargarProximasPeliculas();
-        //tabPaneMovies.getSelectionModel().selectFirst();
+        tilePaneEnCartelera.getChildren().clear();
+        tilePaneProximanete.getChildren().clear();
+        cargarPeliculasEnCartelera();
+        cargarProximasPeliculas();
+        tabPaneMovies.getSelectionModel().selectFirst();
+        
+        //Made by Rodrigo (Me dio errores)
+//        tilePaneEnCartelera.getChildren().clear();
+//        tilePaneProximanete.getChildren().clear();
+//        cargarPeliculasEnCartelera();
+//        cargarProximasPeliculas();
+//        cargarCartelera();
+//        cargarProximas();
     }
     
     //Methods
     private void cargarPeliculasEnCartelera(){
-        for (int i = 0; i < 5; i++) {
-            MovieDto movie = new MovieDto();
-            movie.setMovieNombre("Frozen");
-            movie.setMovieDate(LocalDate.now());
-            movie.setMovieDuracion(new Long(120));
-            movie.setMoviePortada("cineuna/resourses/images/VenomPoster.jpg");
-            movie.setMovieEstado("A");
-            MovieCard2 card = new MovieCard2(true, movie);
-            card.initCard();
-            tilePaneEnCartelera.getChildren().add(card);
-        }
         tilePaneEnCartelera.getChildren().clear();
         CarteleraCardList.clear();
         Respuesta resp = movieService.getMovies("C");
@@ -135,65 +122,66 @@ public class AdminMoviesController extends Controller implements Initializable {
         list.stream().forEach(card -> card.selectedStatus(false));
     }
     
-    private void llenarCartelera(List<MovieDto> movies){
-        tilePaneEnCartelera.getChildren().clear();
-        
-        //System.out.println("movies size:" + movies.size());
-        movies.stream().forEach(e->{
-            //System.out.println("peli");
-            MovieCard2 card = new MovieCard2(true,e);
-            card.initCard();
-            tilePaneEnCartelera.getChildren().add(card);
-        }); 
-    }
-    
-    private void cargarCartelera(){
-        List<MovieDto> listaDto=new ArrayList<>();
-
-        MovieService ms = new MovieService();
-        Respuesta r = ms.getMovies("C");
-        
-        if(r.getEstado()){
-            //System.out.println("true");
-            listaDto=(List<MovieDto>) r.getResultado("Movies");
-            llenarCartelera(listaDto);
-        }
-        else{
-            //System.out.println("false");
-        }
- 
-    }
-    
-    private void llenarProximas(List<MovieDto> movies){
-        tilePaneProximanete.getChildren().clear();
-        //System.out.println("movies size:" + movies.size());
-        movies.stream().forEach(e->{
-            //System.out.println("peli");
-            MovieCard2 card = new MovieCard2(false,e);
-            card.initCard();
-            //card.prefHeightProperty().bind(listaProximas.widthProperty());
-            //card.prefHeightProperty().bind(listaProximas.heightProperty());
-            tilePaneProximanete.getChildren().add(card);
-        });
-    }
-
-     private void cargarProximas(){
-        List<MovieDto> listaDto=new ArrayList<>();
-
-        MovieService ms = new MovieService();
-        Respuesta r = ms.getMovies("P");
-        
-        if(r.getEstado()){
-            //System.out.println("true");
-            listaDto=(List<MovieDto>) r.getResultado("Movies");
-            llenarProximas(listaDto);
-        }
-        else{
-            System.out.println("false");
-        }
-        
-        
-    }
+    //Made by Rodrigo (Me dio errores)
+//    private void llenarCartelera(List<MovieDto> movies){
+//        tilePaneEnCartelera.getChildren().clear();
+//        
+//        //System.out.println("movies size:" + movies.size());
+//        movies.stream().forEach(e->{
+//            //System.out.println("peli");
+//            MovieCard2 card = new MovieCard2(true,e);
+//            card.initCard();
+//            tilePaneEnCartelera.getChildren().add(card);
+//        }); 
+//    }
+//    
+//    private void cargarCartelera(){
+//        List<MovieDto> listaDto=new ArrayList<>();
+//
+//        MovieService ms = new MovieService();
+//        Respuesta r = ms.getMovies("C");
+//        
+//        if(r.getEstado()){
+//            //System.out.println("true");
+//            listaDto=(List<MovieDto>) r.getResultado("Movies");
+//            llenarCartelera(listaDto);
+//        }
+//        else{
+//            //System.out.println("false");
+//        }
+// 
+//    }
+//    
+//    private void llenarProximas(List<MovieDto> movies){
+//        tilePaneProximanete.getChildren().clear();
+//        //System.out.println("movies size:" + movies.size());
+//        movies.stream().forEach(e->{
+//            //System.out.println("peli");
+//            MovieCard2 card = new MovieCard2(false,e);
+//            card.initCard();
+//            //card.prefHeightProperty().bind(listaProximas.widthProperty());
+//            //card.prefHeightProperty().bind(listaProximas.heightProperty());
+//            tilePaneProximanete.getChildren().add(card);
+//        });
+//    }
+//
+//     private void cargarProximas(){
+//        List<MovieDto> listaDto=new ArrayList<>();
+//
+//        MovieService ms = new MovieService();
+//        Respuesta r = ms.getMovies("P");
+//        
+//        if(r.getEstado()){
+//            //System.out.println("true");
+//            listaDto=(List<MovieDto>) r.getResultado("Movies");
+//            llenarProximas(listaDto);
+//        }
+//        else{
+//            System.out.println("false");
+//        }
+//        
+//        
+//    }
 
     @FXML
     private void btn1Action(ActionEvent event) {
@@ -226,11 +214,6 @@ public class AdminMoviesController extends Controller implements Initializable {
     @FXML
     private void btn3Action(ActionEvent event) {
         //TODO
-    }
-    
-    private void cargarIdioma(){
-        LangUtils.getInstance().loadTabLang(tabEnCartelera, "lblCartelera");
-        LangUtils.getInstance().loadTabLang(tabProximamente, "lblProximas");
     }
     
 }

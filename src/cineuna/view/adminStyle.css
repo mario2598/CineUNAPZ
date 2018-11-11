@@ -83,9 +83,26 @@ and open the template in the editor.
     -jfx-rippler-fill: -fx-pallet-color2;
 }
 
-/*Text Fill*/
-.jfx-text-field {
+/*Toggle Button*/
+.admin-toggle-button {
     -fx-text-fill: -fx-text-ligh-color;
+    -jfx-toggle-color: -fx-pallet-color3;
+    -jfx-untoggle-color: white;
+    -jfx-untoggle-line-color: -fx-text-ligh-color;
+}
+
+/*Labels*/
+.label{
+    -fx-text-fill: -fx-text-ligh-color;
+}
+
+/*Text Fill*/
+.admin-text-field {
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-text-ligh-color;
+    -fx-prompt-text-fill: -fx-text-ligh-color;
+    -jfx-focus-color: -fx-pallet-color3;
+    -jfx-unfocus-color: -fx-text-ligh-color;
 }
 
 /*List View*/
@@ -97,9 +114,6 @@ and open the template in the editor.
 
 .customListView .list-cell {
     -fx-padding: 0px;
-}
-
-.customListView .list-cell{
     -fx-background-color: -fx-pallet-color2;
 }
 
@@ -113,6 +127,83 @@ and open the template in the editor.
 
 .customListView .list-cell .jfx-rippler {
     -jfx-rippler-fill: -fx-pallet-color3;
+}
+
+/*Combo Box*/
+.admin-combo-box {
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-text-ligh-color;
+    -fx-prompt-text-fill: -fx-text-ligh-color;
+    -jfx-focus-color: -fx-pallet-color3;
+    -jfx-unfocus-color: -fx-text-ligh-color;
+}
+
+.admin-combo-box .list-cell {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-ligh-color;
+    -fx-padding: 0px;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -fx-text-ligh-color, -fx-text-ligh-color;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+}    
+
+.combo-box-popup .list-view .list-cell {
+    -fx-padding: 6 6 6 6;
+    -fx-background-color: -fx-pallet-color2;
+    -fx-text-fill: -fx-text-ligh-color;
+    /*No alternate highlighting*/ 
+    /*-fx-background-color: white;*/
+}
+
+.combo-box-popup .list-view .list-cell:odd {
+    -fx-padding: 6 6 6 6;
+    -fx-background-color: derive(-fx-pallet-color2,10%);
+    -fx-text-fill: -fx-text-ligh-color;
+    /*No alternate highlighting*/ 
+    /*-fx-background-color: white;*/
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-padding: 6 6 6 6;
+    -fx-background-color: -fx-pallet-color3;
+    -fx-text-fill: -fx-text-dark-color;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-padding: 6 6 6 6;
+    -fx-text-fill: -fx-text-pallet-color;
+}
+
+/*Check Box*/
+.admin-check-box {
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-text-ligh-color;
+    -fx-graphic-text-gap: 10px;
+}
+
+.admin-check-box .glyph-icon {
+    -fx-fill: -fx-text-ligh-color;
+}
+
+/*Spinner*/
+.spinner .text-field{
+    -fx-background-color: -fx-pallet-color1;
+    -fx-border-color: -fx-text-ligh-color;
+    -fx-border-radius: 2;
+    -fx-border-width: 2px;
+    -fx-text-fill: -fx-text-ligh-color;
+}
+
+.spinner:focused .text-field{
+    -fx-background-color: -fx-pallet-color1;
+    -fx-border-color: -fx-text-pallet-color;
+    -fx-border-radius: 2;
+    -fx-border-width: 2;
+    -fx-text-fill: -fx-text-ligh-color;
 }
 
 /*TabePane*/
@@ -190,7 +281,7 @@ and open the template in the editor.
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color : #394c56;
+    -fx-background-color : derive(-fx-text-ligh-color, -25%);
     -fx-background-radius: 5;
     -fx-border-color: black;
     -fx-border-radius: 5;
@@ -199,9 +290,67 @@ and open the template in the editor.
 
 .scroll-bar:horizontal .thumb:hover,
 .scroll-bar:vertical .thumb:hover {
+    -fx-background-color : derive(-fx-pallet-color3, -25%);
+    -fx-background-radius: 5;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+}
+
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
     -fx-background-color : -fx-pallet-color3;
     -fx-background-radius: 5;
     -fx-border-color: black;
     -fx-border-radius: 5;
     -fx-border-width: 1;
+}
+
+/*Date Picker*/
+.admin-date-picker{
+    -jfx-default-color: -fx-pallet-color3;
+    -fx-background-color: -fx-pallet-color2;
+}
+
+.admin-date-picker .text-field{
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-text-ligh-color;
+    -fx-fill: -fx-text-ligh-color;
+    -fx-prompt-text-fill: -fx-text-pallet-color;
+    -jfx-focus-color: -fx-pallet-color3;
+    -jfx-unfocus-color: -fx-text-ligh-color;
+}
+
+.admin-date-picker,
+.admin-date-picker:focused,
+.admin-date-picker:focused:editable {
+    -fx-background-color: TRANSPARENT, TRANSPARENT, TRANSPARENT, TRANSPARENT;
+}
+
+.admin-date-picker > .arrow-button,
+.admin-date-picker:editable > .arrow-button,
+.admin-date-picker:focused > .arrow-button,
+.admin-date-picker:editable:focused > .arrow-button{
+    -fx-background-color: TRANSPARENT;
+    -fx-padding: 1 8 1 8;
+}
+
+.admin-date-picker > .arrow-button > .jfx-svg-glyph{
+    -fx-background-color: -fx-text-ligh-color;
+}
+
+.date-picker-popup > * > .spinner {
+    -fx-spacing: 0.25em;
+    -fx-alignment: CENTER;
+    -fx-fill-height: false;
+    -fx-background-color: transparent;
+}
+
+.date-picker-popup > * > .spinner > .label {
+    -fx-alignment: CENTER;
+}
+
+.date-picker-popup .calendar-grid {
+    -fx-pref-width: 275.0;
+    -fx-pref-height: 200.0;
 }
