@@ -71,7 +71,7 @@ public class AdminMoviesController extends Controller implements Initializable {
                 deselectAllCards(ProximasCardList);
             }
             event.consume();
-        });
+        });    
     }       
 
     /**

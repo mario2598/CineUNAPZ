@@ -5,8 +5,8 @@
  */
 package cineuna.model;
 
+import cineuna.cards.CampoButaca;
 import cineuna.service.ButacaService;
-import cineuna.util.Respuesta;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -60,7 +60,7 @@ public class UsuarioDto {
    // @XmlTransient
    // List<CineDto> cineList;
     public Long cineId;
-    private ArrayList<ButacaDto> butacasSeleccionadas;
+    private ArrayList<CampoButaca> butacasSeleccionadas;
     private Boolean existe;
     
     
@@ -213,33 +213,34 @@ public class UsuarioDto {
         this.cineId = cineId;
     }
 
-    public ArrayList<ButacaDto> getButacasSeleccionadas() {
+    public ArrayList<CampoButaca> getButacasSeleccionadas() {
         return butacasSeleccionadas;
     }
 
-    public void setButacasSeleccionadas(ArrayList<ButacaDto> butacasSeleccionadas) {
+    public void setButacasSeleccionadas(ArrayList<CampoButaca> butacasSeleccionadas) {
         this.butacasSeleccionadas = butacasSeleccionadas;
     }
     
-    public Boolean isSeleccionada(ButacaDto butaca){
+    public Boolean isSeleccionada(CampoButaca butaca){
         existe=false;
         if(butacasSeleccionadas.size()>0){
+            butacasSeleccionadas.contains(butaca);
             //System.out.println("buscando en butacas seleccionadas: "+butacasSeleccionadas.size());
-            butacasSeleccionadas.stream().forEach(b->{
-                if(butaca.getButId().equals(b.getButId()))
-                    existe = true;
-            });
+            //butacasSeleccionadas.stream().forEach(b->{
+                //if(butaca.getButacaId().equals(b.getButacaId()))
+                    //existe = true;
+            //});
         }
         //System.out.println("existe= "+existe.toString());
         return existe;
     }
     
-    public void pushSeleccionada(ButacaDto butaca){
+    public void pushSeleccionada(CampoButaca butaca){
         if(!butacasSeleccionadas.contains(butaca))
             butacasSeleccionadas.add(butaca);System.out.println("push: "+butacasSeleccionadas.size());
     }
     
-    public void popSeleccionada(ButacaDto butaca){
+    public void popSeleccionada(CampoButaca butaca){
         if(butacasSeleccionadas.contains(butaca))
             butacasSeleccionadas.remove(butaca);System.out.println("pop: "+butacasSeleccionadas.size());
     }
@@ -248,34 +249,15 @@ public class UsuarioDto {
         //System.out.println("Desseleciconar "+butacasSeleccionadas.size());
         ButacaService bs = new ButacaService();
         butacasSeleccionadas.stream().forEach(b->{
-            try{
-                Respuesta res = new Respuesta();
-                b.setButEstado("D");
-                res = bs.guardarButaca(b);
-                if(!res.getEstado())
-                   System.out.println("fallo peristir");b.setButEstado("S");  
-            }
-            catch(Exception e){
-                System.out.println("problema desseleccionado butacas del usuario actual"+e.getMessage());
-            }
+            b.desSeleccionaButaca();
         });
         butacasSeleccionadas.clear();
     }
     
     public void guardaButacasSeleccionadas(){
         //System.out.println("guardar "+butacasSeleccionadas.size());
-        ButacaService bs = new ButacaService();
-        butacasSeleccionadas.stream().forEach(e->{
-            try{
-            Respuesta res = new Respuesta();
-            e.setButEstado("O");
-            res = bs.guardarButaca(e);
-            if(!res.getEstado())
-                e.setButEstado("D");
-            }
-            catch(Exception ex){
-              System.out.println("problema guardando butacas del usuario actual");  
-            }
+        butacasSeleccionadas.stream().forEach(c->{
+            c.guardarButaca();
         });
         butacasSeleccionadas.clear();
     }

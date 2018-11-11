@@ -77,9 +77,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private Integer costoPorAsiento;
     @FXML
     private FlowPane fp;
-    //private static ArrayList<ButacaDto> butacasSeleccionadas;
     private UsuarioDto usuario;
     private Hilo hilo;
+    private ArrayList<CampoButaca> listaButacas;
 
     /**
      * Initializes the controller class.
@@ -98,17 +98,15 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     @Override
     public void initialize() {
         this.usuario = AppContext.getInstance().getUsuario();
-        //butacasSeleccionadas=new ArrayList<>();
-        //AppContext.getInstance().set("butacasSeleccionadas",butacasSeleccionadas);
+        apReserva.getChildren().clear();
         asientos.set(0);
         costoTotal.set(0);
         cargarIdioma();
         cargarInfoTanda();
         cargarDistribucion();
         cargarListaButacas();
+        cargarCamposButacas();
         hilo=new Hilo();
-        //hilo.detener();
-        
         hilo.start();
     }
     
@@ -129,14 +127,15 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        apReserva.getChildren().clear();
-                        cargarDistribucion();
-                        cargarListaButacas();
+                        //apReserva.getChildren().clear();
+                        //cargarDistribucion();
+                        //cargarListaButacas();
+                        refrescarCamposButaca();
                     }
                 });
                 
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(5000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(UsuSeleccionTandaController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -206,7 +205,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         columnas=tanda.getSalaId().getSalaCol().intValue();
         apReserva.setPrefColumns(columnas);
         apReserva.setPrefRows(filas);
-        apReserva.getChildren().clear();
+        //apReserva.getChildren().clear();
         }
         catch(NullPointerException e){
 
@@ -222,13 +221,10 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         Respuesta res= bs.getListaButacasSala(tanda.getSalaId().getSalaId());
         if(res.getEstado()){
             butacasDtoList = (ArrayList<ButacaDto>) res.getResultado("ButacaList");
-            //System.out.println("butacas cargadas: "+butacasDtoList.size());
         }
         }
         catch(Exception e){
-             //System.out.println("ya valió");
         }
-        cargarCamposButacas();
     }
     
     /**
@@ -239,33 +235,21 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         butacaList.clear();
         Double anchura = bpButacas.getWidth()*0.82;
         Integer dimButaca = ((anchura.intValue())/columnas);
-        Boolean activa,disponible,seleccionada,propia;
         butacasDtoList.sort(ButacaDto.butFilCol);
         
         for(ButacaDto b:butacasDtoList){
-            activa=false;
-            disponible=false;
-            seleccionada=false;
-            propia=false;
-            
-            if(b.getButActiva().equalsIgnoreCase("A")){
-                activa=true;//estaba activa
-                
-                if(b.getButEstado().equalsIgnoreCase("D")){
-                    disponible=true;
-                }else if(b.getButEstado().equalsIgnoreCase("S")){
-                    seleccionada=true;//estaba seleccionada
-                    if(usuario.isSeleccionada(b)){
-                        propia = true;
-                    }
-                    //else System.out.println("");//era propia
-                }
-            }
-            
-            CampoButaca espacioB = new CampoButaca(dimButaca,disponible,activa,seleccionada,propia);
-            espacioB.setButaca(b);
+            CampoButaca espacioB = new CampoButaca(dimButaca,b);
             butacaList.add(espacioB);
             apReserva.getChildren().add(espacioB);
+        }
+    }
+    
+    private void refrescarCamposButaca(){
+        //System.out.println("refrescando campos butacas");
+        //apReserva.getChildren().clear();
+        for(CampoButaca b:butacaList){
+            b.refrescaEstado();
+            //apReserva.getChildren().add(b);
         }
     }
     
