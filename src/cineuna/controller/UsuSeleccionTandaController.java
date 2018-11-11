@@ -7,9 +7,11 @@ package cineuna.controller;
 
 import cineuna.cards.CampoButaca;
 import cineuna.model.ButacaDto;
+import cineuna.model.ReservaDto;
 import cineuna.model.TandaDto;
 import cineuna.model.UsuarioDto;
 import cineuna.service.ButacaService;
+import cineuna.service.ReservaService;
 import cineuna.util.AppContext;
 import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
@@ -58,13 +60,13 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private JFXButton btnReservar;
     @FXML
     private JFXButton btnCancelar;
-    TandaDto tanda;
     @FXML
     private Label lblTotal;
     @FXML
     private Label lblPantalla;
     private ArrayList<CampoButaca> butacaList;
     private ArrayList<ButacaDto> butacasDtoList;
+    private ArrayList<ReservaDto> reservasDtoList;
     Integer filas;
     Integer columnas;
     private Boolean butacasDistribuidas;
@@ -80,7 +82,9 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private UsuarioDto usuario;
     private Hilo hilo;
     private ArrayList<CampoButaca> listaButacas;
-
+    TandaDto tanda;
+    ReservaDto reserva;
+    
     /**
      * Initializes the controller class.
      */
@@ -229,7 +233,12 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     }
     
     public void cargarListaReservas(){
-        //ReservaService rs=new Rese
+        ReservaService rs=new ReservaService();
+        Respuesta res = rs.getListReservas(tanda.getTandaId());
+        if(res.getEstado())
+            reservasDtoList = (ArrayList<ReservaDto>) res.getResultado("ReservasList");
+        else System.out.println("no se pudo cargar la lista de reservas para esta tanda");
+            
     }
     
     /**
