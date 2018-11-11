@@ -440,31 +440,6 @@ public class LogInController extends Controller implements Initializable {
         }
 
     }
-     
-     
-   /*  public void generarReport() throws JRException, FileNotFoundException{
-         String outPutFile = "src/cineuna/jasperReport/jasperPrueba.pdf";
-         List<cobro> list = new ArrayList<>();        
-         cobro c1 = new cobro();
-         c1.setNombre("mario"); 
-         c1.setInicio("18/06/1996");
-         c1.setfin("25/01/1998");
-         c1.setOcupados(15);
-         c1.setDesocupados(10);
-         c1.setMonto(50000);
-         list.add(c1);
-         JRBeanCollectionDataSource cobrojrb = new JRBeanCollectionDataSource(list);        
-         JasperReport jasperReport = JasperCompileManager.compileReport("src/cineuna/jasperReport/reporteCanchasPZu.jrxml");
-         Map<String, Object> parametros = new HashMap<>();
-         parametros.put("dataSource", cobrojrb);
-         JasperPrint jasperprint = JasperFillManager.fillReport(jasperReport, parametros, new JREmptyDataSource());
-         
-         OutputStream outputStream = new FileOutputStream(new File(outPutFile));
-           
-         JasperExportManager.exportReportToPdfStream(jasperprint, outputStream);
-         File png = new File("src/cineuna/jasperReport/jasperPrueba.pdf");
-         
-     }*/
 
     @FXML
     private void btnVlvPassChange(ActionEvent event) {
