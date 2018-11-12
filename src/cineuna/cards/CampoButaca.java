@@ -176,7 +176,6 @@ public class CampoButaca extends Label{
     
     private void seleccionaButaca(){
         usuario.pushSeleccionada(this);
-        ComprobanteDto  c = crearComp();
         usuario.pushComp(comp);
         //icon.getStyleClass().add("campo-butaca-sel");
         asientos.set(asientos.get()+1);
@@ -185,15 +184,6 @@ public class CampoButaca extends Label{
         guardarReserva();
     }
     
-    public ComprobanteDto crearComp(){
-        comp.setButId(this.butaca.getButId());
-        comp.setCompCosto(this.tanda.getTandaCobro());
-        comp.setMovieId(this.tanda.getMovieId().getMovieId());
-        comp.setUsuId(this.usuario.getUsuId());
-        comp.setSalaId(this.tanda.getSalaId().getSalaId());
-      //  comp.setCompDate(this.tanda.getMovieId().getMovieDate());
-        return comp;
-    }
     
     public void desSeleccionaButaca(){
         usuario.popSeleccionada(this);

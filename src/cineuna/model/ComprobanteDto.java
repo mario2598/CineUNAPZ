@@ -8,9 +8,8 @@ package cineuna.model;
 import cineuna.util.LocalDateAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,38 +21,42 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author mario
  */
 @XmlRootElement(name = "ComprobanteDto")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class ComprobanteDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @XmlTransient
-    private Long compId;
+     public Long compId;
     @XmlTransient
-    private Long compCosto;
+     public StringProperty compCosto;
     @XmlTransient
-    private Long butId;
+     public StringProperty butId;
     @XmlTransient
-    private Long movieId;
+     public StringProperty movieId;
     @XmlTransient
-    private Long salaId;
+     public StringProperty salaId;
     @XmlTransient
-    private Long usuId;
-   // @XmlTransient
-  //  public ObjectProperty<LocalDate> compDate;
+     public StringProperty usuId;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public LocalDate compDate;
+    
+    public ComprobanteDto() {  
+      
+        compCosto = new SimpleStringProperty();
+        butId = new SimpleStringProperty();
+        movieId = new SimpleStringProperty();
+        salaId = new SimpleStringProperty();
+        usuId = new SimpleStringProperty();
+    }
     
      public void duplicateData(ComprobanteDto c){
-        this.compId = c.getCompId();
-        this.compCosto = c.getCompCosto();
-        this.butId = c.getButId();
-        this.movieId = c.getMovieId();
-        this.salaId = c.getSalaId();
-        this.usuId = c.getUsuId();
+        this.compId =c.getCompId();
+        this.compCosto.set(c.getCompCosto());
+        this.butId.set(c.getButId());
+        this.movieId.set(c.getMovieId());
+        this.salaId.set(c.getSalaId());
+        this.usuId.set(c.getUsuId());
     }
-
-    public ComprobanteDto() {
-     //   this.compDate = new SimpleObjectProperty<>();
-    }
-
 
     public Long getCompId() {
         return compId;
@@ -62,53 +65,52 @@ public class ComprobanteDto implements Serializable {
     public void setCompId(Long compId) {
         this.compId = compId;
     }
-
-    public Long getCompCosto() {
-        return compCosto;
+     public String getCompCosto() {
+        return compCosto.get();
     }
 
-    public void setCompCosto(Long compCosto) {
-        this.compCosto = compCosto;
+    public void setCompCosto(String compCosto) {
+        this.compCosto.set(compCosto);
+    }
+    public String getButId() {
+        return butId.get();
     }
 
-    public Long getButId() {
-        return butId;
+    public void setButId(String butId) {
+        this.butId.set(butId);
+    }
+     public String getMovieId() {
+        return movieId.get();
     }
 
-    public void setButId(Long butId) {
-        this.butId = butId;
+    public void setMovieId(String movieId) {
+        this.movieId.set(movieId);
+    }
+    public String getSalaId() {
+        return salaId.get();
     }
 
-    public Long getMovieId() {
-        return movieId;
+    public void setSalaId(String salaId) {
+        this.salaId.set(salaId);
+    }
+    
+    public String getUsuId() {
+        return usuId.get();
     }
 
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
+    public void setUsuId(String usuId) {
+        this.usuId.set(usuId);
     }
 
-    public Long getSalaId() {
-        return salaId;
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public LocalDate getCompDate() {
+        return compDate;
+    }
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public void setCompDate(LocalDate compDate) {
+        this.compDate = compDate;
     }
 
-    public void setSalaId(Long salaId) {
-        this.salaId = salaId;
-    }
-
-    public Long getUsuId() {
-        return usuId;
-    }
-
-    public void setUsuId(Long usuId) {
-        this.usuId = usuId;
-    }
-   // @XmlJavaTypeAdapter(LocalDateAdapter.class)
-   // public LocalDate getCompDate() {
-    //    return compDate.get();
-  //  }
- //   @XmlJavaTypeAdapter(LocalDateAdapter.class)
-  //  public void setCompDate(LocalDate compDate) {
-      //  this.compDate.set(compDate); 
-   // }   
 
 }

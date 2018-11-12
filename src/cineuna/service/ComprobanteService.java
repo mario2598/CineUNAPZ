@@ -7,6 +7,7 @@ package cineuna.service;
 
 import cineuna.model.ComprobanteDto;
 import cineuna.util.AppContext;
+import cineuna.util.Mensaje;
 import cineuna.util.Request;
 import cineuna.util.Respuesta;
 import java.io.File;
@@ -19,6 +20,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -48,7 +50,7 @@ public class ComprobanteService {
     
 
     
-    public void guardarComp(ComprobanteDto dto){
+    public Boolean guardarComp(ComprobanteDto dto){
         ComprobanteDto aux;
         try{
             Respuesta res = new Respuesta();
@@ -56,17 +58,21 @@ public class ComprobanteService {
             res = guardarComprobante(dto);//cambiar a reserva
             if(res.getEstado()){
                 aux = (ComprobanteDto) res.getResultado("Comprobante");
-              respuesta = getReport(aux.getCompId());
+              respuesta = getReport(Long.valueOf(aux.getCompId()));
               byte[] b = (byte[]) respuesta.getResultado("Reporte");
+              
                if(respuesta.getEstado()){
-                   exportToMail(b);
+                  return exportToMail(b);
                }
             }
         }
         catch(Exception e){
             System.out.println("problema guardando comprobante");
+            return false;
         }
+        return true;
     }
+    
     
   public Respuesta guardarComprobante(ComprobanteDto dto){
         try {     
@@ -95,8 +101,8 @@ public class ComprobanteService {
                 System.out.println("error TandaService(Cliente)"+request.getError());
                 return new Respuesta(false, request.getError(), "");
             }
-            byte[] b = (byte[]) request.readEntity(new GenericType<byte[]>() {});
-            return new Respuesta(true, "", "", "reporte",b);
+            byte[] b = (byte[]) (byte[]) request.readEntity(new GenericType<byte[]>() {});
+            return new Respuesta(true, "", "", "Reporte",b);
             
         } catch (Exception ex) {
             Logger.getLogger(TandaService.class.getName()).log(Level.SEVERE, "Error obteniendo comprobante de pago.", ex);
