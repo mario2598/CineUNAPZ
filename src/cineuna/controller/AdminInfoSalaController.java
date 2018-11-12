@@ -10,6 +10,7 @@ import cineuna.cards.AdminTandaCard;
 import cineuna.model.MovieDto;
 import cineuna.model.SalaDto;
 import cineuna.model.TandaDto;
+import cineuna.service.SalaService;
 import cineuna.service.TandaService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
@@ -60,6 +61,7 @@ public class AdminInfoSalaController extends Controller implements Initializable
     private final ReadOnlyDoubleProperty heightProp = FlowController.getInstance().getStage().heightProperty();
     private final ReadOnlyDoubleProperty widthProp = FlowController.getInstance().getStage().widthProperty();
     private SalaDto sala;
+    private TandaDto tanda;
     private AdminMovieCard card;
     @FXML
     private Label lblDistribucion;
@@ -93,6 +95,7 @@ public class AdminInfoSalaController extends Controller implements Initializable
                 gpTandaInfo.setVisible(true);
                 btnEditarTanda.setDisable(false);
                 btnEliminarTanda.setDisable(false);
+                this.tanda = newValue.getTanda();
                 mostrarInfoTanda(newValue.getTanda());
             } else {
                 gpTandaInfo.setVisible(false);
@@ -213,7 +216,17 @@ public class AdminInfoSalaController extends Controller implements Initializable
 
     @FXML
     private void brnEliminarSalaAction(ActionEvent event) {
-        //TODO
+        try{
+            Respuesta resp = (new SalaService()).eliminarSala(sala);
+            if(resp.getEstado()){
+                FlowController.getInstance().goView("AdminSalas");
+                System.out.println("Se ha borrado la sala correctamente.");
+            } else {
+                System.out.println("Se ha producido un error eliminando la sala");
+            }
+        } catch(Exception ex){
+            System.out.println("Se ha producido un error eliminando la sala.\nError: " + ex);
+        }
     }
 
     @FXML
@@ -225,7 +238,17 @@ public class AdminInfoSalaController extends Controller implements Initializable
 
     @FXML
     private void btnEliminarTandaAction(ActionEvent event) {
-        //TODO
+        try{
+            Respuesta resp = (new TandaService()).eliminarTanda(tanda);
+            if(resp.getEstado()){
+                System.out.println("Se ha borrado la sala correctamente.");
+                initialize();
+            } else {
+                System.out.println("Se ha producido un error eliminando la tanda");
+            }
+        } catch(Exception ex){
+            System.out.println("Se ha producido un error eliminando la tanda.\nError: " + ex);
+        }
     }
 
     @FXML
