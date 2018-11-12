@@ -80,8 +80,9 @@ public class CampoButaca extends Label{
     }
     
     public void refrescaEstado(){
-        //reinicia las variables a consultar
+        //reinicia las variables a consultar 
             this.icon.getStyleClass().clear();
+            icon.getStyleClass().add("campo-butaca");
             this.disponible.set(false);
             this.seleccionada=false;
             this.activa=false;
