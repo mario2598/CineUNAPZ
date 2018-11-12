@@ -102,11 +102,8 @@ public class UsuarioDto {
         setUsuNewpassword(u.getUsuNewpassword());
         setUsuCambio(u.getUsuCambio());
         this.cineID = u.getCineID();
-<<<<<<< HEAD
         this.usuImg = u.getUsuImg();
-=======
         this.usuCodAct.set(u.getUsuCodAct());
->>>>>>> master9_fallas
     }
     
     //Getters and Setters
