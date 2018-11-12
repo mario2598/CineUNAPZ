@@ -12,16 +12,23 @@ import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -61,9 +68,13 @@ public class AdminManteUsuarioController extends Controller implements Initializ
         bindedUser = false;
         hayCambios.set(false);
         ivPicture.setOnMouseClicked(event -> {
-            if(event.getButton().equals(MouseButton.PRIMARY))
-                cambiarImagenPerfil();
-            event.consume();
+            try {
+                if(event.getButton().equals(MouseButton.PRIMARY))
+                    cambiarImagenPerfil();
+                event.consume();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AdminManteUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         toggleBtnDerechos.selectedProperty().addListener((observable, oldValue, newValue) -> {
             usuario.setUsuAdmin(newValue ? "S":"N");
@@ -158,8 +169,18 @@ public class AdminManteUsuarioController extends Controller implements Initializ
         return !huboError;
     }
     
-    private void cambiarImagenPerfil(){
+    private void cambiarImagenPerfil() throws FileNotFoundException{
         System.out.println("File Chooser para imagen de perfil del usuario");
+        FileChooser fc=new FileChooser();
+        File sel = fc.showOpenDialog(null);
+        if(fc!=null){
+            usuario.guardarImagenByte(sel);
+            ivPicture.setImage(new Image(sel.toURI().toString()));
+          
+        }
+        else{
+            System.out.println("imagen obtenida desde windows vacía");
+        }
     }
     
     //FXML Methods
@@ -186,6 +207,12 @@ public class AdminManteUsuarioController extends Controller implements Initializ
         } else {
             System.out.println(mensajeError);
         }
+    }
+    
+
+    @FXML
+    private void buscaImg(MouseEvent event) throws FileNotFoundException {
+        
     }
     
 }

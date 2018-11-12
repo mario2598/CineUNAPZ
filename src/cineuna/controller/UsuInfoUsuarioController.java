@@ -13,16 +13,23 @@ import cineuna.util.LangUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -80,8 +87,13 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
 
     @Override
     public void initialize() {
-        cargarIdioma();
-        bindUsuarioLbls();
+        try {
+            cargarIdioma();
+            bindUsuarioLbls();
+            cargarImagen();
+        } catch (IOException ex) {
+            Logger.getLogger(UsuInfoUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void llenarInfoUsuario(){
@@ -171,10 +183,7 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
         vbInfo.setVisible(true);
         UsuarioService uService = new UsuarioService();
         try{
-        uService.guardarUsuario(usuario);
-        String str="";
-        if(str.contains("watch"))
-           str.replace("watch", "embed");
+            uService.guardarUsuario(usuario);
         }
         catch(Exception e){
             
@@ -207,6 +216,41 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
         LangUtils.getInstance().loadButtonLang(btnCancelar,"btnCancelar");
         LangUtils.getInstance().loadButtonLang(btnConfirmar,"btnConfirmar");
         LangUtils.getInstance().loadButtonLang(btnEditar,"btnEditar");
+    }
+    
+    
+    private void cargarImagen() throws IOException{
+        String imgPath = "src\\cineuna\\resources\\images\\" + usuario.getUsuNombre()+".jpg";
+        File file = new File(imgPath);
+        if(usuario.getUsuImg()!=null){
+        usuario.crearImagenDesdeByte();
+        if(file.exists()){
+        imgUsuarioLbl.setImage(usuario.abrirImagen());
+        imgUsuarioTxt.setImage(usuario.abrirImagen());
+        }
+        else{
+           imgUsuarioLbl.setImage(new Image("cineuna/resources/images/VenomPoster.jpg")); 
+           imgUsuarioTxt.setImage(new Image("cineuna/resources/images/VenomPoster.jpg"));
+        }
+        }
+        else{
+            imgUsuarioLbl.setImage(new Image("cineuna/resources/images/VenomPoster.jpg")); 
+            imgUsuarioTxt.setImage(new Image("cineuna/resources/images/VenomPoster.jpg"));
+        } 
+    }
+
+    @FXML
+    private void buscarImagen(MouseEvent event) throws FileNotFoundException {
+        FileChooser fc=new FileChooser();
+        File sel = fc.showOpenDialog(null);
+        if(fc!=null){
+            usuario.guardarImagenByte(sel);
+            imgUsuarioTxt.setImage(new Image(sel.toURI().toString()));
+          
+        }
+        else{
+            System.out.println("imagen obtenida desde windows vacía");
+        }
     }
     
 }
