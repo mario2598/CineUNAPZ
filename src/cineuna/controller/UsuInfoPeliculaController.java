@@ -148,6 +148,8 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             LangUtils.getInstance().setLang("es");
         else
             LangUtils.getInstance().setLang("eng");
+        
+        LangUtils.getInstance().loadButtonLang(btnComprar, "btnComprarI");
     }    
 
     @FXML

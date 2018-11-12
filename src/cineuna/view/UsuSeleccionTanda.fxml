@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<JFXDialogLayout fx:id="root" prefHeight="500.0" prefWidth="1000.0" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuSeleccionTandaController">
+<JFXDialogLayout fx:id="root" prefHeight="500.0" prefWidth="1000.0" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuSeleccionTandaController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="background-pane">
          <left>
@@ -96,7 +96,7 @@
                <children>
                   <VBox alignment="CENTER">
                      <children>
-                        <Label graphicTextGap="5.0" text="Simbología de los colores:" textAlignment="CENTER" wrapText="true">
+                        <Label fx:id="lblSimbologia" graphicTextGap="5.0" text="Simbología de los colores:" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="16.0" />
                            </font>
