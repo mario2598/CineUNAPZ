@@ -16,8 +16,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Base64;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -43,6 +48,8 @@ import static javafx.scene.control.Alert.AlertType.ERROR;
 import static javafx.scene.control.Alert.AlertType.INFORMATION;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -123,6 +130,8 @@ public class LogInController extends Controller implements Initializable {
     private JFXButton btnVolverNewPass;
     @FXML
     private JFXButton btnCambiar;
+    @FXML
+    private JFXTextField tfUrl;
 
     /**
      * Initializes the controller class.
@@ -134,6 +143,7 @@ public class LogInController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
+        usuario = new UsuarioDto();
         reinicia();
         cargarLenguaje();
     }
@@ -277,16 +287,33 @@ public class LogInController extends Controller implements Initializable {
             this.vbOpcUsu.setVisible(true);
     }
     
+    public static String convertDocToByteArray() throws FileNotFoundException, IOException {
+        File file = new File("C:\\Users\\mario\\Documents\\NetBeansProjects\\Tarea2\\src\\tarea2\\resources\\add-user.png");
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        try {
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum);
+            }
+        } catch (IOException ex) {
+        }
+        byte[] bytes = bos.toByteArray();
+        String movieUrlimg =Base64.getEncoder().encodeToString(bytes); 
+        return movieUrlimg;
+    }
+    
        @FXML
-    private void registrarCliente(ActionEvent event) {
+    private void registrarCliente(ActionEvent event) throws IOException {
         Boolean req = validaCamposRegistro();
         if(req){
-            usuario = new UsuarioDto();
+            
             usuario.setUsuNombre(tfRegNombre.getText());
             usuario.setUsuPapellido(tfRegApe.getText());
             usuario.setUsuUser(tfRegUsu.getText());
             usuario.setUsuPassword(tfRegContra.getText());
             usuario.setUsuEmail(tfRegCorreo.getText());
+            usuario.setUsuImg(convertDocToByteArray()); 
             String cod = generarCodAct(tfRegContra.getText());
             usuario.setUsuCodAct(cod);
             if(!tfRegApe1.getText().isEmpty()){{
@@ -319,6 +346,10 @@ public class LogInController extends Controller implements Initializable {
         if(tfRegNombre.getText().isEmpty()){
             completo=false;
             estado+="Ingresar nombre\n";
+        }
+         if(tfUrl.getText().isEmpty()){
+            completo=false;
+            estado+="Ingresar Imagen\n";
         }
         if(tfRegApe.getText().isEmpty()){
             completo = false;
@@ -385,7 +416,7 @@ public class LogInController extends Controller implements Initializable {
             message.setRecipients(Message.RecipientType.TO,
             InternetAddress.parse(usuario.getUsuEmail()));
             message.setSubject("Activacion Cuenta CINEUNAPZ") ;
-            message.setText("Ingrese al link para activar la cuenta " + "http://localhost:80/WsCineUNA/wsCine/UsuarioController/activar/"+usuario.getUsuCodAct());
+            message.setText("Ingrese al link para activar la cuenta " + "http://172.17.32.195:80/WsCineUNA/wsCine/UsuarioController/activar/"+usuario.getUsuCodAct());
 
             //message.setText("Ingrese al link para activar la cuenta " + "http://localhost:80/WsCineUNA/wsCine/UsuarioController/activar/"+usuario.getUsuUser());
             Transport.send(message);
@@ -564,5 +595,43 @@ System.out.println( abecedario[numRandon] );
     private void idiomaEsp(ActionEvent event) {
         LangUtils.getInstance().setLang("esp");
         cargarLenguaje();
+    }
+
+    @FXML
+    private void btnAnadir(ActionEvent event) throws FileNotFoundException {
+        FileChooser fc=new FileChooser();
+        File sel = fc.showOpenDialog(null);
+        if(sel!=null){
+            String u = guardarImagenByte(sel);
+            usuario.setUsuImg(u);
+            tfUrl.setText(sel.getAbsolutePath());
+        }
+        else{
+            System.out.println("imagen obtenida desde windows vacía");
+        }
+        
+    }
+    
+        public String guardarImagenByte(File file) throws FileNotFoundException{
+        //File file = new File(path);
+        String path;
+       
+            FileInputStream fis = new FileInputStream(file);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            try {
+                for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                    bos.write(buf, 0, readNum);
+                }
+            } catch (IOException ex) {
+
+            }
+            byte[] by = bos.toByteArray();
+            String s = Base64.getEncoder().encodeToString(by);                
+            usuario.setUsuImg(s);
+            
+            return null;
+
+       
     }
 }

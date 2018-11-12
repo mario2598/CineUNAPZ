@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author eflores
+ * @author mflores
  */
 public final class Request {
 
@@ -30,10 +30,9 @@ public final class Request {
     private Invocation.Builder builder;
     private WebTarget webTarget;
     private Response response;
-    // public String urlBase = null;
-    //public String urlBase = "http://localhost:80/WsCineUNA/wsCine/";//todo
+
     public String urlBase = "http://localhost:80/WsCineUNA/wsCine/";//todo
-   //public String urlBase = "http://localhost:8080/ElectricPosWs/wsPos/";
+
 
     /**
      * Constructor por defecto

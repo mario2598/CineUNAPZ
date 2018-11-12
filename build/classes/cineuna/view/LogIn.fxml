@@ -16,7 +16,7 @@
 
 <StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="460.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.LogInController">
    <children>
-      <StackPane fx:id="vbLogIn" prefHeight="150.0" prefWidth="200.0">
+      <StackPane fx:id="vbLogIn" prefHeight="150.0" prefWidth="200.0" visible="false">
          <children>
             <VBox fx:id="vbLogInvb" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
                <children>
@@ -64,18 +64,6 @@
                   <Hyperlink fx:id="hlAutoReg" onAction="#irRegistro" text="Auto Registro" underline="true" />
                </children>
             </VBox>
-         </children>
-      </VBox>
-      <VBox fx:id="vbRegCliente" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" visible="false">
-         <children>
-            <JFXTextField fx:id="tfRegNombre" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Nombre" />
-            <JFXTextField fx:id="tfRegApe" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Primer Apellido" />
-            <JFXTextField fx:id="tfRegApe1" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Segundo Apellido" />
-            <JFXTextField fx:id="tfRegUsu" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Usuario" />
-            <JFXPasswordField fx:id="tfRegContra" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Contraseña" />
-            <JFXPasswordField fx:id="tfRegcontraRep" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Repita Contraseña" />
-            <JFXTextField fx:id="tfRegCorreo" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Correo Electrónico" />
-            <JFXButton fx:id="btnRegistrar" onAction="#registrarCliente" text="Registrar" />
          </children>
       </VBox>
       <VBox fx:id="vbpassChange" prefHeight="200.0" prefWidth="100.0" visible="false">
@@ -145,6 +133,32 @@
                   </JFXButton>
                </children>
             </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="vbRegCliente" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+         <children>
+            <JFXTextField fx:id="tfRegNombre" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Nombre" />
+            <JFXTextField fx:id="tfRegApe" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Primer Apellido" />
+            <JFXTextField fx:id="tfRegApe1" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Segundo Apellido" />
+            <JFXTextField fx:id="tfRegUsu" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Usuario" />
+            <JFXPasswordField fx:id="tfRegContra" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Contraseña" />
+            <JFXPasswordField fx:id="tfRegcontraRep" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Repita Contraseña" />
+            <JFXTextField fx:id="tfRegCorreo" maxHeight="70.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" promptText="Correo Electrónico" />
+            <HBox prefHeight="47.0" prefWidth="460.0">
+               <children>
+                  <JFXTextField fx:id="tfUrl" disable="true" maxHeight="70.0" maxWidth="300.0" prefHeight="32.0" prefWidth="192.0" promptText="Url Imagen">
+                     <HBox.margin>
+                        <Insets left="80.0" top="15.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXButton onAction="#btnAnadir" prefHeight="31.0" prefWidth="78.0" text="Añadir">
+                     <HBox.margin>
+                        <Insets left="30.0" top="15.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <JFXButton fx:id="btnRegistrar" onAction="#registrarCliente" text="Registrar" />
          </children>
       </VBox>
    </children>
