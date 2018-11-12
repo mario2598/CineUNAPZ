@@ -81,6 +81,7 @@ public class AdminMoviesController extends Controller implements Initializable {
         tilePaneProximanete.getChildren().clear();
         cargarPeliculasEnCartelera();
         cargarProximasPeliculas();
+        cargarPelculasInactivas();
         tabPaneMovies.getSelectionModel().selectFirst();
     }
     

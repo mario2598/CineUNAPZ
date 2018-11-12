@@ -103,7 +103,6 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
         
         url = cambiarTipoUrl(url);
         webView.getEngine().load(url);
-        
     }
     
     private String cambiarTipoUrl(String url){
@@ -184,6 +183,6 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     
     private void buscarTandas(){
         //TandaService ts= new TandaService();
-        
     }
+    
 }

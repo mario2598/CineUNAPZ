@@ -5,15 +5,18 @@
  */
 package cineuna.controller;
 
-import cineuna.cards.CampoButaca;
+import cineuna.cards.AdminEspacioButaca;
+import cineuna.cards.UserEspacioButaca;
 import cineuna.model.ButacaDto;
 import cineuna.model.ReservaDto;
+import cineuna.model.SalaDto;
 import cineuna.model.TandaDto;
 import cineuna.model.UsuarioDto;
 import cineuna.service.ButacaService;
 import cineuna.service.ReservaService;
+import cineuna.service.SalaService;
 import cineuna.util.AppContext;
-import cineuna.util.LangUtils;
+import cineuna.util.FlowController;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -23,14 +26,12 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 
 /**
@@ -40,6 +41,7 @@ import javafx.scene.layout.TilePane;
  */
 public class UsuSeleccionTandaController extends Controller implements Initializable {
 
+    //FXML Attributes
     @FXML
     private JFXDialogLayout root;
     @FXML
@@ -64,61 +66,23 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private Label lblTotal;
     @FXML
     private Label lblPantalla;
-    private ArrayList<CampoButaca> butacaList;
-    private ArrayList<ButacaDto> butacasDtoList;
-    private ArrayList<ReservaDto> reservasDtoList;
-    Integer filas;
-    Integer columnas;
-    private Boolean butacasDistribuidas;
     @FXML
     private BorderPane bpButacas;
-    @FXML
-    private HBox hbCont;
-    private static SimpleIntegerProperty asientos;
-    private static SimpleIntegerProperty costoTotal;
-    private Integer costoPorAsiento;
-    @FXML
-    private FlowPane fp;
-    private UsuarioDto usuario;
-    private Hilo hilo;
-    private ArrayList<CampoButaca> listaCamposButacas;
-    TandaDto tanda;
-    ReservaDto reserva;
     
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        butacasDtoList=new ArrayList<>();
-        butacasDistribuidas=false;
-        reservasDtoList=new ArrayList<>();
-        butacaList = new ArrayList<>();
-        listaCamposButacas=new ArrayList<>();
-        asientos=new SimpleIntegerProperty(0);
-        costoTotal=new SimpleIntegerProperty(0);
-        AppContext.getInstance().set("asientos",asientos);
-        redimensionado();
-    }    
-
-    @Override
-    public void initialize() {
-        this.usuario = AppContext.getInstance().getUsuario();
-        apReserva.getChildren().clear();
-        asientos.set(0);
-        costoTotal.set(0);
-        cargarIdioma();
-        cargarInfoTanda();
-        cargarDistribucion();
-        cargarListaButacas();
-        cargarCamposButacas();
-        cargarListaReservas();
-        distribuirReservas();
-        eliminarReservasViejas();
-        refrescarCamposButaca();
-        hilo=new Hilo();
-        hilo.start();
-    }
+    //Attributes
+    private final ReadOnlyDoubleProperty stageWidthProp = FlowController.getInstance().getStage().widthProperty();
+    private final ReadOnlyDoubleProperty stageHeightProp = FlowController.getInstance().getStage().heightProperty();
+    private final ButacaService butacaService = new ButacaService();
+    private final ReservaService reservaService = new ReservaService();
+    private Integer columnas;
+    private Integer filas;
+    private Hilo hilo;
+    private UsuarioDto usuario;
+    private SalaDto sala;
+    private TandaDto tanda;
+    private ArrayList<UserEspacioButaca> espacioButacaList;
+    private ArrayList<ButacaDto> butacaList;
+    private ArrayList<ReservaDto> reservaList;
     
     public class Hilo extends Thread{
         private Boolean activado;
@@ -137,13 +101,12 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-                        cargarListaReservas();
-                        distribuirReservas();
-                        eliminarReservasViejas();
-                        refrescarCamposButaca();
+//                        cargarListaReservas();
+//                        distribuirReservas();
+//                        eliminarReservasViejas();
+//                        refrescarCamposButaca();
                     }
                 });
-                
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException ex) {
@@ -151,170 +114,106 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                 }
             }
         }
-        
     }
     
-    private void redimensionado(){
-        lblPantalla.widthProperty().addListener((observable, oldValue, newValue)->{
-            if(!butacaList.isEmpty() && newValue!=null){
-                Double anchura = bpButacas.getWidth()*0.82;
-                Integer dimButaca = ((anchura.intValue())/columnas);
-                butacaList.stream().forEach(butaca -> {
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        espacioButacaList = new ArrayList<>();
+        butacaList = new ArrayList<>();
+        reservaList = new ArrayList<>();
+        bpButacas.widthProperty().addListener((observable, oldValue, newValue)->{
+            if(!espacioButacaList.isEmpty() && newValue!=null){
+                Double anchura = ((stageWidthProp.get()-350)*0.75)/columnas;
+                Double altura = ((stageHeightProp.get()-100)*0.65)/filas;
+                Integer dimButaca;
+                if(anchura > altura)
+                    dimButaca = altura.intValue();
+                else
+                    dimButaca = anchura.intValue();
+                espacioButacaList.stream().forEach(butaca -> {
                     butaca.cambiarDimension(dimButaca);
                 });
             }
         });
-        fp.prefHeightProperty().bind(hbCont.heightProperty());
-        fp.prefWidthProperty().bind(hbCont.widthProperty());
-        hbCont.prefWidthProperty().bind(root.widthProperty());
-        hbCont.prefHeightProperty().bind(root.heightProperty());
-        bpButacas.prefHeightProperty().bind(hbCont.heightProperty());
-        bpButacas.prefWidthProperty().bind(hbCont.widthProperty());
-    }
-    
-    private void cargarIdioma(){
-        Integer idioma=Integer.valueOf(AppContext.getInstance().getUsuario().usuIdioma.getValue());
-        if(idioma.equals(1))
-            LangUtils.getInstance().setLang("es");
-        else
-            LangUtils.getInstance().setLang("eng");
+    }    
+
+    @Override
+    public void initialize() {
+        this.usuario = AppContext.getInstance().getUsuario();
+//        this.sala = (SalaDto) AppContext.getInstance().get("UserSelectedSala");
+        this.tanda = (TandaDto) AppContext.getInstance().get("UserSelectedTanda");
         
-        LangUtils.getInstance().loadLabelLang(lblMsjAsientos, "lblMsjAsientos");
-        LangUtils.getInstance().loadLabelLang(lblMsjCosto, "lblMsjCosto");
-        LangUtils.getInstance().loadButtonLang(btnReservar, "btnReservar");
-        LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
-        LangUtils.getInstance().loadLabelLang(lblPantalla, "lblPantalla");
-    }
-    
-    private void cargarInfoTanda(){
-        try{
-            this.tanda=(TandaDto) AppContext.getInstance().get("tandaSeleccionada");
-            costoPorAsiento=tanda.getTandaCobro().intValue();
-            lblAsientos.setText(asientos.getValue().toString());
-            lblTotal.setText(costoTotal.getValue().toString());
-            this.lblSala.setText(tanda.getSalaId().getSalaNombre());
-            this.lblCosto.setText(costoPorAsiento.toString());
-            asientos.addListener(l->{
-                lblAsientos.setText(asientos.getValue().toString());
-                costoTotal.set(asientos.getValue()*costoPorAsiento);
-            });
-            costoTotal.addListener(l->{
-                lblTotal.setText(costoTotal.getValue().toString());
-            });
-        }
-        catch(NullPointerException e){
-            //System.out.println("Ninguna tanda seleccionada");
-        }
+        Respuesta resp = (new SalaService()).getSala(new Long(33));
+        this.sala = ((SalaDto) resp.getResultado("Sala"));
         
-        //this.lblCine.setText(tanda.getC);
+        cargarListaButacas(sala.getSalaId());
+        aplicarDistribucion();
+        hilo=new Hilo();
+        hilo.start();
     }
     
-    private void cargarDistribucion(){
-        try{
-        filas=tanda.getSalaId().getSalaFilas().intValue();
-        columnas=tanda.getSalaId().getSalaCol().intValue();
+    //Methods
+    private void aplicarDistribucion() {
+        columnas = sala.getSalaCol().intValue();
+        filas = sala.getSalaFilas().intValue();
         apReserva.setPrefColumns(columnas);
         apReserva.setPrefRows(filas);
-        //apReserva.getChildren().clear();
+        apReserva.getChildren().clear();
+        espacioButacaList.clear();
+        Integer dimButaca;
+        Double anchura = ((stageWidthProp.get()-350)*0.75)/columnas;
+        Double altura = ((stageHeightProp.get()-100)*0.65)/filas;
+        if(anchura > altura)
+            dimButaca = altura.intValue();
+        else
+            dimButaca = anchura.intValue();
+        if(dimButaca>0){
+            butacaList.sort((b1, b2) -> {
+                if(b1.getButFila()>b2.getButFila())
+                    return 1;
+                else if(b1.getButFila()<b2.getButFila())
+                    return -1;
+                else if(b1.getButColumna()>b2.getButColumna())
+                    return 1;
+                else if(b1.getButColumna()<b2.getButColumna())
+                    return -1;
+                else 
+                    return 0;
+            });
+            butacaList.stream().forEach(butaca -> {
+                UserEspacioButaca espacioB = new UserEspacioButaca(dimButaca);
+                espacioB.setButaca(butaca);
+                espacioB.refreshStatus();
+                espacioButacaList.add(espacioB);
+                apReserva.getChildren().add(espacioB);
+            });
+        } else {
+            System.out.println("No se ha aplicado la distribucion porque dimButaca <= 0");
         }
-        catch(NullPointerException e){
+    }
+    
+    private void cargarListaButacas(Long salaID){
+        Respuesta resp = butacaService.getListaButacasSala(salaID);
+        if(resp.getEstado()){
+            this.butacaList = ((ArrayList<ButacaDto>) resp.getResultado("ButacaList"));
+        } else {
+            System.out.println("Error cargando la lista de butacas.");
+        }
+    }
 
-        }
-    }
-    
-    /**
-     * carga el arrayList de butacas
-     */
-    private void cargarListaButacas(){
-        ButacaService bs= new ButacaService();
-        try{
-        Respuesta res= bs.getListaButacasSala(tanda.getSalaId().getSalaId());
-        if(res.getEstado()){
-            butacasDtoList = (ArrayList<ButacaDto>) res.getResultado("ButacaList");
-        }
-        }
-        catch(Exception e){
-        }
-    }
-    
-    /**
-     * cargar lista de reservas para tanda
-     */
-    public void cargarListaReservas(){
-        ReservaService rs=new ReservaService();
-        Respuesta res = rs.getListReservas(tanda.getTandaId());
-        if(res.getEstado()){
-            reservasDtoList.addAll((ArrayList<ReservaDto>) res.getResultado("ReservasList"));
-            //System.out.println("reservas cargadas:"+reservasDtoList.size());
-        }
-        else System.out.println("no se pudo cargar la lista de reservas para esta tanda");        
-    }
-    
-    private void distribuirReservas(){
-        reservasDtoList.stream().forEach(r->{
-            listaCamposButacas.stream().filter(b->{
-                if(b.getButaca()!=null){
-                    return b.getButaca().getButId().equals(r.getButId().getButId());
-                }
-                else return false;
-            }).forEach(cb->cb.setReserva(r));
-        });
-    }
-    
-    /**
-     * carga las butacas y su estado (usada cada vez que refresca)
-     */
-    private void cargarCamposButacas(){
-        //butacasSeleccionadas.clear();//ver si sirve
-        butacaList.clear();
-        Double anchura = bpButacas.getWidth()*0.82;
-        Integer dimButaca = ((anchura.intValue())/columnas);
-        butacasDtoList.sort(ButacaDto.butFilCol);
-        
-        for(ButacaDto b:butacasDtoList){
-            
-            CampoButaca espacioB = new CampoButaca(dimButaca,b);
-            listaCamposButacas.add(espacioB);
-            butacaList.add(espacioB);
-            apReserva.getChildren().add(espacioB);
-        }
-    }
-    
-    private void refrescarCamposButaca(){
-        for(CampoButaca b:butacaList){
-            b.refrescaEstado();
-        }
-    }
-    
-    private void eliminarReservasViejas(){
-        listaCamposButacas.stream().filter(cb->cb.getReserva()!=null).forEach(cbf->{
-            if(!reservasDtoList.contains(cbf.getReserva())){
-                cbf.setReserva(null);
-            }
-        });
-    }
-    
-    private void reiniciarDatos(){
-        costoTotal.set(0);
-        asientos.set(0);
-        cargarDistribucion();
-        cargarListaButacas();
-    }
-  
     @FXML
     private void reservar(ActionEvent event) {
-        usuario.guardaButacasSeleccionadas();
-        reiniciarDatos();
-        refrescarCamposButaca();
+        
     }
 
     @FXML
     private void cancelar(ActionEvent event) {
-        usuario.desSeleccionaButacas();
-        reiniciarDatos();
-        refrescarCamposButaca();
+        
     }
-    
-    
     
 }

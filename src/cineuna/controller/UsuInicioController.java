@@ -5,22 +5,23 @@
  */
 package cineuna.controller;
 
-import cineuna.cards.MovieCard2;
+import cineuna.cards.UserMovieCard;
 import cineuna.model.MovieDto;
 import cineuna.model.UsuarioDto;
 import cineuna.service.MovieService;
 import cineuna.util.AppContext;
 import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
+import com.jfoenix.controls.JFXTabPane;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Tab;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 
 /**
@@ -29,95 +30,86 @@ import javafx.scene.layout.TilePane;
  * @author robri
  */
 public class UsuInicioController extends Controller implements Initializable {
-
+    //FXML Attributes
     @FXML
-    private StackPane root;
+    private Tab tabCartelera;
     @FXML
-    private Hyperlink hlCartelera;
+    private TilePane tpCartelera;
     @FXML
-    private Hyperlink hlProximas;
+    private Tab tabProximamente;
     @FXML
-    private TilePane tpPeliculas;
+    private TilePane tpProximamente;
     @FXML
-    private StackPane spDialogos;
+    private JFXTabPane tabPaneMovies;
+    
+    //Attributes
     private UsuarioDto usuario;
+    private final MovieService movieService = new MovieService();
+    private final ArrayList<UserMovieCard> CarteleraCardList = new ArrayList<>();
+    private final ArrayList<UserMovieCard> ProximasCardList = new ArrayList<>();
+    private final ArrayList<UserMovieCard> InactivasCardList = new ArrayList<>();
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AppContext.getInstance().set("spDialogos",spDialogos);
-    }    
+        tabCartelera.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(oldValue)
+                deselectAllCards(CarteleraCardList);
+        });
+        tabProximamente.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(oldValue)
+                deselectAllCards(ProximasCardList);
+        });
+        tabPaneMovies.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)){
+                deselectAllCards(CarteleraCardList);
+                deselectAllCards(ProximasCardList);
+            }
+            event.consume();
+        });  
+    } 
 
-    @FXML
-    private void irCartelera(ActionEvent event) {
-        cargarCartelera();
-    }
-
-    @FXML
-    private void irProximas(ActionEvent event) {
-        cargarProximas();
-    }
-
+    /**
+     * Metodo abstracto de la clase Controller
+     */
     @Override
     public void initialize() {
-        cargarIdioma();
-        cargarCartelera();
+        tpCartelera.getChildren().clear();
+        tpProximamente.getChildren().clear();
+        cargarPeliculasEnCartelera();
+        cargarProximasPeliculas();
+        tabPaneMovies.getSelectionModel().selectFirst();
     }
     
-    private void llenarCartelera(List<MovieDto> movies){
-        tpPeliculas.getChildren().clear();
-        movies.stream().forEach(e->{
-            MovieCard2 card = new MovieCard2(true,e);
-            card.initCard();
-            tpPeliculas.getChildren().add(card);
-        }); 
-    }
-    
-    private void cargarCartelera(){
-        List<MovieDto> listaDto=new ArrayList<>();
-        System.out.println("intentando cargar cartelera");
-        MovieService ms = new MovieService();
-        Respuesta r = ms.getMovies("C");
-        
-        if(r.getEstado()){
-            
-            listaDto=(List<MovieDto>) r.getResultado("Movies");
-            System.out.println("true:"+listaDto.size());
-            llenarCartelera(listaDto);
-        }
-        else{
-            System.out.println("false");
-        }
- 
-    }
-    
-    private void llenarProximas(List<MovieDto> movies){
-        tpPeliculas.getChildren().clear();
-        movies.stream().forEach(e->{
-            MovieCard2 card = new MovieCard2(false,e);
-            card.initCard();
-            tpPeliculas.getChildren().add(card);
+    //Methods
+    private void cargarPeliculasEnCartelera(){
+        tpCartelera.getChildren().clear();
+        CarteleraCardList.clear();
+        Respuesta resp = movieService.getMovies("C");
+        ArrayList<MovieDto> movieList = new ArrayList<>((List<MovieDto>) resp.getResultado("Movies"));
+        movieList.stream().forEach(movie -> {
+            UserMovieCard newCard = new UserMovieCard(movie);
+            newCard.initCard();
+            CarteleraCardList.add(newCard);
+            tpCartelera.getChildren().add(newCard);
         });
     }
-
-     private void cargarProximas(){
-        List<MovieDto> listaDto=new ArrayList<>();
-
-        MovieService ms = new MovieService();
-        Respuesta r = ms.getMovies("P");
-        
-        if(r.getEstado()){
-            //System.out.println("true");
-            listaDto=(List<MovieDto>) r.getResultado("Movies");
-            llenarProximas(listaDto);
-        }
-        else{
-            System.out.println("false");
-        }
-        
-        
+    
+    private void cargarProximasPeliculas(){
+        tpProximamente.getChildren().clear();
+        ProximasCardList.clear();
+        Respuesta resp = movieService.getMovies("P");
+        ArrayList<MovieDto> movieList = new ArrayList<>((List<MovieDto>) resp.getResultado("Movies"));
+        movieList.stream().forEach(movie -> {
+            UserMovieCard newCard = new UserMovieCard(movie);
+            newCard.initCard();
+            ProximasCardList.add(newCard);
+            tpProximamente.getChildren().add(newCard);
+        });
     }
     
     private void cargarIdioma(){
@@ -129,8 +121,10 @@ public class UsuInicioController extends Controller implements Initializable {
         else{
             LangUtils.getInstance().setLang("eng");
         }
-        
-        LangUtils.getInstance().loadHyperlinkLang(hlCartelera, "lblCartelera");
-        LangUtils.getInstance().loadHyperlinkLang(hlProximas, "lblProximas");
     }
+    
+    private void deselectAllCards(ArrayList<UserMovieCard> list){
+        list.stream().forEach(card -> card.selectedStatus(false));
+    }
+    
 }
