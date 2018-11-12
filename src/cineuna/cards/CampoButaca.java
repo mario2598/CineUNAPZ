@@ -152,7 +152,7 @@ public class CampoButaca extends Label{
     
     private void seleccionaButaca(){
         usuario.pushSeleccionada(this);
-        icon.getStyleClass().add("campo-butaca-sel");
+        //icon.getStyleClass().add("campo-butaca-sel");
         asientos.set(asientos.get()+1);
         //butaca.setButEstado("S");//cambiar a reserva
         creaReserva();
@@ -188,7 +188,7 @@ public class CampoButaca extends Label{
             res = rs.guardarReserva(reserva);//cambiar a reserva
             if(res.getEstado()){
                this.reserva = (ReservaDto) res.getResultado("Reserva");
-               System.out.println("guardar CampoButaca");
+
             }
                 
         }
@@ -203,7 +203,7 @@ public class CampoButaca extends Label{
             Respuesta res = new Respuesta();
             res = rs.eliminarReserva(reserva);//cambiar a reserva
             if(res.getEstado()){
-                System.out.println("reserva eliminada");
+                refrescaIcono('D');
             } 
         }
         catch(Exception e){
@@ -217,6 +217,7 @@ public class CampoButaca extends Label{
     }
 
     private void creaReserva(){
+        refrescaIcono('S');
         this.reserva = new ReservaDto();
         this.reserva.setButId(this.butaca);
         this.reserva.setTandaId(this.tanda);
@@ -225,13 +226,36 @@ public class CampoButaca extends Label{
     
     public void reservaButaca(){
         if(this.reserva!=null){
-           this.reserva.setResEstado("O");
+           refrescaIcono('O');
            guardarReserva();
         }
     }
     
+    public void refrescaIcono(char estado){
+        icon.getStyleClass().clear();
+        switch(estado){
+            case 'S':
+                seleccionada=true;
+                disponible.set(false);
+                icon.getStyleClass().add("campo-butaca-sel");
+                break;
+            case 'D':
+                seleccionada=false;
+                disponible.set(true);
+                //this.reserva.setResEstado("D");
+                icon.getStyleClass().add("campo-butaca");
+                break;
+            case 'O':
+                seleccionada=false;
+                disponible.set(false);
+                this.reserva.setResEstado("O");
+                icon.getStyleClass().add("campo-butaca-ocupada");
+                break;
+        }   
+    }
+    
     public void cancelaButaca(){
-        icon.getStyleClass().add("campo-butaca");
+        refrescaIcono('D');
         asientos.set(asientos.get()-1);
         eliminarReserva();
     }
