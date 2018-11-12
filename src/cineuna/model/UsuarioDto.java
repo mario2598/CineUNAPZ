@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -57,7 +58,7 @@ public class UsuarioDto {
     @XmlTransient
     private Long cineID;
     @XmlTransient
-    public byte[] usuImg;
+    public String usuImg;
     @XmlTransient
     private ArrayList<CampoButaca> butacasSeleccionadas;
     private Boolean existe;
@@ -96,6 +97,7 @@ public class UsuarioDto {
         this.usuNewpassword = u.usuNewpassword;
         this.usuCambio = u.usuCambio;
         this.cineID = u.getCineID();
+        this.usuImg = u.getUsuImg();
     }
     
     //Getters and Setters
@@ -154,6 +156,16 @@ public class UsuarioDto {
         return usuEmail.get();
     }
 
+    public String getUsuImg() {
+        return usuImg;
+    }
+
+    public void setUsuImg(String usuImg) {
+        this.usuImg = usuImg;
+    }
+
+    
+    
     public void setUsuEmail(String usuEmail) {
         this.usuEmail.set(usuEmail);
     }
@@ -257,8 +269,9 @@ public class UsuarioDto {
     public void crearImagenDesdeByte() throws FileNotFoundException, IOException{
             String outPutFile = "src\\cineuna\\resources\\images\\"+usuNombre.getValue()+".jpg";
             File someFile = new File(outPutFile);
+            byte[] b = Base64.getDecoder().decode(this.usuImg);
         try (FileOutputStream fos = new FileOutputStream(someFile)) {
-            //fos.write(movieUrlimg);
+            fos.write(b);
             fos.flush();
         }
     }
@@ -275,8 +288,8 @@ public class UsuarioDto {
             }
         } catch (IOException ex) {
         }
-        //movieUrlimg = bos.toByteArray();
-        //System.out.println("imagen creada: "+movieUrlimg.toString());
+        byte[] by = bos.toByteArray();
+        this.usuImg =Base64.getEncoder().encodeToString(by); 
         }
         catch(NullPointerException e){
                 System.out.println("Imagen seleccionada nula");

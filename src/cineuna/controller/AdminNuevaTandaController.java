@@ -272,7 +272,7 @@ public class AdminNuevaTandaController extends Controller implements Initializab
             try{
                 tanda.setSalaId((SalaDto) AppContext.getInstance().get("AdminShowingSala"));
                 Respuesta resp = tandaService.guardarTanda(tanda);
-                if(!resp.getEstado()){
+                if(resp.getEstado()){
                     ((SimpleBooleanProperty) AppContext.getInstance().get("AdminNewTandaProperty")).set(true);
                     salir();
                 } else {
