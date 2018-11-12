@@ -84,12 +84,6 @@ public class MovieDto {
         movieIdioma = new SimpleStringProperty();
         movieNombreing = new SimpleStringProperty();
         movieResenaing = new SimpleStringProperty();
-        if(movieUrlimg!=null){
-          //System.out.println("movieUrlimg" + Arrays.toString(movieUrlimg));   
-        }
-        else{
-            System.out.println("movieUrlimg: null");
-        }
     }
     
     //Methods
@@ -117,6 +111,7 @@ public class MovieDto {
             fos.write(b);
             fos.flush();
         }
+        this.moviePortada.set(outPutFile);
     }
 
     

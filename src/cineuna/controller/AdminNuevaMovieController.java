@@ -285,10 +285,6 @@ public class AdminNuevaMovieController extends Controller implements Initializab
             System.out.println(errorMensaje);
         }
     }
-
-    private void buscarImagen(MouseEvent event) throws FileNotFoundException {
-        
-    }
     
     private void cargarIdioma(){
 //        LangUtils.getInstance().setLang("es");

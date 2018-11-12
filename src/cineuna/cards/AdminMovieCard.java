@@ -8,7 +8,11 @@ package cineuna.cards;
 import cineuna.util.DateUtil;
 import cineuna.model.MovieDto;
 import com.jfoenix.controls.JFXRippler;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,7 +30,6 @@ import javafx.scene.text.TextAlignment;
 public class AdminMovieCard extends Card{
     //Attributes
     private MovieDto movie;
-    private SimpleStringProperty posterUrlProp;
     private ObjectProperty<LocalDate> dateProp;
     //Size variables
     private final Integer anchoBase = 24;
@@ -81,22 +84,23 @@ public class AdminMovieCard extends Card{
     }
     
     private ImageView initPoster(){
-        posterUrlProp = movie.moviePortada;
-        if(movie.getMoviePortada()!=null)
-            ImgView = new ImageView(new Image("cineuna/resources/images/VenomPoster.jpg"));
-        else
-            ImgView = new ImageView(new Image("cineuna/resources/images/VenomPoster.jpg"));
-        ImgView.setPreserveRatio(false);
-        ImgView.setFitWidth(this.widthProp.get());
-        ImgView.setFitHeight(this.heightProp.get());
-        posterUrlProp.addListener(event -> {
-            refreshPoster(ImgView);
-        });
-        return ImgView;
-    }
-    
-    private void refreshPoster(ImageView IV){
-        IV.setImage(new Image(posterUrlProp.getValue()));
+        try {
+            String imgPath = "src\\cineuna\\resources\\images\\" + movie.getMovieNombre() +".jpg";
+            File file = new File(imgPath);
+            movie.crearImagenDesdeByte();
+            if(file.exists())
+                ImgView = new ImageView(movie.abrirImagen());
+            else
+                ImgView = new ImageView(new Image("cineuna/resources/images/VenomPoster.jpg"));
+            ImgView.setPreserveRatio(false);
+            ImgView.setFitWidth(this.widthProp.get());
+            ImgView.setFitHeight(this.heightProp.get());
+            return ImgView;
+        } catch (IOException ex) {
+            Logger.getLogger(AdminMovieCard.class.getName()).log(Level.SEVERE, null, ex);
+            ImgView = new ImageView();
+            return ImgView;
+        }
     }
     
     private Label initNameLbl(){

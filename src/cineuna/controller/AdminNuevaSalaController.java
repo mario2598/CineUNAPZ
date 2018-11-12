@@ -260,7 +260,7 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
     private Boolean validarDatosNecesarios(){
         mensajeError = "Se ha producido un error guardando la nueva sala, revisa los siguientes datos faltantes:";
         Boolean hayError = false;
-        if(this.txtNombre.getText().isEmpty()){
+        if(txtNombre.textProperty().get().isEmpty()){
             hayError = true;
             mensajeError = "\n\tDebes ingresar un nombre para la nueva sala.";
         }
