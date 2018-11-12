@@ -82,16 +82,13 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             bindData();
             loadData();
         }
-<<<<<<< HEAD
         if(AppContext.getInstance().getUsuario().getUsuAdmin().equalsIgnoreCase("S") || 
                 movie.getMovieEstado().equalsIgnoreCase("P"))
             btnComprar.setVisible(false);
         else 
             btnComprar.setVisible(true);
-=======
         tamannoInicialImg();
         //play();
->>>>>>> origin/master11_r
     }
     
     //Methods
@@ -171,7 +168,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             url = movie.getMovieUrlesp();
         else
             url = movie.getMovieUrleng();
-            System.out.println("intentando reproducir: "+url);
+        System.out.println("intentando reproducir: "+url);
         this.webViewTrailer.getEngine().load(url);
         }
         catch(Exception e){
