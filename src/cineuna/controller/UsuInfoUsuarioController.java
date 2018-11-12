@@ -10,6 +10,7 @@ import cineuna.service.UsuarioService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import cineuna.util.LangUtils;
+import cineuna.util.Mensaje;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -179,14 +181,20 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
     
     @FXML
     private void confirmarCambios(ActionEvent event) {
-        vbEditar.setVisible(false);
-        vbInfo.setVisible(true);
-        UsuarioService uService = new UsuarioService();
-        try{
-            uService.guardarUsuario(usuario);
+        if(validaCampos()){
+            vbEditar.setVisible(false);
+            vbInfo.setVisible(true);
+            UsuarioService uService = new UsuarioService();
+            try{
+                uService.guardarUsuario(usuario);
+            }
+            catch(Exception e){
+                System.out.println("problema guardando usuario:"+e.getMessage());
+            }
         }
-        catch(Exception e){
-            
+        else{
+            Mensaje alert = new Mensaje();
+            alert.show(Alert.AlertType.INFORMATION, "estado de actualización", "error");
         }
     }
 
@@ -225,8 +233,8 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
         if(usuario.getUsuImg()!=null){
         usuario.crearImagenDesdeByte();
         if(file.exists()){
-        imgUsuarioLbl.setImage(usuario.abrirImagen());
-        imgUsuarioTxt.setImage(usuario.abrirImagen());
+            imgUsuarioLbl.setImage(usuario.abrirImagen());
+            imgUsuarioTxt.setImage(usuario.abrirImagen());
         }
         else{
            imgUsuarioLbl.setImage(new Image("cineuna/resources/images/VenomPoster.jpg")); 
@@ -251,6 +259,44 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
         else{
             System.out.println("imagen obtenida desde windows vacía");
         }
+    }
+    
+    private Boolean validaCampos(){
+        Boolean completo = true;
+        String msj="";
+        if(this.txtNombre.getText().isEmpty()){
+            completo = false;
+            msj+="nombre,";
+        }
+        if(this.txtUsuario.getText().isEmpty()){
+            completo = false;
+            msj+="usuario,";
+        }
+        if(this.txtPApellido.getText().isEmpty()){
+            completo = false;
+            msj+="primer apellido,";
+        }
+        if(this.txtSApellido.getText().isEmpty()){
+            completo = false;
+            msj+="segundo apellido,";
+        }
+        if(this.txtContrasenna1.getText().isEmpty()&&this.txtContrasenna1.getText().length()>8){
+            completo = false;
+            msj+="contraseña,";
+        }
+        else{
+           if(this.txtContrasenna2.getText().isEmpty()){
+            completo = false;
+            msj+="repetir contraseña,";
+            }
+           else if(!this.txtContrasenna2.getText().equals(this.txtContrasenna1.getText())){
+              completo = false;
+              msj+="contraseñas no coinciden,";
+           }
+        Mensaje alert = new Mensaje();
+        alert.showModal(Alert.AlertType.INFORMATION, "estado de actualización", null, msj);
+        }
+    return completo;    
     }
     
 }

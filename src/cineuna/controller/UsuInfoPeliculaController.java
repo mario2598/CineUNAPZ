@@ -11,6 +11,7 @@ import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import cineuna.util.LangUtils;
 import com.jfoenix.controls.JFXButton;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 
@@ -80,6 +82,8 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             bindData();
             loadData();
         }
+        tamannoInicialImg();
+        //play();
     }
     
     //Methods
@@ -87,6 +91,8 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
         lblNombre.textProperty().bind(movie.movieNombre);
         lblSinopsis.textProperty().bind(movie.movieResena);
         bindedMovie = true;
+        cargarImagen();
+        play();
     }
     
     private void unbindData(){
@@ -122,6 +128,16 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
         }
     }
     
+    private void cargarImagen(){
+        //this.ivPoster.
+        try{
+            this.ivPoster.setImage(movie.abrirImagen());
+        }
+        catch(NullPointerException e){
+            
+        }
+    }
+    
     private void clearPoster(){
         ivPoster.setImage(null);
     }
@@ -140,4 +156,37 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
         FlowController.getInstance().goViewOnDialog("UserInfoCompra", dialogPane);
     }
     
+    private void play(){
+        try{
+        String url = "";
+        if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
+            url = movie.getMovieUrlesp();
+        else
+            url = movie.getMovieUrleng();
+            System.out.println("intentando reproducir: "+url);
+        this.webViewTrailer.getEngine().load(url);
+        }
+        catch(Exception e){
+            
+        }
+    }
+    
+    private void redimensionadoImg(){
+        spPoster.widthProperty().addListener((observable, oldValue, newValue) -> {
+            Double width = newValue.doubleValue();
+            ivPoster.setFitWidth(width * 0.92);
+            //System.out.println("Redimensionando:\n newValue: " + newValue + "\n imgPosterValue: " + imgPoster.getFitWidth());
+        });
+        spPoster.heightProperty().addListener((observable, oldValue, newValue) -> {
+            Double width = newValue.doubleValue();
+            ivPoster.setFitHeight(width * 0.92);
+            //System.out.println("Redimensionando:\n newValue: " + newValue + "\n imgPosterValue: " + imgPoster.getFitHeight());
+        });
+    }
+    
+    
+    private void tamannoInicialImg(){
+        ivPoster.setFitWidth(spPoster.widthProperty().get() * 0.92);
+        ivPoster.setFitHeight(spPoster.heightProperty().get() * 0.92);
+    }
 }
