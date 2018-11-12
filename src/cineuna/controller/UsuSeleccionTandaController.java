@@ -7,12 +7,14 @@ package cineuna.controller;
 
 import cineuna.cards.UserEspacioButaca;
 import cineuna.model.ButacaDto;
+import cineuna.model.ComprobanteDto;
 import cineuna.model.MovieDto;
 import cineuna.model.ReservaDto;
 import cineuna.model.SalaDto;
 import cineuna.model.TandaDto;
 import cineuna.model.UsuarioDto;
 import cineuna.service.ButacaService;
+import cineuna.service.ComprobanteService;
 import cineuna.service.ReservaService;
 import cineuna.service.SalaService;
 import cineuna.util.AppContext;
@@ -81,6 +83,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private Integer filas;
     private Hilo hilo;
     private ArrayList<UserEspacioButaca> espacioButacaList;
+    private ArrayList<ComprobanteDto> compList;
     private ArrayList<ButacaDto> butacaList;
     private ArrayList<ReservaDto> reservaList;
     private Boolean procesando = false;
@@ -111,6 +114,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                     @Override
                     public void run() {
                         cargarListaReservas();
+                        System.out.print("csdczdc");
                         distribuirReservas();
                         eliminarReservasViejas();
                         refrescarCamposButaca();
@@ -118,6 +122,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                     }
                 });
                 try {
+                   
                     procesando = false;
                     Thread.sleep(10000);
                 } catch (InterruptedException ex) {
@@ -283,12 +288,24 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     }
     
     private void generarReservasFinales(){
+        compList = new ArrayList<>();
         try{
             ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).stream().forEach(reserva -> {
                 ReservaService rs = new ReservaService();
                 reserva.setResEstado("O");
                 Respuesta res = rs.guardarReserva(reserva);//cambiar a reserva
+                if(res.getEstado()){
+                    ComprobanteDto c = new ComprobanteDto();
+                    c.setCompCosto(tanda.getTandaCobro().toString());
+                    c.setMovieId(movie.getMovieId().toString());
+                    c.setSalaId(sala.getSalaId().toString());
+                    c.setCompDate(LocalDate.now());
+                    c.setUsuId(usuario.getUsuId().toString());
+                    c.setButId(reserva.getButId().getButId().toString());
+                    compList.add(c);
+                }
             });
+            
             ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).clear();
             refrescarCamposButaca();
             huboCambios.set(!huboCambios.get());
@@ -309,20 +326,27 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
             System.out.println("problema eliminando reserva.\tError: " + e);
         }
     }
-    
-    private void salir(){
-//        AppContext.getInstance().set("UserShowingMovie", null);
-//        AppContext.getInstance().set("UserSelectedTanda", null);
-//        AppContext.getInstance().set("UserSelectedDate", null);
-//        AppContext.getInstance().set("UserSelectedIdioma", null);
-        //Aqui se cancela el hilo
+    private void comprobantesFinales(){
+        
+        Boolean veri = false;
+        compList.stream().forEach(comp -> {
+              ComprobanteService cs = new ComprobanteService();
+              cs.guardarComp(comp);
+            });
+    }
+    private void salir(){     
         hilo.activado = false;
+       
         FlowController.getInstance().goView("UsuInicio");
     }
 
     @FXML
     private void reservar(ActionEvent event) {
+        hilo.stop();
+        hilo.suspend();
+        hilo.detener();
         generarReservasFinales();
+        comprobantesFinales();
         salir();
     }
 

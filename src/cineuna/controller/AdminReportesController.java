@@ -5,16 +5,11 @@
  */
 package cineuna.controller;
 
-import cineuna.model.ComprobanteDto;
 import cineuna.model.MovieDto;
-import cineuna.model.UsuarioDto;
 import cineuna.service.ComprobanteService;
 import cineuna.service.MovieService;
-import cineuna.service.UsuarioService;
-import cineuna.util.LocalDateAdapter;
 import cineuna.util.Mensaje;
 import cineuna.util.Respuesta;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import java.awt.Desktop;
@@ -23,12 +18,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -41,7 +33,6 @@ import static javafx.scene.control.Alert.AlertType.ERROR;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * FXML Controller class
@@ -101,9 +92,7 @@ public class AdminReportesController extends Controller implements Initializable
                 } else {
             byte[] b = (byte[]) respuesta.getResultado("reporte");
             String r = convPdf(b,"src\\cineuna\\jasper\\moviesListReport.pdf");
-           if(cService.exportToMail(r)){
-              showFile(r);  
-           }
+             
            new Mensaje().showModal(Alert.AlertType.ERROR, "Datos vacios", getStage(), "No se envio el correo");
            }
         } catch (Exception ex) {

@@ -5,12 +5,22 @@
  */
 package cineuna.service;
 
+import cineuna.model.ComprobanteDto;
 import cineuna.util.AppContext;
+import cineuna.util.Mensaje;
+import cineuna.util.Request;
+import cineuna.util.Respuesta;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -24,6 +34,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.ws.rs.core.GenericType;
 
 /**
  *
@@ -37,9 +48,81 @@ public class ComprobanteService {
         
     }
     
-  
-    public Boolean exportToMail(String pdf){
-     
+
+    
+    public Boolean guardarComp(ComprobanteDto dto){
+        ComprobanteDto aux;
+        try{
+            Respuesta res = new Respuesta();
+            Respuesta respuesta = new Respuesta();
+            res = guardarComprobante(dto);//cambiar a reserva
+            if(res.getEstado()){
+                aux = (ComprobanteDto) res.getResultado("Comprobante");
+              respuesta = getReport(Long.valueOf(aux.getCompId()));
+              byte[] b = (byte[]) respuesta.getResultado("Reporte");
+              
+               if(respuesta.getEstado()){
+                  return exportToMail(b);
+               }
+            }
+        }
+        catch(Exception e){
+            System.out.println("problema guardando comprobante");
+            return false;
+        }
+        return true;
+    }
+    
+    
+  public Respuesta guardarComprobante(ComprobanteDto dto){
+        try {     
+            Request request = new Request("comprobante/guardarComprobante");
+            request.post(dto);
+            
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
+            ComprobanteDto compDto = (ComprobanteDto) request.readEntity(ComprobanteDto.class);
+            return new Respuesta(true, "", "", "Comprobante", compDto);
+        } catch (Exception ex) {
+            Logger.getLogger(ButacaService.class.getName()).log(Level.SEVERE, "Error guardando el comprobante.", ex);
+            return new Respuesta(false, "Error guardando comprobante.", "guardarComprobante " + ex.getMessage());
+        }
+    }
+    
+     public Respuesta getReport(Long id){
+        try {
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("id", id);
+            Request request = new Request("comprobante/comprobanteReport","{id}",parametros);
+            request.get();
+
+            if (request.isError()) {
+                System.out.println("error TandaService(Cliente)"+request.getError());
+                return new Respuesta(false, request.getError(), "");
+            }
+            byte[] b = (byte[]) (byte[]) request.readEntity(new GenericType<byte[]>() {});
+            return new Respuesta(true, "", "", "Reporte",b);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(TandaService.class.getName()).log(Level.SEVERE, "Error obteniendo comprobante de pago.", ex);
+            return new Respuesta(false, "Error obteniendo comprobante de pago.", "getReport " + ex.getMessage());
+        }
+    }
+    String convPdf(byte[] b) throws FileNotFoundException, IOException{
+        String outPutFile = "src\\cineuna\\jasper\\moviesListReport.pdf";
+         String stream =Base64.getEncoder().encodeToString(b); 
+            byte[] bytes = Base64.getDecoder().decode(stream);
+            File someFile = new File(outPutFile);
+            FileOutputStream fos = new FileOutputStream(someFile);
+            fos.write(bytes);
+            fos.flush();
+            fos.close();
+            return outPutFile;
+    }
+         
+    public Boolean exportToMail(byte[] Cpdf) throws IOException{
+        String pdf = convPdf(Cpdf);
         final String username = "proyectosuna83@gmail.com";
         final String password = "proy.una";
 
