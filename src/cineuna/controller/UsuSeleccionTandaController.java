@@ -5,7 +5,6 @@
  */
 package cineuna.controller;
 
-import cineuna.cards.AdminEspacioButaca;
 import cineuna.cards.UserEspacioButaca;
 import cineuna.model.ButacaDto;
 import cineuna.model.MovieDto;
@@ -29,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -74,6 +74,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     //Attributes
     private final ReadOnlyDoubleProperty stageWidthProp = FlowController.getInstance().getStage().widthProperty();
     private final ReadOnlyDoubleProperty stageHeightProp = FlowController.getInstance().getStage().heightProperty();
+    private final SimpleBooleanProperty huboCambios = new SimpleBooleanProperty();
     private final ButacaService butacaService = new ButacaService();
     private final ReservaService reservaService = new ReservaService();
     private Integer columnas;
@@ -82,6 +83,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private ArrayList<UserEspacioButaca> espacioButacaList;
     private ArrayList<ButacaDto> butacaList;
     private ArrayList<ReservaDto> reservaList;
+    private Boolean procesando = false;
     //Entidades para el comprobante
     private UsuarioDto usuario;
     private SalaDto sala;
@@ -104,6 +106,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         @Override
         public void run() {
             while(activado){
+                procesando = true;
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
@@ -111,9 +114,11 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                         distribuirReservas();
                         eliminarReservasViejas();
                         refrescarCamposButaca();
+                        refreshData();
                     }
                 });
                 try {
+                    procesando = false;
                     Thread.sleep(10000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(UsuSeleccionTandaController.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,9 +134,6 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        espacioButacaList = new ArrayList<>();
-        butacaList = new ArrayList<>();
-        reservaList = new ArrayList<>();
         bpButacas.widthProperty().addListener((observable, oldValue, newValue)->{
             if(!espacioButacaList.isEmpty() && newValue!=null){
                 Double anchura = ((stageWidthProp.get()-350)*0.75)/columnas;
@@ -146,12 +148,18 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                 });
             }
         });
+        huboCambios.addListener((observable, oldValue, newValue) -> {
+            refreshData();
+        });
+        AppContext.getInstance().set("HuboCambiosSeleccionButacas", huboCambios);
         ArrayList<ReservaDto> currentReservas = new ArrayList<>();
         AppContext.getInstance().set("currentReservas", currentReservas);
+        AppContext.getInstance().set("procesando", procesando);
     }    
 
     @Override
     public void initialize() {
+        clearData();
         this.usuario = AppContext.getInstance().getUsuario();
         this.movie = (MovieDto) AppContext.getInstance().get("UserShowingMovie");
         this.tanda = (TandaDto) AppContext.getInstance().get("UserSelectedTanda");
@@ -160,6 +168,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         this.idioma = (String) AppContext.getInstance().get("UserSelectedIdioma");
         cargarListaButacas(sala.getSalaId());
         aplicarDistribucion();
+        refreshData();
         hilo=new Hilo();
         hilo.start();
     }
@@ -247,15 +256,71 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private void refrescarCamposButaca(){
         espacioButacaList.stream().forEach(eb -> eb.cambiarEstado());
     }
+    
+    private void refreshData(){
+        lblCosto.setText(tanda.getTandaCobro().toString());
+        Integer nAsientos = ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).size();
+        lblAsientos.setText(nAsientos.toString());
+        lblTotal.setText(String.valueOf(nAsientos * tanda.getTandaCobro()));
+    }
+    
+    private void clearData(){
+        lblCosto.setText("?");
+        lblAsientos.setText("?");
+        lblTotal.setText("?");
+        espacioButacaList = new ArrayList<>();
+        butacaList = new ArrayList<>();
+        reservaList = new ArrayList<>();
+    }
+    
+    private void generarReservasFinales(){
+        try{
+            ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).stream().forEach(reserva -> {
+                ReservaService rs = new ReservaService();
+                reserva.setResEstado("O");
+                Respuesta res = rs.guardarReserva(reserva);//cambiar a reserva
+            });
+            ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).clear();
+            refrescarCamposButaca();
+            huboCambios.set(!huboCambios.get());
+        }catch(Exception e){
+            System.out.println("problema guardando estado de butaca.\nError: " + e);
+        }
+    }
+    
+    private void cancelarReservas(){
+        try{
+            ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).stream().forEach(reserva -> {
+                reserva.setResEstado("D");
+                ReservaService rs = new ReservaService();
+                Respuesta res = rs.eliminarReserva(reserva);//cambiar a reserva
+            });
+        }
+        catch(Exception e){
+            System.out.println("problema eliminando reserva.\tError: " + e);
+        }
+    }
+    
+    private void salir(){
+//        AppContext.getInstance().set("UserShowingMovie", null);
+//        AppContext.getInstance().set("UserSelectedTanda", null);
+//        AppContext.getInstance().set("UserSelectedDate", null);
+//        AppContext.getInstance().set("UserSelectedIdioma", null);
+        //Aqui se cancela el hilo
+        hilo.activado = false;
+        FlowController.getInstance().goView("UsuInicio");
+    }
 
     @FXML
     private void reservar(ActionEvent event) {
-        
+        generarReservasFinales();
+        salir();
     }
 
     @FXML
     private void cancelar(ActionEvent event) {
-        
+        cancelarReservas();
+        salir();
     }
     
 }

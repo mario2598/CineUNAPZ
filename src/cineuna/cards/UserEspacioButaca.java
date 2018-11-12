@@ -15,6 +15,7 @@ import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import java.util.ArrayList;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
@@ -54,15 +55,23 @@ public class UserEspacioButaca extends Label{
         this.icon = iconButaca;
         this.setOnMouseClicked(event -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
-                if(disponible){
-                    crearNuevaReserva();
-                    guardarReserva();
-                } else {
-                   if(reserva!=null && ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).stream().anyMatch(r -> r.getResId().equals(reserva.getResId()))){
-                       eliminarReserva();
-                   } else {
-                       System.out.println("La butaca esta reservada por otra persona.");
-                   }
+                if(!((Boolean) AppContext.getInstance().get("procesando"))){
+                    if(disponible){
+                        crearNuevaReserva();
+                        guardarReserva();
+                        ((SimpleBooleanProperty) AppContext.getInstance().get("HuboCambiosSeleccionButacas")).set(
+                                !((SimpleBooleanProperty) AppContext.getInstance().get("HuboCambiosSeleccionButacas")).get()
+                        );
+                    } else {
+                       if(reserva!=null && ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).stream().anyMatch(r -> r.getResId().equals(reserva.getResId()))){
+                           eliminarReserva();
+                           ((SimpleBooleanProperty) AppContext.getInstance().get("HuboCambiosSeleccionButacas")).set(
+                                !((SimpleBooleanProperty) AppContext.getInstance().get("HuboCambiosSeleccionButacas")).get()
+                            );
+                       } else {
+                           System.out.println("La butaca esta reservada por otra persona.");
+                       }
+                    }
                 }
             }
         });
@@ -142,9 +151,6 @@ public class UserEspacioButaca extends Label{
                 ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).add(reserva);
                 cambiarEstado();
             }
-            System.out.println("Ahora la lista de reservas del appContext tiene; "
-                    + ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).size()
-                    + " reservas.");
         }
         catch(Exception e){
             System.out.println("problema guardando estado de butaca");
@@ -155,23 +161,19 @@ public class UserEspacioButaca extends Label{
         try{
             try{
                 ReservaDto reservaAux = ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).stream()
-                        .filter(r -> r.getButId().equals(reserva.getButId()) && r.getTandaId().equals(reserva.getTandaId()))
-                        .findFirst().get();
+                        .filter(r -> r.getResId().equals(reserva.getResId()))
+                        .findFirst().orElse(null);
                 if(reservaAux!=null){
                     ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).remove(reservaAux);
                 }
-            } catch(NullPointerException ex){
-                
-            }
+            } catch(NullPointerException ex){} catch(Exception ex2){}
+            reserva.setResEstado("D");
             ReservaService rs = new ReservaService();
             Respuesta res = rs.eliminarReserva(reserva);//cambiar a reserva
             if(res.getEstado()){
                 this.reserva = null;
                 cambiarEstado();
             }
-            System.out.println("Ahora la lista de reservas del appContext tiene; "
-                    + ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).size()
-                    + " reservas.");
         }
         catch(Exception e){
             System.out.println("problema eliminando reserva.\tError: " + e);

@@ -2,16 +2,20 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDialogLayout?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<JFXDialogLayout fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="1154.0" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuSeleccionTandaController">
+<JFXDialogLayout fx:id="root" prefHeight="500.0" prefWidth="1000.0" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuSeleccionTandaController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="background-pane">
          <left>
@@ -21,20 +25,32 @@
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
                   </Label>
                   <Label fx:id="lblSala" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="44.0" prefWidth="161.0" text=" " />
-                  <Label fx:id="lblMsjCosto" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="161.0" text="Costo:" />
-                  <Label fx:id="lblCosto" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="161.0" text="30000" />
-                  <Label fx:id="lblMsjAsientos" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="161.0" text="Asientos:" />
-                  <Label fx:id="lblAsientos" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="161.0" text="6" />
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="161.0" text="Total:" />
-                  <Label fx:id="lblTotal" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="161.0" text="6" />
-                  <JFXButton fx:id="btnReservar" maxHeight="1.7976931348623157E308" onAction="#reservar" styleClass="jfx-button-green" text="Reservar">
+                  <Label fx:id="lblMsjCosto" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="161.0" text="Costo:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label fx:id="lblCosto" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="161.0" text="??" />
+                  <Label fx:id="lblMsjAsientos" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="161.0" text="Asientos:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label fx:id="lblAsientos" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="161.0" text="?" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="161.0" text="Total:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label fx:id="lblTotal" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="161.0" text="?" />
+                  <JFXButton fx:id="btnReservar" maxHeight="1.7976931348623157E308" onAction="#reservar" styleClass="pallet-button" text="Reservar">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="btnCancelar" maxHeight="1.7976931348623157E308" onAction="#cancelar" text="Cancelar">
+                  <JFXButton fx:id="btnCancelar" maxHeight="1.7976931348623157E308" onAction="#cancelar" styleClass="pallet-button" text="Cancelar">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -56,7 +72,7 @@
                   </ScrollPane>
                </center>
                <top>
-                  <VBox alignment="CENTER" prefHeight="60.0" BorderPane.alignment="CENTER">
+                  <VBox alignment="CENTER" prefHeight="80.0" BorderPane.alignment="CENTER">
                      <children>
                         <Label fx:id="lblPantalla" alignment="CENTER" opacity="0.7" prefHeight="48.0" prefWidth="420.0" styleClass="details-Pane" text="PANTALLA">
                            <font>
@@ -69,7 +85,87 @@
             </BorderPane>
          </center>
          <right>
-            <VBox prefWidth="150.0" BorderPane.alignment="CENTER" />
+            <GridPane prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="80.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label graphicTextGap="5.0" text="Simbología de los colores:" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <graphic>
+                              <MaterialDesignIconView fill="#bcbcbc" glyphName="READABILITY" size="30" />
+                           </graphic>
+                        </Label>
+                     </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </VBox>
+                  <GridPane GridPane.rowIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Disponible" textAlignment="CENTER" wrapText="true">
+                                 <graphic>
+                                    <MaterialDesignIconView fill="#bcbcbc" glyphName="READABILITY" size="30" styleClass="campo-butaca" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="Seleccionada" textAlignment="CENTER" wrapText="true">
+                                 <graphic>
+                                    <MaterialDesignIconView fill="#bcbcbc" glyphName="READABILITY" size="30" styleClass="campo-butaca-sel" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                           <children>
+                              <Label text="Seleccionada por alguien más" textAlignment="CENTER" wrapText="true">
+                                 <graphic>
+                                    <MaterialDesignIconView fill="#bcbcbc" glyphName="READABILITY" size="30" styleClass="campo-butaca-sel-otro" />
+                                 </graphic>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                           <children>
+                              <Label text="Vendida" textAlignment="CENTER" wrapText="true">
+                                 <graphic>
+                                    <MaterialDesignIconView fill="#bcbcbc" glyphName="READABILITY" size="30" styleClass="campo-butaca-ocupada" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </GridPane>
+               </children>
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin>
+            </GridPane>
          </right>
       </BorderPane>
    </children>
