@@ -97,11 +97,11 @@ public class AdminManteUsuarioController extends Controller implements Initializ
                 hayCambios.set(true);
         });
         hayCambios.addListener((observable, oldValue, newValue) -> btnGuardar.setDisable(!newValue));
-        try {
-            cambiarImagenPerfil();
-        } catch (IOException ex) {
-            Logger.getLogger(AdminManteUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //try {
+            //cambiarImagenPerfil();
+        //} catch (IOException ex) {
+            //Logger.getLogger(AdminManteUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        //}
     }
 
     @Override
@@ -171,7 +171,7 @@ public class AdminManteUsuarioController extends Controller implements Initializ
     }
     
     private void cambiarImagenPerfil() throws FileNotFoundException, IOException{
-        usuario.crearImagenDesdeByte();
+        //usuario.crearImagenDesdeByte();
         if(usuario.abrirImagen()!=null)
             ivPicture.setImage(usuario.abrirImagen());
         else ivPicture.setImage(new Image("cineuna/resources/images/DefaultPoster.jpg"));
