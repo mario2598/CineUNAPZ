@@ -19,6 +19,7 @@ import cineuna.service.ReservaService;
 import cineuna.service.SalaService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
+import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -94,6 +95,8 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private MovieDto movie;
     private LocalDate fecha;
     private String idioma;
+    @FXML
+    private Label lblSimbologia;
     
     public class Hilo extends Thread{
         private Boolean activado;
@@ -354,6 +357,18 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private void cancelar(ActionEvent event) {
         cancelarReservas();
         salir();
+    }
+    
+    private void cargarIdioma(){
+        LangUtils.getInstance().loadLabelLang(lblSimbologia, "lblSimbologia");
+        LangUtils.getInstance().loadButtonLang(btnReservar, "btnReservar");
+        LangUtils.getInstance().loadButtonLang(btnCancelar, "btnCancelar");
+        LangUtils.getInstance().loadLabelLang(lblMsjCosto, "lblMsjCosto");
+        LangUtils.getInstance().loadLabelLang(lblMsjAsientos, "lblMsjAsientos");
+        LangUtils.getInstance().loadLabelLang(lblPantalla, "lblPantalla");
+        
+        
+        
     }
     
 }

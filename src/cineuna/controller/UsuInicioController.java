@@ -82,6 +82,7 @@ public class UsuInicioController extends Controller implements Initializable {
         cargarPeliculasEnCartelera();
         cargarProximasPeliculas();
         tabPaneMovies.getSelectionModel().selectFirst();
+        cargarIdioma();
     }
     
     //Methods
@@ -120,6 +121,9 @@ public class UsuInicioController extends Controller implements Initializable {
         else{
             LangUtils.getInstance().setLang("eng");
         }
+        
+        LangUtils.getInstance().loadTabLang(tabCartelera, "lblCartelera");
+        LangUtils.getInstance().loadTabLang(tabProximamente, "lblProximas");
     }
     
     private void deselectAllCards(ArrayList<UserMovieCard> list){
