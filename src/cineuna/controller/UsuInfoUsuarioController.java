@@ -222,6 +222,7 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
     private void cargarImagen() throws IOException{
         String imgPath = "src\\cineuna\\resources\\images\\" + usuario.getUsuNombre()+".jpg";
         File file = new File(imgPath);
+        if(usuario.getUsuImg()!=null){
         usuario.crearImagenDesdeByte();
         if(file.exists()){
         imgUsuarioLbl.setImage(usuario.abrirImagen());
@@ -231,6 +232,11 @@ public class UsuInfoUsuarioController extends Controller implements Initializabl
            imgUsuarioLbl.setImage(new Image("cineuna/resources/images/VenomPoster.jpg")); 
            imgUsuarioTxt.setImage(new Image("cineuna/resources/images/VenomPoster.jpg"));
         }
+        }
+        else{
+            imgUsuarioLbl.setImage(new Image("cineuna/resources/images/VenomPoster.jpg")); 
+            imgUsuarioTxt.setImage(new Image("cineuna/resources/images/VenomPoster.jpg"));
+        } 
     }
 
     @FXML
