@@ -231,7 +231,7 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         chkBoxEsp1.setSelected(false);
         chkBoxEng1.setSelected(false);
         datePickEstreno.setValue(null);
-        this.imgPoster.setImage(new Image("cineuna/resources/images/DefaultPoster.jpg"));
+//        this.imgPoster.setImage(new Image("cineuna/resources/images/DefaultPoster.jpg"));
     }
     
     private Boolean validadInfoNecesaria(){

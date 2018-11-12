@@ -63,10 +63,15 @@ public class AdminMoviesController extends Controller implements Initializable {
             if(oldValue)
                 deselectAllCards(ProximasCardList);
         });
+        tabInactivas.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(oldValue)
+                deselectAllCards(InactivasCardList);
+        });
         tabPaneMovies.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
                 deselectAllCards(CarteleraCardList);
                 deselectAllCards(ProximasCardList);
+                deselectAllCards(InactivasCardList);
             }
             event.consume();
         });    

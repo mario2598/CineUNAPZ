@@ -124,7 +124,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             if(file.exists())
                 ivPoster = new ImageView(movie.abrirImagen());
             else
-                ivPoster = new ImageView(new Image("cineuna/resources/images/VenomPoster.jpg"));
+                ivPoster = new ImageView(new Image("cineuna/resources/images/DefaultPoster.jpg"));
             ivPoster.setPreserveRatio(false);
             ivPoster.setFitWidth(stageWidthProp.get()*0.25);
             ivPoster.setFitHeight(stageHeightProp.get()*0.60);
