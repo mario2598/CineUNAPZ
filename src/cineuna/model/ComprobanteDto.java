@@ -6,7 +6,9 @@
 package cineuna.model;
 
 import cineuna.util.LocalDateAdapter;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -20,9 +22,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author mario
  */
 @XmlRootElement(name = "ComprobanteDto")
-@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
-public class ComprobanteDto {
-    //Attributes
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ComprobanteDto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @XmlTransient
     private Long compId;
     @XmlTransient
@@ -35,16 +38,10 @@ public class ComprobanteDto {
     private Long salaId;
     @XmlTransient
     private Long usuId;
-    @XmlTransient
-    public ObjectProperty<LocalDate> compDate;
+   // @XmlTransient
+  //  public ObjectProperty<LocalDate> compDate;
     
-    //Constructors
-    public ComprobanteDto() {
-        compDate=new SimpleObjectProperty<>();
-    }
-    
-    //Methods
-    public void duplicateData(ComprobanteDto c){
+     public void duplicateData(ComprobanteDto c){
         this.compId = c.getCompId();
         this.compCosto = c.getCompCosto();
         this.butId = c.getButId();
@@ -52,8 +49,12 @@ public class ComprobanteDto {
         this.salaId = c.getSalaId();
         this.usuId = c.getUsuId();
     }
-    
-    //Setters and Getters
+
+    public ComprobanteDto() {
+     //   this.compDate = new SimpleObjectProperty<>();
+    }
+
+
     public Long getCompId() {
         return compId;
     }
@@ -101,15 +102,13 @@ public class ComprobanteDto {
     public void setUsuId(Long usuId) {
         this.usuId = usuId;
     }
-    
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    public LocalDate getCompDate() {
-        return compDate.get();
-    }
-
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    public void setCompDate(LocalDate compDate) {
-        this.compDate.set(compDate);
-    }
+   // @XmlJavaTypeAdapter(LocalDateAdapter.class)
+   // public LocalDate getCompDate() {
+    //    return compDate.get();
+  //  }
+ //   @XmlJavaTypeAdapter(LocalDateAdapter.class)
+  //  public void setCompDate(LocalDate compDate) {
+      //  this.compDate.set(compDate); 
+   // }   
 
 }

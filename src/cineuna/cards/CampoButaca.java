@@ -6,15 +6,19 @@
 package cineuna.cards;
 
 import cineuna.model.ButacaDto;
+import cineuna.model.ComprobanteDto;
 import cineuna.model.ReservaDto;
 import cineuna.model.TandaDto;
 import cineuna.model.UsuarioDto;
 import cineuna.service.ButacaService;
+import cineuna.service.ComprobanteService;
 import cineuna.service.ReservaService;
 import cineuna.util.AppContext;
 import cineuna.util.Respuesta;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -29,7 +33,7 @@ import javafx.scene.text.TextBoundsType;
  * @author Chris
  */
 public class CampoButaca extends Label{
-    
+    private ComprobanteDto comp;
     private ButacaDto butaca;
     private ReservaDto reserva;
     private UsuarioDto usuario;
@@ -68,6 +72,7 @@ public class CampoButaca extends Label{
         this.icon.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
         this.icon.getStyleClass().clear();
         this.butaca=butaca;
+        this.comp = new ComprobanteDto();
         asientos=(SimpleIntegerProperty) AppContext.getInstance().get("asientos");//la misma que maneja selección de butacas para calcular costo
         dimension = new SimpleIntegerProperty(dim);
         this.disponible = new SimpleBooleanProperty(false);
@@ -171,11 +176,23 @@ public class CampoButaca extends Label{
     
     private void seleccionaButaca(){
         usuario.pushSeleccionada(this);
+        ComprobanteDto  c = crearComp();
+        usuario.pushComp(comp);
         //icon.getStyleClass().add("campo-butaca-sel");
         asientos.set(asientos.get()+1);
         //butaca.setButEstado("S");//cambiar a reserva
         creaReserva();
         guardarReserva();
+    }
+    
+    public ComprobanteDto crearComp(){
+        comp.setButId(this.butaca.getButId());
+        comp.setCompCosto(this.tanda.getTandaCobro());
+        comp.setMovieId(this.tanda.getMovieId().getMovieId());
+        comp.setUsuId(this.usuario.getUsuId());
+        comp.setSalaId(this.tanda.getSalaId().getSalaId());
+      //  comp.setCompDate(this.tanda.getMovieId().getMovieDate());
+        return comp;
     }
     
     public void desSeleccionaButaca(){
