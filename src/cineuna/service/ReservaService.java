@@ -5,9 +5,7 @@
  */
 package cineuna.service;
 
-import cineuna.model.ButacaDto;
 import cineuna.model.ReservaDto;
-import cineuna.model.TandaDto;
 import cineuna.util.Request;
 import cineuna.util.Respuesta;
 import java.util.ArrayList;

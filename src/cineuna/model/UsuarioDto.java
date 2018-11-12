@@ -225,7 +225,7 @@ public class UsuarioDto {
         existe=false;
         if(butacasSeleccionadas.size()>0&&butacasSeleccionadas.contains(butaca))
                 existe=true;
-
+        if(existe) System.out.println("el usuario la tenía seleccionada");
         return existe;
     }
     

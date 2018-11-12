@@ -7,7 +7,6 @@ package cineuna.controller;
 
 import cineuna.model.CineDto;
 import cineuna.service.CineService;
-import cineuna.util.AppContext;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
@@ -54,7 +53,7 @@ public class AdminCinesController extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        bindCine();
     }
 
     private void bindCine(){

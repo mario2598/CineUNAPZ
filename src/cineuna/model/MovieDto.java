@@ -98,7 +98,7 @@ public class MovieDto {
           //System.out.println("movieUrlimg" + Arrays.toString(movieUrlimg));   
         }
         else{
-            System.out.println("movieUrlimg: null");
+            //System.out.println("movieUrlimg: null");
         }
     }
     

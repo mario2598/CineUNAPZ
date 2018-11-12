@@ -32,6 +32,12 @@ public class ReservaDto {
     
     }
     
+    public ReservaDto(TandaDto tanda,ButacaDto butaca){
+        this.tandaId=tanda;
+        this.butId=butaca;
+        this.resEstado="S";
+    }
+    
     //Methods
     public void duplicateData(ReservaDto r){
         this.butId=r.getButId();

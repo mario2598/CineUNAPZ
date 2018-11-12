@@ -7,6 +7,7 @@ package cineuna.cards;
 
 import cineuna.model.ButacaDto;
 import cineuna.model.ReservaDto;
+import cineuna.model.TandaDto;
 import cineuna.model.UsuarioDto;
 import cineuna.service.ButacaService;
 import cineuna.service.ReservaService;
@@ -39,8 +40,10 @@ public class CampoButaca extends Label{
     private SimpleBooleanProperty disponible;
     private Boolean activa;
     private Boolean propia;
+    private TandaDto tanda;
 
     public CampoButaca(Integer dim,ButacaDto butaca) {
+        this.tanda=(TandaDto) AppContext.getInstance().get("tandaSeleccionada");
         inicializaVariables(dim,butaca);
         inicializaIcono(dim);
         this.setPrefSize(dim, dim);
@@ -54,6 +57,7 @@ public class CampoButaca extends Label{
                     eventoClick();
                 }
             }
+            event.consume();
         });
         
         this.disponible.set(disponible.get());
@@ -73,43 +77,6 @@ public class CampoButaca extends Label{
         else
             activa=false;
         this.usuario=AppContext.getInstance().getUsuario();//usada para averiguar si el usuario la había seleccionado
-    }
-    
-    public void refrescaEstado2(){
-            refrescaButaca();
-            this.icon.getStyleClass().clear();
-            this.disponible.set(false);
-            this.seleccionada=false;
-            //eventoClick();
-            activa=false;
-            propia=false;
-        if(butaca.getButActiva().equalsIgnoreCase("A")){
-                activa=true;//estaba activa
-                if(butaca.getButEstado().equalsIgnoreCase("D")){
-                    disponible.set(true);
-                    icon.getStyleClass().add("campo-butaca");
-                }else if(butaca.getButEstado().equalsIgnoreCase("S")){
-                    //seleccionada.set(true);//estaba seleccionada
-                    if(usuario.isSeleccionada(this)){//pregunta si el usuario la tenía seleccionada
-                        //seleccionada.set(true);//estaba seleccionada
-                        propia = true;
-                        icon.getStyleClass().add("campo-butaca-sel");
-                    }
-                    else{
-                        //seleccionada.set(false);//estaba seleccionada
-                        icon.getStyleClass().add("campo-butaca-sel-otro");
-                    }
-                }
-                else{
-                    icon.getStyleClass().add("campo-butaca-ocupada");
-                }
-            }
-        else{
-        }
-        
-        //System.out.println("\nestado:"+butaca.getButLetra()+"-->"+estado);
-            
-        //refrescaEstilo();
     }
     
     public void refrescaEstado(){
@@ -154,13 +121,6 @@ public class CampoButaca extends Label{
         //refrescaEstilo();
     }
     
-    private void refrescaButaca(){
-        ButacaService bs=new ButacaService();
-        Respuesta res = bs.getButaca(butaca.getButId());
-        if(res.getEstado())
-            butaca=(ButacaDto) res.getResultado("Butaca");
-    }
-    
     private void reservaReserva(){
         ReservaService rs = new ReservaService();
         //Respuesta res = rs.
@@ -196,15 +156,15 @@ public class CampoButaca extends Label{
         icon.getStyleClass().add("campo-butaca-sel");
         asientos.set(asientos.get()+1);
         //butaca.setButEstado("S");//cambiar a reserva
-        guardarButaca();
+        creaReserva();
+        guardarReserva();
     }
     
     public void desSeleccionaButaca(){
         usuario.popSeleccionada(this);
         icon.getStyleClass().add("campo-butaca");
         asientos.set(asientos.get()-1);
-        butaca.setButEstado("D");//cambiar a reserva
-        guardarButaca();
+        eliminarReserva();
     }
     
     public void guardarButaca(){
@@ -226,9 +186,10 @@ public class CampoButaca extends Label{
         try{
             ReservaService rs = new ReservaService();
             Respuesta res = new Respuesta();
-            //res = rs.guardarButaca(butaca);//cambiar a reserva
+            res = rs.guardarReserva(reserva);//cambiar a reserva
             if(res.getEstado()){
-
+                this.reserva = (ReservaDto) res.getResultado("Reserva");
+                System.out.println("reserva guardada");
             }
                 
         }
@@ -237,23 +198,43 @@ public class CampoButaca extends Label{
         }
     }
     
+    public void eliminarReserva(){
+        try{
+            ReservaService rs = new ReservaService();
+            Respuesta res = new Respuesta();
+            res = rs.eliminarReserva(reserva);//cambiar a reserva
+            if(res.getEstado()){
+                System.out.println("reserva eliminada");
+            } 
+        }
+        catch(Exception e){
+            System.out.println("problema eliminando reserva");
+        }
+    }
+    
     public void cambiarDimension(Integer dim){
         this.setPrefSize(dim, dim);
         //icon.setSize(String.valueOf(dim*1.1));
     }
 
+    private void creaReserva(){
+        this.reserva = new ReservaDto();
+        this.reserva.setButId(this.butaca);
+        this.reserva.setTandaId(this.tanda);
+        this.reserva.setResEstado("S");
+    }
+    
     public void reservaButaca(){
-        this.butaca.setButEstado("O");
-        guardarButaca();
-        //icon.getStyleClass().add("campo-butaca");
+        if(this.reserva!=null){
+           this.reserva.setResEstado("O");
+           guardarReserva();
+        }
     }
     
     public void cancelaButaca(){
         icon.getStyleClass().add("campo-butaca");
         asientos.set(asientos.get()-1);
-        butaca.setButEstado("D");//cambiar a reserva
-        guardarButaca();
-        //this.seleccionada.set(false);
+        eliminarReserva();
     }
     
     //Getters and Setters
@@ -292,6 +273,5 @@ public class CampoButaca extends Label{
     public void setReserva(ReservaDto reserva) {
         this.reserva = reserva;
     }
-    
-    
+  
 }
