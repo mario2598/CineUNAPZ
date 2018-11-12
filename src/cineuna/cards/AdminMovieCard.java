@@ -92,7 +92,7 @@ public class AdminMovieCard extends Card{
             if(file.exists())
                 ImgView = new ImageView(movie.abrirImagen());
             else
-                ImgView = new ImageView(new Image("cineuna/resources/images/VenomPoster.jpg"));
+                ImgView = new ImageView(new Image("cineuna/resources/images/DefaultPoster.jpg"));
             ImgView.setPreserveRatio(false);
             ImgView.setFitWidth(this.widthProp.get());
             ImgView.setFitHeight(this.heightProp.get());

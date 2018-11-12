@@ -112,7 +112,7 @@ public class MovieDto {
             fos.write(b);
             fos.flush();
         }
-        this.moviePortada.set(outPutFile);
+        this.movieUrlimg = outPutFile;
     }
 
     
