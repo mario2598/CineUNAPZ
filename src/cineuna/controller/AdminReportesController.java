@@ -92,8 +92,7 @@ public class AdminReportesController extends Controller implements Initializable
                 } else {
             byte[] b = (byte[]) respuesta.getResultado("reporte");
             String r = convPdf(b,"src\\cineuna\\jasper\\moviesListReport.pdf");
-             
-           new Mensaje().showModal(Alert.AlertType.ERROR, "Datos vacios", getStage(), "No se envio el correo");
+            showFile(r);
            }
         } catch (Exception ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, "Error registrando reporte.", ex);
