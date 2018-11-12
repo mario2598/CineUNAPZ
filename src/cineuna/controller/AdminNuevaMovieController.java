@@ -40,31 +40,47 @@ import javafx.stage.FileChooser;
 public class AdminNuevaMovieController extends Controller implements Initializable {
     //FXML Attributes
     @FXML
-    private BorderPane root;
+    private Label lblDuracionInfo;
     @FXML
-    private ImageView imgPoster;
+    private BorderPane root;
     @FXML
     private HBox hbPoster;
     @FXML
-    private JFXButton btnCancelar, btnGuardar;
+    private ImageView imgPoster;
     @FXML
-    private JFXTextField txtEspNombre, txtEngNombre, txtEspTrailer, txtEngTrailer, txtDuracion;
+    private JFXButton btnCancelar;
     @FXML
-    private JFXTextArea txtEspSinopsis, txtEngSinopsis;
+    private JFXButton btnGuardar;
     @FXML
-    private JFXCheckBox chkBoxEsp1, chkBoxEng1;
+    private JFXCheckBox chkBoxEsp1;
+    @FXML
+    private JFXCheckBox chkBoxEng1;
     @FXML
     private JFXDatePicker datePickEstreno;
     @FXML
-    private JFXComboBox<String> cmboBoxEstado, cmboBoxTipo;
+    private JFXComboBox<String> cmboBoxEstado;
+    @FXML
+    private JFXComboBox<String> cmboBoxTipo;
+    @FXML
+    private JFXTextField txtDuracion;
+    @FXML
+    private JFXTextField txtEspNombre;
+    @FXML
+    private JFXTextArea txtEspSinopsis;
+    @FXML
+    private JFXTextField txtEspTrailer;
+    @FXML
+    private JFXTextField txtEngNombre;
+    @FXML
+    private JFXTextArea txtEngSinopsis;
+    @FXML
+    private JFXTextField txtEngTrailer;
     
     //Attributes
     private final MovieService movieService = new MovieService();
     private MovieDto movie;
     private Boolean editando;
     private String errorMensaje;
-    @FXML
-    private Label lblDuracionInfo;
     
     //Initializers
     /**
