@@ -111,6 +111,7 @@ public class AdminNuevaTandaController extends Controller implements Initializab
         listView.getStyleClass().add("customListView");
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue!=null){
+                hbMovieCard.getChildren().clear();
                 tanda.setMovieId(newValue.getMovie());
                 hbMovieCard.getChildren().add(generarMovieCard(newValue.getMovie()));
                 calcularHoraFin(newValue.getMovie().getMovieDuracion());
@@ -273,8 +274,10 @@ public class AdminNuevaTandaController extends Controller implements Initializab
         if(!evaluarDatosRequeridos()){
             try{
                 tanda.setSalaId((SalaDto) AppContext.getInstance().get("AdminShowingSala"));
+                tanda.getMovieId().setMovieEstado("C");
+                Respuesta respM = (new MovieService()).guardarMovie(tanda.getMovieId());
                 Respuesta resp = tandaService.guardarTanda(tanda);
-                if(resp.getEstado()){
+                if(resp.getEstado() && respM.getEstado()){
                     ((SimpleBooleanProperty) AppContext.getInstance().get("AdminNewTandaProperty")).set(true);
                     salir();
                 } else {

@@ -47,7 +47,6 @@ public class UsuInicioController extends Controller implements Initializable {
     private final MovieService movieService = new MovieService();
     private final ArrayList<UserMovieCard> CarteleraCardList = new ArrayList<>();
     private final ArrayList<UserMovieCard> ProximasCardList = new ArrayList<>();
-    private final ArrayList<UserMovieCard> InactivasCardList = new ArrayList<>();
 
     /**
      * Initializes the controller class.

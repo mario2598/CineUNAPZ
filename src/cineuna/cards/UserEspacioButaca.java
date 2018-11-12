@@ -55,7 +55,7 @@ public class UserEspacioButaca extends Label{
         iconButaca.setFill(Paint.valueOf("#bcbcbc"));
         this.icon = iconButaca;
         this.setOnMouseClicked(event -> {
-            if(event.getButton().equals(MouseButton.PRIMARY)){
+            if(activa && event.getButton().equals(MouseButton.PRIMARY)){
                 if(!((Boolean) AppContext.getInstance().get("procesando"))){
                     if(disponible){
                         crearNuevaReserva();

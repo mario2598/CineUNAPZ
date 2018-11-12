@@ -107,9 +107,9 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         //Info Listeners
         cmboBoxTipo.getItems().addAll("2D", "3D");
         if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
-            cmboBoxEstado.getItems().addAll("Próximamente", "En Cartelera", "Inactiva");
+            cmboBoxEstado.getItems().addAll("Próximamente", "Inactiva");
         else
-            cmboBoxEstado.getItems().addAll("Coming Soon", "Available", "Inactive");
+            cmboBoxEstado.getItems().addAll("Coming Soon", "Inactive");
         cmboBoxTipo.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(movie!=null){
                 movie.setMovieTipo(newValue);
@@ -231,6 +231,7 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         chkBoxEsp1.setSelected(false);
         chkBoxEng1.setSelected(false);
         datePickEstreno.setValue(null);
+        this.imgPoster.setImage(new Image("cineuna/resources/images/DefaultPoster.jpg"));
     }
     
     private Boolean validadInfoNecesaria(){
@@ -270,7 +271,6 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     
     private void salir(){
         unbindMovie();
-        movie = null;
         FlowController.getInstance().goView("AdminMovies");
     }
 
@@ -282,7 +282,6 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     @FXML
     private void btcGuardarAction(ActionEvent event) {
         if(validadInfoNecesaria()){
-            unbindMovie();
             try{
                 Respuesta resp = movieService.guardarMovie(movie);
                 if(resp.getEstado()){
@@ -322,10 +321,9 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     private void cargarPoster(MouseEvent event) throws FileNotFoundException, IOException {
         FileChooser fc=new FileChooser();
         File sel = fc.showOpenDialog(null);
-        if(fc!=null){
+        if(sel!=null){
             movie.guardarImagenByte(sel);
             imgPoster.setImage(new Image(sel.toURI().toString()));
-          
         }
         else{
             System.out.println("imagen obtenida desde windows vacía");

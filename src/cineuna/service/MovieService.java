@@ -42,7 +42,7 @@ public class MovieService {
             
             return new Respuesta(true, "", "", "Movie", movies);
         } catch (Exception ex) {
-            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error guardando el usuario.", ex);
+            Logger.getLogger(MovieService.class.getName()).log(Level.SEVERE, "Error guardando el usuario.", ex);
             return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
         }
     }
@@ -60,7 +60,7 @@ public class MovieService {
             byte[] b = (byte[]) request.readEntity(new GenericType<byte[]>() {});
             return new Respuesta(true, "", "", "reporte",b);
         } catch (Exception ex) {
-            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error con comprobantes.", ex);
+            Logger.getLogger(MovieService.class.getName()).log(Level.SEVERE, "Error con comprobantes.", ex);
             return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
         }
     }
@@ -77,7 +77,7 @@ public class MovieService {
             byte[] b = (byte[]) request.readEntity(new GenericType<byte[]>() {});
             return new Respuesta(true, "", "", "reporte",b);
         } catch (Exception ex) {
-            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error con comprobantes.", ex);
+            Logger.getLogger(MovieService.class.getName()).log(Level.SEVERE, "Error con comprobantes.", ex);
             return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
         }
     }
@@ -98,13 +98,13 @@ public class MovieService {
             
             return new Respuesta(true, "", "", "Movies", movies);
         } catch (Exception ex) {
-            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, "Error guardando el usuario.", ex);
+            Logger.getLogger(MovieService.class.getName()).log(Level.SEVERE, "Error guardando la pelicula.", ex);
             return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
         }
     }
     
     public Respuesta guardarMovie(MovieDto dto){
-      
+        try{
             Request request = new Request("movieController/guardarMovie");
             request.post(dto);
             if(request.isError()){
@@ -112,7 +112,10 @@ public class MovieService {
             }
             MovieDto Movie = (MovieDto) request.readEntity(MovieDto.class);
             return new Respuesta(true, "", "", "Movie", Movie);
-        
+        } catch(Exception ex){
+            Logger.getLogger(MovieService.class.getName()).log(Level.SEVERE, "Error guardando la pelicula.", ex);
+            return new Respuesta(false, "Error obteniendo películas(Service Cliente).", "getMovies " + ex.getMessage());
+        }
     }
     
 }

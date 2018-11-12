@@ -232,6 +232,7 @@ public class AdminInfoSalaController extends Controller implements Initializable
     private void btnEditarTandaAction(ActionEvent event) {
         AppContext.getInstance().set("AdminEditingTanda", listViewTandas.getSelectionModel().getSelectedItem().getTanda());
         FlowController.getInstance().goViewOnDialog("AdminNuevaTanda", FlowController.getInstance().getDialogsPane());
+        ((SimpleBooleanProperty) AppContext.getInstance().get("AdminNewTandaProperty")).set(false);
     }
     
     private void cargarIdioma(){

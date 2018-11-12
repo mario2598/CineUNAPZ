@@ -67,6 +67,7 @@ public class MovieDto {
     public SimpleStringProperty movieNombreing;
     @XmlTransient
     public SimpleStringProperty movieResenaing;
+    @XmlTransient
     private String movieUrlimg;
     
      

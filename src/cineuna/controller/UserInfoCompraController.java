@@ -52,6 +52,7 @@ public class UserInfoCompraController extends Controller implements Initializabl
     private TandaDto tanda;
     private MovieDto movie;
     private ArrayList<TandaDto> tandaList;
+    private String msgError;
 
     /**
      * Initializes the controller class.
@@ -102,6 +103,7 @@ public class UserInfoCompraController extends Controller implements Initializabl
     
     private void loadData(){
         cmboBoxIdiomas.getItems().clear();
+        datePickerFecha.setValue(null);
         switch(movie.getMovieIdioma().intValue()){
             case 1: case 0:
                 cmboBoxIdiomas.getItems().addAll("Español");
@@ -120,7 +122,23 @@ public class UserInfoCompraController extends Controller implements Initializabl
     }
     
     private Boolean validadDatosNecesarios(){
-        return true;
+        msgError = "Se ha producido un error, debes ingresar los siguientes datos correctamente:";
+        Boolean hayError = false;
+        if(datePickerFecha.getValue()==null){
+            hayError = true;
+            msgError += "\n\tDebes ingresar la fecha para tus entradas.";
+        }
+        if(cmboBoxIdiomas.getValue()==null){
+            hayError = true;
+            msgError += "\n\tDebes seleccionar el idioma.";
+        }
+        if(this.tanda==null){
+            hayError = true;
+            msgError += "\n\tDebes ingresar la fecha para tus entradas.";
+        }
+        if(!hayError)
+            msgError = null;
+        return !hayError;
     }
 
     @FXML

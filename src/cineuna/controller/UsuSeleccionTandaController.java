@@ -248,6 +248,15 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private void eliminarReservasViejas(){
         espacioButacaList.stream().filter(cb->cb.getReserva()!=null).forEach(cbf->{
             if(!reservaList.contains(cbf.getReserva())){
+                cbf.getReserva().setResEstado("D");
+                try{
+                ReservaDto reservaAux = ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).stream()
+                        .filter(r -> r.getResId().equals(cbf.getReserva().getResId()))
+                        .findFirst().orElse(null);
+                if(reservaAux!=null){
+                    ((ArrayList<ReservaDto>) AppContext.getInstance().get("currentReservas")).remove(reservaAux);
+                }
+            } catch(NullPointerException ex){} catch(Exception ex2){}
                 cbf.setReserva(null);
             }
         });
