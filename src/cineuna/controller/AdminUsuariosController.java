@@ -9,6 +9,7 @@ import cineuna.CineUNA;
 import cineuna.cards.AdminUsuariosCard;
 import cineuna.model.UsuarioDto;
 import cineuna.service.UsuarioService;
+import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
@@ -19,11 +20,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
-import javafx.event.ActionEvent;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -42,6 +44,7 @@ public class AdminUsuariosController extends Controller implements Initializable
 
     //Attributes
     private final UsuarioService usuarioService = new UsuarioService();
+    private final SimpleBooleanProperty usuarioActualizado = new SimpleBooleanProperty();
     private HashMap<String, FXMLLoader> loaders;
     private ArrayList<UsuarioDto> usuarioList;
     
@@ -58,7 +61,13 @@ public class AdminUsuariosController extends Controller implements Initializable
                 mostrarSala(newValue.getUsuario());
             }
         });
-    }    
+        usuarioActualizado.set(false);
+        usuarioActualizado.addListener((observable, oldValue, newValue) -> {
+            if(newValue)
+                btnRefrescarAction();
+        });
+        AppContext.getInstance().set("UsuarioActualizadoProp", usuarioActualizado);
+    }
 
     @Override
     public void initialize() {
@@ -91,18 +100,19 @@ public class AdminUsuariosController extends Controller implements Initializable
     }
     
     private void mostrarSala(UsuarioDto usu){
-//        AppContext.getInstance().set("AdminShowingSala", usu);
-//        FXMLLoader loader = getLoader("AdminInfoSala");
-//        Controller controller = loader.getController();
-//        controller.setAccion(null);
-//        controller.initialize();
-//        Stage stage = controller.getStage();
-//        if (stage == null) {
-//            stage = this.getStage();
-//            controller.setStage(stage);
-//        }
-//        salasHolderPane.getChildren().clear();
-//        salasHolderPane.getChildren().add(loader.getRoot());
+        AppContext.getInstance().set("AdminShowingUser", usu);
+        ((SimpleBooleanProperty) AppContext.getInstance().get("UsuarioActualizadoProp")).set(false);
+        FXMLLoader loader = getLoader("AdminManteUsuario");
+        Controller controller = loader.getController();
+        controller.setAccion(null);
+        controller.initialize();
+        Stage stage = controller.getStage();
+        if (stage == null) {
+            stage = this.getStage();
+            controller.setStage(stage);
+        }
+        holderPane.getChildren().clear();
+        holderPane.getChildren().add(loader.getRoot());
     }
     
     private FXMLLoader getLoader(String name) {
@@ -126,7 +136,7 @@ public class AdminUsuariosController extends Controller implements Initializable
     
     //FXMLMethods
     @FXML
-    private void btnRefrescarAction(ActionEvent event) {
+    private void btnRefrescarAction() {
         initialize();
     }
 

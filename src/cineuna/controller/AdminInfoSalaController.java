@@ -49,7 +49,7 @@ public class AdminInfoSalaController extends Controller implements Initializable
     @FXML
     private JFXListView<AdminTandaCard> listViewTandas;
     @FXML
-    private JFXButton btnGuardar, btnEliminarTanda, btnEditarTanda;
+    private JFXButton btnEliminarTanda, btnEditarTanda;
     @FXML
     private GridPane gpTandaInfo;
     @FXML
@@ -207,7 +207,8 @@ public class AdminInfoSalaController extends Controller implements Initializable
 
     @FXML
     private void btnVerButacasAction(ActionEvent event) {
-        //TODO
+        AppContext.getInstance().set("AdminShowingSalaDistribution", this.sala);
+        FlowController.getInstance().goViewOnDialog("AdminVerDistribucionButacas", FlowController.getInstance().getDialogsPane());
     }
 
     @FXML
@@ -220,11 +221,6 @@ public class AdminInfoSalaController extends Controller implements Initializable
         ((SimpleBooleanProperty) AppContext.getInstance().get("AdminNewTandaProperty")).set(false);
         AppContext.getInstance().set("AdminEditingSala", sala);
         FlowController.getInstance().goView("AdminNuevaSala");
-    }
-
-    @FXML
-    private void btnGuardarAction(ActionEvent event) {
-        //TODO
     }
 
     @FXML
@@ -244,11 +240,8 @@ public class AdminInfoSalaController extends Controller implements Initializable
         LangUtils.getInstance().loadLabelLang(lblTandas, "lblTandas");
         LangUtils.getInstance().loadButtonLang(btnEliminar, "btnEliminar");
         LangUtils.getInstance().loadButtonLang(btnEditar, "btnEditar");
-        LangUtils.getInstance().loadButtonLang(btnGuardar, "btnGuardar");
         LangUtils.getInstance().loadButtonLang(btnEliminarTanda, "btnEliminarTanda");
         LangUtils.getInstance().loadButtonLang(btnEditarTanda, "btnEditarTanda");
-        
     }
-        
     
 }

@@ -9,7 +9,6 @@ import cineuna.model.MovieDto;
 import cineuna.service.MovieService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
-import cineuna.util.LangUtils;
 import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -17,8 +16,6 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,15 +25,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
-import javax.imageio.ImageIO;
-import javax.swing.JFileChooser;
 
 /**
  * FXML Controller class
@@ -54,10 +48,6 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     @FXML
     private JFXButton btnCancelar, btnGuardar;
     @FXML
-    private Label lblLenguajes, lblEstreno, lblEstado, lblTipo, lblDuracion, lblSegundos;
-    @FXML
-    private Tab tabInfoEsp, tabInfoEng;
-    @FXML
     private JFXTextField txtEspNombre, txtEngNombre, txtEspTrailer, txtEngTrailer, txtDuracion;
     @FXML
     private JFXTextArea txtEspSinopsis, txtEngSinopsis;
@@ -72,6 +62,9 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     private final MovieService movieService = new MovieService();
     private MovieDto movie;
     private Boolean editando;
+    private String errorMensaje;
+    @FXML
+    private Label lblDuracionInfo;
     
     //Initializers
     /**
@@ -153,10 +146,6 @@ public class AdminNuevaMovieController extends Controller implements Initializab
         }
        // cargarIdioma();
     }
-
-    private void imgPosterAction(MouseEvent event) {
-        //TODO
-    }
     
     private void bindMovie(){
         txtEspNombre.textProperty().bindBidirectional(movie.movieNombre);
@@ -230,8 +219,38 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     }
     
     private Boolean validadInfoNecesaria(){
-        //TODO
-        return true;
+        Boolean hayError = false;
+        errorMensaje = "Se ha producido un error guardando la nueva sala, revisa los siguientes datos faltantes:";
+        if(!chkBoxEsp1.isSelected() && !chkBoxEng1.isSelected()){
+            hayError = true;
+            errorMensaje = "\n\tDebes seleccionar al menos un idioma.";
+        }
+        if(datePickEstreno.getValue()==null){
+            hayError = true;
+            errorMensaje = "\n\tDebes registrar una fecha de estreno.";
+        }
+        if(txtDuracion.getText().isEmpty()){
+            hayError = true;
+            errorMensaje = "\n\tDebes registrar la duración en minutos.";
+        } else{
+            try{
+                Integer tryCast = Integer.valueOf(txtDuracion.getText());
+            } catch(NumberFormatException ex){
+                hayError = true;
+                errorMensaje = "\n\tEstas ingresando valores alfabéticos en el campo para la duración.";
+            }
+        }
+        if(txtEspNombre.getText().isEmpty() || txtEspSinopsis.getText().isEmpty() || txtEspTrailer.getText().isEmpty()){
+            hayError = true;
+            errorMensaje = "\n\tFaltan datos de la película en español.";
+        }
+        if(txtEngNombre.getText().isEmpty() || txtEngSinopsis.getText().isEmpty() || txtEngTrailer.getText().isEmpty()){
+            hayError = true;
+            errorMensaje = "\n\tFaltan datos de la película en inglés.";
+        }
+        if(!hayError)
+            errorMensaje = null;
+        return !hayError;
     }
     
     private void salir(){
@@ -262,11 +281,9 @@ public class AdminNuevaMovieController extends Controller implements Initializab
                 System.out.println("Ha ocurrido un error en la parte del cliente guardando la película\nError: " + ex);
                 bindMovie();
             }
+        } else {
+            System.out.println(errorMensaje);
         }
-    }
-
-    private void buscarImagen(MouseEvent event) throws FileNotFoundException {
-        
     }
     
     private void cargarIdioma(){

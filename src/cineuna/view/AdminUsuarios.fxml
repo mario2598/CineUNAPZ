@@ -10,7 +10,7 @@
 
 <BorderPane stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminUsuariosController">
    <center>
-      <StackPane fx:id="holderPane" BorderPane.alignment="CENTER" />
+      <StackPane fx:id="holderPane" styleClass="background-pane" BorderPane.alignment="CENTER" />
    </center>
    <left>
       <VBox BorderPane.alignment="CENTER">

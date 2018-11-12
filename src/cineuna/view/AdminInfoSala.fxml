@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" prefHeight="550.0" prefWidth="1000.0" styleClass="background-pane" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminInfoSalaController">
+<BorderPane fx:id="root" prefHeight="550.0" prefWidth="1000.0" styleClass="background-pane" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminInfoSalaController">
    <center>
       <GridPane alignment="TOP_CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -118,14 +118,6 @@
                            </font>
                            <graphic>
                               <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" fill="#bcbcbc" glyphName="PENCIL" size="25" />
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="btnGuardar" buttonType="RAISED" disable="true" graphicTextGap="10.0" onAction="#btnGuardarAction" prefHeight="40.0" prefWidth="105.0" styleClass="pallet-button" text="Guardar" textFill="#bcbcbc">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <graphic>
-                              <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" fill="#bcbcbc" glyphName="SAVE" size="25" />
                            </graphic>
                         </JFXButton>
                      </children>
