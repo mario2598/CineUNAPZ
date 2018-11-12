@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="600.0" prefWidth="1100.0" styleClass="background-pane" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminMenuController">
+<StackPane prefHeight="600.0" prefWidth="1100.0" styleClass="background-pane" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminMenuController">
    <children>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" StackPane.alignment="CENTER">
          <StackPane.margin>
@@ -56,14 +56,6 @@
                      <graphic>
                         <FontAwesomeIconView glyphName="TICKET" size="80" />
                      </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="btnConfig" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnConfigAction" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Configuraciones de la app" textAlignment="CENTER" wrapText="true">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="TICKET" size="80" />
-                     </graphic>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
                   </JFXButton>
                </children>
             </TilePane>

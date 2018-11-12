@@ -56,6 +56,7 @@ public class AdminNuevaTandaController extends Controller implements Initializab
     //Attributes 
     private final MovieService movieService = new MovieService();
     private final TandaService tandaService = new TandaService();
+    private final ArrayList<AdminSmallMovieCard> movies = new ArrayList<>();
     private TandaDto tanda;
     private AdminMovieCard card;
     private Boolean editando;
@@ -102,26 +103,26 @@ public class AdminNuevaTandaController extends Controller implements Initializab
     
     //Methods
     private void checkAvailableMovies(){
-        if(true){
-            ScrollPane moviesScrollPane = new ScrollPane();
-            moviesScrollPane.setFitToHeight(true);
-            moviesScrollPane.setFitToWidth(true);
-            moviesScrollPane.setPrefWidth(200);
-            JFXListView<AdminSmallMovieCard> listView = new JFXListView<>();
-            listView.getStyleClass().add("customListView");
-            listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                if(newValue!=null){
-                    tanda.setMovieId(newValue.getMovie());
-                    hbMovieCard.getChildren().add(generarMovieCard(newValue.getMovie()));
-                    calcularHoraFin(newValue.getMovie().getMovieDuracion());
-                }
-            });
-            moviesScrollPane.setContent(listView);
-            loadMovies(listView);
+        ScrollPane moviesScrollPane = new ScrollPane();
+        moviesScrollPane.setFitToHeight(true);
+        moviesScrollPane.setFitToWidth(true);
+        moviesScrollPane.setPrefWidth(200);
+        JFXListView<AdminSmallMovieCard> listView = new JFXListView<>();
+        listView.getStyleClass().add("customListView");
+        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue!=null){
+                tanda.setMovieId(newValue.getMovie());
+                hbMovieCard.getChildren().add(generarMovieCard(newValue.getMovie()));
+                calcularHoraFin(newValue.getMovie().getMovieDuracion());
+            }
+        });
+        moviesScrollPane.setContent(listView);
+        loadMovies(listView);
+        if(this.movies!=null && !movies.isEmpty()){
             baseBorderPane.setPrefSize(950, 400);
             baseBorderPane.setRight(moviesScrollPane);
         } else {
-            System.out.println("No hay ninguna película registrada hasta el momento.");
+            System.out.println("No hay ninguna película que cumpla los requisitos para estar en esta tanda.");
         }
     }
     
@@ -157,6 +158,7 @@ public class AdminNuevaTandaController extends Controller implements Initializab
             AdminSmallMovieCard newCard = new AdminSmallMovieCard(movie);
             newCard.initCard();
             listView.getItems().add(newCard);
+            this.movies.add(newCard);
         });
     }
 

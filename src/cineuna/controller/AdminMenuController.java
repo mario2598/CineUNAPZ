@@ -35,8 +35,6 @@ public class AdminMenuController extends Controller implements Initializable {
     private JFXButton btnUsuarios;
     @FXML
     private JFXButton btnReportes;
-    @FXML
-    private JFXButton btnConfig;
 
     /**
      * Initializes the controller class.
@@ -80,18 +78,12 @@ public class AdminMenuController extends Controller implements Initializable {
     private void btnReportsAction(ActionEvent event) {
         FlowController.getInstance().goView("AdminReportes");
     }
-
-    @FXML
-    private void btnConfigAction(ActionEvent event) {
-        //TODO
-    }
     
     private void cargarIdioma(){
         if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
             LangUtils.getInstance().setLang("es");
         
         LangUtils.getInstance().loadButtonLang(btnCines, "btnCines");
-        LangUtils.getInstance().loadButtonLang(btnConfig, "btnConfig");
         LangUtils.getInstance().loadButtonLang(btnPeliculas, "btnPeliculas");
         LangUtils.getInstance().loadButtonLang(btnReportes, "btnReportes");
         LangUtils.getInstance().loadButtonLang(btnSalas, "btnSalas");

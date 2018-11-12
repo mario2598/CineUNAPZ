@@ -13,6 +13,7 @@ import cineuna.util.AppContext;
 import cineuna.util.Respuesta;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -185,6 +186,7 @@ public class UserEspacioButaca extends Label{
         res.setButId(butaca);
         res.setTandaId((TandaDto) AppContext.getInstance().get("UserSelectedTanda"));
         res.setResEstado("S");
+        res.setResDate((LocalDate) AppContext.getInstance().get("UserSelectedDate"));
         this.reserva = res;
     }
 

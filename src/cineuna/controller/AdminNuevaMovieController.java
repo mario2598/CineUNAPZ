@@ -160,7 +160,6 @@ public class AdminNuevaMovieController extends Controller implements Initializab
             cmboBoxEstado.setValue("Próximamente");
             cmboBoxTipo.setValue("2D");
         }
-       // cargarIdioma();
     }
     
     private void bindMovie(){

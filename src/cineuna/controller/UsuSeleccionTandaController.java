@@ -227,7 +227,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
      */
     public void cargarListaReservas(){
         ReservaService rs=new ReservaService();
-        Respuesta res = rs.getListReservas(tanda.getTandaId());
+        Respuesta res = rs.getListReservas(tanda.getTandaId(), this.fecha);
         if(res.getEstado()){
             reservaList.addAll((ArrayList<ReservaDto>) res.getResultado("ReservasList"));
         }

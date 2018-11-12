@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -14,134 +15,138 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoPeliculaController">
+<JFXDialogLayout prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoPeliculaController">
    <children>
-      <BorderPane prefHeight="500.0" prefWidth="1000.0" styleClass="background-pane" stylesheets="@adminStyle.css">
-         <center>
-            <GridPane BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
-                <ColumnConstraints hgrow="SOMETIMES" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints percentHeight="75.0" vgrow="SOMETIMES" />
-                      <RowConstraints vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <StackPane fx:id="spPoster" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #bcbcbc;" styleClass="details-Pane">
-                           <children>
-                              <ImageView fx:id="ivPoster" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                           <GridPane.margin>
-                              <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-                           </GridPane.margin>
-                        </StackPane>
-                        <VBox alignment="CENTER" GridPane.rowIndex="1">
-                           <children>
-                              <JFXButton fx:id="btnComprar" onAction="#btnComprarAction" prefWidth="120.0" styleClass="pallet-button" text="Comprar Entradas" wrapText="true">
-                                 <graphic>
-                                    <FontAwesomeIconView glyphName="TICKET" size="30" />
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                           <GridPane.margin>
-                              <Insets bottom="20.0" />
-                           </GridPane.margin>
-                        </VBox>
-                     </children>
-                  </GridPane>
-                  <GridPane GridPane.columnIndex="1">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                      <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                      <RowConstraints percentHeight="60.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+      <StackPane>
+         <children>
+            <BorderPane prefHeight="500.0" prefWidth="1000.0" styleClass="background-pane" stylesheets="@adminStyle.css">
+               <center>
+                  <GridPane BorderPane.alignment="CENTER">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
                         <GridPane>
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" percentWidth="40.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints percentHeight="75.0" vgrow="SOMETIMES" />
+                              <RowConstraints vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <VBox alignment="CENTER" style="-fx-border-color: #bcbcbc;" styleClass="details-Pane">
+                              <StackPane fx:id="spPoster" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #bcbcbc;" styleClass="details-Pane">
                                  <children>
-                                    <Label fx:id="lblNombre" focusTraversable="false" text="Nombre de la pelicula" textAlignment="CENTER" wrapText="true">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
+                                    <ImageView fx:id="ivPoster" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                                  <GridPane.margin>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                                  </GridPane.margin>
-                              </VBox>
-                              <VBox alignment="CENTER" style="-fx-border-color: #bcbcbc;" styleClass="details-Pane" GridPane.columnIndex="1">
+                              </StackPane>
+                              <VBox alignment="CENTER" GridPane.rowIndex="1">
                                  <children>
-                                    <Label fx:id="lblTipo" focusTraversable="false" text="Tipo: 2D/3D" textAlignment="CENTER" wrapText="true">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                 </GridPane.margin>
-                              </VBox>
-                              <VBox alignment="CENTER" style="-fx-border-color: #bcbcbc;" styleClass="details-Pane" GridPane.columnIndex="2">
-                                 <children>
-                                    <Label fx:id="lblCalificacion" focusTraversable="false" graphicTextGap="10.0" text="7.5 / 10" textAlignment="CENTER" wrapText="true">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
+                                    <JFXButton fx:id="btnComprar" onAction="#btnComprarAction" prefWidth="120.0" styleClass="pallet-button" text="Comprar Entradas" wrapText="true">
                                        <graphic>
-                                          <FontAwesomeIconView fill="#fffb00" glyphName="STAR" size="30" />
+                                          <FontAwesomeIconView glyphName="TICKET" size="30" />
                                        </graphic>
-                                    </Label>
+                                    </JFXButton>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                    <Insets bottom="20.0" />
                                  </GridPane.margin>
                               </VBox>
                            </children>
                         </GridPane>
-                        <VBox alignment="CENTER" style="-fx-border-color: #bcbcbc;" styleClass="details-Pane" GridPane.rowIndex="1">
+                        <GridPane GridPane.columnIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+                              <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+                              <RowConstraints percentHeight="60.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
-                              <Label fx:id="lblSinopsis" focusTraversable="false" text="Reseña">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="40.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <VBox alignment="CENTER" style="-fx-border-color: #bcbcbc; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="details-Pane">
+                                       <children>
+                                          <Label fx:id="lblNombre" focusTraversable="false" text="Nombre de la pelicula" textAlignment="CENTER" wrapText="true">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <GridPane.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </GridPane.margin>
+                                    </VBox>
+                                    <VBox alignment="CENTER" style="-fx-border-color: #bcbcbc; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="details-Pane" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label fx:id="lblTipo" focusTraversable="false" text="Tipo: 2D/3D" textAlignment="CENTER" wrapText="true">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <GridPane.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </GridPane.margin>
+                                    </VBox>
+                                    <VBox alignment="CENTER" style="-fx-border-color: #bcbcbc; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="details-Pane" GridPane.columnIndex="2">
+                                       <children>
+                                          <Label fx:id="lblCalificacion" focusTraversable="false" graphicTextGap="10.0" text="7.5 / 10" textAlignment="CENTER" wrapText="true">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#fffb00" glyphName="STAR" size="30" />
+                                             </graphic>
+                                          </Label>
+                                       </children>
+                                       <GridPane.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </GridPane.margin>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                              <VBox alignment="CENTER" style="-fx-border-color: #bcbcbc; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="details-Pane" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label fx:id="lblSinopsis" focusTraversable="false" text="Reseña">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </GridPane.margin>
+                              </VBox>
+                              <WebView fx:id="webViewTrailer" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets bottom="25.0" left="25.0" right="25.0" top="10.0" />
+                                 </GridPane.margin>
+                              </WebView>
                            </children>
-                           <GridPane.margin>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                           </GridPane.margin>
-                        </VBox>
-                        <WebView fx:id="webViewTrailer" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" GridPane.rowIndex="2">
-                           <GridPane.margin>
-                              <Insets bottom="25.0" left="25.0" right="25.0" top="10.0" />
-                           </GridPane.margin>
-                        </WebView>
+                        </GridPane>
                      </children>
                   </GridPane>
-               </children>
-            </GridPane>
-         </center>
-      </BorderPane>
-      <StackPane fx:id="dialogPane" prefHeight="150.0" prefWidth="200.0" visible="false" />
+               </center>
+            </BorderPane>
+            <StackPane fx:id="dialogPane" prefHeight="150.0" prefWidth="200.0" visible="false" />
+         </children>
+      </StackPane>
    </children>
-</StackPane>
+</JFXDialogLayout>

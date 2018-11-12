@@ -7,6 +7,8 @@ package cineuna.cards;
 
 import cineuna.util.DateUtil;
 import cineuna.model.MovieDto;
+import cineuna.util.AppContext;
+import cineuna.util.FlowController;
 import com.jfoenix.controls.JFXRippler;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -134,9 +135,9 @@ public class AdminMovieCard extends Card{
         ripplerLbl.setPrefSize(this.widthProp.get(), this.heightProp.get() + (this.heightProp.get()*0.14)*2);
         ripplerLbl.setOnMouseClicked((t) -> {
             if(t.getButton().equals(MouseButton.PRIMARY)){
-                //Evento para mostrar informacion de la movie
+                AppContext.getInstance().set("UserShowingMovie", this.movie);
+                FlowController.getInstance().goViewOnDialog("UsuInfoPelicula", FlowController.getInstance().getDialogsPane());
             } else {
-                //Evento para seleccionar la cancha
                 this.toggleSelected();
             }
             t.consume();

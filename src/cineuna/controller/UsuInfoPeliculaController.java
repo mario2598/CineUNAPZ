@@ -80,6 +80,11 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             bindData();
             loadData();
         }
+        if(AppContext.getInstance().getUsuario().getUsuAdmin().equalsIgnoreCase("S") || 
+                movie.getMovieEstado().equalsIgnoreCase("P"))
+            btnComprar.setVisible(false);
+        else 
+            btnComprar.setVisible(true);
     }
     
     //Methods

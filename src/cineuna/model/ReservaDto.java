@@ -5,10 +5,13 @@
  */
 package cineuna.model;
 
+import cineuna.util.LocalDateAdapter;
+import java.time.LocalDate;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  *
@@ -27,6 +30,8 @@ public class ReservaDto {
     private Long resId;
     @XmlTransient
     private ButacaDto butId;
+    @XmlTransient
+    private LocalDate resDate;
 
     public ReservaDto() {
     
@@ -77,5 +82,15 @@ public class ReservaDto {
 
     public void setButId(ButacaDto butId) {
         this.butId = butId;
+    }
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public LocalDate getResDate() {
+        return resDate;
+    }
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public void setResDate(LocalDate resDate) {
+        this.resDate = resDate;
     }
 }

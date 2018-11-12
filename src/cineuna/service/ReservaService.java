@@ -6,8 +6,10 @@
 package cineuna.service;
 
 import cineuna.model.ReservaDto;
+import cineuna.util.DateUtil;
 import cineuna.util.Request;
 import cineuna.util.Respuesta;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +36,26 @@ public class ReservaService {
             ArrayList<ReservaDto> reservaListT = (ArrayList<ReservaDto>) request.readEntity(new GenericType<ArrayList<ReservaDto>>() {
             });
             
+            return new Respuesta(true, "", "", "ReservasList", reservaListT);
+        } catch (Exception ex) {
+            Logger.getLogger(TandaService.class.getName()).log(Level.SEVERE, "Error obteniendo lita tandas(TS Cliente)", ex);
+            return new Respuesta(false, "Error obteniendo tandasM(Service Cliente).", "getTandasS " + ex.getMessage());
+        }
+    }
+    
+    public Respuesta getListReservas(Long tandaId, LocalDate date){
+        try {
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("tandaId", tandaId);
+            parametros.put("date", DateUtil.LocalDate2String(date));
+            Request request = new Request("reservaController/getReservas","/{tandaId}/{date}",parametros);
+            request.get();
+            if (request.isError()) {
+                System.out.println("error TandaService(Cliente)"+request.getError());
+                return new Respuesta(false, request.getError(), "");
+            }
+            ArrayList<ReservaDto> reservaListT = (ArrayList<ReservaDto>) request.readEntity(new GenericType<ArrayList<ReservaDto>>() {
+            });
             return new Respuesta(true, "", "", "ReservasList", reservaListT);
         } catch (Exception ex) {
             Logger.getLogger(TandaService.class.getName()).log(Level.SEVERE, "Error obteniendo lita tandas(TS Cliente)", ex);
