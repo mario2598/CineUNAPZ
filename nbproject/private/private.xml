@@ -5,6 +5,9 @@
         <group>
             <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/controller/UsuSeleccionTandaController.java</file>
             <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/service/ComprobanteService.java</file>
+            <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/service/MovieService.java</file>
+            <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/controller/AdminReportesController.java</file>
+            <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/controller/LogInController.java</file>
             <file>file:/C:/Users/mario/Documents/GitHub/CineUNAPZ/src/cineuna/model/ComprobanteDto.java</file>
         </group>
     </open-files>

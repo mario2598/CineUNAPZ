@@ -323,7 +323,7 @@ public class AdminNuevaMovieController extends Controller implements Initializab
     private void cargarPoster(MouseEvent event) throws FileNotFoundException, IOException {
         FileChooser fc=new FileChooser();
         File sel = fc.showOpenDialog(null);
-        if(fc!=null){
+        if(sel!=null){
             movie.guardarImagenByte(sel);
             imgPoster.setImage(new Image(sel.toURI().toString()));
           
