@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTimePicker?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -35,13 +35,13 @@
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="263.0">
                <children>
                   <FontAwesomeIconView glyphName="" size="20.0" text="" wrappingWidth="30.0" />
-                  <JFXTextField fx:id="txtNombreCine" prefHeight="25.0" prefWidth="223.0" />
+                  <JFXTextField fx:id="txtNombreCine" disable="true" prefHeight="25.0" prefWidth="223.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="51.0" prefWidth="263.0">
                <children>
                   <FontAwesomeIconView size="20.0" text="" wrappingWidth="19.0" />
-                  <JFXTextField fx:id="txtCorreoCine" prefHeight="25.0" prefWidth="219.0" />
+                  <JFXTextField fx:id="txtCorreoCine" disable="true" prefHeight="25.0" prefWidth="219.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="780.0">
@@ -53,15 +53,17 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="780.0" spacing="10.0">
                <children>
                   <Label fx:id="lblMsjAbre" prefHeight="21.0" prefWidth="48.0" text="Abre:" />
-                  <JFXTimePicker fx:id="tpAbre" styleClass="admin-date-picker" />
+                  <JFXTextField fx:id="txtAbre" disable="true" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="54.0" prefWidth="780.0" spacing="10.0">
                <children>
-                  <Label fx:id="lblMsjCierra" prefHeight="21.0" prefWidth="48.0" text="Abre:" />
-                  <JFXTimePicker fx:id="tpCierra" styleClass="admin-date-picker" />
+                  <Label fx:id="lblMsjCierra" prefHeight="21.0" prefWidth="48.0" text="Cierra:" />
+                  <JFXTextField fx:id="txtCierra" disable="true" />
                </children>
             </HBox>
+            <JFXButton onAction="#btnModificar" prefHeight="40.0" prefWidth="121.0" text="Modificar" />
+            <JFXButton fx:id="btnActualizar" disable="true" onAction="#btnAct" prefHeight="32.0" prefWidth="118.0" text="Actualizar" />
          </children>
       </VBox>
    </children>

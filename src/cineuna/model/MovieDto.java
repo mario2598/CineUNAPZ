@@ -6,35 +6,25 @@
 package cineuna.model;
 
 import cineuna.util.LocalDateAdapter;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javax.imageio.ImageIO;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import static jdk.nashorn.internal.objects.ArrayBufferView.buffer;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -116,12 +106,12 @@ public class MovieDto {
         this.setMovieIdioma(m.getMovieIdioma());
         this.setMovieNombreing(m.getMovieNombreing());
         this.setMovieResenaing(m.getMovieResenaing());
+        this.movieUrlimg = m.getMovieUrlimg();
     }
     
     public void crearImagenDesdeByte() throws FileNotFoundException, IOException{
         String outPutFile = "src\\cineuna\\resources\\images\\" + movieNombre.getValue()+".jpg";
         File someFile = new File(outPutFile);
-        //byte[] b = movieUrlimg.getBytes(StandardCharsets .UTF_8);
         byte[] b = Base64.getDecoder().decode(movieUrlimg);
         try (FileOutputStream fos = new FileOutputStream(someFile)) {
             fos.write(b);
