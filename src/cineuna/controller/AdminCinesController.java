@@ -64,10 +64,10 @@ public class AdminCinesController extends Controller implements Initializable {
             txtNombreCine.textProperty().bindBidirectional(cine.cineNombre);
             txtCorreoCine.textProperty().bindBidirectional(cine.cineEmail); 
             tpAbre.valueProperty().addListener((e,e1,e2)->{
-                cine.setCineAbre(LocalDate.now());
+                //cine.setCineAbre(LocalDate.now());
             });
             tpCierra.valueProperty().addListener((e,e1,e2)->{
-                cine.setCineCierra(LocalDate.now());
+                //cine.setCineCierra(LocalDate.now());
             });
             //lblAbre.setText(cine.getCineAbre().toString());
             //lblCierra.setText(cine.getCineCierra().toString());
