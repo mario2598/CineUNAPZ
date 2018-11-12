@@ -27,6 +27,7 @@ public class AdminEspacioButaca extends Label{
     private Boolean status;
     private MaterialDesignIconView icon;
     private IntegerProperty dimension;
+    private Boolean editable = true;
 
     public AdminEspacioButaca(Integer dim) {
         dimension = new SimpleIntegerProperty(dim);
@@ -40,7 +41,8 @@ public class AdminEspacioButaca extends Label{
         this.icon = iconButaca;
         this.setOnMouseClicked(event -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
-                toggleStatus();
+                if(editable)
+                    toggleStatus();
             }
         });
         this.status = true;
@@ -50,6 +52,15 @@ public class AdminEspacioButaca extends Label{
     private void toggleStatus(){
         this.status = !this.status;
         this.butaca.setButActiva(this.status ? "A":"I");
+        if(status){
+            this.setGraphic(icon);
+        } else {
+            this.setGraphic(null);
+        }
+    }
+    
+    public void refreshStatus(){
+        this.status = butaca.getButActiva().equalsIgnoreCase("A");
         if(status){
             this.setGraphic(icon);
         } else {
@@ -93,6 +104,14 @@ public class AdminEspacioButaca extends Label{
 
     public void setDimension(IntegerProperty dimension) {
         this.dimension = dimension;
+    }
+
+    public Boolean getEditable() {
+        return editable;
+    }
+
+    public void setEditable(Boolean editable) {
+        this.editable = editable;
     }
     
     

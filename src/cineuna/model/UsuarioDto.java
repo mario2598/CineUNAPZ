@@ -80,22 +80,28 @@ public class UsuarioDto {
         this.usuCodAct = new SimpleStringProperty();
         this.butacasSeleccionadas=new ArrayList<>();
     }    
+    
+    public UsuarioDto(UsuarioDto usu){
+        this();
+        duplicateData(usu);
+    }
 
     //Methods
     public void duplicateData(UsuarioDto u){
-        this.usuId = u.usuId;
-        this.usuUser = u.usuUser;
-        this.usuNombre = u.usuNombre;
-        this.usuPapellido = u.usuPapellido;
-        this.usuSapellido = u.usuSapellido;
-        this.usuPassword = u.usuPassword;
-        this.usuEmail = u.usuEmail;
-        this.usuIdioma = u.usuIdioma;
-        this.usuEstado = u.usuEstado;
-        this.usuAdmin = u.usuAdmin;
-        this.usuNewpassword = u.usuNewpassword;
-        this.usuCambio = u.usuCambio;
+        setUsuId(u.getUsuId());
+        setUsuUser(u.getUsuUser());
+        setUsuNombre(u.getUsuNombre());
+        setUsuPapellido(u.getUsuPapellido());
+        setUsuSapellido(u.getUsuSapellido());
+        setUsuPassword(u.getUsuPassword());
+        setUsuEmail(u.getUsuEmail());
+        setUsuIdioma(u.getUsuIdioma());
+        setUsuEstado(u.getUsuEstado());
+        setUsuAdmin(u.getUsuAdmin());
+        setUsuNewpassword(u.getUsuNewpassword());
+        setUsuCambio(u.getUsuCambio());
         this.cineID = u.getCineID();
+        this.usuCodAct.set(u.getUsuCodAct());
     }
     
     //Getters and Setters
