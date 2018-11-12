@@ -43,7 +43,6 @@ public class ReservaService {
     
     public Respuesta guardarReserva(ReservaDto dto){
         try {
-            System.out.println("guardar ReservaService(Cliente)");
             Request request = new Request("reservaController/reserva");
             request.post(dto);
             if (request.isError()) {
@@ -72,4 +71,5 @@ public class ReservaService {
             return new Respuesta(false, "Se ha producido un error eliminando la reserva.", ex.getMessage());
         }
     }
+    
 }

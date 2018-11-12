@@ -80,14 +80,14 @@ public class CampoButaca extends Label{
     }
     
     public void refrescaEstado(){
-            //refrescaButaca();
-            reservaReserva();
+        //reinicia las variables a consultar 
             this.icon.getStyleClass().clear();
+            icon.getStyleClass().add("campo-butaca");
             this.disponible.set(false);
             this.seleccionada=false;
-            //eventoClick();
-            activa=false;
-            propia=false;
+            this.activa=false;
+            this.propia=false;
+            
         if(butaca.getButActiva().equalsIgnoreCase("A")){
             activa=true;//estaba activa
             if(reserva!=null){
@@ -95,26 +95,25 @@ public class CampoButaca extends Label{
                     case "S":
                         seleccionada=true;
                         if(usuario.isSeleccionada(this)){//pregunta si el usuario la tenía seleccionada
-                            //seleccionada.set(true);//estaba seleccionada
                             propia = true;
                             icon.getStyleClass().add("campo-butaca-sel");
                         }
                         else{
-                            //seleccionada.set(false);//estaba seleccionada
                             icon.getStyleClass().add("campo-butaca-sel-otro");
                         }
                         break;
                     case "O":
                         icon.getStyleClass().add("campo-butaca-ocupada");
                         break;
-                    }
+                    case "D":
+                        icon.getStyleClass().add("campo-butaca");
+                        break;
                 }
-            else{
+            }
+            else{//si reserva está nula es porque está disponible
                 disponible.set(true);
                 icon.getStyleClass().add("campo-butaca"); 
             }
-            }
-        else{
         }
         
         //System.out.println("\nestado:"+butaca.getButLetra()+"-->"+estado);
@@ -122,9 +121,29 @@ public class CampoButaca extends Label{
         //refrescaEstilo();
     }
     
-    private void reservaReserva(){
-        ReservaService rs = new ReservaService();
-        //Respuesta res = rs.
+    //usada en seleccionar,seleccionar y reservar
+    public void refrescaIcono(char estado){
+        icon.getStyleClass().clear();
+        switch(estado){
+            case 'S':
+                seleccionada=true;
+                disponible.set(false);
+                icon.getStyleClass().add("campo-butaca-sel");
+                break;
+            case 'D':
+                seleccionada=false;
+                disponible.set(true);
+                this.reserva.setResEstado("D");
+                this.reserva=null;
+                icon.getStyleClass().add("campo-butaca");
+                break;
+            case 'O':
+                seleccionada=false;
+                disponible.set(false);
+                this.reserva.setResEstado("O");
+                icon.getStyleClass().add("campo-butaca-ocupada");
+                break;
+        }   
     }
     
     private void inicializaIcono(Integer dim){
@@ -164,6 +183,7 @@ public class CampoButaca extends Label{
         icon.getStyleClass().add("campo-butaca");
         asientos.set(asientos.get()-1);
         eliminarReserva();
+        //refrescaIcono('D');
     }
     
     public void guardarButaca(){
@@ -224,6 +244,7 @@ public class CampoButaca extends Label{
         this.reserva.setResEstado("S");
     }
     
+    //usada por el cliente para qeu no de conflictos con el push
     public void reservaButaca(){
         if(this.reserva!=null){
            refrescaIcono('O');
@@ -231,31 +252,8 @@ public class CampoButaca extends Label{
         }
     }
     
-    public void refrescaIcono(char estado){
-        icon.getStyleClass().clear();
-        switch(estado){
-            case 'S':
-                seleccionada=true;
-                disponible.set(false);
-                icon.getStyleClass().add("campo-butaca-sel");
-                break;
-            case 'D':
-                seleccionada=false;
-                disponible.set(true);
-                //this.reserva.setResEstado("D");
-                icon.getStyleClass().add("campo-butaca");
-                break;
-            case 'O':
-                seleccionada=false;
-                disponible.set(false);
-                this.reserva.setResEstado("O");
-                icon.getStyleClass().add("campo-butaca-ocupada");
-                break;
-        }   
-    }
-    
+    //usada por el cliente para que no de conflictos con el pop
     public void cancelaButaca(){
-        refrescaIcono('D');
         asientos.set(asientos.get()-1);
         eliminarReserva();
     }
