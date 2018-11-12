@@ -53,7 +53,7 @@ public class CampoButaca extends Label{
         //cambia el estado de seleccionada si está disponible o es seleccionada y propia
         this.setOnMouseClicked(event -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
-                if(this.disponible.get()||usuario.isSeleccionada(this)){
+                if(activa&&(this.disponible.get()||usuario.isSeleccionada(this))){
                     eventoClick();
                 }
             }
@@ -93,6 +93,7 @@ public class CampoButaca extends Label{
             if(reserva!=null){
                 switch(reserva.getResEstado()){
                     case "S":
+                        seleccionada=true;
                         if(usuario.isSeleccionada(this)){//pregunta si el usuario la tenía seleccionada
                             //seleccionada.set(true);//estaba seleccionada
                             propia = true;
@@ -137,8 +138,7 @@ public class CampoButaca extends Label{
     }
     
     private void eventoClick(){
-        this.seleccionada=!this.seleccionada;
-            if(activa){//&& seleccionador==AppContext.getInstance().getUsuario();
+                this.seleccionada=!this.seleccionada;
                 icon.getStyleClass().clear();
                 icon.setSize(String.valueOf(dimension.get()*1.1));
                 //cambiarDimension(dimension.get());
@@ -148,7 +148,6 @@ public class CampoButaca extends Label{
                 else{
                     desSeleccionaButaca();
                 }
-            }
     }
     
     private void seleccionaButaca(){
@@ -188,8 +187,8 @@ public class CampoButaca extends Label{
             Respuesta res = new Respuesta();
             res = rs.guardarReserva(reserva);//cambiar a reserva
             if(res.getEstado()){
-                this.reserva = (ReservaDto) res.getResultado("Reserva");
-                System.out.println("reserva guardada");
+               this.reserva = (ReservaDto) res.getResultado("Reserva");
+               System.out.println("guardar CampoButaca");
             }
                 
         }
