@@ -19,6 +19,12 @@ and open the template in the editor.
     -fx-text-ligh-color: #bcbcbc;
     -fx-text-pallet-color: #af0a0a;
     -fx-text-dark-color: #110c0d;
+    
+    /*Colores para las butacas del cliente*/
+    -fx-color-butaca-disponible: #bcbcbc;
+    -fx-color-butaca-seleccionada: #077f2b;
+    -fx-color-butaca-ocupada: #820923;
+    -fx-color-butaca-seleccionada-por-otro: #7f7907;
 }
 
 /*Contenedores*/
@@ -361,26 +367,31 @@ and open the template in the editor.
 
 /*Butacas lado usuarios*/
 .campo-butaca{
-    -fx-fill: -fx-base-color-campo-butaca;
-    -glyph-size: 25px;
-    -fx-text-alignment: center;
-    -fx-line-spacing: 10; 
+    -fx-fill: -fx-color-butaca-disponible;
 }
 
 .campo-butaca:hover{
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 0);
-    -fx-fill: -fx-base-color-campo-butaca-hover;
+    -fx-fill: -fx-color-butaca-disponible;
 }
 
 .campo-butaca-sel{
-    -glyph-size: 25px;
-    -fx-text-alignment: center;
-    -fx-line-spacing: 10;
-    -fx-fill: -fx-base-color-campo-butaca-sel;
+    -fx-fill: -fx-color-butaca-seleccionada;
+}
+
+.campo-butaca-sel:hover{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 0);
+    -fx-fill: -fx-color-butaca-seleccionada;
+}
+
+.campo-butaca-sel-otro{
+    -fx-fill: -fx-color-butaca-seleccionada-por-otro;
 }
 
 .campo-butaca-ocupada{
-    -fx-fill: -fx-base-color-campo-butaca-oc;
+    -fx-fill: -fx-color-butaca-ocupada;
 }

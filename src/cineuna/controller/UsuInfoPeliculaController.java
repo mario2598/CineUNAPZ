@@ -3,171 +3,127 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package cineuna.controller;
 
 import cineuna.model.MovieDto;
-import cineuna.model.TandaDto;
-import cineuna.service.TandaService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
 import cineuna.util.LangUtils;
-import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextArea;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 
 /**
  * FXML Controller class
  *
- * @author robri
+ * @author Chris
  */
 public class UsuInfoPeliculaController extends Controller implements Initializable {
 
+    //FXML Attributes
     @FXML
-    private JFXDialogLayout root;
+    private StackPane spPoster;
     @FXML
-    private ImageView imgPoster;
+    private ImageView ivPoster;
     @FXML
-    private AnchorPane apVideo;
+    private JFXButton btnComprar;
     @FXML
     private Label lblNombre;
     @FXML
-    private Label lblFecha;
+    private Label lblTipo;
     @FXML
-    private JFXTextArea lblResenna;
+    private Label lblCalificacion;
     @FXML
-    private JFXListView<JFXButton> listaTandas;
-    private Boolean disponible;
+    private Label lblSinopsis;
     @FXML
-    private VBox vbRoot;
+    private WebView webViewTrailer;
     @FXML
-    private Label lblMsjFecha;
-    private MovieDto pelicula;
-    @FXML
-    private WebView webView;
-    //public ObjectProperty<YouTubeVideo> youTubeVideo;
-    @FXML
-    private Label lblDuracion;
-    @FXML
-    private Label lblMsjDuracion;
+    private StackPane dialogPane;
+    
+    //Attributes
+    private final ReadOnlyDoubleProperty stageWidthProp = FlowController.getInstance().getStage().widthProperty();
+    private final ReadOnlyDoubleProperty stageHeightProp = FlowController.getInstance().getStage().heightProperty();
+    private MovieDto movie;
+    private Boolean bindedMovie;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        StackPane spDialogos = (StackPane) AppContext.getInstance().get("spDialogos");
-        this.root.prefHeightProperty().bind(spDialogos.heightProperty());
-        this.vbRoot.prefHeightProperty().bind(root.heightProperty());
-        this.vbRoot.prefWidthProperty().bind(root.widthProperty());
-        //this.root.prefWidthProperty().bind(spDialogos.widthProperty());
-    }    
+        bindedMovie = false;
+    }
 
     @Override
     public void initialize() {
-        apVideo.setVisible(false);
-        disponible = (Boolean) AppContext.getInstance().get("peliDisponible");
-        pelicula=(MovieDto) AppContext.getInstance().get("peliculaSel");
-        cargarTandas();
-        cargarIdioma();
-        if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
-            cargarInfoPelicula();
-        else cargarInfoPeliculaI();
-    }
-
-    /**
-     * usar el apVideo que está invisible para poner el reproductor de youtube
-     * @param event 
-     */
-    @FXML
-    private void verTrailer(MouseEvent event) {
-        this.apVideo.setVisible(true);
-        String url;
-        if(AppContext.getInstance().getUsuario().getUsuIdioma()==1)
-            url=pelicula.getMovieUrleng();
-        else url=pelicula.getMovieUrlesp();
-        
-        url = cambiarTipoUrl(url);
-        webView.getEngine().load(url);
-    }
-    
-    private String cambiarTipoUrl(String url){
-        if(url.contains("watch"))
-            url =  url.replaceAll("watch", "embed"); 
-        return url;
-    }
-    
-    private void getVideoID(){
-        String link = pelicula.getMovieUrlesp();
-        //link.
-    }
-    
-    private void cargarInfoPelicula(){
-        imgPoster.setImage(pelicula.abrirImagen());
-        lblFecha.setText(pelicula.getMovieDate().toString());
-        lblNombre.setText(pelicula.getMovieNombre());
-        lblResenna.setText(pelicula.getMovieResena());
-    }
-    
-    private void cargarInfoPeliculaI(){
-        imgPoster.setImage(pelicula.abrirImagen());
-        lblFecha.setText(pelicula.getMovieDate().toString());
-        lblNombre.setText(pelicula.getMovieNombreing());
-        lblResenna.setText(pelicula.getMovieResenaing());
-    }
-    
-    private void cargarTandas(){
-        listaTandas.getItems().clear();
-        if(disponible){
-            /*for (int i = 0; i < 3; i++) {
-                JFXButton btnTanda = new JFXButton("16:30");
-                btnTanda.setOnAction(c->{  
-                //AppContext.getInstance().set("tandaSeleccionada",tanda);
-                 FlowController.getInstance().goView("UsuSeleccionTanda");
-                });
-                listaTandas.getItems().add(btnTanda);
-            }*/
-            List<TandaDto> listaDto=new ArrayList<>();
-            TandaService ts=new TandaService();
-            System.out.println("buscar por id: "+pelicula.getMovieId());
-            Respuesta r = ts.getTandasM(pelicula.getMovieId());
-            if(r.getEstado()){
-                System.out.println("true");
-                listaDto=(List<TandaDto>) r.getResultado("tandasM");
-                System.out.println("lista tandas size:"+ listaDto.size());
-            for(TandaDto t: listaDto){
-                //System.out.println("Hora"+t.getHoraTanda());
-                JFXButton btnTanda = new JFXButton(t.getTandaInihh()+":"+t.getTandaInimm());
-                
-                //JFXButton btnTanda = new JFXButton("");
-                btnTanda.setOnAction(c->{  
-                AppContext.getInstance().set("tandaSeleccionada",t);
-                FlowController.getInstance().goView("UsuSeleccionTanda");
-                });
-                listaTandas.getItems().add(btnTanda);
-            }
-            }
-            else{
-                System.out.println("false");
-            }
-            
-            //List<TandaDto> tandas = (List<TandaDto>) ts.getTandasM(pelicula.getMovieId());
-            
+        if(bindedMovie)
+            unbindData();
+        clearData();
+        this.movie = (MovieDto) AppContext.getInstance().get("UserShowingMovie");
+        if(movie!=null){
+            bindData();
+            loadData();
         }
+    }
+    
+    //Methods
+    private void bindData(){
+        lblNombre.textProperty().bind(movie.movieNombre);
+        lblSinopsis.textProperty().bind(movie.movieResena);
+        bindedMovie = true;
+    }
+    
+    private void unbindData(){
+        lblNombre.textProperty().unbind();
+        lblSinopsis.textProperty().unbind();
+        bindedMovie = false;
+    }
+    
+    private void loadData(){
+        lblTipo.setText(movie.getMovieTipo());
+        loadPoster();
+    }
+    
+    private void clearData(){
+        lblTipo.setText("");
+        clearPoster();
+    }
+    
+    private void loadPoster(){
+        try {
+            String imgPath = "src\\cineuna\\resources\\images\\" + movie.getMovieNombre() +".jpg";
+            File file = new File(imgPath);
+            movie.crearImagenDesdeByte();
+            if(file.exists())
+                ivPoster = new ImageView(movie.abrirImagen());
+            else
+                ivPoster = new ImageView(new Image("cineuna/resources/images/VenomPoster.jpg"));
+            ivPoster.setPreserveRatio(false);
+            ivPoster.setFitWidth(stageWidthProp.get()*0.25);
+            ivPoster.setFitHeight(stageHeightProp.get()*0.60);
+        } catch (IOException ex) {
+            Logger.getLogger(UsuInfoPeliculaController.class.getName()).log(Level.SEVERE, "Error generando el poster de la pelicula", ex);
+        }
+    }
+    
+    private void clearPoster(){
+        ivPoster.setImage(null);
     }
     
     private void cargarIdioma(){
@@ -176,13 +132,12 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             LangUtils.getInstance().setLang("es");
         else
             LangUtils.getInstance().setLang("eng");
-        
-        LangUtils.getInstance().loadLabelLang(lblMsjFecha, "lblMsjFecha");
-        LangUtils.getInstance().loadLabelLang(lblMsjDuracion, "lblMsjDuracion");
-    }
-    
-    private void buscarTandas(){
-        //TandaService ts= new TandaService();
+    }    
+
+    @FXML
+    private void btnComprarAction(ActionEvent event) {
+        AppContext.getInstance().set("UserShowingMovie", this.movie);
+        FlowController.getInstance().goViewOnDialog("UserInfoCompra", dialogPane);
     }
     
 }

@@ -8,6 +8,7 @@ package cineuna.controller;
 import cineuna.cards.AdminEspacioButaca;
 import cineuna.cards.UserEspacioButaca;
 import cineuna.model.ButacaDto;
+import cineuna.model.MovieDto;
 import cineuna.model.ReservaDto;
 import cineuna.model.SalaDto;
 import cineuna.model.TandaDto;
@@ -21,6 +22,7 @@ import cineuna.util.Respuesta;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -77,12 +79,16 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
     private Integer columnas;
     private Integer filas;
     private Hilo hilo;
-    private UsuarioDto usuario;
-    private SalaDto sala;
-    private TandaDto tanda;
     private ArrayList<UserEspacioButaca> espacioButacaList;
     private ArrayList<ButacaDto> butacaList;
     private ArrayList<ReservaDto> reservaList;
+    //Entidades para el comprobante
+    private UsuarioDto usuario;
+    private SalaDto sala;
+    private TandaDto tanda;
+    private MovieDto movie;
+    private LocalDate fecha;
+    private String idioma;
     
     public class Hilo extends Thread{
         private Boolean activado;
@@ -101,14 +107,14 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                 Platform.runLater(new Runnable(){
                     @Override
                     public void run() {
-//                        cargarListaReservas();
-//                        distribuirReservas();
-//                        eliminarReservasViejas();
-//                        refrescarCamposButaca();
+                        cargarListaReservas();
+                        distribuirReservas();
+                        eliminarReservasViejas();
+                        refrescarCamposButaca();
                     }
                 });
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(UsuSeleccionTandaController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -140,17 +146,18 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                 });
             }
         });
+        ArrayList<ReservaDto> currentReservas = new ArrayList<>();
+        AppContext.getInstance().set("currentReservas", currentReservas);
     }    
 
     @Override
     public void initialize() {
         this.usuario = AppContext.getInstance().getUsuario();
-//        this.sala = (SalaDto) AppContext.getInstance().get("UserSelectedSala");
+        this.movie = (MovieDto) AppContext.getInstance().get("UserShowingMovie");
         this.tanda = (TandaDto) AppContext.getInstance().get("UserSelectedTanda");
-        
-        Respuesta resp = (new SalaService()).getSala(new Long(33));
-        this.sala = ((SalaDto) resp.getResultado("Sala"));
-        
+        this.sala = ((SalaDto) ((Respuesta) (new SalaService()).getSala(tanda.getSalaId().getSalaId())).getResultado("Sala"));
+        this.fecha = (LocalDate) AppContext.getInstance().get("UserSelectedDate");
+        this.idioma = (String) AppContext.getInstance().get("UserSelectedIdioma");
         cargarListaButacas(sala.getSalaId());
         aplicarDistribucion();
         hilo=new Hilo();
@@ -204,6 +211,41 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
         } else {
             System.out.println("Error cargando la lista de butacas.");
         }
+    }
+    
+    /**
+     * cargar lista de reservas para tanda
+     */
+    public void cargarListaReservas(){
+        ReservaService rs=new ReservaService();
+        Respuesta res = rs.getListReservas(tanda.getTandaId());
+        if(res.getEstado()){
+            reservaList.addAll((ArrayList<ReservaDto>) res.getResultado("ReservasList"));
+        }
+        else System.out.println("no se pudo cargar la lista de reservas para esta tanda");        
+    }
+    
+    private void distribuirReservas(){
+        reservaList.stream().forEach(r->{
+            espacioButacaList.stream().filter(b->{
+                if(b.getButaca()!=null){
+                    return b.getButaca().getButId().equals(r.getButId().getButId());
+                }
+                else return false;
+            }).forEach(cb->cb.setReserva(r));
+        });
+    }
+    
+    private void eliminarReservasViejas(){
+        espacioButacaList.stream().filter(cb->cb.getReserva()!=null).forEach(cbf->{
+            if(!reservaList.contains(cbf.getReserva())){
+                cbf.setReserva(null);
+            }
+        });
+    }
+    
+    private void refrescarCamposButaca(){
+        espacioButacaList.stream().forEach(eb -> eb.cambiarEstado());
     }
 
     @FXML
