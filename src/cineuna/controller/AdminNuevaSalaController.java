@@ -62,6 +62,7 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
     private ArrayList<AdminEspacioButaca> butacaList;
     private SalaDto sala;
     private Boolean editando = false;
+    private String mensajeError;
 
     //Initializers
     /**
@@ -257,16 +258,19 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
     }
     
     private Boolean validarDatosNecesarios(){
-        Boolean accepted = true;
+        mensajeError = "Se ha producido un error guardando la nueva sala, revisa los siguientes datos faltantes:";
+        Boolean hayError = false;
         if(this.txtNombre.getText().isEmpty()){
-            accepted = false;
-            System.out.println("Debes ingresar un nombre para la nueva sala.");
+            hayError = true;
+            mensajeError = "\n\tDebes ingresar un nombre para la nueva sala.";
         }
         if(!this.butacasDistribuidas){
-            accepted = false;
-            System.out.println("Debes organizar la distribucion de las butacas para la nueva sala.");
+            hayError = true;
+            mensajeError = "\n\tDebes organizar la distribucion de las butacas para la nueva sala.";
         }
-        return accepted;
+        if(!hayError)
+            mensajeError = null;
+        return !hayError;
     }
     
     private void salir(){
@@ -290,15 +294,21 @@ public class AdminNuevaSalaController extends Controller implements Initializabl
                         this.sala.getButacaList().add(butaca);
                 });
             }
-            this.sala.setCineId(AppContext.getInstance().getUsuario().getCineID());
-            SalaService salaServ = new SalaService();
-            Respuesta resp = salaServ.guardarSala(this.sala);
-            if(resp.getEstado()){
-                System.out.println("Se ha guardado la sala satisfactoriamente.");
-            } else {
-                System.out.println("Ha ocurrido un error guardando la sala\nError: " + resp.getMensaje());
+            try{
+                this.sala.setCineId(AppContext.getInstance().getUsuario().getCineID());
+                SalaService salaServ = new SalaService();
+                Respuesta resp = salaServ.guardarSala(this.sala);
+                if(resp.getEstado()){
+                    System.out.println("Se ha guardado la sala satisfactoriamente.");
+                } else {
+                    System.out.println("Ha ocurrido un error guardando la sala\nError: " + resp.getMensaje());
+                }
+                salir();
+            } catch(Exception ex){
+                System.out.println("Ha ocurrido un error guardando la sala\nError: " + ex);
             }
-            salir();
+        } else {
+            System.out.println(mensajeError);
         }
     }
     

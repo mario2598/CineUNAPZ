@@ -37,14 +37,15 @@ public class AdminMoviesController extends Controller implements Initializable {
     @FXML
     private JFXTabPane tabPaneMovies;
     @FXML
-    private Tab tabEnCartelera, tabProximamente;
+    private Tab tabEnCartelera, tabProximamente, tabInactivas;
     @FXML
-    private TilePane tilePaneEnCartelera, tilePaneProximanete;
+    private TilePane tilePaneEnCartelera, tilePaneProximanete, tilePaneInactivas;
 
     //Attributes
     private final MovieService movieService = new MovieService();
     private final ArrayList<AdminMovieCard> CarteleraCardList = new ArrayList<>();
     private final ArrayList<AdminMovieCard> ProximasCardList = new ArrayList<>();
+    private final ArrayList<AdminMovieCard> InactivasCardList = new ArrayList<>();
     
     //Initializers
     /**
@@ -81,14 +82,6 @@ public class AdminMoviesController extends Controller implements Initializable {
         cargarPeliculasEnCartelera();
         cargarProximasPeliculas();
         tabPaneMovies.getSelectionModel().selectFirst();
-        
-        //Made by Rodrigo (Me dio errores)
-//        tilePaneEnCartelera.getChildren().clear();
-//        tilePaneProximanete.getChildren().clear();
-//        cargarPeliculasEnCartelera();
-//        cargarProximasPeliculas();
-//        cargarCartelera();
-//        cargarProximas();
     }
     
     //Methods
@@ -118,70 +111,22 @@ public class AdminMoviesController extends Controller implements Initializable {
         });
     }
     
+    private void cargarPelculasInactivas(){
+        tilePaneInactivas.getChildren().clear();
+        InactivasCardList.clear();
+        Respuesta resp = movieService.getMovies("I");
+        ArrayList<MovieDto> movieList = new ArrayList<>((List<MovieDto>) resp.getResultado("Movies"));
+        movieList.stream().forEach(movie -> {
+            AdminMovieCard newCard = new AdminMovieCard(movie);
+            newCard.initCard();
+            InactivasCardList.add(newCard);
+            tilePaneInactivas.getChildren().add(newCard);
+        });
+    }
+    
     private void deselectAllCards(ArrayList<AdminMovieCard> list){
         list.stream().forEach(card -> card.selectedStatus(false));
     }
-    
-    //Made by Rodrigo (Me dio errores)
-//    private void llenarCartelera(List<MovieDto> movies){
-//        tilePaneEnCartelera.getChildren().clear();
-//        
-//        //System.out.println("movies size:" + movies.size());
-//        movies.stream().forEach(e->{
-//            //System.out.println("peli");
-//            MovieCard2 card = new MovieCard2(true,e);
-//            card.initCard();
-//            tilePaneEnCartelera.getChildren().add(card);
-//        }); 
-//    }
-//    
-//    private void cargarCartelera(){
-//        List<MovieDto> listaDto=new ArrayList<>();
-//
-//        MovieService ms = new MovieService();
-//        Respuesta r = ms.getMovies("C");
-//        
-//        if(r.getEstado()){
-//            //System.out.println("true");
-//            listaDto=(List<MovieDto>) r.getResultado("Movies");
-//            llenarCartelera(listaDto);
-//        }
-//        else{
-//            //System.out.println("false");
-//        }
-// 
-//    }
-//    
-//    private void llenarProximas(List<MovieDto> movies){
-//        tilePaneProximanete.getChildren().clear();
-//        //System.out.println("movies size:" + movies.size());
-//        movies.stream().forEach(e->{
-//            //System.out.println("peli");
-//            MovieCard2 card = new MovieCard2(false,e);
-//            card.initCard();
-//            //card.prefHeightProperty().bind(listaProximas.widthProperty());
-//            //card.prefHeightProperty().bind(listaProximas.heightProperty());
-//            tilePaneProximanete.getChildren().add(card);
-//        });
-//    }
-//
-//     private void cargarProximas(){
-//        List<MovieDto> listaDto=new ArrayList<>();
-//
-//        MovieService ms = new MovieService();
-//        Respuesta r = ms.getMovies("P");
-//        
-//        if(r.getEstado()){
-//            //System.out.println("true");
-//            listaDto=(List<MovieDto>) r.getResultado("Movies");
-//            llenarProximas(listaDto);
-//        }
-//        else{
-//            System.out.println("false");
-//        }
-//        
-//        
-//    }
 
     @FXML
     private void btn1Action(ActionEvent event) {
