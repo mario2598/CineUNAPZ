@@ -98,12 +98,14 @@ public class CampoButaca extends Label{
                             icon.getStyleClass().add("campo-butaca-sel");
                         }
                         else{
-                            //seleccionada.set(false);//estaba seleccionada
                             icon.getStyleClass().add("campo-butaca-sel-otro");
                         }
                         break;
                     case "O":
                         icon.getStyleClass().add("campo-butaca-ocupada");
+                        break;
+                    case "D":
+                        icon.getStyleClass().add("campo-butaca");
                         break;
                 }
             }
@@ -130,6 +132,7 @@ public class CampoButaca extends Label{
             case 'D':
                 seleccionada=false;
                 disponible.set(true);
+                this.reserva.setResEstado("D");
                 this.reserva=null;
                 icon.getStyleClass().add("campo-butaca");
                 break;
