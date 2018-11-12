@@ -101,9 +101,6 @@ public class AdminReportesController extends Controller implements Initializable
                 } else {
             byte[] b = (byte[]) respuesta.getResultado("reporte");
             String r = convPdf(b,"src\\cineuna\\jasper\\moviesListReport.pdf");
-           if(cService.exportToMail(r)){
-              showFile(r);  
-           }
            new Mensaje().showModal(Alert.AlertType.ERROR, "Datos vacios", getStage(), "No se envio el correo");
            }
         } catch (Exception ex) {

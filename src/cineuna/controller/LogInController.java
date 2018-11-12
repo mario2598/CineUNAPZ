@@ -5,7 +5,9 @@
  */
 package cineuna.controller;
 
+import cineuna.model.ComprobanteDto;
 import cineuna.model.UsuarioDto;
+import cineuna.service.ComprobanteService;
 import cineuna.service.UsuarioService;
 import cineuna.util.AppContext;
 import cineuna.util.FlowController;
@@ -189,6 +191,17 @@ public class LogInController extends Controller implements Initializable {
 
     @FXML
     private void irMain(ActionEvent event) {
+        ComprobanteDto comp = new ComprobanteDto();
+        comp.setButId(Long.valueOf("5"));
+        comp.setCompCosto(Long.valueOf("5"));
+        comp.setMovieId(Long.valueOf("5"));
+        comp.setUsuId(Long.valueOf("5"));
+        comp.setSalaId(Long.valueOf("5"));
+        ComprobanteService sc = new ComprobanteService();
+        Respuesta r = sc.guardarComprobante(comp);
+        if(r.getEstado()){
+            System.out.print("sirve");
+        }
         try{
 
         if (txtUsuario.getText() == null || txtUsuario.getText().isEmpty()) {

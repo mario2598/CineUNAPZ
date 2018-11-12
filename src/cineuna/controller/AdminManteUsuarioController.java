@@ -98,7 +98,8 @@ public class AdminManteUsuarioController extends Controller implements Initializ
             unbindUsuario();
         clearData();
         UsuarioDto usuarioOriginal = (UsuarioDto) AppContext.getInstance().get("AdminShowingUser");
-        usuario = new UsuarioDto(usuarioOriginal);
+        usuario = new UsuarioDto();
+        usuario.duplicateData(usuarioOriginal);
         if(usuario!=null){
             bindUsuario();
             loadData();

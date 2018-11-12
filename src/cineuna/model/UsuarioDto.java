@@ -6,6 +6,7 @@
 package cineuna.model;
 
 import cineuna.cards.CampoButaca;
+import cineuna.service.ComprobanteService;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -62,7 +63,7 @@ public class UsuarioDto {
     @XmlTransient
     private ArrayList<CampoButaca> butacasSeleccionadas;
     private Boolean existe;
-    
+    private ArrayList<ComprobanteDto> compList = new ArrayList<>();
     
     //Constructors
     public UsuarioDto() {
@@ -81,29 +82,23 @@ public class UsuarioDto {
         this.usuCodAct = new SimpleStringProperty();
         this.butacasSeleccionadas=new ArrayList<>();
     }    
-    
-    public UsuarioDto(UsuarioDto usu){
-        this();
-        duplicateData(usu);
-    }
 
     //Methods
     public void duplicateData(UsuarioDto u){
-        setUsuId(u.getUsuId());
-        setUsuUser(u.getUsuUser());
-        setUsuNombre(u.getUsuNombre());
-        setUsuPapellido(u.getUsuPapellido());
-        setUsuSapellido(u.getUsuSapellido());
-        setUsuPassword(u.getUsuPassword());
-        setUsuEmail(u.getUsuEmail());
-        setUsuIdioma(u.getUsuIdioma());
-        setUsuEstado(u.getUsuEstado());
-        setUsuAdmin(u.getUsuAdmin());
-        setUsuNewpassword(u.getUsuNewpassword());
-        setUsuCambio(u.getUsuCambio());
+        this.usuId = u.usuId;
+        this.usuUser = u.usuUser;
+        this.usuNombre = u.usuNombre;
+        this.usuPapellido = u.usuPapellido;
+        this.usuSapellido = u.usuSapellido;
+        this.usuPassword = u.usuPassword;
+        this.usuEmail = u.usuEmail;
+        this.usuIdioma = u.usuIdioma;
+        this.usuEstado = u.usuEstado;
+        this.usuAdmin = u.usuAdmin;
+        this.usuNewpassword = u.usuNewpassword;
+        this.usuCambio = u.usuCambio;
         this.cineID = u.getCineID();
         this.usuImg = u.getUsuImg();
-        this.usuCodAct.set(u.getUsuCodAct());
     }
     
     //Getters and Setters
@@ -251,6 +246,10 @@ public class UsuarioDto {
         if(!butacasSeleccionadas.contains(butaca))
             butacasSeleccionadas.add(butaca);System.out.println("push: "+butacasSeleccionadas.size());
     }
+    public void pushComp(ComprobanteDto comp){
+        if(!compList.contains(comp))
+            compList.add(comp);
+    }
     
     public void popSeleccionada(CampoButaca butaca){
         if(butacasSeleccionadas.contains(butaca))
@@ -266,8 +265,13 @@ public class UsuarioDto {
     
     public void guardaButacasSeleccionadas(){
         //System.out.println("guardar "+butacasSeleccionadas.size());
+        ComprobanteService cs = new ComprobanteService();
         butacasSeleccionadas.stream().forEach(c->{
             c.reservaButaca();
+            
+        });
+        compList.stream().forEach(c->{
+           cs.guardarComp(c);
         });
         butacasSeleccionadas.clear();
     }

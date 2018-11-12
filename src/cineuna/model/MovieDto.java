@@ -84,15 +84,12 @@ public class MovieDto {
         movieIdioma = new SimpleStringProperty();
         movieNombreing = new SimpleStringProperty();
         movieResenaing = new SimpleStringProperty();
-<<<<<<< HEAD
         if(movieUrlimg!=null){
           //System.out.println("movieUrlimg" + Arrays.toString(movieUrlimg));   
         }
         else{
             //System.out.println("movieUrlimg: null");
         }
-=======
->>>>>>> master10_fallas
     }
     
     //Methods
