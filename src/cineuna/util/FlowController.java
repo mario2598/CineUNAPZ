@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -151,6 +152,10 @@ public class FlowController {
             default:
                 break;
         }
+        stage.setOnCloseRequest(e->{
+            Platform.exit();
+            System.exit(0);
+        });
     }
 
     public void goViewInStage(String viewName, Stage stage) {
