@@ -25,6 +25,10 @@ and open the template in the editor.
     -fx-color-butaca-seleccionada: #077f2b;
     -fx-color-butaca-ocupada: #820923;
     -fx-color-butaca-seleccionada-por-otro: #7f7907;
+    
+    /*hyperlink*/
+    -fx-base-color-hyper-tf:white;
+    -fx-base-color-hyper-tf-focus:#FF0A0A;
 }
 
 /*Contenedores*/
@@ -394,4 +398,15 @@ and open the template in the editor.
 
 .campo-butaca-ocupada{
     -fx-fill: -fx-color-butaca-ocupada;
+}
+
+.hyperlink{
+    -fx-alignment: center;
+    -fx-text-fill: -fx-base-color-hyper-tf;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.hyperlink:hover{
+    -fx-text-fill: -fx-base-color-hyper-tf-focus;
 }

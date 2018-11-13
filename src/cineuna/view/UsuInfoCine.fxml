@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="780.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoCineController">
+<AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="780.0" styleClass="background-pane" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.UsuInfoCineController">
    <children>
       <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="585.0" prefWidth="780.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -33,19 +33,19 @@
             </Label>
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="263.0">
                <children>
-                  <FontAwesomeIconView glyphName="" size="20.0" text="" wrappingWidth="30.0" />
+                  <FontAwesomeIconView fill="#f8efef" glyphName="" size="20.0" text="" wrappingWidth="30.0" />
                   <Hyperlink fx:id="lblNumTel" prefHeight="23.0" prefWidth="153.0" text="2772-6391" textAlignment="CENTER" />
                </children>
             </HBox>
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="51.0" prefWidth="263.0">
                <children>
-                  <FontAwesomeIconView size="20.0" text="" wrappingWidth="19.0" />
+                  <FontAwesomeIconView fill="#ebe8e8" size="20.0" text="" wrappingWidth="19.0" />
                   <Hyperlink fx:id="lblCorreo" prefHeight="23.0" prefWidth="154.0" text="infocine@cineuna.com" />
                </children>
             </HBox>
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="51.0" prefWidth="263.0">
                <children>
-                  <FontAwesomeIconView size="20.0" text="" wrappingWidth="27.0" />
+                  <FontAwesomeIconView fill="#e8e8e8" size="20.0" text="" wrappingWidth="27.0" />
                   <Label fx:id="lblHorario" prefHeight="21.0" prefWidth="151.0" text="Horario:" />
                </children>
             </HBox>
