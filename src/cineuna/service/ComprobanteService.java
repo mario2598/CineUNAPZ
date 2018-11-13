@@ -110,7 +110,7 @@ public class ComprobanteService {
         }
     }
     String convPdf(byte[] b) throws FileNotFoundException, IOException{
-        String outPutFile = "src\\cineuna\\jasper\\moviesListReport.pdf";
+        String outPutFile = "src\\cineuna\\jasper\\ComporbanteReport.pdf";
          String stream =Base64.getEncoder().encodeToString(b); 
             byte[] bytes = Base64.getDecoder().decode(stream);
             File someFile = new File(outPutFile);

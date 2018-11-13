@@ -302,7 +302,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
                     c.setCompCosto(tanda.getTandaCobro().toString());
                     c.setMovieId(movie.getMovieId().toString());
                     c.setSalaId(sala.getSalaId().toString());
-                    c.setCompDate(LocalDate.now());
+                    c.setCompDate(reserva.getResDate());
                     c.setUsuId(usuario.getUsuId().toString());
                     c.setButId(reserva.getButId().getButId().toString());
                     compList.add(c);
@@ -329,8 +329,7 @@ public class UsuSeleccionTandaController extends Controller implements Initializ
             System.out.println("problema eliminando reserva.\tError: " + e);
         }
     }
-    private void comprobantesFinales(){
-        
+    private void comprobantesFinales(){       
         Boolean veri = false;
         compList.stream().forEach(comp -> {
               ComprobanteService cs = new ComprobanteService();

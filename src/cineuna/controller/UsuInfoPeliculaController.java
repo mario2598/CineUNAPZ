@@ -207,7 +207,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     
     private String cambiar(String url){
         if(url.contains("watch"))
-            url.replaceAll("watch", "embed");
+           url = url.replaceAll("watch", "embed");
         return url;
     }
 }
