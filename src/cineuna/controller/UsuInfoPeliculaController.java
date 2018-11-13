@@ -70,6 +70,14 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         bindedMovie = false;
+        stageWidthProp.addListener((observable, oldValue, newValue) -> {
+            ivPoster.setFitWidth(spPoster.getWidth()*0.90);
+            System.out.println("ksdfgsdfg");
+        });
+        stageHeightProp.addListener((observable, oldValue, newValue) -> {
+            ivPoster.setFitWidth(spPoster.getHeight()*0.90);
+            System.out.println("ksdfgsdfg");
+        });
     }
 
     @Override
@@ -87,7 +95,7 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             btnComprar.setVisible(false);
         else 
             btnComprar.setVisible(true);
-        tamannoInicialImg();
+//        tamannoInicialImg();
         //play();
     }
     
@@ -170,8 +178,8 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
             url = movie.getMovieUrlesp();
         else
             url = movie.getMovieUrleng();
-        System.out.println("intentando reproducir: "+url);
-        this.webViewTrailer.getEngine().load(url);
+        //System.out.println("intentando reproducir: "+url);
+        this.webViewTrailer.getEngine().load(cambiar(url));
         }
         catch(Exception e){
             
@@ -192,8 +200,14 @@ public class UsuInfoPeliculaController extends Controller implements Initializab
     }
     
     
-    private void tamannoInicialImg(){
-        ivPoster.setFitWidth(spPoster.widthProperty().get() * 0.92);
-        ivPoster.setFitHeight(spPoster.heightProperty().get() * 0.92);
+//    private void tamannoInicialImg(){
+//        ivPoster.setFitWidth(spPoster.widthProperty().get() * 0.92);
+//        ivPoster.setFitHeight(spPoster.heightProperty().get() * 0.92);
+//    }
+    
+    private String cambiar(String url){
+        if(url.contains("watch"))
+            url.replaceAll("watch", "embed");
+        return url;
     }
 }
