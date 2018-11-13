@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="628.0" prefWidth="817.0" style="-fx-background-color: #110C0D;" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminCinesController">
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="628.0" prefWidth="817.0" style="-fx-background-color: #110C0D;" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminCinesController">
    <children>
       <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="585.0" prefWidth="780.0" spacing="10.0">
          <children>

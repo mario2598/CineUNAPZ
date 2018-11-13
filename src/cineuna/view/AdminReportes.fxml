@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminReportesController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" styleClass="background-pane" stylesheets="@adminStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cineuna.controller.AdminReportesController">
    <children>
-      <StackPane fx:id="spBtn" layoutX="72.0" layoutY="36.0" prefHeight="328.0" prefWidth="486.0">
+      <StackPane fx:id="spBtn" layoutX="72.0" layoutY="36.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox fx:id="hbBtn" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="hbBtn" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
                   <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnVBList" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Reporte Listado Peliculas con cantidad de visitas" textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -26,7 +26,7 @@
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="45.0" top="80.0" />
+                        <Insets />
                      </HBox.margin>
                   </JFXButton>
                   <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" focusTraversable="false" graphicTextGap="5.0" onAction="#btnVbId" prefHeight="175.0" prefWidth="175.0" styleClass="admin-menu-option" text="Reporte Pelicula con informacion de tandas y visitas" textAlignment="CENTER" wrapText="true">
@@ -37,12 +37,12 @@
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="45.0" top="80.0" />
+                        <Insets />
                      </HBox.margin>
                   </JFXButton>
                </children>
             </HBox>
-            <VBox fx:id="vbDate" prefHeight="200.0" prefWidth="400.0" visible="false">
+            <VBox fx:id="vbDate" alignment="CENTER" prefHeight="200.0" prefWidth="400.0" visible="false">
                <children>
                   <Label prefHeight="21.0" prefWidth="409.0" text="Ingrese las fechas que desea para consultar las Peliculas" textFill="#ee3131">
                      <padding>
@@ -71,7 +71,7 @@
                   </JFXButton>
                </children>
             </VBox>
-            <VBox fx:id="vbId" prefHeight="200.0" prefWidth="400.0" visible="false">
+            <VBox fx:id="vbId" alignment="CENTER" prefHeight="200.0" prefWidth="400.0" visible="false">
                <children>
                   <Label prefHeight="21.0" prefWidth="409.0" text="Seleccione la pelicula que desea consultar" textFill="#ee3131">
                      <padding>
